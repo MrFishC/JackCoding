@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cn.jackmvvm.mvvm.viewModel.LoginViewModel"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="119dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="80dp"
+            android:paddingRight="80dp"
+            android:layout_marginTop="62dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="9dp"
+                android:textSize="12sp"
+                android:textColor="#4a90e2"
+                android:text="账号"
+                />
+
+            <EditText
+                android:id="@+id/login_input_phone"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:textSize="12sp"
+                android:textColor="#cecece"
+                android:hint="请输入账号"
+                android:text="@={viewModel.mUserName}"
+                android:background="@null"
+                android:singleLine="true"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                />
+
+            <TextView
+                android:id="@+id/login_input_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="清除"
+                android:onClick="@{viewModel.clearUserNameOnClick}"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginLeft="80dp"
+            android:background="#4a90e2"
+            android:layout_marginTop="8dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="80dp"
+            android:paddingRight="80dp"
+            android:layout_marginTop="33dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="9dp"
+                android:textSize="12sp"
+                android:textColor="#4a90e2"
+                android:text="密码"/>
+
+            <EditText
+                android:id="@+id/login_input_passwd"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:textSize="12sp"
+                android:textColor="#cecece"
+                android:text="@={viewModel.mPasswd}"
+                android:hint="请输入密码"
+                android:inputType="textPassword"
+                android:background="@null"
+                android:maxLength="18"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginLeft="80dp"
+            android:background="#4a90e2"
+            android:layout_marginTop="8dp"
+            />
+
+        <TextView
+            android:id="@+id/login_forget_passwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#4a90e2"
+            android:paddingRight="80dp"
+            android:layout_marginTop="23dp"
+            android:gravity="right"
+            android:text="忘记密码"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/login_tv"
+            android:layout_width="169dp"
+            android:layout_height="38dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:layout_marginTop="69dp"
+            android:gravity="center"
+            android:text="登录"
+            android:background="#4a90e2"
+            android:onClick="@{viewModel.loginOnClick}"/>
+
+    </LinearLayout>
+
+
+
+</layout>

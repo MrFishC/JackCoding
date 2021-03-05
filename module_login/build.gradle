@@ -1,0 +1,9 @@
+apply from: "../module.build.gradle"
+
+dependencies {
+    //每个业务模块都按照implementation的方式依赖
+    implementation project(path: ':wrapper')
+
+    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["constraint"]
+}

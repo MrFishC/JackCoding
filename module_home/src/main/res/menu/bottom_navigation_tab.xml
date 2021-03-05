@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tab_01"
+        android:enabled="true"
+        android:icon="@mipmap/icon_bottom"
+        android:title="aa" />
+
+    <item
+        android:id="@+id/tab_02"
+        android:enabled="true"
+        android:icon="@mipmap/icon_bottom"
+        android:title="bb" />
+
+    <item
+        android:id="@+id/tab_03"
+        android:enabled="true"
+        android:icon="@mipmap/icon_bottom"
+        android:title="cc" />
+
+    <item
+        android:id="@+id/tab_04"
+        android:enabled="true"
+        android:icon="@mipmap/icon_bottom"
+        android:title="dd" />
+
+</menu>

@@ -1,0 +1,9 @@
+apply from: "../lib.build.gradle"
+
+
+dependencies {
+
+    implementation project(':library_common_res')
+
+    implementation rootProject.ext.dependencies["appcompat"]
+}

@@ -1,0 +1,7 @@
+include ':library_weight'
+include ':library_util'
+include ':library_arouter'
+include ':library_common_res'
+include ':module_login'
+include ':module_home'
+include ':app', ':wrapper', ':retrofit2_rxjava2'

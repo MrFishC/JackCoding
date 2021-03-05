@@ -1,0 +1,11 @@
+apply from: "../module.build.gradle"
+
+dependencies {
+    //每个业务模块都按照implementation的方式依赖
+    implementation project(path: ':wrapper')
+
+    //底部导航栏
+    //2.0.5  AndroidX版本、支持ViewPager2
+    //地址：https://github.com/Vincent7Wong/EasyNavigation
+    implementation 'com.github.Vincent7Wong:EasyNavigation:2.0.5'
+}
