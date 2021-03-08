@@ -1,8 +1,14 @@
 package cn.jack.module_home;
 
+import android.view.View;
+
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.next.easynavigation.view.EasyNavigationBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +29,7 @@ public class HomeActivity extends BaseSimpleActiviy<ActivityHomeBinding> {
     //选中时icon
     private int[] selectIcon = {R.mipmap.index1, R.mipmap.find1, R.mipmap.message1, R.mipmap.me1};
 
-    private List<Fragment> fragments = new ArrayList<>();
+    private List<Fragment> mFragments = new ArrayList<>();
 
     @Override
     protected int setLayoutRes() {
@@ -34,17 +40,20 @@ public class HomeActivity extends BaseSimpleActiviy<ActivityHomeBinding> {
     public void prepareData() {
         super.prepareData();
 
-        fragments.add(((Fragment) ARouter.getInstance().build(RouterPathFragment.HomeFirst.PAGER_HOME_FIRST).navigation()));
-        fragments.add(((Fragment) ARouter.getInstance().build(RouterPathFragment.HomeFirst.PAGER_HOME_FIRST).navigation()));
-        fragments.add(((Fragment) ARouter.getInstance().build(RouterPathFragment.HomeFirst.PAGER_HOME_FIRST).navigation()));
-        fragments.add(((Fragment) ARouter.getInstance().build(RouterPathFragment.HomeFirst.PAGER_HOME_FIRST).navigation()));
+        mFragments.add(((Fragment) ARouter.getInstance().build(RouterPathFragment.HomeFirst.PAGER_HOME_FIRST).navigation()));
+        mFragments.add(((Fragment) ARouter.getInstance().build(RouterPathFragment.HomeSecond.PAGER_HOME_SECOND).navigation()));
+        mFragments.add(((Fragment) ARouter.getInstance().build(RouterPathFragment.HomeThird.PAGER_HOME_THIRD).navigation()));
+        mFragments.add(((Fragment) ARouter.getInstance().build(RouterPathFragment.HomeFour.PAGER_HOME_FOUR).navigation()));
 
         mBinding.navigationBar.titleItems(tabText)
                 .normalIconItems(normalIcon)
                 .selectIconItems(selectIcon)
-                .fragmentList(fragments)
+                .fragmentList(mFragments)
                 .fragmentManager(getSupportFragmentManager())
                 .canScroll(true)
                 .build();
+
+
     }
+
 }

@@ -16,5 +16,31 @@ public class RouterPathFragment {
         public static final String PAGER_HOME_FIRST = HOME_FIRST + "/Home_First";
     }
 
+    /**
+     * module-fragment-02
+     */
+    public static class HomeSecond {
+        private static final String HOME_SECOND = "/home_second";
+        /*首页-home_second*/
+        public static final String PAGER_HOME_SECOND = HOME_SECOND + "/Home_Second";
+    }
+
+    /**
+     * module-fragment-03
+     */
+    public static class HomeThird {
+        private static final String HOME_THIRD = "/home_third";
+        /*首页-home_third*/
+        public static final String PAGER_HOME_THIRD = HOME_THIRD + "/Home_Third";
+    }
+
+    /**
+     * module-fragment-04
+     */
+    public static class HomeFour {
+        private static final String HOME_FOUR = "/home_four";
+        /*首页-home_four*/
+        public static final String PAGER_HOME_FOUR = HOME_FOUR + "/Home_Four";
+    }
 
 }

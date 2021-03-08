@@ -15,6 +15,15 @@ dependencies {
     //沉寂式状态栏,基础依赖包
     api rootProject.ext.dependencies["immersionbar"]
 
+    //下拉刷新
+    api rootProject.ext.dependencies["refresh_layout_kernel"]
+    //下拉刷新 - 经典头部
+    api rootProject.ext.dependencies["refresh_header_classics"]
+
+    //View
+    api rootProject.ext.dependencies["constraint"]
+    api rootProject.ext.dependencies["material"]
+
     //wrapper模块依赖网络,其它模块直接wrapper模块即可。
     api project(':retrofit2_rxjava2')
     api project(':library_weight')

@@ -1,3 +1,6 @@
+include ':module_fragment_04'
+include ':module_fragment_03'
+include ':module_fragment_02'
 include ':module_fragment_01'
 include ':library_weight'
 include ':library_util'

@@ -65,6 +65,10 @@ ext {
 
             //状态栏 https://github.com/gyf-dev/ImmersionBar
             immersionbar                             :"com.gyf.immersionbar:immersionbar:${version["immersionbar"]}",
+
+            //https://github.com/scwang90/SmartRefreshLayout
+            refresh_layout_kernel                    :  'com.scwang.smart:refresh-layout-kernel:2.0.3',      //核心必须依赖
+            refresh_header_classics                  : 'com.scwang.smart:refresh-header-classics:2.0.3'     //经典刷新头
     ]
 
 }
