@@ -12,10 +12,8 @@ dependencies {
     //如果你使用java8开发，可以添加这个依赖，里面只有一个类
     api 'androidx.lifecycle:lifecycle-common-java8:2.0.0'
 
-    //沉寂式状态栏,基础依赖包  地址:https://github.com/gyf-dev/ImmersionBar
-    api 'com.gyf.immersionbar:immersionbar:3.0.0-beta02'
-    //沉寂式状态栏,fragment快速实现   地址:https://github.com/gyf-dev/ImmersionBar
-    api 'com.gyf.immersionbar:immersionbar-components:3.0.0-beta02'
+    //沉寂式状态栏,基础依赖包
+    api rootProject.ext.dependencies["immersionbar"]
 
     //wrapper模块依赖网络,其它模块直接wrapper模块即可。
     api project(':retrofit2_rxjava2')

@@ -1,12 +1,5 @@
 package cn.jackmvvm.mvvm.model.repository;
 
-import cn.jackmvvm.service.APIService;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import jack.retrofit2_rxjava2.exception.APIException;
-import jack.retrofit2_rxjava2.manager.rx.RxBaseSubscriber;
-import jack.retrofit2_rxjava2.manager.rx.RxFunction;
-import jack.retrofit2_rxjava2.manager.rx.RxUtils;
 import jack.wrapper.base.mvvm.model.BaseModel;
 
 /**

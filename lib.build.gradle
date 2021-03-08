@@ -52,6 +52,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation rootProject.ext.dependencies["appcompat"]
+
     //ARouter配置2
     implementation      "com.alibaba:arouter-api:${rootProject.ext.version["arouterApiVersion"]}"
     annotationProcessor "com.alibaba:arouter-compiler:${rootProject.ext.version["arouterApiVersion"]}"

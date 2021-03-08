@@ -2,7 +2,7 @@ package jack.retrofit2_rxjava2.manager.rx;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
-import jack.retrofit2_rxjava2.exception.APIException;
+import jack.retrofit2_rxjava2.exception.ApiException;
 import jack.retrofit2_rxjava2.exception.DataNullException;
 import jack.retrofit2_rxjava2.exception.TimeOutException;
 import jack.retrofit2_rxjava2.exception.TokenInvalidException;
@@ -34,8 +34,8 @@ public abstract class RxBaseSubscriber<T> extends DisposableObserver<T> {
     @Override
     public final void onError(Throwable e) {
 
-        if (e instanceof APIException) {
-            onError((APIException) e);
+        if (e instanceof ApiException) {
+            onError((ApiException) e);
         }else if (e instanceof TimeOutException) {
             showTips("连接超时");
         }else if (e instanceof TokenInvalidException) {
@@ -59,7 +59,7 @@ public abstract class RxBaseSubscriber<T> extends DisposableObserver<T> {
 
     }
 
-    public abstract void onError(APIException e);
+    public abstract void onError(ApiException e);
     public abstract void onSuccess(T t);
 
 }

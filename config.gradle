@@ -2,7 +2,7 @@ ext {
 
     android = [
             compileSdkVersion       : 29,
-            minSdkVersion           : 21,
+            minSdkVersion           : 24,
             targetSdkVersion        : 29,
             versionCode             : 1,
             versionName             : "1.0.1",
@@ -14,17 +14,20 @@ ext {
 
             buildToolsVersion      : "29.0.2",
 
-            junitVersion           : "4.13-beta-2",
-            constraintVersion      : "2.0.4",
+            constraintVersion      : "2.0.1",
+            junit                  : "1.1.1",
+            test_junit             : "3.2.0",
+            test_espresso_core     : "2.0.4",
 
             timber                 : "4.7.1",
             appcompatVersion       : "1.0.0",
             aacVersion             : "2.0.0",
             materialVersion        : "1.1.0",
 
-            arouterApiVersion             : "1.5.1",
-            arouterCompilerVersion        : "1.5.1",
-//            designVersion          : "28.0.0",
+            arouterApiVersion      : "1.5.1",
+            arouterCompilerVersion : "1.5.1",
+
+            immersionbar           : "3.0.0",
 
     ]
 
@@ -33,9 +36,11 @@ ext {
             "appcompat"                              : "androidx.appcompat:appcompat:${version["appcompatVersion"]}",
             "constraint"                             : "androidx.constraintlayout:constraintlayout:${version["constraintVersion"]}",
             "material"                               : "com.google.android.material:material:${version["materialVersion"]}",
-//            "design"                               : "com.android.support:design:${version["designVersion"]}",
 
-            "junit"                                  : "junit:junit:${version["junitVersion"]}",
+            //test
+            "junit"                                  : "junit:junit:${version["junit"]}",
+            "test_junit"                             : "androidx.test.ext:junit:${version["test_junit"]}",
+            "test_espresso_core"                     : "androidx.test.espresso:espresso-core:${version["test_espresso_core"]}",
 
             //Google AAC (For Lifecycles, LiveData, and ViewModel)
             "lifecycle-runtime"                      : "androidx.lifecycle:lifecycle-runtime:${version["aacVersion"]}",
@@ -56,7 +61,10 @@ ext {
             "timber"                                 : "com.jakewharton.timber:timber:${version["timber"]}",
 
             //底部导航栏
-            "bottom-navigation-bar"                  : "com.ashokvarma.android:bottom-navigation-bar:2.2.0",
+//            "bottom-navigation-bar"                  : "com.ashokvarma.android:bottom-navigation-bar:2.2.0",
+
+            //状态栏 https://github.com/gyf-dev/ImmersionBar
+            immersionbar                             :"com.gyf.immersionbar:immersionbar:${version["immersionbar"]}",
     ]
 
 }

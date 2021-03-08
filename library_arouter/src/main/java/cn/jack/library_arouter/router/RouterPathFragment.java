@@ -8,12 +8,12 @@ package cn.jack.library_arouter.router;
 public class RouterPathFragment {
 
     /**
-     * module-first
+     * module-fragment-01
      */
-    public static class First {
-        private static final String FIRST = "/first";
-        /*首页-first*/
-        public static final String PAGER_FIRST = FIRST + "/First";
+    public static class HomeFirst {
+        private static final String HOME_FIRST = "/home_first";
+        /*首页-home-first*/
+        public static final String PAGER_HOME_FIRST = HOME_FIRST + "/Home_First";
     }
 
 

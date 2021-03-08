@@ -3,6 +3,10 @@ package jack.wrapper.base.mvvm.view.activity;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.gyf.immersionbar.BarHide;
+import com.gyf.immersionbar.ImmersionBar;
+
+import jack.wrapper.R;
 import jack.wrapper.base.mvvm.view.IBaseView;
 
 /**
@@ -24,6 +28,20 @@ abstract class BaseTopActivtiy extends AppCompatActivity implements IBaseView {
         //todo 事件总线的封装
         //todo 沉寂式状态栏的封装
 
+        //沉浸式状态栏相关
+        initImmersionBar();
+
+    }
+
+    /**
+     * Init immersion bar.
+     */
+    protected void initImmersionBar() {
+        //在Activity中实现沉浸式:java用法
+        ImmersionBar
+                .with(this)
+                .keyboardEnable(true)  //解决软键盘与底部输入框冲突问题(采用了方式一)
+                .init();
     }
 
     /**

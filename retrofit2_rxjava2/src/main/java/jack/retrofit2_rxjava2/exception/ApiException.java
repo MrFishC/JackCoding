@@ -8,12 +8,12 @@ import java.io.IOException;
  * date:19-5-5
  * describe:
  */
-public class APIException extends IOException {
+public class ApiException extends IOException {
 
     private int errStatus;
     private String errMessage;
 
-    public APIException(int errStatus, String errMessage) {
+    public ApiException(int errStatus, String errMessage) {
         this.errStatus = errStatus;
         this.errMessage = errMessage;
     }

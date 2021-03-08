@@ -1,9 +1,10 @@
 package cn.jack.module_login;
 
 import cn.jack.library_arouter.manager.ArouterManager;
+import cn.jack.module_login.databinding.ActivitysPlashBinding;
 import jack.wrapper.base.mvvm.view.activity.BaseSimpleActiviy;
 
-public class SplashActivity extends BaseSimpleActiviy {
+public class SplashActivity extends BaseSimpleActiviy<ActivitysPlashBinding> {
 
     @Override
     protected int setLayoutRes() {
@@ -15,4 +16,5 @@ public class SplashActivity extends BaseSimpleActiviy {
         super.prepareData();
         ArouterManager.getInstance().navigation2Home();
     }
+    
 }

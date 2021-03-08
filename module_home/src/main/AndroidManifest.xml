@@ -3,9 +3,7 @@
     package="cn.jack.module_home">
 
     <application>
-
         <activity android:name=".HomeActivity"/>
-
     </application>
 
 </manifest>

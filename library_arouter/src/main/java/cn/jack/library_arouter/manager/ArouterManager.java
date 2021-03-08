@@ -3,6 +3,7 @@ package cn.jack.library_arouter.manager;
 import com.alibaba.android.arouter.launcher.ARouter;
 
 import cn.jack.library_arouter.router.RouterPathActivity;
+import cn.jack.library_arouter.router.RouterPathFragment;
 
 /**
  * @创建者 Jack
@@ -28,5 +29,9 @@ public class ArouterManager {
 
     public void navigation2Home(){
         ARouter.getInstance().build(RouterPathActivity.Home.PAGER_HOME).navigation();
+    }
+
+    public void navigation2HomeFragment01(){
+        ARouter.getInstance().build(RouterPathFragment.HomeFirst.PAGER_HOME_FIRST).navigation();
     }
 }

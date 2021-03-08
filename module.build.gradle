@@ -83,4 +83,8 @@ dependencies{
     //ARouter配置
     implementation      "com.alibaba:arouter-api:${rootProject.ext.version["arouterApiVersion"]}"
     annotationProcessor "com.alibaba:arouter-compiler:${rootProject.ext.version["arouterApiVersion"]}"
+
+    testImplementation  rootProject.ext.dependencies["constraint"]
+    androidTestImplementation  rootProject.ext.dependencies["test_junit"]
+    androidTestImplementation  rootProject.ext.dependencies["test_espresso_core"]
 }
