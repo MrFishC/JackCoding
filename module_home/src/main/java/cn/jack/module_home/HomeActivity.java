@@ -1,17 +1,13 @@
 package cn.jack.module_home;
 
-import android.view.View;
-
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.next.easynavigation.view.EasyNavigationBar;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import cn.jack.library_arouter.router.RouterPathActivity;
 import cn.jack.library_arouter.router.RouterPathFragment;
 import cn.jack.module_home.databinding.ActivityHomeBinding;

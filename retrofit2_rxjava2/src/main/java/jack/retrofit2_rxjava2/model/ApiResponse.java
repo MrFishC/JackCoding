@@ -8,33 +8,24 @@ package jack.retrofit2_rxjava2.model;
  */
 public class ApiResponse<T extends Object> {
 
-    private String code;
-    private int stat;
-    private String msg;
-    private T data;
+    private int errorCode;          //状态码
+    private String errorMsg;        //信息
+    private T data;                 //数据
 
-    public String getCode() {
-        return code;
+    public int getErrorCode() {
+        return errorCode;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
     }
 
-    public int getStat() {
-        return stat;
+    public String getErrorMsg() {
+        return errorMsg;
     }
 
-    public void setStat(int stat) {
-        this.stat = stat;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 
     public T getData() {
@@ -42,20 +33,16 @@ public class ApiResponse<T extends Object> {
     }
 
     public void setData(T data) {
-            this.data = data;
-    }
-
-    public boolean isOk() {
-        return stat == 1;
+        this.data = data;
     }
 
     @Override
     public String toString() {
         return "ApiResponse{" +
-                "code='" + code + '\'' +
-                ", stat=" + stat +
-                ", msg='" + msg + '\'' +
+                "errorCode=" + errorCode +
+                ", errorMsg='" + errorMsg + '\'' +
                 ", data=" + data +
                 '}';
     }
+
 }

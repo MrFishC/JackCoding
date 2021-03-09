@@ -20,6 +20,8 @@ dependencies {
     //下拉刷新 - 经典头部
     api rootProject.ext.dependencies["refresh_header_classics"]
 
+    api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+
     //View
     api rootProject.ext.dependencies["constraint"]
     api rootProject.ext.dependencies["material"]

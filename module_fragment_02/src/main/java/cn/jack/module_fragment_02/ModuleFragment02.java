@@ -1,16 +1,110 @@
 package cn.jack.module_fragment_02;
 
+import androidx.annotation.NonNull;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
+
 import cn.jack.library_arouter.router.RouterPathFragment;
+import cn.jack.module_fragment_02.adapter.RvAdapterArticleList;
+import cn.jack.module_fragment_02.constant.C;
 import cn.jack.module_fragment_02.databinding.FragmentHome02Binding;
+import cn.jack.module_fragment_02.entiy.ArticleListRes;
+import cn.jack.module_fragment_02.service.ApiService;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+import jack.retrofit2_rxjava2.exception.ApiException;
+import jack.retrofit2_rxjava2.manager.rx.RxBaseSubscriber;
+import jack.retrofit2_rxjava2.manager.rx.RxFunction;
+import jack.retrofit2_rxjava2.manager.rx.RxUtils;
+import jack.retrofit2_rxjava2.model.ApiResponse;
 import jack.wrapper.base.mvvm.view.fragment.BaseSimpleFragment;
 
 @Route(path = RouterPathFragment.HomeSecond.PAGER_HOME_SECOND)
-public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> {
+public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> implements OnRefreshLoadMoreListener {
 
     @Override
     protected int setLayoutRes() {
         return R.layout.fragment_home_02;
+    }
+
+    @Override
+    public void prepareData() {
+        super.prepareData();
+
+        initAdapter();
+
+        listProjects(id, true);
+    }
+
+    @Override
+    public void prepareListener() {
+        super.prepareListener();
+
+        mBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(this);
+    }
+
+    private RvAdapterArticleList adapterArticleList;
+
+    private void initAdapter() {
+        adapterArticleList = new RvAdapterArticleList();
+        mBinding.rvContent.setAdapter(adapterArticleList);
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        listProjects(id, false);
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        listProjects(id, true);
+    }
+
+    private int page = 0;
+    private String id;
+
+    private void listProjects(String id, boolean refresh) {
+
+        if (refresh) {
+            page = 0;
+        } else {
+            page++;
+        }
+
+        RxBaseSubscriber<ArticleListRes> subscriber = new RxBaseSubscriber<ArticleListRes> () {
+
+            @Override
+            public void onError(ApiException e) {
+                mBinding.smartRefreshLayout.finishRefresh();
+                mBinding.smartRefreshLayout.finishLoadMore();
+            }
+
+            @Override
+            public void onSuccess(ArticleListRes data) {
+                if (refresh) {
+                    adapterArticleList.setList(data.getDatas());
+                } else {
+                    adapterArticleList.addData(data.getDatas());
+                }
+
+                mBinding.smartRefreshLayout.finishRefresh();
+                mBinding.smartRefreshLayout.finishLoadMore();
+            }
+
+        };
+
+        RxUtils.getInstance()
+                .obtainRetrofitService(ApiService.class)
+                .listProjects(page,id)
+                .subscribeOn(Schedulers.io())
+                .map(new RxFunction<ArticleListRes>())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+
     }
 
 }

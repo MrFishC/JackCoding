@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
+import jack.retrofit2_rxjava2.exception.ApiException;
 import jack.retrofit2_rxjava2.exception.DataNullException;
 import jack.retrofit2_rxjava2.exception.TimeOutException;
 import jack.retrofit2_rxjava2.exception.TokenInvalidException;
@@ -25,21 +26,17 @@ public final class RxFunction<T> implements Function<ApiResponse<T>, T> {
     @Override
     public T apply(@NonNull ApiResponse<T> apiResponse) throws IOException {
 
-            int status = apiResponse.getStat();
+            int status = apiResponse.getErrorCode();
 
-//            if(status == NetConfig.FAIL){
-//                throw new ApiException(apiResponse.getStat(), apiResponse.getMsg());
-//            }else
-
-            if(status == NetConfig.TOKEN_INVALID){
-                throw new TokenInvalidException(apiResponse.getStat(),apiResponse.getMsg());
-            }else if(status == NetConfig.OK){
+            if(status == NetConfig.CODE_ERROR){
+                throw new ApiException(apiResponse.getErrorCode(),apiResponse.getErrorMsg());
+            }else if(status == NetConfig.CODE_SUCCESS){
                 if (apiResponse.getData() == null) {
-                    throw new DataNullException(apiResponse.getStat(),apiResponse.getMsg());
+                    throw new DataNullException(apiResponse.getErrorCode(),apiResponse.getErrorMsg());
                 }
                 return apiResponse.getData();
             }else {
-                throw new TimeOutException(apiResponse.getStat(), "请求超时");
+                throw new TimeOutException(apiResponse.getErrorCode(), "请求超时");
             }
 
     }

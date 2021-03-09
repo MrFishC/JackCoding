@@ -53,7 +53,7 @@ public class HttpManager {
      * 构建全局Retrofit客户端
      */
     private static final class RetrofitHolder {
-        private static final String BASE_URL = "xxx";
+        private static final String BASE_URL = "https://www.wanandroid.com/";
 
         private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
