@@ -38,10 +38,28 @@ abstract class BaseTopActivtiy extends AppCompatActivity implements IBaseView {
      */
     protected void initImmersionBar() {
         //在Activity中实现沉浸式:java用法
-        ImmersionBar
-                .with(this)
-                .keyboardEnable(true)  //解决软键盘与底部输入框冲突问题(采用了方式一)
-                .init();
+        if(isBlack()){
+            ImmersionBar
+                    .with(this)
+                    .statusBarView(R.id.status_bar_view)
+                    .statusBarDarkFont(true)
+                    //使用ImmersionBar的titleBar(View view)方法，原理是设置paddingTop，可以用来适配渐变色状态栏、侧滑返回
+                    //                .keyboardEnable(true)  //解决软键盘与底部输入框冲突问题(采用了方式一需要设置)
+                    .init();
+        }else {
+            ImmersionBar
+                    .with(this)
+                    .statusBarView(R.id.status_bar_view)
+                    .init();
+        }
+    }
+
+    /**
+     * 状态栏默认为黑色
+     * @return
+     */
+    protected boolean isBlack() {
+        return true;
     }
 
     /**

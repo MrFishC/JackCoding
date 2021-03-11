@@ -11,8 +11,11 @@ import com.alibaba.android.arouter.launcher.ARouter;
 
 import java.util.List;
 
+import cn.jack.library_image.glide.GlideManager;
+import cn.jack.library_image.image.ImageManager;
 import cn.jack.library_util.AppContext;
 import jack.wrapper.BuildConfig;
+import timber.log.Timber;
 
 /**
  * created by Jack
@@ -84,6 +87,8 @@ public class BaseApplication extends Application{
 
         initArouter();
 
+        initImageLoader();
+
         //全局配置 todo  需要更改  建议更改在子类中去实现
 //        GlobalConfig.init(application)
 //                .withApiHost("http://192.168.1.164:8082/course-teacher/")
@@ -91,9 +96,9 @@ public class BaseApplication extends Application{
 //                .configure();
 
         //DEBUG模式下打印日志
-//        if (BuildConfig.DEBUG) {
-//            Timber.plant(new Timber.DebugTree());
-//        }
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
 
         //注册监听每个activity的生命周期,便于堆栈式管理
         application.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
@@ -128,6 +133,11 @@ public class BaseApplication extends Application{
                 AppManager.getAppManager().removeActivity(activity);
             }
         });
+    }
+
+    private void initImageLoader() {
+        GlideManager glideManager = new GlideManager.Builder().create();
+        ImageManager.getInstance().init(glideManager);
     }
 
     private void initArouter() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:layout_height="20dp"
         android:visibility="gone" />
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,14 +28,14 @@
             android:layout_weight="1"
             android:src="#36C1BC" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:orientation="vertical"
             android:paddingStart="10dp">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -46,7 +46,7 @@
                 android:textSize="16sp"
                 tools:text="标题标题标题标题标题标题标题题标题标题标题标题标题标题题标题标题标题标题标题标题标题" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvContent"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -59,7 +59,7 @@
                 tools:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容" />
 
 
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
@@ -67,7 +67,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvAuthor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -78,15 +78,7 @@
                     android:textSize="12sp"
                     tools:text="名字" />
 
-<!--                <com.zlx.module_base.widget.shinebutton.ShineButton-->
-<!--                    android:id="@+id/ivCollect"-->
-<!--                    android:layout_width="20dp"-->
-<!--                    android:layout_height="20dp"-->
-<!--                    app:btn_color="@android:color/darker_gray"-->
-<!--                    app:btn_fill_color="@color/shine_fill_color"-->
-<!--                    app:enable_flashing="true"-->
-<!--                    app:siShape="@raw/star" />-->
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

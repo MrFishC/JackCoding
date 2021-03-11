@@ -1,3 +1,4 @@
+include ':library_image'
 include ':module_fragment_04'
 include ':module_fragment_03'
 include ':module_fragment_02'

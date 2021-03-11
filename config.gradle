@@ -59,18 +59,24 @@ ext {
 
             //日志
             "timber"                                 : "com.jakewharton.timber:timber:${version["timber"]}",
+            
+            //图片
+            "glide"                                  : 'com.github.bumptech.glide:glide:4.12.0',
+            "glide-transformations"                  : 'jp.wasabeef:glide-transformations:4.3.0',
+            "glide-compiler"                         : 'com.github.bumptech.glide:compiler:4.12.0',
+
 
             //底部导航栏
 //            "bottom-navigation-bar"                  : "com.ashokvarma.android:bottom-navigation-bar:2.2.0",
 
             //状态栏 https://github.com/gyf-dev/ImmersionBar
-            immersionbar                             :"com.gyf.immersionbar:immersionbar:${version["immersionbar"]}",
+            "immersionbar"                             :"com.gyf.immersionbar:immersionbar:${version["immersionbar"]}",
 
             //https://github.com/scwang90/SmartRefreshLayout
-            refresh_layout_kernel                    :  'com.scwang.smart:refresh-layout-kernel:2.0.3',      //核心必须依赖
-            refresh_header_classics                  : 'com.scwang.smart:refresh-header-classics:2.0.3',     //经典刷新头
+            "refresh_layout_kernel"                    :  'com.scwang.smart:refresh-layout-kernel:2.0.3',      //核心必须依赖
+            "refresh_header_classics"                  : 'com.scwang.smart:refresh-header-classics:2.0.3',     //经典刷新头
 
-            BaseRecyclerViewAdapterHelper            : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+            "BaseRecyclerViewAdapterHelper"            : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
 
     ]
 

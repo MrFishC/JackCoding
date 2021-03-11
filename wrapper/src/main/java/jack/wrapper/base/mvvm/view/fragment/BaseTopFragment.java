@@ -3,6 +3,11 @@ package jack.wrapper.base.mvvm.view.fragment;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.gyf.immersionbar.BarHide;
+import com.gyf.immersionbar.ImmersionBar;
+
+import jack.wrapper.R;
 import jack.wrapper.base.mvvm.view.IBaseView;
 
 /**
@@ -12,12 +17,31 @@ import jack.wrapper.base.mvvm.view.IBaseView;
  */
 abstract class BaseTopFragment extends Fragment implements IBaseView {
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    /**
+     * Init immersion bar.
+     */
+    protected void initImmersionBar() {
+        if(isBlack()){
+            ImmersionBar
+                    .with(this)
+                    .statusBarView(R.id.status_bar_view)
+                    .statusBarDarkFont(true)
+//                    .hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
+                    .init();
+        }else {
+            ImmersionBar
+                    .with(this)
+                    .statusBarView(R.id.status_bar_view)
+                    .init();
+        }
+    }
 
-        //todo 沉寂式状态栏的封装
-
+    /**
+     * 状态栏默认为黑色
+     * @return
+     */
+    protected boolean isBlack() {
+        return true;
     }
 
     //空实现部分方法,方便子类选择性实现

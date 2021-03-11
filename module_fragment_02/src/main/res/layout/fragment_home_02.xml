@@ -8,7 +8,7 @@
         android:orientation="vertical">
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
-            android:id="@+id/smartRefreshLayout"
+            android:id="@+id/find_smart_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -19,7 +19,7 @@
                 android:layout_marginTop="?attr/actionBarSize" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvContent"
+                android:id="@+id/find_recycle_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

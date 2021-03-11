@@ -7,20 +7,16 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
 import cn.jack.library_arouter.router.RouterPathFragment;
-import cn.jack.module_fragment_02.adapter.RvAdapterArticleList;
-import cn.jack.module_fragment_02.constant.C;
+import cn.jack.module_fragment_02.adapter.ArticleInfoAdapter;
 import cn.jack.module_fragment_02.databinding.FragmentHome02Binding;
-import cn.jack.module_fragment_02.entiy.ArticleListRes;
+import cn.jack.module_fragment_02.entiy.ProjectInfoList;
 import cn.jack.module_fragment_02.service.ApiService;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import jack.retrofit2_rxjava2.exception.ApiException;
 import jack.retrofit2_rxjava2.manager.rx.RxBaseSubscriber;
 import jack.retrofit2_rxjava2.manager.rx.RxFunction;
 import jack.retrofit2_rxjava2.manager.rx.RxUtils;
-import jack.retrofit2_rxjava2.model.ApiResponse;
 import jack.wrapper.base.mvvm.view.fragment.BaseSimpleFragment;
 
 @Route(path = RouterPathFragment.HomeSecond.PAGER_HOME_SECOND)
@@ -44,14 +40,14 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
     public void prepareListener() {
         super.prepareListener();
 
-        mBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(this);
+        mBinding.findSmartRefreshLayout.setOnRefreshLoadMoreListener(this);
     }
 
-    private RvAdapterArticleList adapterArticleList;
+    private ArticleInfoAdapter mArticleInfoAdapter;
 
     private void initAdapter() {
-        adapterArticleList = new RvAdapterArticleList();
-        mBinding.rvContent.setAdapter(adapterArticleList);
+        mArticleInfoAdapter = new ArticleInfoAdapter();
+        mBinding.findRecycleView.setAdapter(mArticleInfoAdapter);
     }
 
     @Override
@@ -67,6 +63,7 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
     private int page = 0;
     private String id;
 
+    private RxBaseSubscriber<ProjectInfoList> mProjectInfoListRxBaseSubscriber;
     private void listProjects(String id, boolean refresh) {
 
         if (refresh) {
@@ -75,24 +72,24 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
             page++;
         }
 
-        RxBaseSubscriber<ArticleListRes> subscriber = new RxBaseSubscriber<ArticleListRes> () {
+        mProjectInfoListRxBaseSubscriber = new RxBaseSubscriber<ProjectInfoList> () {
 
             @Override
             public void onError(ApiException e) {
-                mBinding.smartRefreshLayout.finishRefresh();
-                mBinding.smartRefreshLayout.finishLoadMore();
+                mBinding.findSmartRefreshLayout.finishRefresh();
+                mBinding.findSmartRefreshLayout.finishLoadMore();
             }
 
             @Override
-            public void onSuccess(ArticleListRes data) {
+            public void onSuccess(ProjectInfoList data) {
                 if (refresh) {
-                    adapterArticleList.setList(data.getDatas());
+                    mArticleInfoAdapter.setList(data.getDatas());
                 } else {
-                    adapterArticleList.addData(data.getDatas());
+                    mArticleInfoAdapter.addData(data.getDatas());
                 }
 
-                mBinding.smartRefreshLayout.finishRefresh();
-                mBinding.smartRefreshLayout.finishLoadMore();
+                mBinding.findSmartRefreshLayout.finishRefresh();
+                mBinding.findSmartRefreshLayout.finishLoadMore();
             }
 
         };
@@ -101,10 +98,16 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
                 .obtainRetrofitService(ApiService.class)
                 .listProjects(page,id)
                 .subscribeOn(Schedulers.io())
-                .map(new RxFunction<ArticleListRes>())
+                .map(new RxFunction<ProjectInfoList>())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
+                .subscribe(mProjectInfoListRxBaseSubscriber);
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxUtils.getInstance().dispose(mProjectInfoListRxBaseSubscriber);
     }
 
 }

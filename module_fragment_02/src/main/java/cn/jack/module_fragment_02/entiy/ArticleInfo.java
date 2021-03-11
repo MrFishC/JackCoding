@@ -5,47 +5,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import java.util.List;
 import cn.jack.module_fragment_02.constant.C;
 
-/**
- * FileName: ArticleBean
- * Created by zlx on 2020/9/18 15:01
- * Email: 1170762202@qq.com
- * Description: 文章实体
- */
-public class ArticleBean implements MultiItemEntity {
-    /**
-     * apkLink :
-     * audit : 1
-     * author : 小编
-     * canEdit : false
-     * chapterId : 272
-     * chapterName : 常用网站
-     * collect : false
-     * courseId : 13
-     * desc :
-     * descMd :
-     * envelopePic :
-     * fresh : false
-     * id : 1848
-     * link : https://developers.google.cn/
-     * niceDate : 2018-01-07 18:59
-     * niceShareDate : 未知时间
-     * origin :
-     * prefix :
-     * projectLink :
-     * publishTime : 1515322795000
-     * realSuperChapterId : 0
-     * selfVisible : 0
-     * shareDate : null
-     * shareUser :
-     * superChapterId : 0
-     * superChapterName :
-     * tags : []
-     * title : Google开发者
-     * type : 0
-     * userId : -1
-     * visible : 0
-     * zan : 0
-     */
+public class ArticleInfo implements MultiItemEntity {
 
     private String  apkLink;
     private int     audit;
@@ -339,8 +299,8 @@ public class ArticleBean implements MultiItemEntity {
     @Override
     public int getItemType() {
         if (TextUtils.isEmpty(envelopePic)) {
-            return C.ARTICLE_ITEM_TEXT;
+            return C.ARTICLE_ITEM_TYPE_01;
         }
-        return C.ARTICLE_ITEM_TEXT_PIC;
+        return C.ARTICLE_ITEM_TYPE_02;
     }
 }

@@ -8,9 +8,7 @@ package cn.jack.module_fragment_02.constant;
  */
 public class C {
 
-    //文章列表纯文字
-    public static final int ARTICLE_ITEM_TEXT = 1;
-    //文章文字、图片
-    public static final int ARTICLE_ITEM_TEXT_PIC = ARTICLE_ITEM_TEXT + 1;
+    public static final int ARTICLE_ITEM_TYPE_01 = 0x01;
+    public static final int ARTICLE_ITEM_TYPE_02 = 0x03;
 
 }

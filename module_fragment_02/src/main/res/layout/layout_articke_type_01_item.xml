@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -88,14 +87,6 @@
                 android:textSize="12sp"
                 tools:text="作者" />
 
-<!--            <com.zlx.module_base.widget.shinebutton.ShineButton-->
-<!--                android:id="@+id/ivCollect"-->
-<!--                android:layout_width="20dp"-->
-<!--                android:layout_height="20dp"-->
-<!--                app:btn_color="@android:color/darker_gray"-->
-<!--                app:btn_fill_color="@color/shine_fill_color"-->
-<!--                app:enable_flashing="true"-->
-<!--                app:siShape="@raw/star" />-->
         </LinearLayout>
     </LinearLayout>
 

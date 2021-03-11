@@ -6,11 +6,11 @@ package jack.retrofit2_rxjava2.model;
  * date:19-5-5
  * describe:服务器返回的json数据转化成bean格式;
  */
-public class ApiResponse<T extends Object> {
+public class ApiResponse<T> {
 
-    private int errorCode;          //状态码
-    private String errorMsg;        //信息
-    private T data;                 //数据
+    private int errorCode;
+    private String errorMsg;
+    private T data;
 
     public int getErrorCode() {
         return errorCode;
