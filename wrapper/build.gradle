@@ -14,11 +14,13 @@ dependencies {
 
     //沉寂式状态栏,基础依赖包
     api rootProject.ext.dependencies["immersionbar"]
+    // fragment快速实现
+    api rootProject.ext.dependencies["immersionbar-components"]
 
     //下拉刷新
     api rootProject.ext.dependencies["refresh_layout_kernel"]
-    //下拉刷新 - 经典头部
     api rootProject.ext.dependencies["refresh_header_classics"]
+    //下拉刷新 - 经典头部
 
     api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
 

@@ -1,4 +1,4 @@
-package cn.jack.module_fragment_03.fragment;
+package cn.jack.module_fragment_03.simple.fragment;
 
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,8 +17,8 @@ import java.util.List;
 
 import cn.jack.library_arouter.router.RouterPathFragment;
 import cn.jack.module_fragment_03.R;
-import cn.jack.module_fragment_03.adapter.TabNavigatorAdapter;
-import cn.jack.module_fragment_03.adapter.ViewPagerFragmentStateAdapter;
+import cn.jack.module_fragment_03.simple.adapter.TabNavigatorAdapter;
+import cn.jack.module_fragment_03.simple.adapter.ViewPagerFragmentStateAdapter;
 import cn.jack.module_fragment_03.databinding.FragmentHome03Binding;
 import jack.wrapper.base.mvvm.view.fragment.BaseSimpleFragment;
 

@@ -19,8 +19,11 @@ public abstract class BaseSimpleActiviy<V extends ViewDataBinding> extends BaseT
 
         mBinding = DataBindingUtil.setContentView(this, setLayoutRes());
 
+        initImmersionBar();
+
         //默认的初始化的顺序
         init();
+
     }
 
     /**

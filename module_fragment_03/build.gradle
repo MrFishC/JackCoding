@@ -3,4 +3,10 @@ apply from: "../module.build.gradle"
 dependencies {
     //每个业务模块都按照implementation的方式依赖
     implementation project(path: ':wrapper')
+
+    //https://github.com/google/flexbox-layout
+    implementation 'com.google.android:flexbox:2.0.1'
+
+    //https://github.com/skydoves/IndicatorScrollView
+    implementation "com.github.skydoves:indicatorscrollview:1.0.4"
 }

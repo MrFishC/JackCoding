@@ -1,4 +1,4 @@
-package cn.jack.module_fragment_03.adapter;
+package cn.jack.module_fragment_03.simple.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

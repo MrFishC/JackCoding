@@ -32,6 +32,8 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
         super.onCreate(savedInstanceState);
         initViewDataBinding();
 
+        initImmersionBar();
+
         //私有的ViewModel与View的契约事件回调逻辑
         registorUIChangeLiveDataCallBack();
 

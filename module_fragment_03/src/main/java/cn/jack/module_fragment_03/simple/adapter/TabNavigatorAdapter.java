@@ -1,21 +1,17 @@
-package cn.jack.module_fragment_03.adapter;
+package cn.jack.module_fragment_03.simple.adapter;
 
 import android.content.Context;
 import android.text.TextPaint;
 import android.util.TypedValue;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-
 import androidx.core.content.ContextCompat;
-
 import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-
 import java.util.List;
-
 import cn.jack.module_fragment_03.R;
 import cn.jack.module_fragment_03.weight.OnTabClickListener;
 import cn.jack.module_fragment_03.weight.ScaleTransitionPagerTitleView;

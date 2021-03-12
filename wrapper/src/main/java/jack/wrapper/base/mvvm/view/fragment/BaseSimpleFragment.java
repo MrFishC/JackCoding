@@ -30,9 +30,6 @@ public abstract class BaseSimpleFragment<V extends ViewDataBinding> extends Base
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //沉浸式状态栏相关
-        initImmersionBar();
-
         init();
     }
 

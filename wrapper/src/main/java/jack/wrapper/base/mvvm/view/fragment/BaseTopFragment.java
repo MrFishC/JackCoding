@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
+import com.gyf.immersionbar.components.ImmersionFragment;
 
 import jack.wrapper.R;
 import jack.wrapper.base.mvvm.view.IBaseView;
@@ -15,23 +16,19 @@ import jack.wrapper.base.mvvm.view.IBaseView;
  * @创建时间 2021/3/4 18:20
  * @描述
  */
-abstract class BaseTopFragment extends Fragment implements IBaseView {
+abstract class BaseTopFragment extends ImmersionFragment implements IBaseView {
 
-    /**
-     * Init immersion bar.
-     */
-    protected void initImmersionBar() {
+    //若不实现ImmersionFragment，则BaseTopFragment的子类调用ImmersionBar等api将无效
+    @Override
+    public void initImmersionBar() {
         if(isBlack()){
             ImmersionBar
                     .with(this)
-                    .statusBarView(R.id.status_bar_view)
                     .statusBarDarkFont(true)
-//                    .hideBar(BarHide.FLAG_HIDE_NAVIGATION_BAR)
                     .init();
         }else {
             ImmersionBar
                     .with(this)
-                    .statusBarView(R.id.status_bar_view)
                     .init();
         }
     }

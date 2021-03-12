@@ -1,4 +1,4 @@
-package cn.jack.module_fragment_03.fragment;
+package cn.jack.module_fragment_03.simple.fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 
@@ -9,6 +9,8 @@ import jack.wrapper.base.mvvm.view.fragment.BaseSimpleFragment;
 
 /**
  * Description: 体系
+ *
+ * 使用随机布局实现
  */
 @Route(path = RouterPathFragment.HomeThird.PAGER_HOME_SYSTEM)
 public class SystemFragment extends BaseSimpleFragment<FragmentSystemBinding> {
