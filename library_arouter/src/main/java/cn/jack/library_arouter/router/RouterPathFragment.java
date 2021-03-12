@@ -32,6 +32,14 @@ public class RouterPathFragment {
         private static final String HOME_THIRD = "/home_third";
         /*首页-home_third*/
         public static final String PAGER_HOME_THIRD = HOME_THIRD + "/Home_Third";
+
+        private static final String HOME_SQUARE = "/home_square";
+        /*首页-home_Square*/
+        public static final String PAGER_HOME_SQUARE = HOME_SQUARE + "/Home_Square";
+
+        private static final String HOME_SYSTEM = "/home_system";
+        /*首页-home_System*/
+        public static final String PAGER_HOME_SYSTEM = HOME_SYSTEM + "/Home_System";
     }
 
     /**

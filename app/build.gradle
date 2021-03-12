@@ -47,4 +47,5 @@ dependencies {
         implementation project(path: ':module_fragment_03')
         implementation project(path: ':module_fragment_04')
     }
+
 }

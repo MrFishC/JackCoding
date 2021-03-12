@@ -15,6 +15,7 @@ import cn.jack.library_image.glide.GlideManager;
 import cn.jack.library_image.image.ImageManager;
 import cn.jack.library_util.AppContext;
 import jack.wrapper.BuildConfig;
+import leakcanary.LeakCanary;
 import timber.log.Timber;
 
 /**

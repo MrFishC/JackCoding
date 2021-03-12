@@ -76,8 +76,9 @@ ext {
             "refresh_layout_kernel"                    :  'com.scwang.smart:refresh-layout-kernel:2.0.3',      //核心必须依赖
             "refresh_header_classics"                  : 'com.scwang.smart:refresh-header-classics:2.0.3',     //经典刷新头
 
-            "BaseRecyclerViewAdapterHelper"            : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+            "BaseRecyclerViewAdapterHelper"            : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4',
 
+            "MagicIndicator"                           : 'com.github.hackware1993:MagicIndicator:1.7.0'
     ]
 
 }
