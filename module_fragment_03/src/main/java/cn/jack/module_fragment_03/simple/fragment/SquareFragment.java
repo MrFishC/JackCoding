@@ -58,7 +58,7 @@ public class SquareFragment extends BaseSimpleFragment<FragmentSquareBinding> {
 
         RxUtils.getInstance()
                 .obtainRetrofitService(ApiService.class)
-                .getSystemAndSquareInfoList()
+                .getSystemInfoList()
                 .subscribeOn(Schedulers.io())
                 .map(new RxFunction<List<SystemAndSquareInfo>>())
                 .observeOn(AndroidSchedulers.mainThread())
