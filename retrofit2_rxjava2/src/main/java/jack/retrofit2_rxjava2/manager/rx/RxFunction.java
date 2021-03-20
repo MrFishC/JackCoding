@@ -1,14 +1,12 @@
 package jack.retrofit2_rxjava2.manager.rx;
 
-
 import java.io.IOException;
-
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import jack.retrofit2_rxjava2.exception.ApiException;
 import jack.retrofit2_rxjava2.exception.DataNullException;
 import jack.retrofit2_rxjava2.exception.TimeOutException;
-import jack.retrofit2_rxjava2.exception.TokenInvalidException;
+import jack.retrofit2_rxjava2.exception.UnloginException;
 import jack.retrofit2_rxjava2.model.ApiResponse;
 import jack.retrofit2_rxjava2.util.net.NetConfig;
 
@@ -28,14 +26,20 @@ public final class RxFunction<T> implements Function<ApiResponse<T>, T> {
 
             int status = apiResponse.getErrorCode();
 
-            if(status == NetConfig.CODE_ERROR){
+            if(status == NetConfig.CODE_ERROR || status == NetConfig.NOT_MATCH){
                 throw new ApiException(apiResponse.getErrorCode(),apiResponse.getErrorMsg());
+            }else if(status == NetConfig.UN_LOGIN){
+                throw new UnloginException(apiResponse.getErrorCode(),apiResponse.getErrorMsg());
             }else if(status == NetConfig.CODE_SUCCESS){
                 if (apiResponse.getData() == null) {
                     throw new DataNullException(apiResponse.getErrorCode(),apiResponse.getErrorMsg());
                 }
                 return apiResponse.getData();
             }else {
+
+                System.out.println(" apiResponse " + apiResponse.getErrorMsg());
+                System.out.println(" status " + status);
+
                 throw new TimeOutException(apiResponse.getErrorCode(), "请求超时");
             }
 

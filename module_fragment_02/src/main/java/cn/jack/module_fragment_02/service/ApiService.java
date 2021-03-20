@@ -1,6 +1,6 @@
 package cn.jack.module_fragment_02.service;
 
-import cn.jack.module_fragment_02.entiy.ProjectInfoList;
+import cn.jack.library_common_business.entiy.ProjectInfoList;
 import io.reactivex.Observable;
 import jack.retrofit2_rxjava2.model.ApiResponse;
 import retrofit2.http.GET;

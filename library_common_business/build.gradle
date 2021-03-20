@@ -1,0 +1,8 @@
+apply from: "../lib.build.gradle"
+
+dependencies {
+    implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+
+    implementation project(':retrofit2_rxjava2')
+    implementation project(':library_image')
+}

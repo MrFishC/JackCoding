@@ -12,15 +12,15 @@ dependencies {
     //如果你使用java8开发，可以添加这个依赖，里面只有一个类
     api 'androidx.lifecycle:lifecycle-common-java8:2.0.0'
 
-    //沉寂式状态栏,基础依赖包
+    //沉寂式状态栏,基础 依赖包
     api rootProject.ext.dependencies["immersionbar"]
     // fragment快速实现
     api rootProject.ext.dependencies["immersionbar-components"]
 
     //下拉刷新
     api rootProject.ext.dependencies["refresh_layout_kernel"]
-    api rootProject.ext.dependencies["refresh_header_classics"]
     //下拉刷新 - 经典头部
+    api rootProject.ext.dependencies["refresh_header_classics"]
 
     api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
 
@@ -37,6 +37,7 @@ dependencies {
     api project(':library_arouter')
     api project(':library_common_res')
     api project(':library_image')
+    api project(':library_common_business')
 
     debugApi 'com.squareup.leakcanary:leakcanary-android:2.6'
 

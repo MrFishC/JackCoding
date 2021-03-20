@@ -45,7 +45,7 @@ public class SquareFragment extends BaseSimpleFragment<FragmentSquareBinding> {
         mRxBaseSubscriber = new RxBaseSubscriber<List<SystemAndSquareInfo>>() {
 
             @Override
-            public void onError(ApiException e) {
+            public void onFailed(ApiException e) {
 
             }
 

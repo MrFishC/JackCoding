@@ -49,7 +49,7 @@ public class SystemFragment extends BaseSimpleFragment<FragmentSystemBinding> {
         mRxBaseSubscriber = new RxBaseSubscriber<List<SystemAndSquareInfo>>() {
 
             @Override
-            public void onError(ApiException e) {
+            public void onFailed(ApiException e) {
 
             }
 

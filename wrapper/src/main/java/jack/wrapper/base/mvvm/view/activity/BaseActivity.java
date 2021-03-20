@@ -12,6 +12,9 @@ import androidx.lifecycle.ViewModelProviders;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
+
+import jack.wrapper.base.contract.IBaseContract;
+import jack.wrapper.base.mvvm.model.BaseModel;
 import jack.wrapper.base.mvvm.view.IBaseView;
 import jack.wrapper.base.mvvm.viewModel.BaseViewModel;
 
@@ -20,6 +23,10 @@ import jack.wrapper.base.mvvm.viewModel.BaseViewModel;
  * email:yucrun@163.com
  * date:19-4-27
  * describe:activity的基类
+ *
+ * update:
+ *  BaseViewModel 需要传递泛型
+ *      建议：取消BaseViewModel的泛型参数
  */
 
 public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseViewModel> extends BaseTopActivtiy implements IBaseView {

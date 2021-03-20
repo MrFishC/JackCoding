@@ -6,6 +6,7 @@ import jack.retrofit2_rxjava2.exception.ApiException;
 import jack.retrofit2_rxjava2.exception.DataNullException;
 import jack.retrofit2_rxjava2.exception.TimeOutException;
 import jack.retrofit2_rxjava2.exception.TokenInvalidException;
+import jack.retrofit2_rxjava2.exception.UnloginException;
 import jack.retrofit2_rxjava2.util.net.NetCheckHelper;
 
 /**
@@ -14,6 +15,7 @@ import jack.retrofit2_rxjava2.util.net.NetCheckHelper;
 public abstract class RxBaseSubscriber<T> extends DisposableObserver<T> {
 
     public RxBaseSubscriber() {
+
     }
 
     @Override
@@ -35,17 +37,12 @@ public abstract class RxBaseSubscriber<T> extends DisposableObserver<T> {
     public final void onError(Throwable e) {
 
         if (e instanceof ApiException) {
-            onError((ApiException) e);
-        }else if (e instanceof TimeOutException) {
-            showTips("连接超时");
-        }else if (e instanceof TokenInvalidException) {
-            //...
-
+            onFailed((ApiException) e);
         }else if (e instanceof DataNullException) {
-            //接口访问成功,但后台返回的数据为null,同样回调onSuccess方法
+            //接口访问成功,但后台返回的数据为null,同样回调onSuccess方法          可以考虑通过 自定义转换器的方式来优化该位置
             onSuccess(null);
-        }else {
-            showTips("网络请求超时");
+        }else{
+            RxExceptionManager.getInstance().exceptionHandler(e);
         }
 
     }
@@ -55,11 +52,7 @@ public abstract class RxBaseSubscriber<T> extends DisposableObserver<T> {
 
     }
 
-    private void showTips(String tip){
-
-    }
-
-    public abstract void onError(ApiException e);
+    public abstract void onFailed(ApiException e);
     public abstract void onSuccess(T t);
 
 }

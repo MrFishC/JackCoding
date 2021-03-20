@@ -10,7 +10,7 @@ import io.reactivex.disposables.Disposable;
  * describe:服务于Repository,数据层基类,具体的Repository(数据仓库)需要实现该类
  */
 
-public class BaseModel implements IModel {
+public class BaseModel implements IModel{
 
     //管理RxJava，主要针对RxJava异步操作造成的内存泄漏
     protected CompositeDisposable mCompositeDisposable;

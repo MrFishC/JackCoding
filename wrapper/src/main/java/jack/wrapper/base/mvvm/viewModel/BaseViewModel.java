@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.disposables.Disposable;
+import jack.wrapper.base.contract.IBaseContract;
 import jack.wrapper.base.mvvm.viewModel.liveData.UIChangeLiveData;
 import jack.wrapper.base.mvvm.model.BaseModel;
 
@@ -25,9 +26,16 @@ import jack.wrapper.base.mvvm.model.BaseModel;
  *      实现 ILifecycleCallback接口,即实现DefaultLifecycleObserver(jdk1.8实现DefaultLifecycleObserver,jdk1.7
  *实现LifecycleObserver),为了实现View层与ViewModel层生命周期同步;
  *
+ * update(21-03-19):
+ *  在该类中加入新的泛型参数
+ *      L extends IBaseContract.IBridge
+ *
  */
 
-public class BaseViewModel<M extends BaseModel> extends AndroidViewModel implements ILifecycleCallback {
+//public class BaseViewModel<M extends BaseModel,L extends IBaseContract.IBridge> extends AndroidViewModel implements ILifecycleCallback,IBaseContract.IBridge{
+public class BaseViewModel<M extends BaseModel> extends AndroidViewModel implements ILifecycleCallback
+        ,IBaseContract
+{
 
     //ViewModel层持有Model层引用,Model的具体实现类为自定义的xxxRepository(数据仓库类)
     protected M mModel;
@@ -41,6 +49,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         mModel = null;
     }
 
+    //若要对mModel进行赋值，子类必须要调用父类=该构造方法
     public BaseViewModel(@NonNull Application application, M model) {
         super(application);
         this.mModel = model;
@@ -49,6 +58,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     /**
      * 调用BaseModel中的addSubscribe方法,处理rxjava的内存泄露
      * @param disposable
+     * 备注： 去掉 该方法
      */
     protected void addSubscribe(Disposable disposable) {
         if (mModel == null) {
@@ -163,6 +173,26 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
      */
     public void onBackPressed() {
 //        mUIChangeLiveData.getOnBackPressedEvent().call();
+    }
+
+    @Override
+    public void loading() {
+        System.out.println(" loading ");
+    }
+
+    @Override
+    public void loadFinished() {
+        System.out.println(" loadFinished ");
+    }
+
+    @Override
+    public void loadFailed() {
+        System.out.println(" loadFailed ");
+    }
+
+    @Override
+    public void showToast(String toastMsg) {
+        System.out.println(" showToast ");
     }
 
     public static final class ParameterField {

@@ -22,6 +22,13 @@ import cn.jack.module_fragment_03.simple.adapter.ViewPagerFragmentStateAdapter;
 import cn.jack.module_fragment_03.databinding.FragmentHome03Binding;
 import jack.wrapper.base.mvvm.view.fragment.BaseSimpleFragment;
 
+/**
+ * 1.列表     （跳转新页面）
+ *
+ * 2.搜索
+ * 3.导航
+ * 4.公众号
+ */
 @Route(path = RouterPathFragment.HomeThird.PAGER_HOME_THIRD)
 public class ModuleFragment03 extends BaseSimpleFragment<FragmentHome03Binding> {
 

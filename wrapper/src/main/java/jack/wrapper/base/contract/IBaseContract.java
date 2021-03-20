@@ -9,38 +9,16 @@ package jack.wrapper.base.contract;
  */
 public interface IBaseContract {
 
-    /**
-     * 注意：
-     * 该接口出现的位置有两处,Repository和ViewModel;
-     * 使用时候均需要带上泛型IB
-     * @param <IB> IBridge的子类
-     */
-    interface IHttpDataSource<IB extends IBridge> {
-        //获取数据/执行网络操作
-        void getHttpData(IB iBridge);
-    }
+    //开始加载
+    void loading();
 
-    /**
-     * 该接口出现的位置有两处,Repository和ViewModel;
-     * 使用时候均需要带上泛型IB
-     * @param <IB> IBridge的子类
-     */
-    interface ILocalDataSource<IB extends IBridge>{
-        //进行本地数据数据
-        void getLocalData(IB iBridge);
-    }
+    //完成加载
+    void loadFinished();
 
-    /**
-     * 该接口或子类实现的方法,会在对应的vm层(ViewModel)中得到回调
-     */
-    interface IBridge {
+    //加载失败
+    void loadFailed();
 
-        //这里规定一些通用的方法,辅助于状态布局
-        //开始加载
-        //完成加载
-
-        //子类自行规定加载网络或本地数据的方法
-
-    }
+    //吐司
+    void showToast(String toastMsg);
 
 }

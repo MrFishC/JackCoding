@@ -3,7 +3,7 @@
     package="cn.jack.module_login">
 
     <application>
-        <activity android:name=".SplashActivity"/>
+        <activity android:name=".mvvm.view.SplashActivity"/>
     </application>
 
 </manifest>

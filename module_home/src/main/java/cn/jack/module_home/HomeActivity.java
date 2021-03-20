@@ -19,7 +19,7 @@ import jack.wrapper.base.mvvm.view.activity.BaseSimpleActiviy;
 @Route(path = RouterPathActivity.Home.PAGER_HOME)
 public class HomeActivity extends BaseSimpleActiviy<ActivityHomeBinding> {
 
-    private String[] tabText = {"首页", "发现", "消息", "我的"};
+    private String[] tabText = {"首页", "项目", "体系", "收藏"};
     //未选中icon
     private int[] normalIcon = {R.mipmap.index, R.mipmap.find, R.mipmap.message, R.mipmap.me};
     //选中时icon
