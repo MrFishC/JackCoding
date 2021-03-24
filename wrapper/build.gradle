@@ -1,6 +1,56 @@
-apply from: "../lib.build.gradle"
+//apply from: "../lib.build.gradle"
+
+apply plugin: 'com.android.library'     //...
+
+android {       //...
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+        //这里不需要添加arouter的配置，只需要在dependencies中依赖arouter即可
+        //将eventbus的总线注解处理器生成的代码配置统一在app的build.gradle中配置(未能生成代码，具体原因不明)
+        //原因：在每个模块中配置，估计是和arouter的配置发生了冲突  导致项目会报错：具体原因暂时不明白(android studio 不支持同事存在两个annotationProcessor)
+        javaCompileOptions {
+            annotationProcessorOptions {            //需要加深对annotationProcessorOptions的理解
+                arguments = [ eventBusIndex : 'jack.wrapper.bus.MyEventBusIndex' ]  //一定会在当前目录下生成
+//                System.out.println(" 在gradle中打印一下 " + project.getName())
+            }
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //开启dataBinding
+    dataBinding {
+        enabled true
+    }
+
+}
 
 dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     api rootProject.ext.dependencies["appcompat"]
 
@@ -30,6 +80,14 @@ dependencies {
 
     api rootProject.ext.dependencies["MagicIndicator"]
 
+    debugApi 'com.squareup.leakcanary:leakcanary-android:2.6'
+
+    implementation "com.alibaba:arouter-api:${rootProject.ext.version["arouterApiVersion"]}"   //...
+
+    //事件总线以及总线注解处理器
+    implementation rootProject.ext.dependencies["eventbus"]
+    annotationProcessor rootProject.ext.dependencies["eventbus-annotation"]
+
     //wrapper模块依赖网络,其它模块直接wrapper模块即可。
     api project(':retrofit2_rxjava2')
     api project(':library_weight')
@@ -38,7 +96,5 @@ dependencies {
     api project(':library_common_res')
     api project(':library_image')
     api project(':library_common_business')
-
-    debugApi 'com.squareup.leakcanary:leakcanary-android:2.6'
 
 }

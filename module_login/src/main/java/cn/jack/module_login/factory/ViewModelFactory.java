@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import cn.jack.module_login.mvvm.modle.repository.LoginHttpRepository;
+import cn.jack.module_login.mvvm.modle.repository.RegisterHttpRepository;
 import cn.jack.module_login.mvvm.vm.LoginViewModel;
+import cn.jack.module_login.mvvm.vm.RegisterViewModel;
 
 /**
  * @创建者 Jack
@@ -38,6 +40,8 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory{
 
         if (modelClass.isAssignableFrom(LoginViewModel.class)) {
             return (T) new LoginViewModel(mApplication, RepositoryFactory.getInstance().provideRepository(LoginHttpRepository.class));
+        }else if(modelClass.isAssignableFrom(RegisterViewModel.class)){
+            return (T) new RegisterViewModel(mApplication, RepositoryFactory.getInstance().provideRepository(RegisterHttpRepository.class));
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

@@ -29,6 +29,8 @@ ext {
 
             immersionbar           : "3.0.0",
 
+            eventbus               : "3.1.1",
+
     ]
 
     dependencies = [
@@ -80,7 +82,17 @@ ext {
 
             "BaseRecyclerViewAdapterHelper"            : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4',
 
-            "MagicIndicator"                           : 'com.github.hackware1993:MagicIndicator:1.7.0'
+            "MagicIndicator"                           : 'com.github.hackware1993:MagicIndicator:1.7.0',
+
+            //arouter
+            "arouter-api"                              : "com.alibaba:arouter-api:${version["arouterApiVersion"]}",
+            //arouter注解处理器
+            "arouter-compiler"                         : "com.alibaba:arouter-compiler:${version["arouterApiVersion"]}",
+
+            //事件总线
+            "eventbus"                                 : "org.greenrobot:eventbus:${version["eventbus"]}",
+            // 事件总线注解处理器
+            "eventbus-annotation"                      : "org.greenrobot:eventbus-annotation-processor:${version["eventbus"]}"
     ]
 
 }

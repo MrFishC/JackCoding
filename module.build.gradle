@@ -33,6 +33,14 @@ android {
             }
         }
 
+        //android studio 不支持同事存在两个annotationProcessor
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [ eventBusIndex : 'jack.wrapper.bus.MyEventBusIndex' ]
+//            }
+//        }
+
+
     }
 
     /*java插件引入了一个概念叫做SourceSets，通过修改SourceSets中的属性，可以指定哪些源文件
@@ -81,10 +89,15 @@ android {
 dependencies{
 
     //ARouter配置
-    implementation      "com.alibaba:arouter-api:${rootProject.ext.version["arouterApiVersion"]}"
-    annotationProcessor "com.alibaba:arouter-compiler:${rootProject.ext.version["arouterApiVersion"]}"
+    implementation rootProject.ext.dependencies["arouter-api"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
+    //事件总线以及总线注解处理器 android studio 不支持同事存在两个annotationProcessor
+//    implementation rootProject.ext.dependencies["eventbus"]
+//    annotationProcessor rootProject.ext.dependencies["eventbus-annotation"]
 
     testImplementation  rootProject.ext.dependencies["constraint"]
     androidTestImplementation  rootProject.ext.dependencies["test_junit"]
     androidTestImplementation  rootProject.ext.dependencies["test_espresso_core"]
+
 }

@@ -32,9 +32,8 @@ import jack.wrapper.base.mvvm.model.BaseModel;
  *
  */
 
-//public class BaseViewModel<M extends BaseModel,L extends IBaseContract.IBridge> extends AndroidViewModel implements ILifecycleCallback,IBaseContract.IBridge{
 public class BaseViewModel<M extends BaseModel> extends AndroidViewModel implements ILifecycleCallback
-        ,IBaseContract
+        ,IBaseContract      //实现该接口，避免其子类再次重写IBaseContract中的方法
 {
 
     //ViewModel层持有Model层引用,Model的具体实现类为自定义的xxxRepository(数据仓库类)

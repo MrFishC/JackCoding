@@ -82,11 +82,18 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
             mViewModel = (VM) createViewModel(this, modelClass);
         }
 
+        //在基类中定义mBinding.setVariable(BR.xxx,y)相当于是约定，在布局中的layout-data-variable节点只要设定了name=viewModel，type=对应的子ViewModel
+        //即实现databinding与ViewModel组件无缝协作
         //关联ViewModel       相当于通过<variable>标签指定类（然后在控件的属性值中就可以使用）[子类initVariableId()的返回的为BR.xxx,其中xxx必须和xml的<variable>标签一样]
         mBinding.setVariable(initVariableId(), mViewModel);
 
         //让ViewModel拥有View的生命周期感应
         getLifecycle().addObserver(mViewModel);
+
+        //使用 LiveData 将数据变化通知给界面
+//        mBinding.setLifecycleOwner(this);         //todo 不明白这里的意思 具体点就是  需要具体场景具体代码 来体现这样代码的作用才行
+
+
     }
 
     /**
@@ -122,6 +129,7 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
 //                Class<?> clz = (Class<?>) params.get(ParameterField.CLASS);
 //                Bundle bundle = (Bundle) params.get(ParameterField.BUNDLE);
 //                startActivity(clz, bundle);
+
             }
         });
 

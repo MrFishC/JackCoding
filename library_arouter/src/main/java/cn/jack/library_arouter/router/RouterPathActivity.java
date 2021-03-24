@@ -13,4 +13,14 @@ public class RouterPathActivity {
         public static final String PAGER_HOME = HOME + "/Home";
     }
 
+    public static class Login {
+        private static final String LOGIN = "/login";
+        public static final String PAGER_LOGIN = LOGIN + "/Login";
+    }
+
+    public static class Register {
+        private static final String REGISTER = "/register";
+        public static final String PAGER_REGISTER = REGISTER + "/Register";
+    }
+
 }

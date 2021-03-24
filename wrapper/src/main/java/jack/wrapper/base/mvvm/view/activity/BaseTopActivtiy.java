@@ -1,24 +1,24 @@
 package jack.wrapper.base.mvvm.view.activity;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
-
+import org.greenrobot.eventbus.Subscribe;
 import jack.wrapper.R;
 import jack.wrapper.base.mvvm.view.IBaseView;
+import jack.wrapper.bus.Event;
+import jack.wrapper.bus.EventBusUtil;
 
 /**
  * created by Jack
  * email:yucrun@163.com
  * date:19-5-14
  * describe:BaseActivity和BaseStateActivity的父类,去掉public,只能由BaseActivity和BaseStateActivity继承
+ *
+ * update：更改为public
  */
-abstract class BaseTopActivtiy extends AppCompatActivity implements IBaseView {
+public abstract class BaseTopActivtiy extends AppCompatActivity implements IBaseView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +28,50 @@ abstract class BaseTopActivtiy extends AppCompatActivity implements IBaseView {
             ARouter.getInstance().inject(this);
         }
 
-        //todo 事件总线的封装
-        //todo 沉寂式状态栏的封装
+        //事件总线
+        if (isRegisterEventBus()) {
+            EventBusUtil.getInstance().register(this);
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isRegisterEventBus()) {
+            EventBusUtil.getInstance().unregister(this);
+        }
+    }
+
+    @Subscribe
+    public <T> void onEventBusCome(Event<T> event) {
+        if (event != null) {
+            receiveEvent(event);
+        }
+    }
+
+    @Subscribe(sticky = true)
+    public <T> void onStickyEventBusCome(Event<T> event) {
+        if (event != null) {
+            receiveStickyEvent(event);
+        }
+    }
+
+    /**
+     * 接收到分发到事件
+     *
+     * @param event 事件
+     */
+    protected void receiveEvent(Event event) {
+
+    }
+
+    /**
+     * 接收到分发的粘性事件
+     *
+     * @param event 粘性事件
+     */
+    protected void receiveStickyEvent(Event event) {
 
     }
 
@@ -118,4 +160,12 @@ abstract class BaseTopActivtiy extends AppCompatActivity implements IBaseView {
     public void prepareListener() {
 
     }
+
+    /**
+     * 是否注册EventBus，默认不注册
+     */
+    protected boolean isRegisterEventBus() {
+        return false;
+    }
+
 }

@@ -31,6 +31,14 @@ public class ArouterManager {
         ARouter.getInstance().build(RouterPathActivity.Home.PAGER_HOME).navigation();
     }
 
+    public void navigation2Login(){
+        ARouter.getInstance().build(RouterPathActivity.Login.PAGER_LOGIN).navigation();
+    }
+
+    public void navigation2Register(){
+        ARouter.getInstance().build(RouterPathActivity.Register.PAGER_REGISTER).navigation();
+    }
+
     public void navigation2HomeFragment01(){
         ARouter.getInstance().build(RouterPathFragment.HomeFirst.PAGER_HOME_FIRST).navigation();
     }

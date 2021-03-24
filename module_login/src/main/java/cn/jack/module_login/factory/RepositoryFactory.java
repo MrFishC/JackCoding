@@ -3,6 +3,7 @@ package cn.jack.module_login.factory;
 import androidx.annotation.NonNull;
 
 import cn.jack.module_login.mvvm.modle.repository.LoginHttpRepository;
+import cn.jack.module_login.mvvm.modle.repository.RegisterHttpRepository;
 import jack.wrapper.base.mvvm.model.BaseModel;
 
 /**
@@ -28,6 +29,8 @@ public class RepositoryFactory {
 
         if (modelClass.isAssignableFrom(LoginHttpRepository.class)) {
             return (T) new LoginHttpRepository();
+        }else if (modelClass.isAssignableFrom(RegisterHttpRepository.class)) {
+            return (T) new RegisterHttpRepository();
         }
 
         throw new IllegalArgumentException("Unknown Repository class: " + modelClass.getName());

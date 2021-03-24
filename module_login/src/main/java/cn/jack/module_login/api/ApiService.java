@@ -23,4 +23,9 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("user/login")
     Observable<ApiResponse<UserInfo>> login(@Field("username") String username, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("user/register")
+    Observable<ApiResponse<UserInfo>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+
 }

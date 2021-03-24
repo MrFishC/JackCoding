@@ -20,7 +20,7 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
 
-        //ARouter配置1
+        //ARouter配置1：library_arouter统一管理页面跳转，这里需要配置提供给其使用
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
@@ -60,6 +60,7 @@ dependencies {
     implementation rootProject.ext.dependencies["appcompat"]
 
     //ARouter配置2
-    implementation      "com.alibaba:arouter-api:${rootProject.ext.version["arouterApiVersion"]}"
-    annotationProcessor "com.alibaba:arouter-compiler:${rootProject.ext.version["arouterApiVersion"]}"
+    implementation rootProject.ext.dependencies["arouter-api"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
 }

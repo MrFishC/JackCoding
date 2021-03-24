@@ -5,9 +5,13 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.meta.SubscriberInfo;
 
 import java.util.List;
 
@@ -15,7 +19,8 @@ import cn.jack.library_image.glide.GlideManager;
 import cn.jack.library_image.image.ImageManager;
 import cn.jack.library_util.AppContext;
 import jack.wrapper.BuildConfig;
-import leakcanary.LeakCanary;
+import jack.wrapper.base.mvvm.view.activity.BaseTopActivtiy;
+import jack.wrapper.bus.MyEventBusIndex;
 import timber.log.Timber;
 
 /**
@@ -90,6 +95,8 @@ public class BaseApplication extends Application{
 
         initImageLoader();
 
+        initBus();
+
         //全局配置 todo  需要更改  建议更改在子类中去实现
 //        GlobalConfig.init(application)
 //                .withApiHost("http://192.168.1.164:8082/course-teacher/")
@@ -135,6 +142,16 @@ public class BaseApplication extends Application{
             }
         });
     }
+
+    private void initBus() {
+        MyEventBusIndex myEventBusIndex = new MyEventBusIndex();
+////        之前限制了BaseTopActivtiy为非public，在MyEventBusIndex中的静态代码块未生成相应的putIndex方法
+//        SubscriberInfo subscriberInfo = myEventBusIndex.getSubscriberInfo(BaseTopActivtiy.class);
+//        System.out.println(" 是否为空 " + (subscriberInfo == null));                              //false
+        EventBus.builder().addIndex(myEventBusIndex).installDefaultEventBus();
+//        System.out.println(" 是否为空 toString " + EventBus.getDefault().toString());             //EventBus[indexCount=1, eventInheritance=true]
+    }
+
 
     private void initImageLoader() {
         GlideManager glideManager = new GlideManager.Builder().create();
