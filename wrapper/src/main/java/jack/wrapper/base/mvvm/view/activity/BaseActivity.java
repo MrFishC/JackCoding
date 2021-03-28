@@ -1,7 +1,9 @@
 package jack.wrapper.base.mvvm.view.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -9,13 +11,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import jack.wrapper.base.contract.IBaseContract;
-import jack.wrapper.base.mvvm.model.BaseModel;
 import jack.wrapper.base.mvvm.view.IBaseView;
+import jack.wrapper.base.mvvm.view.IOpenActivity;
 import jack.wrapper.base.mvvm.viewModel.BaseViewModel;
 
 /**
@@ -29,7 +31,7 @@ import jack.wrapper.base.mvvm.viewModel.BaseViewModel;
  *      建议：取消BaseViewModel的泛型参数
  */
 
-public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseViewModel> extends BaseTopActivtiy implements IBaseView {
+public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseViewModel> extends BaseTopActivtiy implements IBaseView, IOpenActivity{
 
     protected V mBinding;
     protected VM mViewModel;
@@ -201,6 +203,11 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
      */
     public <T extends ViewModel> T createViewModel(FragmentActivity activity, Class<T> cls) {
         return ViewModelProviders.of(activity).get(cls);
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 
 }

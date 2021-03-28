@@ -1,16 +1,21 @@
 package cn.jack.module_login.mvvm.view;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
+
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
+
 import cn.jack.library_arouter.manager.ArouterManager;
 import cn.jack.library_arouter.router.RouterPathActivity;
+import cn.jack.library_common_business.constant.C;
+import cn.jack.library_util.SPUtils;
 import cn.jack.module_login.BR;
 import cn.jack.module_login.R;
 import cn.jack.module_login.databinding.ActivityLoginBinding;
 import cn.jack.module_login.factory.ViewModelFactory;
+import cn.jack.module_login.mvvm.modle.entity.UserInfo;
 import cn.jack.module_login.mvvm.vm.LoginViewModel;
 import jack.wrapper.base.mvvm.view.activity.BaseActivity;
 
@@ -39,6 +44,18 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     @Override
+    protected void registorUIChangeLiveDataCallBack() {
+        super.registorUIChangeLiveDataCallBack();
+        mViewModel.navigation2HomeA.observe(this, new Observer<UserInfo>() {
+            @Override
+            public void onChanged(UserInfo userInfo) {
+                ArouterManager.getInstance().navigation2Home();
+                finish();
+            }
+        });
+    }
+
+    @Override
     public void prepareListener() {
         super.prepareListener();
 
@@ -54,25 +71,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Override
     public void prepareParam() {
         super.prepareParam();
-
-        System.out.println("跳转... " + System.currentTimeMillis());
-
-        Intent intent = getIntent();
-
-        System.out.println("intent " + (intent ==null));
-
-        if(intent != null){
-            Bundle bundle = intent.getExtras();
-            System.out.println("bundle " + (bundle ==null));
-            if(bundle != null){
-                String phone = bundle.getString("phone");
-                String passwd = bundle.getString("passwd");
-                mViewModel.mPhone.set(phone);
-                mViewModel.mPasswd.set(passwd);
-
-                System.out.println("phone " + phone + " passwd " + passwd);
-            }
-        }
-
+        mViewModel.mPhone.set(SPUtils.getInstance().getData(C.C_USER_NAME,"") + "");
+        mViewModel.mPasswd.set(SPUtils.getInstance().getData(C.C_USER_PASSWD,"") + "");
     }
+
 }

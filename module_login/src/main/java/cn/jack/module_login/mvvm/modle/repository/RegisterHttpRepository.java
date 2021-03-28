@@ -1,5 +1,7 @@
 package cn.jack.module_login.mvvm.modle.repository;
 
+import cn.jack.library_common_business.constant.C;
+import cn.jack.library_util.SPUtils;
 import cn.jack.module_login.api.ApiService;
 import cn.jack.module_login.contract.IRegisterLisenter;
 import cn.jack.module_login.mvvm.modle.entity.UserInfo;
@@ -29,6 +31,8 @@ public class RegisterHttpRepository extends BaseModel {
 
             @Override
             public void onSuccess(UserInfo userInfo) {
+                SPUtils.getInstance().putData(C.C_USER_NAME,userName);
+                SPUtils.getInstance().putData(C.C_USER_PASSWD,passwd);
                 iRegisterLisenter.registerSuccess(userInfo);
             }
         };

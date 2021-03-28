@@ -191,7 +191,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
     @Override
     public void showToast(String toastMsg) {
-        System.out.println(" showToast ");
+        System.out.println(" showToast " + toastMsg);
     }
 
     public static final class ParameterField {

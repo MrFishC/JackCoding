@@ -13,6 +13,8 @@ dependencies {
 
     api rootProject.ext.dependencies["timber"]
 
+    implementation rootProject.ext.dependencies["PersistentCookieJar"]
+
     //避免重复依赖
     implementation project(':library_util')
 

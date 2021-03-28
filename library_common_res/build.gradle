@@ -1,1 +1,15 @@
 apply from: "../lib.build.gradle"
+
+dependencies {
+
+    //提高 Android UI 开发效率的 UI 库,只依赖了qmui
+    //官网 https://github.com/Tencent/QMUI_Android
+    api(rootProject.ext.dependencies["qmui"]) {
+        exclude group: 'androidx.appcompat'
+        exclude group: 'androidx.annotation'
+        exclude group: 'com.google.android.material:material'
+        exclude group: 'androidx.constraintlayout:constraintlayout'
+        exclude group: 'androidx.swiperefreshlayout:swiperefreshlayout'
+    }
+
+}

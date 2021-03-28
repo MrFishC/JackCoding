@@ -1,1 +1,9 @@
 apply from: "../lib.build.gradle"
+
+dependencies {
+    //通用标题栏
+    api rootProject.ext.dependencies["titlebar"]
+
+
+    api rootProject.ext.dependencies["mmkv"]
+}

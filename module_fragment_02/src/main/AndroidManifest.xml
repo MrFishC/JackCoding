@@ -3,7 +3,6 @@
     package="cn.jack.module_fragment_02">
 
     <application>
-
+        <activity android:name=".ui.activity.CollectionActivity"/>
     </application>
-
 </manifest>

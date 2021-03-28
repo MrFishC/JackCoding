@@ -92,7 +92,28 @@ ext {
             //事件总线
             "eventbus"                                 : "org.greenrobot:eventbus:${version["eventbus"]}",
             // 事件总线注解处理器
-            "eventbus-annotation"                      : "org.greenrobot:eventbus-annotation-processor:${version["eventbus"]}"
+            "eventbus-annotation"                      : "org.greenrobot:eventbus-annotation-processor:${version["eventbus"]}",
+
+            //欢迎页面使用
+            "ferriswheel"                              : 'ru.github.igla:ferriswheel:1.2',
+
+            //https://github.com/mxn21/FlowingDrawer    首页使用
+            "flowingdrawer-core"                       : 'com.mxn.soul:flowingdrawer-core:2.1.0',
+            "nineoldandroids_library"                  : 'com.nineoldandroids:library:2.4.0',
+
+            //https://github.com/Tencent/QMUI_Android
+            "qmui"                                     : 'com.qmuiteam:qmui:2.0.0-alpha10',
+
+            //通用的标题栏
+            "titlebar"                                 : "com.hjq:titlebar:6.0",
+
+            //https://github.com/Tencent/MMKV
+            "mmkv"                                     : "com.tencent:mmkv-static:1.2.7",
+
+            //https://github.com/franmontiel/PersistentCookieJar
+            "PersistentCookieJar"                      : "com.github.franmontiel:PersistentCookieJar:v1.0.1",
+
+
     ]
 
 }

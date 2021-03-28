@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.tencent.mmkv.MMKV;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.meta.SubscriberInfo;
@@ -97,6 +98,8 @@ public class BaseApplication extends Application{
 
         initBus();
 
+        initMMKV();
+
         //全局配置 todo  需要更改  建议更改在子类中去实现
 //        GlobalConfig.init(application)
 //                .withApiHost("http://192.168.1.164:8082/course-teacher/")
@@ -143,6 +146,10 @@ public class BaseApplication extends Application{
         });
     }
 
+    private void initMMKV() {
+        MMKV.initialize(this);
+    }
+
     private void initBus() {
         MyEventBusIndex myEventBusIndex = new MyEventBusIndex();
 ////        之前限制了BaseTopActivtiy为非public，在MyEventBusIndex中的静态代码块未生成相应的putIndex方法
@@ -151,7 +158,6 @@ public class BaseApplication extends Application{
         EventBus.builder().addIndex(myEventBusIndex).installDefaultEventBus();
 //        System.out.println(" 是否为空 toString " + EventBus.getDefault().toString());             //EventBus[indexCount=1, eventInheritance=true]
     }
-
 
     private void initImageLoader() {
         GlideManager glideManager = new GlideManager.Builder().create();

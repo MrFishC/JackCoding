@@ -3,16 +3,20 @@ package cn.jack.module_fragment_03.simple.fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
 import androidx.appcompat.widget.AppCompatTextView;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.flexbox.FlexboxLayout;
 import com.skydoves.indicatorscrollview.IndicatorAnimation;
 import com.skydoves.indicatorscrollview.IndicatorItem;
+
 import java.util.List;
+
 import cn.jack.library_arouter.router.RouterPathFragment;
+import cn.jack.library_common_business.entiy.ArticleInfo;
 import cn.jack.module_fragment_03.R;
 import cn.jack.module_fragment_03.databinding.FragmentSquareBinding;
-import cn.jack.module_fragment_03.entity.ArticleInfo;
 import cn.jack.module_fragment_03.entity.SystemAndSquareInfo;
 import cn.jack.module_fragment_03.service.ApiService;
 import io.reactivex.android.schedulers.AndroidSchedulers;

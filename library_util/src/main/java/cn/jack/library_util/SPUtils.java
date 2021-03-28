@@ -1,12 +1,10 @@
-package jack.wrapper.utils;
+package cn.jack.library_util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
 import java.util.HashMap;
 import java.util.Map;
-
-import cn.jack.library_util.AppContext;
 
 /**
  * created by Jack

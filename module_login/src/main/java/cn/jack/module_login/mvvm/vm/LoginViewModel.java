@@ -2,13 +2,13 @@ package cn.jack.module_login.mvvm.vm;
 
 import android.app.Application;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
-
 import cn.jack.module_login.contract.ILoginLisenter;
+import cn.jack.module_login.mvvm.modle.entity.UserInfo;
 import cn.jack.module_login.mvvm.modle.repository.LoginHttpRepository;
 import jack.wrapper.base.mvvm.viewModel.BaseViewModel;
+import jack.wrapper.base.mvvm.viewModel.liveData.UIChangeLiveData;
 
 /**
  * @创建者 Jack
@@ -22,6 +22,8 @@ public class LoginViewModel extends BaseViewModel<LoginHttpRepository> implement
     //密码
     public ObservableField<String> mPasswd   = new ObservableField<>();
 
+    public UIChangeLiveData<UserInfo> navigation2HomeA = new UIChangeLiveData<>();
+
     public LoginViewModel(@NonNull Application application, LoginHttpRepository model) {
         super(application, model);
     }
@@ -33,5 +35,10 @@ public class LoginViewModel extends BaseViewModel<LoginHttpRepository> implement
             mModel.login(mPhone.get(),mPasswd.get(),LoginViewModel.this);
         }
     };
+
+    @Override
+    public void openHomeActivity(UserInfo userInfo) {
+        navigation2HomeA.setValue(userInfo);
+    }
 
 }

@@ -22,6 +22,7 @@ public class ArticleInfoAdapter extends BaseMultiItemQuickAdapter<ArticleInfo, B
         super(null);
         addItemType(C.ARTICLE_ITEM_TYPE_01, R.layout.layout_articke_type_01_item);
         addItemType(C.ARTICLE_ITEM_TYPE_02, R.layout.layout_articke_type_02_item);
+        addChildClickViewIds(R.id.image_collection);
     }
 
     @Override
@@ -35,10 +36,12 @@ public class ArticleInfoAdapter extends BaseMultiItemQuickAdapter<ArticleInfo, B
                         .setText(R.id.tvChapter,
                                 TextUtils.isEmpty(superChapterName) ? chapterName : String.format("%s·%s", superChapterName, chapterName))
                         .setText(R.id.tvTime, articleBean.getNiceDate())
-                        .setGone(R.id.tvRefresh, !articleBean.isFresh());
+                        .setGone(R.id.tvRefresh, !articleBean.isFresh())
+                        .setImageResource(R.id.image_collection,articleBean.isCollect() ? R.mipmap.icon_collect : R.mipmap.icon_uncollect);
                 break;
             case C.ARTICLE_ITEM_TYPE_02:
-                helper.setText(R.id.tvContent, articleBean.getDesc());
+                helper.setText(R.id.tvContent, articleBean.getDesc())
+                        .setImageResource(R.id.image_collection,articleBean.isCollect() ? R.mipmap.icon_collect : R.mipmap.icon_uncollect);
                 ImageManager.getInstance().getImageLoader().loadImageByNet(helper.getView(R.id.image).getContext(),articleBean.getEnvelopePic(), ((AppCompatImageView) helper.getView(R.id.image)));
                 break;
         }

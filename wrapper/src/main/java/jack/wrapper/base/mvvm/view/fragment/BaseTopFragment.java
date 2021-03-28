@@ -1,14 +1,14 @@
 package jack.wrapper.base.mvvm.view.fragment;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import android.view.View;
 
-import com.gyf.immersionbar.BarHide;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.gyf.immersionbar.ImmersionBar;
 import com.gyf.immersionbar.components.ImmersionFragment;
 
-import jack.wrapper.R;
 import jack.wrapper.base.mvvm.view.IBaseView;
 
 /**
@@ -17,6 +17,12 @@ import jack.wrapper.base.mvvm.view.IBaseView;
  * @描述
  */
 abstract class BaseTopFragment extends ImmersionFragment implements IBaseView {
+
+    //Fragment的View加载完毕的标记
+    private boolean mIsViewCreated;
+
+    //Fragment对用户可见的标记
+    private boolean mIsUIVisible;
 
     //若不实现ImmersionFragment，则BaseTopFragment的子类调用ImmersionBar等api将无效
     @Override
@@ -41,6 +47,13 @@ abstract class BaseTopFragment extends ImmersionFragment implements IBaseView {
         return true;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mIsViewCreated = true;
+        lazyLoad();
+    }
+
     //空实现部分方法,方便子类选择性实现
     //初始化参数
     @Override
@@ -60,4 +73,30 @@ abstract class BaseTopFragment extends ImmersionFragment implements IBaseView {
 
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        //isVisibleToUser这个boolean值表示:该Fragment的UI 用户是否可见
+        if (isVisibleToUser) {
+            mIsUIVisible = true;
+            lazyLoad();
+        } else {
+            mIsUIVisible = false;
+        }
+    }
+
+    private void lazyLoad() {
+        //这里进行双重标记判断,是因为setUserVisibleHint会多次回调,并且会在onCreateView执行前回调,必须确保onCreateView加载完毕且页面可见,才加载数据
+        if (mIsViewCreated && mIsUIVisible) {
+            loadData();
+            //数据加载完毕,恢复标记,防止重复加载
+            mIsViewCreated = false;
+            mIsUIVisible = false;
+        }
+    }
+
+    //需要懒加载的子类则自行重写该方法
+    protected void loadData(){
+
+    }
 }

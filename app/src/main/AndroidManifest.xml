@@ -17,6 +17,7 @@
         android:maxAspectRatio="2.4">
 
         <activity android:name="cn.jack.module_login.mvvm.view.SplashActivity">
+<!--        <activity android:name="cn.jack.module_login.mvvm.view.TestActivity">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

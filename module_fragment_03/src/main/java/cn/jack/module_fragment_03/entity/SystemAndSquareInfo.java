@@ -2,6 +2,8 @@ package cn.jack.module_fragment_03.entity;
 
 import java.util.List;
 
+import cn.jack.library_common_business.entiy.ArticleInfo;
+
 /**
  * FileName: TreeListRes
  * Created by zlx on 2020/9/18 13:59

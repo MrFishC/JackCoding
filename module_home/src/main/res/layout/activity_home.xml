@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -13,14 +14,41 @@
         android:orientation="vertical"
         tools:context=".HomeActivity">
 
-        <include layout="@layout/default_status_view"/>
+<!--        <include layout="@layout/default_status_view"/>-->  <!-- 在各自的fragment布局中添加-->
 
-        <!-- 猜测：使用EasyNavigationBar库,在activity基类中调用ImmersionBar的statusBarView(R.id.status_bar_view)方法无效 -->
-        <!-- 使用<include layout="@layout/default_status_view"/> 来灵活处理-->
-        <com.next.easynavigation.view.EasyNavigationBar
-            android:id="@+id/navigationBar"
+        <!-- 增加抽屉布局 -->
+        <com.mxn.soul.flowingdrawer_core.FlowingDrawer
+            android:id="@+id/drawerlayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:edPosition="1"
+            app:edMenuSize="260dp"
+            app:edMenuBackground="#dddddd">
+
+            <!--content-->
+            <!-- 猜测：使用EasyNavigationBar库,在activity基类中调用ImmersionBar的statusBarView(R.id.status_bar_view)方法无效 -->
+            <!-- 使用<include layout="@layout/default_status_view"/> 来灵活处理-->
+            <com.next.easynavigation.view.EasyNavigationBar
+                android:id="@+id/navigationBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <!--menu-->
+            <com.mxn.soul.flowingdrawer_core.FlowingMenuLayout
+                android:id="@+id/menulayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:id="@+id/id_container_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
+
+        </com.mxn.soul.flowingdrawer_core.FlowingDrawer>
 
     </LinearLayout>
 

@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-    </data>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        >
 
-        <TextView
+        <ru.github.igla.ferriswheel.FerrisWheelView
+            android:id="@+id/ferrisWheelView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="欢迎页面"
-            android:gravity="center" />
+            android:layout_margin="20dp"
+            android:layout_gravity="center"
+            app:fwv_cabinsNumber="10"
+            app:fwv_rotateSpeed="8"
+            app:fwv_cabinSize="20dp"
+            app:fwv_baseStrokeColor="@color/common_accent_color"
+            />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </layout>

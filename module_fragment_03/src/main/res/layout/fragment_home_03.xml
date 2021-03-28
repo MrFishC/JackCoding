@@ -6,6 +6,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <include layout="@layout/default_status_view"/>
+
         <net.lucode.hackware.magicindicator.MagicIndicator
             android:id="@+id/magic_indicator"
             android:layout_width="wrap_content"
@@ -16,8 +18,7 @@
             android:id="@+id/view_pager2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never"
-            />
+            android:overScrollMode="never"/>
 
     </LinearLayout>
 

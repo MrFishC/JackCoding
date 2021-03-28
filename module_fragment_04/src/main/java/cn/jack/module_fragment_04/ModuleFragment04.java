@@ -41,11 +41,13 @@ public class ModuleFragment04 extends BaseSimpleFragment<FragmentHome04Binding> 
     @Override
     public void prepareData() {
         super.prepareData();
-
         mBinding.collectSmartRefreshLayout.setOnRefreshLoadMoreListener(this);
-
         initAdapter();
+    }
 
+    @Override
+    protected void loadData() {
+        super.loadData();
         listMyCollect(true);
     }
 

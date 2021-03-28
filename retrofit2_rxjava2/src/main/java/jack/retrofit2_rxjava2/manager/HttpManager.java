@@ -1,8 +1,17 @@
 package jack.retrofit2_rxjava2.manager;
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import cn.jack.library_util.AppContext;
 import jack.retrofit2_rxjava2.interceptor.TokenInterceptor;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -46,6 +55,8 @@ public class HttpManager {
         private static final OkHttpClient OK_HTTP_CLIENT = addInterceptor()
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(new TokenInterceptor())         //头部统一添加token
+                .cookieJar(new PersistentCookieJar(new SetCookieCache(),
+                        new SharedPrefsCookiePersistor(AppContext.getContext())))
                 .build();
     }
 

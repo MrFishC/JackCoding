@@ -48,22 +48,9 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
         mViewModel.navigation2LoginA.observe(this, new Observer<UserInfo>() {
             @Override
             public void onChanged(UserInfo userInfo) {
-                //关闭当前页面
-                //打开登录页面
                 //登录页面展示新注册的账号和密码
-
-                //todo 封装activity的跳转
-                Bundle bundle = new Bundle();
-//                bundle.putString("phone",userInfo.getUsername());
-//                bundle.putString("passwd",userInfo.getPassword());
-
-                bundle.putString("phone","18811116666");
-                bundle.putString("passwd","123456");
-
-                Intent intent = new Intent();
-                intent.putExtras(bundle);
-                intent.setClass(RegisterActivity.this,LoginActivity.class);
-                startActivity(intent);
+                openActivity(LoginActivity.class);
+                finish();
             }
         });
 

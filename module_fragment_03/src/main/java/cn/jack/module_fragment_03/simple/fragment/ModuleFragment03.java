@@ -41,6 +41,12 @@ public class ModuleFragment03 extends BaseSimpleFragment<FragmentHome03Binding> 
     public void prepareData() {
         super.prepareData();
 
+    }
+
+    @Override
+    protected void loadData() {
+        super.loadData();
+
         initIndicator();
     }
 
@@ -57,8 +63,7 @@ public class ModuleFragment03 extends BaseSimpleFragment<FragmentHome03Binding> 
         fragments.add((Fragment) ARouter.getInstance().build(RouterPathFragment.HomeThird.PAGER_HOME_SYSTEM).navigation());
         fragments.add((Fragment) ARouter.getInstance().build(RouterPathFragment.HomeThird.PAGER_HOME_SQUARE).navigation());
 
-        ViewPagerFragmentStateAdapter viewPagerFragmentStateAdapter = new ViewPagerFragmentStateAdapter(
-                getActivity(),fragments);
+        ViewPagerFragmentStateAdapter viewPagerFragmentStateAdapter = new ViewPagerFragmentStateAdapter(getActivity(),fragments);
         mBinding.viewPager2.setOffscreenPageLimit(stringArray.length);
         mBinding.viewPager2.setAdapter(viewPagerFragmentStateAdapter);
 

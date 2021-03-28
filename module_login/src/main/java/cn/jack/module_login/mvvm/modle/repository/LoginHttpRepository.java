@@ -20,8 +20,6 @@ public class LoginHttpRepository extends BaseModel{
 
     public void login(String userName, String passwd, ILoginLisenter lisenter) {
 
-        lisenter.loading();
-
         RxBaseSubscriber<UserInfo> userInfoRxBaseSubscriber = new RxBaseSubscriber<UserInfo>() {
 
             @Override
@@ -31,8 +29,7 @@ public class LoginHttpRepository extends BaseModel{
 
             @Override
             public void onSuccess(UserInfo data) {
-                lisenter.loadFinished();
-                System.out.println(" 登录成功 ");
+                lisenter.openHomeActivity(data);
             }
 
         };

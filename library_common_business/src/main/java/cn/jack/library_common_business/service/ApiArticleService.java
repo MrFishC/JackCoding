@@ -16,15 +16,14 @@ public interface ApiArticleService {
     Observable<ApiResponse<ProjectInfoList>> getArticleCollection(@Path("page") int page);
 
     /**
-     * 收藏(文章)
+     * 收藏文章
      */
     @POST("lg/collect/{id}/json")
-    Observable<ApiResponse> collectArticle(@Path("id") String id);
+    Observable<ApiResponse<String>> collectAtrticle(@Path("id") String id);
 
     /**
      * 取消收藏
      */
     @POST("lg/uncollect_originId/{id}/json")
-    Observable<ApiResponse> unCollectArticle(@Path("id") String id);
-
+    Observable<ApiResponse<String>> unCollectAtrticle(@Path("id") String id);
 }

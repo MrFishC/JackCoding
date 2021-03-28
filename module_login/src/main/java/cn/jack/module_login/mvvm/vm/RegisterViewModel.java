@@ -42,10 +42,6 @@ public class RegisterViewModel extends BaseViewModel<RegisterHttpRepository> imp
         String passwd = mPasswd.getValue();
         String againPasswd = mPasswdAgain.getValue();
 
-        System.out.println("userName " + userName);
-        System.out.println("passwd " + passwd);
-        System.out.println("againPasswd " + againPasswd);
-
         if(TextUtils.isEmpty(userName)){
             showToast("请再次输入用户名");
             return;

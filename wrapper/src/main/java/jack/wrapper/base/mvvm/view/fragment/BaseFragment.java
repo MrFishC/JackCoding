@@ -44,7 +44,6 @@ public abstract class BaseFragment<V extends ViewDataBinding,VM extends BaseView
 
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

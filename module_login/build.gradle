@@ -6,4 +6,7 @@ dependencies {
 
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["constraint"]
+
+    //动画效果
+    implementation rootProject.ext.dependencies["ferriswheel"]
 }
