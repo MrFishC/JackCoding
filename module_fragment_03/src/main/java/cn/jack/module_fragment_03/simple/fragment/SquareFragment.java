@@ -3,18 +3,15 @@ package cn.jack.module_fragment_03.simple.fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.appcompat.widget.AppCompatTextView;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.flexbox.FlexboxLayout;
 import com.skydoves.indicatorscrollview.IndicatorAnimation;
 import com.skydoves.indicatorscrollview.IndicatorItem;
-
 import java.util.List;
-
 import cn.jack.library_arouter.router.RouterPathFragment;
 import cn.jack.library_common_business.entiy.ArticleInfo;
+import cn.jack.library_common_business.loadsir.ViewStateLayout;
 import cn.jack.module_fragment_03.R;
 import cn.jack.module_fragment_03.databinding.FragmentSquareBinding;
 import cn.jack.module_fragment_03.entity.SystemAndSquareInfo;
@@ -22,7 +19,7 @@ import cn.jack.module_fragment_03.service.ApiService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import jack.retrofit2_rxjava2.exception.ApiException;
-import jack.retrofit2_rxjava2.manager.rx.RxBaseSubscriber;
+import jack.retrofit2_rxjava2.manager.rx.RxBaseSimpleSubscriber;
 import jack.retrofit2_rxjava2.manager.rx.RxFunction;
 import jack.retrofit2_rxjava2.manager.rx.RxUtils;
 import jack.wrapper.base.mvvm.view.fragment.BaseSimpleFragment;
@@ -38,24 +35,42 @@ public class SquareFragment extends BaseSimpleFragment<FragmentSquareBinding> {
         return R.layout.fragment_square;
     }
 
-    private RxBaseSubscriber<List<SystemAndSquareInfo>> mRxBaseSubscriber;
+    @Override
+    public boolean isRegisterLoadSir() {
+        return true;
+    }
+
+    private RxBaseSimpleSubscriber<List<SystemAndSquareInfo>> mRxBaseSimpleSubscriber;
 
     @Override
     public void prepareData() {
         super.prepareData();
 
-        mBinding.indicatorScrollView.bindIndicatorView(mBinding.indicatorView);
+        httpDataInfo();
+    }
 
-        mRxBaseSubscriber = new RxBaseSubscriber<List<SystemAndSquareInfo>>() {
+    @Override
+    public void dataReload() {
+        httpDataInfo();
+    }
+
+    private void httpDataInfo() {
+        mRxBaseSimpleSubscriber = new RxBaseSimpleSubscriber<List<SystemAndSquareInfo>>() {
 
             @Override
             public void onFailed(ApiException e) {
-
+                setViewStateChangeLisenter(ViewStateLayout.FAILED);
             }
 
             @Override
             public void onSuccess(List<SystemAndSquareInfo> treeListRes) {
                 setData(treeListRes);
+
+                if(treeListRes.size() == 0){
+                    setViewStateChangeLisenter(ViewStateLayout.EMPTY);
+                }else {
+                    setViewStateChangeLisenter(ViewStateLayout.SUCCESS);
+                }
             }
 
         };
@@ -66,13 +81,13 @@ public class SquareFragment extends BaseSimpleFragment<FragmentSquareBinding> {
                 .subscribeOn(Schedulers.io())
                 .map(new RxFunction<List<SystemAndSquareInfo>>())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mRxBaseSubscriber);
+                .subscribe(mRxBaseSimpleSubscriber);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RxUtils.getInstance().dispose(mRxBaseSubscriber);
+        RxUtils.getInstance().dispose(mRxBaseSimpleSubscriber);
     }
 
     private LayoutInflater layoutInflater = null;
@@ -111,7 +126,6 @@ public class SquareFragment extends BaseSimpleFragment<FragmentSquareBinding> {
                     .setItemColor(R.color.purple_200)
                     .setIndicatorAnimation(IndicatorAnimation.BOUNCE)
                     .build());
-
         }
     }
 

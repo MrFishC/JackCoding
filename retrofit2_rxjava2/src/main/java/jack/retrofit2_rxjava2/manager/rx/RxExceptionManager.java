@@ -1,5 +1,8 @@
 package jack.retrofit2_rxjava2.manager.rx;
 
+import java.util.concurrent.TimeoutException;
+
+import jack.retrofit2_rxjava2.exception.TimeOutException;
 import jack.retrofit2_rxjava2.exception.TokenInvalidException;
 import jack.retrofit2_rxjava2.exception.UnloginException;
 
@@ -28,8 +31,9 @@ public class RxExceptionManager {
             //发送广播(使用事件总线来代替)
             System.out.println(" 未登录异常");
         }else if (e instanceof TokenInvalidException) {
-            //发送广播
             System.out.println(" token失效");
+        }else if (e instanceof TimeOutException) {
+            System.out.println(" 超时");
         }else {
             System.out.println(" 其它异常 " + e.getMessage());
         }

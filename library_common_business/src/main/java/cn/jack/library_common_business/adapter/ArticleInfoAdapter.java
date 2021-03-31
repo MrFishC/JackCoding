@@ -16,8 +16,6 @@ import cn.jack.library_image.image.ImageManager;
  */
 public class ArticleInfoAdapter extends BaseMultiItemQuickAdapter<ArticleInfo, BaseViewHolder> {
 
-    private boolean hasTop = false;
-
     public ArticleInfoAdapter() {
         super(null);
         addItemType(C.ARTICLE_ITEM_TYPE_01, R.layout.layout_articke_type_01_item);
@@ -47,8 +45,7 @@ public class ArticleInfoAdapter extends BaseMultiItemQuickAdapter<ArticleInfo, B
         }
 
         helper.setText(R.id.tvTitle, articleBean.getTitle())
-                .setText(R.id.tvAuthor, TextUtils.isEmpty(articleBean.getAuthor()) ? articleBean.getShareUser() : articleBean.getAuthor())
-                .setGone(R.id.top, !(hasTop && helper.getAdapterPosition() == 0));
+                .setText(R.id.tvAuthor, TextUtils.isEmpty(articleBean.getAuthor()) ? articleBean.getShareUser() : articleBean.getAuthor());
     }
 
 }

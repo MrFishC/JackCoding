@@ -1,22 +1,26 @@
 package jack.wrapper.base.mvvm.view.fragment;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.gyf.immersionbar.ImmersionBar;
 import com.gyf.immersionbar.components.ImmersionFragment;
 
-import jack.wrapper.base.mvvm.view.IBaseView;
+import cn.jack.library_util.AppContext;
+import jack.wrapper.base.app.BaseApplication;
+import jack.wrapper.base.mvvm.view.interf.IBaseView;
+import jack.wrapper.base.mvvm.view.interf.IStatusSwitchLisenter;
 
 /**
  * @创建者 Jack
  * @创建时间 2021/3/4 18:20
  * @描述
  */
-abstract class BaseTopFragment extends ImmersionFragment implements IBaseView {
+abstract class BaseTopFragment extends ImmersionFragment implements IBaseView , IStatusSwitchLisenter {
+
+    protected Application mApplication;
 
     //Fragment的View加载完毕的标记
     private boolean mIsViewCreated;
@@ -39,12 +43,10 @@ abstract class BaseTopFragment extends ImmersionFragment implements IBaseView {
         }
     }
 
-    /**
-     * 状态栏默认为黑色
-     * @return
-     */
-    protected boolean isBlack() {
-        return true;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mApplication = AppContext.getApplication();
     }
 
     @Override

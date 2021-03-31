@@ -1,9 +1,9 @@
 package jack.wrapper.base.mvvm.view.activity;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -12,12 +12,21 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.kingja.loadsir.callback.Callback;
+import com.kingja.loadsir.core.LoadService;
+import com.kingja.loadsir.core.LoadSir;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import jack.wrapper.base.mvvm.view.IBaseView;
-import jack.wrapper.base.mvvm.view.IOpenActivity;
+import cn.jack.library_common_business.loadsir.ViewStateLayout;
+import cn.jack.library_common_business.loadsir.callback.CustomCallback;
+import cn.jack.library_common_business.loadsir.callback.EmptyCallback;
+import cn.jack.library_common_business.loadsir.callback.FailedCallback;
+import cn.jack.library_common_business.loadsir.callback.LoadingCallback;
+import cn.jack.library_common_business.loadsir.callback.TimeoutCallback;
+import jack.wrapper.base.mvvm.view.interf.ILoadSirLisenter;
 import jack.wrapper.base.mvvm.viewModel.BaseViewModel;
 
 /**
@@ -31,7 +40,7 @@ import jack.wrapper.base.mvvm.viewModel.BaseViewModel;
  *      建议：取消BaseViewModel的泛型参数
  */
 
-public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseViewModel> extends BaseTopActivtiy implements IBaseView, IOpenActivity{
+public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseViewModel> extends BaseTopActivtiy implements ILoadSirLisenter {
 
     protected V mBinding;
     protected VM mViewModel;
@@ -46,8 +55,18 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
         //私有的ViewModel与View的契约事件回调逻辑
         registorUIChangeLiveDataCallBack();
 
+        if(isRegisterLoadSir()){
+            if(!isViewRegisterLoadSir()){
+                setLoadService(this);
+            }
+
+            //监听VM层（状态布局属性的变化）
+            setViewStateChangeLisenter();
+        }
+
         //默认的初始化的顺序
         init();
+
     }
 
     /**
@@ -79,8 +98,6 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
                 modelClass = BaseViewModel.class;
             }
 
-            Log.d("名称 "," = " + modelClass.getName());
-
             mViewModel = (VM) createViewModel(this, modelClass);
         }
 
@@ -92,10 +109,75 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
         //让ViewModel拥有View的生命周期感应
         getLifecycle().addObserver(mViewModel);
 
-        //使用 LiveData 将数据变化通知给界面
-//        mBinding.setLifecycleOwner(this);         //todo 不明白这里的意思 具体点就是  需要具体场景具体代码 来体现这样代码的作用才行
+    }
 
+    /**
+     * ================================================
+     * ui状态布局变化监听（VM通过livedata通知V层做出变化）*/
+    protected void setViewStateChangeLisenter(){
+        mViewModel.mUiStatesChange.observe(this, new Observer<ViewStateLayout>() {
+            @Override
+            public void onChanged(ViewStateLayout stateLayout) {
+                stateLayoutChange(stateLayout);
+            }
+        });
+    }
 
+    private LoadService mLoadService;       //databinding跟loadsir是否可以关联起来？ 待思考  （目前应该不支持，暂时放下）
+    //虽然状态布局在view变化，但是都是由数据驱动的，即m层代码 ---> vm --->v层监听vm的变化做出相应的改变
+
+    //LoadSir的Convertor是个很好的功能，但在该项目不合适。            //不使用让整个页面都展示状态布局
+    protected void setLoadService(Object target){
+        mLoadService = LoadSir.getDefault().register(target, new Callback.OnReloadListener() {
+            @Override
+            public void onReload(View v) {
+                dataReload();
+            }
+        });
+    }
+
+    /**
+     * 在View 中使用
+     */
+    protected void setLoadService(View view){
+        mLoadService = LoadSir.getDefault().register(view, new Callback.OnReloadListener() {
+            @Override
+            public void onReload(View v) {
+                dataReload();
+            }
+        });
+    }
+
+    private void stateLayoutChange(ViewStateLayout stateLayout){
+        switch (stateLayout){
+            case LOADING:
+                mLoadService.showCallback(LoadingCallback.class);
+                System.out.println(" 状态信息 v LOADING ");
+                break;
+            case SUCCESS:
+                mLoadService.showSuccess();
+                System.out.println(" 状态信息 v SUCCESS ");
+                break;
+            case FAILED:
+                mLoadService.showCallback(FailedCallback.class);
+                System.out.println(" 状态信息 v FAILED ");
+                break;
+            case NET_ERROR:
+                //todo
+//                break;    //暂时跟time_out一样
+            case TIME_OUT:
+                mLoadService.showCallback(TimeoutCallback.class);
+                System.out.println(" 状态信息 v NET_ERROR ");
+                break;
+            case CUSTOM:
+                mLoadService.showCallback(CustomCallback.class);
+                System.out.println(" 状态信息 v CUSTOM ");
+                break;
+            case EMPTY:
+                mLoadService.showCallback(EmptyCallback.class);
+                System.out.println(" 状态信息 v EMPTY ");
+                break;
+        }
     }
 
     /**
@@ -173,7 +255,8 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
      *
      * @return 布局layout的id
      */
-    public abstract int initContentView();
+    public abstract @LayoutRes
+    int initContentView();
 
     /**
      * 初始化ViewModel的id
@@ -203,11 +286,6 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
      */
     public <T extends ViewModel> T createViewModel(FragmentActivity activity, Class<T> cls) {
         return ViewModelProviders.of(activity).get(cls);
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
     }
 
 }

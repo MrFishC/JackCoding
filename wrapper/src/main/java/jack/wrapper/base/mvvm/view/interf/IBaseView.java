@@ -1,4 +1,4 @@
-package jack.wrapper.base.mvvm.view;
+package jack.wrapper.base.mvvm.view.interf;
 
 /**
  * created by Jack

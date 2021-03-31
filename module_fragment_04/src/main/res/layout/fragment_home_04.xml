@@ -7,6 +7,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <include layout="@layout/default_status_view"/>
+
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/collect_smart_refresh_layout"
             android:layout_width="match_parent"

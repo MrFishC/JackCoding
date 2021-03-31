@@ -1,4 +1,4 @@
-package jack.wrapper.base.mvvm.view;
+package jack.wrapper.base.mvvm.view.interf;
 
 import android.app.Activity;
 import android.content.Context;

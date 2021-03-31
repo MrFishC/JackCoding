@@ -14,7 +14,7 @@ import java.util.Map;
  * update：
  *  v层观察vm层
  */
-public class UIChangeLiveData<T> extends BaseLiveData<T> {
+public class UIChangeLiveData<T extends Object> extends BaseLiveData<T> {
 
     private UIChangeLiveData<String> mShowDialogEvent;
     private UIChangeLiveData<Void> mDismissDialogEvent;

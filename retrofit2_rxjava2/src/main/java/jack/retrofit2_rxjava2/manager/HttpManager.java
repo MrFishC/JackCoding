@@ -1,23 +1,21 @@
 package jack.retrofit2_rxjava2.manager;
 
+import androidx.annotation.Nullable;
+
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import cn.jack.library_util.AppContext;
+import cn.jack.library_util.LogUtils;
 import jack.retrofit2_rxjava2.interceptor.TokenInterceptor;
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import timber.log.Timber;
 
 /**
  * created by Jack
@@ -41,8 +39,8 @@ public class HttpManager {
                 HttpLoggingInterceptor loggerInterceptor = new HttpLoggingInterceptor(
                         new HttpLoggingInterceptor.Logger() {
                             @Override
-                            public void log(String message) {
-                                Timber.tag("HttpLog").i(message);
+                            public void log(@Nullable String message) {
+                                LogUtils.i("HttpLog",message);
                             }
                         }
                 );

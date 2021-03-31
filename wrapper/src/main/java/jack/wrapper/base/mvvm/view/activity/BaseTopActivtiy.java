@@ -1,12 +1,15 @@
 package jack.wrapper.base.mvvm.view.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.gyf.immersionbar.ImmersionBar;
 import org.greenrobot.eventbus.Subscribe;
 import jack.wrapper.R;
-import jack.wrapper.base.mvvm.view.IBaseView;
+import jack.wrapper.base.mvvm.view.interf.IBaseView;
+import jack.wrapper.base.mvvm.view.interf.IOpenActivity;
+import jack.wrapper.base.mvvm.view.interf.IStatusSwitchLisenter;
 import jack.wrapper.bus.Event;
 import jack.wrapper.bus.EventBusUtil;
 
@@ -18,7 +21,7 @@ import jack.wrapper.bus.EventBusUtil;
  *
  * update：更改为public
  */
-public abstract class BaseTopActivtiy extends AppCompatActivity implements IBaseView {
+public abstract class BaseTopActivtiy extends AppCompatActivity implements IBaseView, IOpenActivity, IStatusSwitchLisenter {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,26 +125,6 @@ public abstract class BaseTopActivtiy extends AppCompatActivity implements IBase
 
     }
 
-    /**
-     * 状态栏默认为黑色
-     * @return
-     */
-    protected boolean isBlack() {
-        return true;
-    }
-
-    protected boolean isDefaultStatusBar() {
-        return true;
-    }
-
-    /**
-     * 默认不Inject
-     * 使用ARouter传递参数需要重写该方法，设置返回值为true
-     */
-    protected boolean injectARouter() {
-        return false;
-    }
-
     //空实现部分方法,方便子类选择性实现
     //初始化参数
     @Override
@@ -161,11 +144,9 @@ public abstract class BaseTopActivtiy extends AppCompatActivity implements IBase
 
     }
 
-    /**
-     * 是否注册EventBus，默认不注册
-     */
-    protected boolean isRegisterEventBus() {
-        return false;
+    @Override
+    public Context getContext() {
+        return this;
     }
 
 }

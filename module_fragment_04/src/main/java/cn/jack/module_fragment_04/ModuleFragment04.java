@@ -1,20 +1,24 @@
 package cn.jack.module_fragment_04;
 
 import androidx.annotation.NonNull;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
+
 import java.util.List;
+
 import cn.jack.library_arouter.router.RouterPathFragment;
 import cn.jack.library_common_business.adapter.ArticleInfoAdapter;
 import cn.jack.library_common_business.entiy.ArticleInfo;
 import cn.jack.library_common_business.entiy.ProjectInfoList;
+import cn.jack.library_common_business.loadsir.ViewStateLayout;
 import cn.jack.library_common_business.service.ApiArticleService;
 import cn.jack.module_fragment_04.databinding.FragmentHome04Binding;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import jack.retrofit2_rxjava2.exception.ApiException;
-import jack.retrofit2_rxjava2.manager.rx.RxBaseSubscriber;
+import jack.retrofit2_rxjava2.manager.rx.RxBaseSimpleSubscriber;
 import jack.retrofit2_rxjava2.manager.rx.RxFunction;
 import jack.retrofit2_rxjava2.manager.rx.RxUtils;
 import jack.wrapper.base.mvvm.view.fragment.BaseSimpleFragment;
@@ -22,6 +26,8 @@ import jack.wrapper.base.mvvm.view.fragment.BaseSimpleFragment;
 /**
  * 1.（搜藏）文章列表
  * 2.右上角添加设置入口
+ *
+ * 3.滑动删除
  */
 @Route(path = RouterPathFragment.HomeFour.PAGER_HOME_FOUR)
 public class ModuleFragment04 extends BaseSimpleFragment<FragmentHome04Binding> implements OnRefreshLoadMoreListener {
@@ -29,6 +35,16 @@ public class ModuleFragment04 extends BaseSimpleFragment<FragmentHome04Binding> 
     @Override
     protected int setLayoutRes() {
         return R.layout.fragment_home_04;
+    }
+
+    @Override
+    public boolean isRegisterLoadSir() {
+        return true;
+    }
+
+    @Override
+    public boolean isViewRegisterLoadSir() {
+        return true;
     }
 
     private ArticleInfoAdapter mArticleInfoAdapter;
@@ -43,6 +59,8 @@ public class ModuleFragment04 extends BaseSimpleFragment<FragmentHome04Binding> 
         super.prepareData();
         mBinding.collectSmartRefreshLayout.setOnRefreshLoadMoreListener(this);
         initAdapter();
+
+        setLoadService(mBinding.collectSmartRefreshLayout);
     }
 
     @Override
@@ -51,9 +69,15 @@ public class ModuleFragment04 extends BaseSimpleFragment<FragmentHome04Binding> 
         listMyCollect(true);
     }
 
+    @Override
+    public void dataReload() {
+        super.dataReload();
+        listMyCollect(true);
+    }
+
     private int page = 0;
 
-    private RxBaseSubscriber<ProjectInfoList> mCollectionArticleInfos;
+    private RxBaseSimpleSubscriber<ProjectInfoList> mCollectionArticleInfos;
 
     private void listMyCollect(boolean refresh) {
         if (refresh) {
@@ -62,12 +86,13 @@ public class ModuleFragment04 extends BaseSimpleFragment<FragmentHome04Binding> 
             page++;
         }
 
-        mCollectionArticleInfos = new RxBaseSubscriber<ProjectInfoList>() {
+        mCollectionArticleInfos = new RxBaseSimpleSubscriber<ProjectInfoList>() {
 
             @Override
             public void onFailed(ApiException e) {
                 mBinding.collectSmartRefreshLayout.finishRefresh();
                 mBinding.collectSmartRefreshLayout.finishLoadMore();
+                setViewStateChangeLisenter(ViewStateLayout.FAILED);
             }
 
             @Override
@@ -86,6 +111,12 @@ public class ModuleFragment04 extends BaseSimpleFragment<FragmentHome04Binding> 
 
                 mBinding.collectSmartRefreshLayout.finishRefresh();
                 mBinding.collectSmartRefreshLayout.finishLoadMore();
+
+                if(datas.size() == 0 && page == 0){
+                    setViewStateChangeLisenter(ViewStateLayout.EMPTY);
+                }else {
+                    setViewStateChangeLisenter(ViewStateLayout.SUCCESS);
+                }
             }
 
         };

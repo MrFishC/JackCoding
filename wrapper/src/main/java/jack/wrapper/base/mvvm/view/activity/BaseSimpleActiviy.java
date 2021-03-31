@@ -1,6 +1,8 @@
 package jack.wrapper.base.mvvm.view.activity;
 
 import android.os.Bundle;
+
+import androidx.annotation.LayoutRes;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
@@ -38,6 +40,7 @@ public abstract class BaseSimpleActiviy<V extends ViewDataBinding> extends BaseT
         prepareListener();
     }
 
-    protected abstract int setLayoutRes();
+    protected abstract @LayoutRes
+    int setLayoutRes();
 
 }

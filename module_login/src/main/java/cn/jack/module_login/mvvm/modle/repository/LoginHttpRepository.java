@@ -20,29 +20,25 @@ public class LoginHttpRepository extends BaseModel{
 
     public void login(String userName, String passwd, ILoginLisenter lisenter) {
 
-        RxBaseSubscriber<UserInfo> userInfoRxBaseSubscriber = new RxBaseSubscriber<UserInfo>() {
-
-            @Override
-            public void onFailed(ApiException e) {
-                lisenter.showToast(e.getErrorMessage());
-            }
-
-            @Override
-            public void onSuccess(UserInfo data) {
-                lisenter.openHomeActivity(data);
-            }
-
-        };
-
-        addSubscribe(userInfoRxBaseSubscriber); //换一种处理内存泄露的方案
-
         RxUtils.getInstance()
                 .obtainRetrofitService(ApiService.class)
                 .login(userName,passwd)
                 .subscribeOn(Schedulers.io())
                 .map(new RxFunction<UserInfo>())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(userInfoRxBaseSubscriber);
+                .subscribe(new RxBaseSubscriber<UserInfo>(this) {
+
+                    @Override
+                    public void onFailed(ApiException e) {
+                        lisenter.showToast(e.getErrorMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(UserInfo data) {
+                        lisenter.openHomeActivity(data);
+                    }
+
+                });
     }
 
 }

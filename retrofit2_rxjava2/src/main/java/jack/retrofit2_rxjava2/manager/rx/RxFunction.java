@@ -18,28 +18,30 @@ import jack.retrofit2_rxjava2.util.net.NetConfig;
  *
  * 数据剥壳：同时对stat的不同状态进行处理
  *
+ * （实践发现的）问题：在飞行模式的情况下，RxFunction的代码不执行。具体原因不清楚(夜神模拟器和手机均测试)
  */
 public final class RxFunction<T> implements Function<ApiResponse<T>, T> {
 
     @Override
     public T apply(@NonNull ApiResponse<T> apiResponse) throws IOException {
-
             int status = apiResponse.getErrorCode();
 
+            System.out.println(" RxFunction status " + status);
+
             if(status == NetConfig.CODE_ERROR || status == NetConfig.NOT_MATCH){
+                System.out.println(" RxFunction " + apiResponse.getErrorMsg());
                 throw new ApiException(apiResponse.getErrorCode(),apiResponse.getErrorMsg());
             }else if(status == NetConfig.UN_LOGIN){
+                System.out.println(" RxFunction " + apiResponse.getErrorMsg());
                 throw new UnloginException(apiResponse.getErrorCode(),apiResponse.getErrorMsg());
             }else if(status == NetConfig.CODE_SUCCESS){
                 if (apiResponse.getData() == null) {
+                    System.out.println(" RxFunction " + apiResponse.getErrorMsg());
                     throw new DataNullException(apiResponse.getErrorCode(),apiResponse.getErrorMsg());
                 }
                 return apiResponse.getData();
             }else {
-
-                System.out.println(" apiResponse " + apiResponse.getErrorMsg());
-                System.out.println(" status " + status);
-
+                System.out.println(" RxFunction " + apiResponse.getErrorMsg());
                 throw new TimeOutException(apiResponse.getErrorCode(), "请求超时");
             }
 

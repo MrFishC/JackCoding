@@ -2,19 +2,14 @@ package cn.jack.module_fragment_03.simple.fragment;
 
 import android.view.MotionEvent;
 import android.view.View;
-
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import cn.jack.library_arouter.router.RouterPathFragment;
 import cn.jack.module_fragment_03.R;
 import cn.jack.module_fragment_03.simple.adapter.TabNavigatorAdapter;
@@ -28,6 +23,8 @@ import jack.wrapper.base.mvvm.view.fragment.BaseSimpleFragment;
  * 2.搜索
  * 3.导航
  * 4.公众号
+ *
+ * 颜色统一一下
  */
 @Route(path = RouterPathFragment.HomeThird.PAGER_HOME_THIRD)
 public class ModuleFragment03 extends BaseSimpleFragment<FragmentHome03Binding> {

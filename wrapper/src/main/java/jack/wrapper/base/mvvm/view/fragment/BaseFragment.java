@@ -15,9 +15,21 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
+
+import com.kingja.loadsir.callback.Callback;
+import com.kingja.loadsir.core.LoadService;
+import com.kingja.loadsir.core.LoadSir;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import jack.wrapper.base.mvvm.view.IBaseView;
+
+import cn.jack.library_common_business.loadsir.ViewStateLayout;
+import cn.jack.library_common_business.loadsir.callback.CustomCallback;
+import cn.jack.library_common_business.loadsir.callback.EmptyCallback;
+import cn.jack.library_common_business.loadsir.callback.FailedCallback;
+import cn.jack.library_common_business.loadsir.callback.LoadingCallback;
+import cn.jack.library_common_business.loadsir.callback.TimeoutCallback;
+import jack.wrapper.base.mvvm.view.interf.ILoadSirLisenter;
 import jack.wrapper.base.mvvm.viewModel.BaseViewModel;
 
 /**
@@ -27,7 +39,7 @@ import jack.wrapper.base.mvvm.viewModel.BaseViewModel;
  * describe:fragment的基类,不需要实现状态布局的请继承该类
  */
 
-public abstract class BaseFragment<V extends ViewDataBinding,VM extends BaseViewModel> extends BaseTopFragment implements IBaseView {
+public abstract class BaseFragment<V extends ViewDataBinding,VM extends BaseViewModel> extends BaseTopFragment implements ILoadSirLisenter {
 
     protected V        mBinding;
     protected VM       mViewModel;
@@ -75,8 +87,55 @@ public abstract class BaseFragment<V extends ViewDataBinding,VM extends BaseView
         //私有的ViewModel与View的契约事件回调逻辑
         registorUIChangeLiveDataCallBack();
 
+        if(isRegisterLoadSir()){
+            //监听VM层（状态布局属性的变化）
+            setViewStateChangeLisenter();
+        }
+
         //默认的初始化的顺序
         init();
+
+    }
+
+    protected void setViewStateChangeLisenter(){
+        mViewModel.mUiStatesChange.observe(getViewLifecycleOwner(), new Observer<ViewStateLayout>() {
+            @Override
+            public void onChanged(ViewStateLayout stateLayout) {
+                stateLayoutChange(stateLayout);
+            }
+        });
+    }
+
+    private void stateLayoutChange(ViewStateLayout stateLayout){
+        switch (stateLayout){
+            case LOADING:
+                mLoadService.showCallback(LoadingCallback.class);
+                System.out.println(" 状态信息 v LOADING ");
+                break;
+            case SUCCESS:
+                mLoadService.showSuccess();
+                System.out.println(" 状态信息 v SUCCESS ");
+                break;
+            case FAILED:
+                mLoadService.showCallback(FailedCallback.class);
+                System.out.println(" 状态信息 v FAILED ");
+                break;
+            case NET_ERROR:
+                //todo
+                //                break;    //暂时跟time_out一样
+            case TIME_OUT:
+                mLoadService.showCallback(TimeoutCallback.class);
+                System.out.println(" 状态信息 v NET_ERROR ");
+                break;
+            case CUSTOM:
+                mLoadService.showCallback(CustomCallback.class);
+                System.out.println(" 状态信息 v CUSTOM ");
+                break;
+            case EMPTY:
+                mLoadService.showCallback(EmptyCallback.class);
+                System.out.println(" 状态信息 v EMPTY ");
+                break;
+        }
     }
 
     /**
@@ -113,7 +172,6 @@ public abstract class BaseFragment<V extends ViewDataBinding,VM extends BaseView
 
         //让ViewModel拥有View的生命周期感应
         getLifecycle().addObserver(mViewModel);
-
     }
 
     /**
@@ -124,16 +182,14 @@ public abstract class BaseFragment<V extends ViewDataBinding,VM extends BaseView
     protected void registorUIChangeLiveDataCallBack() {
 
         //1.展示 加载对话框(带自定义标题)
-        mViewModel.getUC().getShowDialogEvent().observe(this, new Observer<String>() {
+        mViewModel.getUC().getShowDialogEvent().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String title) {
                 //                showMDialog(title);
             }
         });
 
-
     }
-
 
     /**
      * 初始化根布局:返回界面layout的id
@@ -162,6 +218,19 @@ public abstract class BaseFragment<V extends ViewDataBinding,VM extends BaseView
      */
     public <T extends ViewModel> T createViewModel(Fragment fragment, Class<T> cls) {
         return ViewModelProviders.of(fragment).get(cls);
+    }
+
+    private LoadService mLoadService;
+
+    protected void setLoadService(View rootView){
+        if(isRegisterLoadSir()) {
+            mLoadService = LoadSir.getDefault().register(rootView, new Callback.OnReloadListener() {
+                @Override
+                public void onReload(View v) {
+                    dataReload();
+                }
+            });
+        }
     }
 
 }

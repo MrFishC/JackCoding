@@ -4,13 +4,16 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+import android.os.Handler;
+import android.os.Looper;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 import java.util.HashMap;
 import java.util.Map;
-
+import cn.jack.library_common_business.loadsir.ViewStateLayout;
 import io.reactivex.disposables.Disposable;
-import jack.wrapper.base.contract.IBaseContract;
+import jack.wrapper.base.contract.IBaseViewStateContract;
 import jack.wrapper.base.mvvm.viewModel.liveData.UIChangeLiveData;
 import jack.wrapper.base.mvvm.model.BaseModel;
 
@@ -28,12 +31,15 @@ import jack.wrapper.base.mvvm.model.BaseModel;
  *
  * update(21-03-19):
  *  在该类中加入新的泛型参数
- *      L extends IBaseContract.IBridge
+ *      L extends IBaseContract.IBridge（已去掉）
  *
+ * update(21-03-30):
+ *      使用状态布局
+ *      将IBaseContract更改为IBaseViewStateContract
  */
 
 public class BaseViewModel<M extends BaseModel> extends AndroidViewModel implements ILifecycleCallback
-        ,IBaseContract      //实现该接口，避免其子类再次重写IBaseContract中的方法
+        , IBaseViewStateContract      //实现该接口，避免其子类再次重写IBaseViewStateContract中的方法
 {
 
     //ViewModel层持有Model层引用,Model的具体实现类为自定义的xxxRepository(数据仓库类)
@@ -43,27 +49,20 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     //让ViewModel层持有LiveData层引用,当数据发生变化的时候,view层通过设置对ViewModel的监听能够知道数据发生改变
     private UIChangeLiveData mUIChangeLiveData;
 
+    //处理Loadsir框架的问题
+    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private final int DELAY_TIME = 1000;
+
+    public MutableLiveData<ViewStateLayout> mUiStatesChange = new MutableLiveData<>();
+
     public BaseViewModel(@NonNull Application application) {
         super(application);
-        mModel = null;
     }
 
     //若要对mModel进行赋值，子类必须要调用父类=该构造方法
     public BaseViewModel(@NonNull Application application, M model) {
         super(application);
         this.mModel = model;
-    }
-
-    /**
-     * 调用BaseModel中的addSubscribe方法,处理rxjava的内存泄露
-     * @param disposable
-     * 备注： 去掉 该方法
-     */
-    protected void addSubscribe(Disposable disposable) {
-        if (mModel == null) {
-            throw new NullPointerException("Create ViewModel with ViewModelFactory with Model");
-        }
-        mModel.addSubscribe(disposable);
     }
 
     @Override
@@ -176,22 +175,91 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
     @Override
     public void loading() {
-        System.out.println(" loading ");
+        System.out.println(" 状态信息 vm loading");
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mUiStatesChange.setValue(ViewStateLayout.LOADING);
+            }
+        }, DELAY_TIME);
     }
 
     @Override
-    public void loadFinished() {
-        System.out.println(" loadFinished ");
+    public void loadSuccess() {
+        System.out.println(" 状态信息 vm loadSuccess");
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mUiStatesChange.setValue(ViewStateLayout.SUCCESS);
+            }
+        }, DELAY_TIME);
+    }
+
+    @Override
+    public void loadEmpty() {
+        System.out.println(" 状态信息 vm loadEmpty");
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mUiStatesChange.setValue(ViewStateLayout.EMPTY);
+            }
+        }, DELAY_TIME);
     }
 
     @Override
     public void loadFailed() {
-        System.out.println(" loadFailed ");
+        System.out.println(" 状态信息 vm loadFailed");
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mUiStatesChange.setValue(ViewStateLayout.FAILED);
+            }
+        }, DELAY_TIME);
+    }
+
+    @Override
+    public void timeOut() {
+        System.out.println(" 状态信息 vm timeOut");
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mUiStatesChange.setValue(ViewStateLayout.TIME_OUT);
+            }
+        }, DELAY_TIME);
+    }
+
+    @Override
+    public void netError() {
+        System.out.println(" 状态信息 vm netError");
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mUiStatesChange.setValue(ViewStateLayout.NET_ERROR);
+            }
+        }, DELAY_TIME);
+    }
+
+    @Override
+    public void custom() {
+        System.out.println(" 状态信息 vm custom");
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mUiStatesChange.setValue(ViewStateLayout.CUSTOM);
+            }
+        }, DELAY_TIME);
     }
 
     @Override
     public void showToast(String toastMsg) {
-        System.out.println(" showToast " + toastMsg);
+
     }
 
     public static final class ParameterField {

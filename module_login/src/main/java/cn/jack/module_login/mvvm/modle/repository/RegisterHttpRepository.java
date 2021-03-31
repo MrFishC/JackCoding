@@ -22,30 +22,26 @@ public class RegisterHttpRepository extends BaseModel {
 
     public void register(String userName, String passwd, String againPasswd, IRegisterLisenter iRegisterLisenter) {
 
-        RxBaseSubscriber<UserInfo> userInfoRxBaseSubscriber = new RxBaseSubscriber<UserInfo>() {
-
-            @Override
-            public void onFailed(ApiException e) {
-                iRegisterLisenter.registerFailed(e.getErrorMessage());
-            }
-
-            @Override
-            public void onSuccess(UserInfo userInfo) {
-                SPUtils.getInstance().putData(C.C_USER_NAME,userName);
-                SPUtils.getInstance().putData(C.C_USER_PASSWD,passwd);
-                iRegisterLisenter.registerSuccess(userInfo);
-            }
-        };
-
-        addSubscribe(userInfoRxBaseSubscriber);
-
         RxUtils.getInstance()
                 .obtainRetrofitService(ApiService.class)
                 .register(userName,passwd,againPasswd)
                 .subscribeOn(Schedulers.io())
                 .map(new RxFunction<UserInfo>())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(userInfoRxBaseSubscriber);
+                .subscribe(new RxBaseSubscriber<UserInfo>(this) {
+
+                    @Override
+                    public void onFailed(ApiException e) {
+                        iRegisterLisenter.registerFailed(e.getErrorMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(UserInfo userInfo) {
+                        SPUtils.getInstance().putData(C.C_USER_NAME,userName);
+                        SPUtils.getInstance().putData(C.C_USER_PASSWD,passwd);
+                        iRegisterLisenter.registerSuccess(userInfo);
+                    }
+                });
 
     }
 

@@ -6,6 +6,7 @@ import jack.retrofit2_rxjava2.model.ApiResponse;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiArticleService {
 
@@ -26,4 +27,10 @@ public interface ApiArticleService {
      */
     @POST("lg/uncollect_originId/{id}/json")
     Observable<ApiResponse<String>> unCollectAtrticle(@Path("id") String id);
+
+    /**
+     * 知识体系下的文章
+     */
+    @GET("article/list/{page}/json")
+    Observable<ApiResponse<ProjectInfoList>> pageArticleList(@Path("page") int page, @Query("cid") String id);
 }

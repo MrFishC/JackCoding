@@ -5,24 +5,23 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.kingja.loadsir.core.LoadSir;
 import com.tencent.mmkv.MMKV;
-
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.meta.SubscriberInfo;
-
 import java.util.List;
-
+import cn.jack.library_common_business.loadsir.callback.CustomCallback;
+import cn.jack.library_common_business.loadsir.callback.EmptyCallback;
+import cn.jack.library_common_business.loadsir.callback.FailedCallback;
+import cn.jack.library_common_business.loadsir.callback.LoadingCallback;
+import cn.jack.library_common_business.loadsir.callback.TimeoutCallback;
 import cn.jack.library_image.glide.GlideManager;
 import cn.jack.library_image.image.ImageManager;
 import cn.jack.library_util.AppContext;
+import cn.jack.library_util.LogUtils;
 import jack.wrapper.BuildConfig;
-import jack.wrapper.base.mvvm.view.activity.BaseTopActivtiy;
 import jack.wrapper.bus.MyEventBusIndex;
-import timber.log.Timber;
 
 /**
  * created by Jack
@@ -89,8 +88,10 @@ public class BaseApplication extends Application{
      */
     public synchronized void setApplication(@NonNull Application application) {
 
-        //初始化全局的context
-        AppContext.init(application);
+        //初始化全局的context和application
+        AppContext.init(application,this);
+
+        initLoadSir();
 
         initArouter();
 
@@ -100,6 +101,8 @@ public class BaseApplication extends Application{
 
         initMMKV();
 
+        initLogger();
+
         //全局配置 todo  需要更改  建议更改在子类中去实现
 //        GlobalConfig.init(application)
 //                .withApiHost("http://192.168.1.164:8082/course-teacher/")
@@ -107,9 +110,9 @@ public class BaseApplication extends Application{
 //                .configure();
 
         //DEBUG模式下打印日志
-        if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
-        }
+//        if (BuildConfig.DEBUG) {
+//            Timber.plant(new Timber.DebugTree());
+//        }
 
         //注册监听每个activity的生命周期,便于堆栈式管理
         application.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
@@ -144,6 +147,21 @@ public class BaseApplication extends Application{
                 AppManager.getAppManager().removeActivity(activity);
             }
         });
+    }
+
+    private void initLogger() {
+        LogUtils.getInstance().init(BuildConfig.DEBUG);
+    }
+
+    private void initLoadSir() {
+        LoadSir.beginBuilder()
+                .addCallback(new FailedCallback())
+                .addCallback(new EmptyCallback())
+                .addCallback(new LoadingCallback())
+                .addCallback(new TimeoutCallback())
+                .addCallback(new CustomCallback())
+                .setDefaultCallback(LoadingCallback.class)
+                .commit();
     }
 
     private void initMMKV() {

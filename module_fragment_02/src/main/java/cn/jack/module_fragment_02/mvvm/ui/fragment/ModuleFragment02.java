@@ -1,4 +1,4 @@
-package cn.jack.module_fragment_02.ui;
+package cn.jack.module_fragment_02.mvvm.ui.fragment;
 
 import android.text.TextUtils;
 import android.view.View;
@@ -16,14 +16,13 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tencent.mmkv.MMKV;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.List;
 
 import cn.jack.library_arouter.router.RouterPathFragment;
 import cn.jack.library_common_business.adapter.ArticleInfoAdapter;
 import cn.jack.library_common_business.entiy.ArticleInfo;
 import cn.jack.library_common_business.entiy.ProjectInfoList;
+import cn.jack.library_common_business.loadsir.ViewStateLayout;
 import cn.jack.library_common_business.service.ApiArticleService;
 import cn.jack.library_util.AppContext;
 import cn.jack.module_fragment_02.R;
@@ -33,7 +32,7 @@ import cn.jack.module_fragment_02.service.ApiService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import jack.retrofit2_rxjava2.exception.ApiException;
-import jack.retrofit2_rxjava2.manager.rx.RxBaseSubscriber;
+import jack.retrofit2_rxjava2.manager.rx.RxBaseSimpleSubscriber;
 import jack.retrofit2_rxjava2.manager.rx.RxFunction;
 import jack.retrofit2_rxjava2.manager.rx.RxUtils;
 import jack.wrapper.base.mvvm.view.fragment.BaseSimpleFragment;
@@ -43,11 +42,21 @@ import jack.wrapper.base.mvvm.view.fragment.BaseSimpleFragment;
  * 2.项目分类（条件筛选）
  */
 @Route(path = RouterPathFragment.HomeSecond.PAGER_HOME_SECOND)
-public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> implements OnRefreshLoadMoreListener, @Nullable OnItemChildClickListener {
+public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> implements OnRefreshLoadMoreListener, OnItemChildClickListener {
 
     @Override
     protected int setLayoutRes() {
         return R.layout.fragment_home_02;
+    }
+
+    @Override
+    public boolean isRegisterLoadSir() {
+        return true;
+    }
+
+    @Override
+    public boolean isViewRegisterLoadSir() {
+        return true;
     }
 
     @Override
@@ -56,12 +65,19 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
 
         initAdapter();
 
+        //在fragment中的view中使用loadsir
+        setLoadService(mBinding.findSmartRefreshLayout);
     }
 
     @Override
     protected void loadData() {
         super.loadData();
 
+        listProjects(id, true);
+    }
+
+    @Override
+    public void dataReload() {
         listProjects(id, true);
     }
 
@@ -110,9 +126,9 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
 
     }
 
-    private RxBaseSubscriber<List<ProjectSortInfo>> mSortInfosRxBaseSubscriber;
+    private RxBaseSimpleSubscriber<List<ProjectSortInfo>> mSortInfosRxBaseSimpleSubscriber;
     private void getSortInfos() {
-        mSortInfosRxBaseSubscriber = new RxBaseSubscriber<List<ProjectSortInfo>> () {
+        mSortInfosRxBaseSimpleSubscriber = new RxBaseSimpleSubscriber<List<ProjectSortInfo>> () {
 
             @Override
             public void onFailed(ApiException e) {
@@ -135,7 +151,7 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
                 .subscribeOn(Schedulers.io())
                 .map(new RxFunction<List<ProjectSortInfo>>())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mSortInfosRxBaseSubscriber);
+                .subscribe(mSortInfosRxBaseSimpleSubscriber);
     }
 
     private void keepSortInfosInLocal(List<ProjectSortInfo> projectSortInfos) {
@@ -203,7 +219,7 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
     private int page = 0;
     private String id;
 
-    private RxBaseSubscriber<ProjectInfoList> mProjectInfoListRxBaseSubscriber;
+    private RxBaseSimpleSubscriber<ProjectInfoList> mProjectInfoListRxBaseSimpleSubscriber;
 
     private void listProjects(String id, boolean refresh) {
 
@@ -213,12 +229,13 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
             page++;
         }
 
-        mProjectInfoListRxBaseSubscriber = new RxBaseSubscriber<ProjectInfoList> () {
+        mProjectInfoListRxBaseSimpleSubscriber = new RxBaseSimpleSubscriber<ProjectInfoList> () {
 
             @Override
             public void onFailed(ApiException e) {
                 mBinding.findSmartRefreshLayout.finishRefresh();
                 mBinding.findSmartRefreshLayout.finishLoadMore();
+                setViewStateChangeLisenter(ViewStateLayout.FAILED);
             }
 
             @Override
@@ -231,6 +248,25 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
 
                 mBinding.findSmartRefreshLayout.finishRefresh();
                 mBinding.findSmartRefreshLayout.finishLoadMore();
+
+                if(data.getDatas().size() == 0){
+                    setViewStateChangeLisenter(ViewStateLayout.EMPTY);
+                }else {
+                    setViewStateChangeLisenter(ViewStateLayout.SUCCESS);
+                }
+
+            }
+
+            @Override
+            public void onTimeOut() {
+                super.onTimeOut();
+                setViewStateChangeLisenter(ViewStateLayout.TIME_OUT);
+            }
+
+            @Override
+            public void onNetError() {
+                super.onNetError();
+                setViewStateChangeLisenter(ViewStateLayout.NET_ERROR);
             }
 
         };
@@ -241,15 +277,15 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
                 .subscribeOn(Schedulers.io())
                 .map(new RxFunction<ProjectInfoList>())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mProjectInfoListRxBaseSubscriber);
+                .subscribe(mProjectInfoListRxBaseSimpleSubscriber);
 
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RxUtils.getInstance().dispose(mProjectInfoListRxBaseSubscriber);
-        RxUtils.getInstance().dispose(mSortInfosRxBaseSubscriber);
+        RxUtils.getInstance().dispose(mProjectInfoListRxBaseSimpleSubscriber);
+        RxUtils.getInstance().dispose(mSortInfosRxBaseSimpleSubscriber);
         RxUtils.getInstance().dispose(mUnCollectArticleRxbaseSubacriber);
         RxUtils.getInstance().dispose(mCollectArticleRxbaseSubacriber);
     }
@@ -266,9 +302,9 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
         }
     }
 
-    private RxBaseSubscriber<String> mCollectArticleRxbaseSubacriber;
+    private RxBaseSimpleSubscriber<String> mCollectArticleRxbaseSubacriber;
     private void collectArticle(ArticleInfo articleInfo,int position,String id) {
-        mCollectArticleRxbaseSubacriber = new RxBaseSubscriber<String>() {
+        mCollectArticleRxbaseSubacriber = new RxBaseSimpleSubscriber<String>() {
 
             @Override
             public void onFailed(ApiException e) {
@@ -292,9 +328,9 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
                 .subscribe(mCollectArticleRxbaseSubacriber);
     }
 
-    private RxBaseSubscriber<String> mUnCollectArticleRxbaseSubacriber;
+    private RxBaseSimpleSubscriber<String> mUnCollectArticleRxbaseSubacriber;
     private void uncollectArticle(ArticleInfo articleInfo,int position,String id) {
-        mUnCollectArticleRxbaseSubacriber = new RxBaseSubscriber<String>() {
+        mUnCollectArticleRxbaseSubacriber = new RxBaseSimpleSubscriber<String>() {
 
             @Override
             public void onFailed(ApiException e) {

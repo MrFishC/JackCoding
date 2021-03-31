@@ -23,4 +23,8 @@ public class RouterPathActivity {
         public static final String PAGER_REGISTER = REGISTER + "/Register";
     }
 
+    public static class Subject {
+        private static final String SUBJECT = "/subject";
+        public static final String PAGER_SUBJECT = SUBJECT + "/Subject";
+    }
 }

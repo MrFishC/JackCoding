@@ -1,11 +1,10 @@
 package cn.jack.module_login.mvvm.view;
 
-import android.content.Intent;
-import android.os.Bundle;
-
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
+
 import cn.jack.library_arouter.router.RouterPathActivity;
 import cn.jack.module_login.BR;
 import cn.jack.module_login.R;
@@ -14,7 +13,6 @@ import cn.jack.module_login.factory.ViewModelFactory;
 import cn.jack.module_login.mvvm.modle.entity.UserInfo;
 import cn.jack.module_login.mvvm.vm.RegisterViewModel;
 import jack.wrapper.base.mvvm.view.activity.BaseActivity;
-import jack.wrapper.bus.Event;
 
 /**
  * @创建者 Jack
@@ -55,5 +53,6 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
         });
 
     }
+
 
 }

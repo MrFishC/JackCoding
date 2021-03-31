@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JackCoding">
+
+        <activity android:name=".mvvm.ui.activity.SubjectActivity"/>
+
     </application>
 
 </manifest>
