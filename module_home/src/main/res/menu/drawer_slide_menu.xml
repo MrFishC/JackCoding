@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:title="积分排行榜"
+            android:icon="@drawable/icon_accumulate_points"
+            android:color="@color/color_ffffff"/>
+
+        <item
+            android:title="我的分享"
+            android:icon="@drawable/icon_share"
+            android:color="@color/color_ffffff"/>
+
+    </group>
+
+    <item android:title="设置">
+
+        <menu>
+            <item
+                android:title="退出登录"
+                android:icon="@drawable/icon_setting"
+                android:color="@color/color_ffffff"/>
+        </menu>
+
+    </item>
+
+</menu>

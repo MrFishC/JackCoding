@@ -19,6 +19,7 @@
             android:id="@+id/subject_title_bar"
             android:layout_width="match_parent"
             android:layout_height="44dp"
+            app:titleColor="@color/color_aa000000"
             />
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout

@@ -47,8 +47,8 @@ public class TabNavigatorAdapter extends CommonNavigatorAdapter {
         scaleTransitionPagerTitleView.setText(tabNameList.get(index));
         scaleTransitionPagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
         scaleTransitionPagerTitleView.setPadding(40, 0, 40, 0);
-        scaleTransitionPagerTitleView.setNormalColor(ContextCompat.getColor(context, R.color.c_666666));
-        scaleTransitionPagerTitleView.setSelectedColor(ContextCompat.getColor(context, R.color.colorPrimary));
+        scaleTransitionPagerTitleView.setNormalColor(ContextCompat.getColor(context, R.color.color_9b9b9b));
+        scaleTransitionPagerTitleView.setSelectedColor(ContextCompat.getColor(context, R.color.color_aa000000));
         scaleTransitionPagerTitleView.setOnClickListener(view -> {
             if (null != onTabClickListener)
                 onTabClickListener.onTabClick(view, index);
@@ -80,7 +80,7 @@ public class TabNavigatorAdapter extends CommonNavigatorAdapter {
         indicator.setRoundRadius((float) UIUtil.dip2px(context, 3.0));
         indicator.setStartInterpolator(new AccelerateInterpolator());
         indicator.setEndInterpolator(new DecelerateInterpolator(2.0f));
-        indicator.setColors(ContextCompat.getColor(context, R.color.colorPrimary));
+        indicator.setColors(ContextCompat.getColor(context, R.color.color_aa000000));
         return indicator;
     }
 

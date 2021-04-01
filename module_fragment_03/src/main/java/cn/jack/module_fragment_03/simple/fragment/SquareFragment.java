@@ -123,7 +123,7 @@ public class SquareFragment extends BaseSimpleFragment<FragmentSquareBinding> {
             mBinding.linearContainer.addView(view);
             mBinding.indicatorView.addIndicatorItem(new IndicatorItem
                     .Builder(view)
-                    .setItemColor(R.color.purple_200)
+                    .setItemColor(R.color.color_9b9b9b)
                     .setIndicatorAnimation(IndicatorAnimation.BOUNCE)
                     .build());
         }

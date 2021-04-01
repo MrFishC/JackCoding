@@ -1,5 +1,7 @@
 package cn.jack.module_fragment_04;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -61,6 +63,12 @@ public class ModuleFragment04 extends BaseSimpleFragment<FragmentHome04Binding> 
         initAdapter();
 
         setLoadService(mBinding.collectSmartRefreshLayout);
+    }
+
+    @Override
+    public void prepareListener() {
+        super.prepareListener();
+        mBinding.collectTitleBar.getLeftView().setVisibility(View.INVISIBLE);
     }
 
     @Override
