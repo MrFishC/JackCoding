@@ -15,7 +15,7 @@ import cn.jack.library_common_business.adapter.ArticleInfoAdapter;
 import cn.jack.library_common_business.entiy.ArticleInfo;
 import cn.jack.library_common_business.entiy.ProjectInfoList;
 import cn.jack.library_common_business.loadsir.ViewStateLayout;
-import cn.jack.library_common_business.service.ApiArticleService;
+import cn.jack.library_common_business.service.api.ApiArticleService;
 import cn.jack.module_fragment_04.databinding.FragmentHome04Binding;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;

@@ -1,5 +1,7 @@
 package cn.jack.module_login.mvvm.modle.repository;
 
+import javax.inject.Inject;
+
 import cn.jack.library_common_business.constant.C;
 import cn.jack.library_util.SPUtils;
 import cn.jack.module_login.api.ApiService;
@@ -7,7 +9,7 @@ import cn.jack.module_login.contract.IRegisterLisenter;
 import cn.jack.module_login.mvvm.modle.entity.UserInfo;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import jack.retrofit2_rxjava2.exception.ApiException;
+import jack.retrofit2_rxjava2.exception.ErrorStatusInfo;
 import jack.retrofit2_rxjava2.manager.rx.RxBaseSubscriber;
 import jack.retrofit2_rxjava2.manager.rx.RxFunction;
 import jack.retrofit2_rxjava2.manager.rx.RxUtils;
@@ -20,6 +22,10 @@ import jack.wrapper.base.mvvm.model.BaseModel;
  */
 public class RegisterHttpRepository extends BaseModel {
 
+    @Inject
+    public RegisterHttpRepository() {
+    }
+
     public void register(String userName, String passwd, String againPasswd, IRegisterLisenter iRegisterLisenter) {
 
         RxUtils.getInstance()
@@ -31,8 +37,8 @@ public class RegisterHttpRepository extends BaseModel {
                 .subscribe(new RxBaseSubscriber<UserInfo>(this) {
 
                     @Override
-                    public void onFailed(ApiException e) {
-                        iRegisterLisenter.registerFailed(e.getErrorMessage());
+                    public void onFailed(ErrorStatusInfo errorStatusInfo) {
+                        iRegisterLisenter.registerFailed(errorStatusInfo.message);
                     }
 
                     @Override

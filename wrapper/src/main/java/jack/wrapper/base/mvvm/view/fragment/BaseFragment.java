@@ -1,5 +1,6 @@
 package jack.wrapper.base.mvvm.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -16,12 +17,14 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.jakewharton.rxbinding3.view.RxView;
 import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.concurrent.TimeUnit;
 
 import cn.jack.library_common_business.loadsir.ViewStateLayout;
 import cn.jack.library_common_business.loadsir.callback.CustomCallback;
@@ -29,8 +32,11 @@ import cn.jack.library_common_business.loadsir.callback.EmptyCallback;
 import cn.jack.library_common_business.loadsir.callback.FailedCallback;
 import cn.jack.library_common_business.loadsir.callback.LoadingCallback;
 import cn.jack.library_common_business.loadsir.callback.TimeoutCallback;
+import cn.jack.library_util.LogUtils;
+import io.reactivex.functions.Consumer;
 import jack.wrapper.base.mvvm.view.interf.ILoadSirLisenter;
 import jack.wrapper.base.mvvm.viewModel.BaseViewModel;
+import jack.wrapper.rxhelper.ViewRepeatClickLisenter;
 
 /**
  * created by Jack
@@ -231,6 +237,27 @@ public abstract class BaseFragment<V extends ViewDataBinding,VM extends BaseView
                 }
             });
         }
+    }
+
+    //view的防重复点击
+    @SuppressLint("CheckResult")
+    protected void handleViewRepeatClick(View view, ViewRepeatClickLisenter viewRepeatClickLisenter){
+
+        RxView.clicks(view)
+                .compose(bindToLifecycle())
+                .throttleFirst(1000, TimeUnit.MILLISECONDS)
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+
+                        LogUtils.d(" 重复点击 " + view.getId() + " " + System.currentTimeMillis());
+
+                        if(viewRepeatClickLisenter != null){
+                            viewRepeatClickLisenter.repeatClick();
+                        }
+                    }
+                });
+
     }
 
 }

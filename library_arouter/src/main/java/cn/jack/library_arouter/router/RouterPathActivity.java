@@ -27,4 +27,9 @@ public class RouterPathActivity {
         private static final String SUBJECT = "/subject";
         public static final String PAGER_SUBJECT = SUBJECT + "/Subject";
     }
+
+    public static class Web {
+        private static final String WEB = "/web";
+        public static final String PAGER_WEB = WEB + "/Web";
+    }
 }

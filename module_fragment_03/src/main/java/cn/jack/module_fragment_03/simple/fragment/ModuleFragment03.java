@@ -66,12 +66,12 @@ public class ModuleFragment03 extends BaseSimpleFragment<FragmentHome03Binding> 
 
         mBinding.viewPager2.registerOnPageChangeCallback(mChangeCallback);
 
-        mBinding.viewPager2.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return false;
-            }
-        });
+//        mBinding.viewPager2.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                return false;
+//            }
+//        });
     }
 
     private final ViewPager2.OnPageChangeCallback mChangeCallback = new ViewPager2.OnPageChangeCallback() {

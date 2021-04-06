@@ -80,6 +80,14 @@ dependencies {
 
     api rootProject.ext.dependencies["MagicIndicator"]
 
+    api(rootProject.ext.dependencies["rxbinding3-appcompat"]) {
+        //排除使用api依赖的rxjava2和annotation，rxandroid2是私有方式依赖
+        exclude group: 'io.reactivex.rxjava2'
+        exclude group: 'androidx.annotation'
+    }
+
+    api rootProject.ext.dependencies["rxlifecycle3-components"]
+
     debugApi 'com.squareup.leakcanary:leakcanary-android:2.6'
 
     implementation "com.alibaba:arouter-api:${rootProject.ext.version["arouterApiVersion"]}"   //...
@@ -87,6 +95,12 @@ dependencies {
     //事件总线以及总线注解处理器
     implementation rootProject.ext.dependencies["eventbus"]
     annotationProcessor rootProject.ext.dependencies["eventbus-annotation"]
+
+    //dagger-android
+//    implementation rootProject.ext.dependencies["dagger2"]
+//    implementation rootProject.ext.dependencies["dagger-android"]
+//    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+//    annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
 
     //wrapper模块依赖网络,其它模块直接wrapper模块即可。
     api project(':retrofit2_rxjava2')
@@ -96,5 +110,7 @@ dependencies {
     api project(':library_common_res')
     api project(':library_image')
     api project(':library_common_business')
+    api project(':library_service_manager')
+    api project(':library_command')
 
 }

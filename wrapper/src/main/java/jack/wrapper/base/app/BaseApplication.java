@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.kingja.loadsir.core.LoadSir;
+import com.limpoxe.support.library_service_manager.ServiceManager;
 import com.tencent.mmkv.MMKV;
 import org.greenrobot.eventbus.EventBus;
 import java.util.List;
@@ -16,6 +17,8 @@ import cn.jack.library_common_business.loadsir.callback.EmptyCallback;
 import cn.jack.library_common_business.loadsir.callback.FailedCallback;
 import cn.jack.library_common_business.loadsir.callback.LoadingCallback;
 import cn.jack.library_common_business.loadsir.callback.TimeoutCallback;
+import cn.jack.library_common_business.service.ServiceConstants;
+import cn.jack.library_common_business.service.baseservice.LoginImpl;
 import cn.jack.library_image.glide.GlideManager;
 import cn.jack.library_image.image.ImageManager;
 import cn.jack.library_util.AppContext;
@@ -103,6 +106,8 @@ public class BaseApplication extends Application{
 
         initLogger();
 
+        initServiceManager();
+
         //全局配置 todo  需要更改  建议更改在子类中去实现
 //        GlobalConfig.init(application)
 //                .withApiHost("http://192.168.1.164:8082/course-teacher/")
@@ -147,6 +152,13 @@ public class BaseApplication extends Application{
                 AppManager.getAppManager().removeActivity(activity);
             }
         });
+    }
+
+    private void initServiceManager() {
+        ServiceManager.init(this);
+
+        //根据自己的业务自定义实现接口和具体类，然后在ServiceManager中注册
+        ServiceManager.publishService(ServiceConstants.C_LOGIN, LoginImpl.class.getName());
     }
 
     private void initLogger() {

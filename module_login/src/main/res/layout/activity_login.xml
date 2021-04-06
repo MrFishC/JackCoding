@@ -79,7 +79,8 @@
                 android:layout_marginHorizontal="40dp"
                 android:layout_marginTop="30dp"
                 android:text="登录"
-                android:onClick="@{viewModel.loginIn}"/>
+                />
+<!--                android:onClick="@{viewModel.loginIn}"-->
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

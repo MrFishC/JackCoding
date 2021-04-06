@@ -97,7 +97,6 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
                 //如果没有指定泛型参数，则默认使用BaseViewModel
                 modelClass = BaseViewModel.class;
             }
-
             mViewModel = (VM) createViewModel(this, modelClass);
         }
 

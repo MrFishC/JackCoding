@@ -1,6 +1,7 @@
 package cn.jack.module_fragment_02.mvvm.ui.activity;
 
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -17,7 +18,6 @@ import cn.jack.library_common_business.entiy.ProjectInfoList;
 import cn.jack.module_fragment_02.BR;
 import cn.jack.module_fragment_02.R;
 import cn.jack.module_fragment_02.databinding.ActivityCollectionBinding;
-import cn.jack.module_fragment_02.factory.ViewModelFactory;
 import cn.jack.module_fragment_02.mvvm.SubjectViewModel;
 import jack.wrapper.base.mvvm.view.activity.BaseActivity;
 
@@ -65,8 +65,8 @@ public class SubjectActivity extends BaseActivity<ActivityCollectionBinding, Sub
 
     @Override
     public SubjectViewModel initViewModel() {
-        ViewModelFactory factory = ViewModelFactory.getInstance(getApplication());
-        return ViewModelProviders.of(this, factory).get(SubjectViewModel.class);
+        return ViewModelProviders.of(this).get(SubjectViewModel.class);     //todo 复习源码 原理
+//        return new SubjectViewModel(AppContext.getApplication());
     }
 
     @Override

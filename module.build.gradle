@@ -92,6 +92,12 @@ dependencies{
     implementation rootProject.ext.dependencies["arouter-api"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
 
+    //dragger-android,注意：必须需要依赖 dagger-compiler
+    implementation rootProject.ext.dependencies["dagger2"]
+//    implementation rootProject.ext.dependencies["dagger-android"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+//    annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
+
     //事件总线以及总线注解处理器 android studio 不支持同事存在两个annotationProcessor
 //    implementation rootProject.ext.dependencies["eventbus"]
 //    annotationProcessor rootProject.ext.dependencies["eventbus-annotation"]

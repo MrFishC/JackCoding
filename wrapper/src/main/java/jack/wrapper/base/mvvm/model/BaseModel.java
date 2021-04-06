@@ -11,11 +11,13 @@ import jack.retrofit2_rxjava2.model.IModel;
  * describe:服务于Repository,数据层基类,具体的Repository(数据仓库)需要实现该类
  *
  * 既然跟网络请求有关，难免跟net的lib有一定耦合（即实现IModel）
+ *
+ *
  */
 
 public class BaseModel implements IModel {
 
-    //管理RxJava，主要针对RxJava异步操作造成的内存泄漏
+    //管理RxJava的多个订阅（主要针对RxJava异步操作造成的内存泄漏），或者使用Disposable
     protected CompositeDisposable mCompositeDisposable;
 
     public BaseModel() {

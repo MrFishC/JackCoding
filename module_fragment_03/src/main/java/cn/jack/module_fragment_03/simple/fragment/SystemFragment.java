@@ -12,6 +12,7 @@ import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.List;
 
+import cn.jack.library_arouter.manager.ArouterManager;
 import cn.jack.library_arouter.router.RouterPathActivity;
 import cn.jack.library_arouter.router.RouterPathFragment;
 import cn.jack.library_common_business.loadsir.ViewStateLayout;
@@ -125,10 +126,7 @@ public class SystemFragment extends BaseSimpleFragment<FragmentSystemBinding> {
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ARouter.getInstance().build(RouterPathActivity.Subject.PAGER_SUBJECT)
-                                .withString("articleTitle",child.getName())
-                                .withString("articleId",child.getId())
-                                .navigation();
+                        ArouterManager.getInstance().navigation2Subject(child.getName(),child.getId());
                     }
                 });
                 flexboxLayout.addView(textView);

@@ -6,10 +6,9 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.gyf.immersionbar.ImmersionBar;
-import com.gyf.immersionbar.components.ImmersionFragment;
-
+import com.gyf.immersionbar.components.SimpleImmersionOwner;
+import com.trello.rxlifecycle3.components.support.RxFragment;
 import cn.jack.library_util.AppContext;
-import jack.wrapper.base.app.BaseApplication;
 import jack.wrapper.base.mvvm.view.interf.IBaseView;
 import jack.wrapper.base.mvvm.view.interf.IStatusSwitchLisenter;
 
@@ -18,7 +17,7 @@ import jack.wrapper.base.mvvm.view.interf.IStatusSwitchLisenter;
  * @创建时间 2021/3/4 18:20
  * @描述
  */
-abstract class BaseTopFragment extends ImmersionFragment implements IBaseView , IStatusSwitchLisenter {
+abstract class BaseTopFragment extends RxFragment implements IBaseView , IStatusSwitchLisenter , SimpleImmersionOwner {
 
     protected Application mApplication;
 
@@ -27,6 +26,11 @@ abstract class BaseTopFragment extends ImmersionFragment implements IBaseView , 
 
     //Fragment对用户可见的标记
     private boolean mIsUIVisible;
+
+    @Override
+    public boolean immersionBarEnabled() {
+        return true;
+    }
 
     //若不实现ImmersionFragment，则BaseTopFragment的子类调用ImmersionBar等api将无效
     @Override

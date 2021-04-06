@@ -1,5 +1,7 @@
 package jack.wrapper.base.contract;
 
+import jack.retrofit2_rxjava2.exception.ErrorStatusInfo;
+
 /**
  * created by Jack
  * email:yucrun@163.com
@@ -26,7 +28,7 @@ public interface IBaseViewStateContract {
     void loadEmpty();
 
     //加载失败
-    void loadFailed();
+    void loadFailed(ErrorStatusInfo errorStatusInfo);
 
     //请求超时
     void timeOut();

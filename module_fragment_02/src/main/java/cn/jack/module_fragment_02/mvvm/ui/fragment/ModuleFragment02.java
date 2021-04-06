@@ -23,7 +23,7 @@ import cn.jack.library_common_business.adapter.ArticleInfoAdapter;
 import cn.jack.library_common_business.entiy.ArticleInfo;
 import cn.jack.library_common_business.entiy.ProjectInfoList;
 import cn.jack.library_common_business.loadsir.ViewStateLayout;
-import cn.jack.library_common_business.service.ApiArticleService;
+import cn.jack.library_common_business.service.api.ApiArticleService;
 import cn.jack.library_util.AppContext;
 import cn.jack.module_fragment_02.R;
 import cn.jack.module_fragment_02.databinding.FragmentHome02Binding;
@@ -257,17 +257,17 @@ public class ModuleFragment02 extends BaseSimpleFragment<FragmentHome02Binding> 
 
             }
 
-            @Override
-            public void onTimeOut() {
-                super.onTimeOut();
-                setViewStateChangeLisenter(ViewStateLayout.TIME_OUT);
-            }
-
-            @Override
-            public void onNetError() {
-                super.onNetError();
-                setViewStateChangeLisenter(ViewStateLayout.NET_ERROR);
-            }
+//            @Override
+//            public void onTimeOut() {
+//                super.onTimeOut();
+//                setViewStateChangeLisenter(ViewStateLayout.TIME_OUT);
+//            }
+//
+//            @Override
+//            public void onNetError() {
+//                super.onNetError();
+//                setViewStateChangeLisenter(ViewStateLayout.NET_ERROR);
+//            }
 
         };
 

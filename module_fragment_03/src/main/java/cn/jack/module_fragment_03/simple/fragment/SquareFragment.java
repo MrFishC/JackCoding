@@ -5,10 +5,14 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatTextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.flexbox.FlexboxLayout;
 import com.skydoves.indicatorscrollview.IndicatorAnimation;
 import com.skydoves.indicatorscrollview.IndicatorItem;
 import java.util.List;
+
+import cn.jack.library_arouter.manager.ArouterManager;
+import cn.jack.library_arouter.router.RouterPathActivity;
 import cn.jack.library_arouter.router.RouterPathFragment;
 import cn.jack.library_common_business.entiy.ArticleInfo;
 import cn.jack.library_common_business.loadsir.ViewStateLayout;
@@ -118,6 +122,12 @@ public class SquareFragment extends BaseSimpleFragment<FragmentSquareBinding> {
                 AppCompatTextView textView = findLabel(flexboxLayout);
                 textView.setText(article.getTitle());
                 flexboxLayout.addView(textView);
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ArouterManager.getInstance().navigation2Web(article.getLink());
+                    }
+                });
             }
 
             mBinding.linearContainer.addView(view);

@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import cn.jack.library_util.AppContext;
 import cn.jack.library_util.LogUtils;
+import jack.retrofit2_rxjava2.BuildConfig;
 import jack.retrofit2_rxjava2.interceptor.TokenInterceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -35,7 +36,7 @@ public class HttpManager {
 
         private static OkHttpClient.Builder addInterceptor() {
             //debug模式下,不添加日志拦截器
-//            if (BuildConfig.DEBUG) {
+            if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor loggerInterceptor = new HttpLoggingInterceptor(
                         new HttpLoggingInterceptor.Logger() {
                             @Override
@@ -46,7 +47,7 @@ public class HttpManager {
                 );
                 loggerInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
                 BUILDER.addInterceptor(loggerInterceptor);
-//            }
+            }
             return BUILDER;
         }
 

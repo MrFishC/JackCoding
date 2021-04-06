@@ -19,6 +19,8 @@ import jack.retrofit2_rxjava2.util.net.NetConfig;
  * 数据剥壳：同时对stat的不同状态进行处理
  *
  * （实践发现的）问题：在飞行模式的情况下，RxFunction的代码不执行。具体原因不清楚(夜神模拟器和手机均测试)
+ *
+ * 执行rxfuntion的前提，是后台能返回apiResponse的数据
  */
 public final class RxFunction<T> implements Function<ApiResponse<T>, T> {
 

@@ -39,7 +39,22 @@ public class ArouterManager {
         ARouter.getInstance().build(RouterPathActivity.Register.PAGER_REGISTER).navigation();
     }
 
+    public void navigation2Web(String webUrl){
+        ARouter.getInstance().build(RouterPathActivity.Web.PAGER_WEB)
+                .withString("webUrl",webUrl)
+                .navigation();
+    }
+
+
     public void navigation2HomeFragment01(){
         ARouter.getInstance().build(RouterPathFragment.HomeFirst.PAGER_HOME_FIRST).navigation();
     }
+
+    public void navigation2Subject(String articleTitle,String articleId){
+        ARouter.getInstance().build(RouterPathActivity.Subject.PAGER_SUBJECT)
+                .withString("articleTitle",articleTitle)
+                .withString("articleId",articleId)
+                .navigation();
+    }
+
 }

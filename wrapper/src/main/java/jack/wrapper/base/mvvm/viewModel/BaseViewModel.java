@@ -1,21 +1,20 @@
 package jack.wrapper.base.mvvm.viewModel;
 
 import android.app.Application;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LifecycleOwner;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-
 import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import java.util.HashMap;
 import java.util.Map;
 import cn.jack.library_common_business.loadsir.ViewStateLayout;
-import io.reactivex.disposables.Disposable;
+import jack.retrofit2_rxjava2.exception.ErrorStatusInfo;
 import jack.wrapper.base.contract.IBaseViewStateContract;
-import jack.wrapper.base.mvvm.viewModel.liveData.UIChangeLiveData;
 import jack.wrapper.base.mvvm.model.BaseModel;
+import jack.wrapper.base.mvvm.viewModel.liveData.UIChangeLiveData;
 
 /**
  * created by Jack
@@ -60,10 +59,10 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     }
 
     //若要对mModel进行赋值，子类必须要调用父类=该构造方法
-    public BaseViewModel(@NonNull Application application, M model) {
-        super(application);
-        this.mModel = model;
-    }
+//    public BaseViewModel(@NonNull Application application, M model) {
+//        super(application);
+//        this.mModel = model;
+//    }
 
     @Override
     public void onCreate(@NonNull LifecycleOwner owner) {
@@ -210,8 +209,10 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     }
 
     @Override
-    public void loadFailed() {
+    public void loadFailed(ErrorStatusInfo errorStatusInfo) {
         System.out.println(" 状态信息 vm loadFailed");
+
+        //todo 根据不同状态进行设置  即可
 
         mHandler.postDelayed(new Runnable() {
             @Override

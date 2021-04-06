@@ -1,17 +1,28 @@
 package jack.wrapper.base.mvvm.view.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.view.View;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.gyf.immersionbar.ImmersionBar;
+import com.jakewharton.rxbinding3.view.RxView;
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
+
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.concurrent.TimeUnit;
+
+import cn.jack.library_util.LogUtils;
+import io.reactivex.functions.Consumer;
 import jack.wrapper.R;
 import jack.wrapper.base.mvvm.view.interf.IBaseView;
 import jack.wrapper.base.mvvm.view.interf.IOpenActivity;
 import jack.wrapper.base.mvvm.view.interf.IStatusSwitchLisenter;
 import jack.wrapper.bus.Event;
 import jack.wrapper.bus.EventBusUtil;
+import jack.wrapper.rxhelper.ViewRepeatClickLisenter;
 
 /**
  * created by Jack
@@ -21,7 +32,7 @@ import jack.wrapper.bus.EventBusUtil;
  *
  * update：更改为public
  */
-public abstract class BaseTopActivtiy extends AppCompatActivity implements IBaseView, IOpenActivity, IStatusSwitchLisenter {
+public abstract class BaseTopActivtiy extends RxAppCompatActivity implements IBaseView, IOpenActivity, IStatusSwitchLisenter {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,4 +160,26 @@ public abstract class BaseTopActivtiy extends AppCompatActivity implements IBase
         return this;
     }
 
+    //view的防重复点击
+    @SuppressLint("CheckResult")
+    protected void handleViewRepeatClick(View view, ViewRepeatClickLisenter viewRepeatClickLisenter){
+
+        RxView.clicks(view)         //测试一下，是否需要手动 取消 disposable
+                .compose(bindToLifecycle())
+                .throttleFirst(1000, TimeUnit.MILLISECONDS)
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+
+                        LogUtils.d(" 重复点击 " + view.getId() + " " + System.currentTimeMillis());
+
+                        if(viewRepeatClickLisenter != null){
+                            viewRepeatClickLisenter.repeatClick();
+                        }
+                    }
+                });
+
+        //todo 进一步封装成工具类
+
+    }
 }

@@ -1,11 +1,12 @@
 package cn.jack.module_fragment_02.mvvm;
 
+import javax.inject.Inject;
 import cn.jack.library_common_business.entiy.ProjectInfoList;
-import cn.jack.library_common_business.service.ApiArticleService;
+import cn.jack.library_common_business.service.api.ApiArticleService;
 import cn.jack.module_fragment_02.contract.ISubjectLisenter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import jack.retrofit2_rxjava2.exception.ApiException;
+import jack.retrofit2_rxjava2.exception.ErrorStatusInfo;
 import jack.retrofit2_rxjava2.manager.rx.RxBaseSubscriber;
 import jack.retrofit2_rxjava2.manager.rx.RxFunction;
 import jack.retrofit2_rxjava2.manager.rx.RxUtils;
@@ -17,6 +18,10 @@ import jack.wrapper.base.mvvm.model.BaseModel;
  * @描述
  */
 public class SubjectHttpRepository extends BaseModel {
+
+    @Inject
+    public SubjectHttpRepository() {
+    }
 
     private int mPage;
 
@@ -36,9 +41,9 @@ public class SubjectHttpRepository extends BaseModel {
                 .subscribe(new RxBaseSubscriber<ProjectInfoList>(this) {
 
                     @Override
-                    public void onFailed(ApiException e) {
-                        iSubjectLisenter.loadFailed();
-                        iSubjectLisenter.showToast(e.getErrorMessage());
+                    public void onFailed(ErrorStatusInfo errorStatusInfo) {
+                        iSubjectLisenter.loadFailed(errorStatusInfo);
+//                        iSubjectLisenter.showToast(e.getErrorMessage());
                     }
 
                     @Override
@@ -53,15 +58,6 @@ public class SubjectHttpRepository extends BaseModel {
                         }
                     }
 
-                    @Override
-                    public void onTimeOut() {
-                        iSubjectLisenter.timeOut();
-                    }
-
-                    @Override
-                    public void onNetError() {
-                        iSubjectLisenter.netError();
-                    }
                 });
     }
 }
