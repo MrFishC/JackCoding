@@ -16,6 +16,9 @@ import com.jack.library_webview.request.ExecuteLisenter;
  * @创建者 Jack
  * @创建时间 2021/4/5 20:51
  * @描述 除了配置方面，这个类几乎不用做改动。
+ *
+ * todo webview安全问题，待增加
+ *  https://developer.android.com/guide/webapps/managing-webview
  */
 public class BaseWebView extends WebView {
 
@@ -40,6 +43,8 @@ public class BaseWebView extends WebView {
     @SuppressLint("JavascriptInterface")
     public void initWebview(Context context, WebViewCallBack webViewCallBack) {
         WebViewSettingManager.getInstance().settings(this);
+
+        //[处理网页导航](https://developer.android.com/guide/webapps/webview.html#HandlingNavigation)
         setWebViewClient(new CostomWebViewClient(this,webViewCallBack));
 
         setWebChromeClient(new CostomWebChromeClient());    //可自行拓展功能

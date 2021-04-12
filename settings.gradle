@@ -1,3 +1,5 @@
+include ':a02_serializable_demo'
+include ':a01_design_pattern'
 include ':library_command'
 include ':library_service_manager'
 include ':library_webview'

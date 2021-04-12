@@ -9,7 +9,7 @@ import android.webkit.WebView;
  * @描述
  */
 public interface ExecuteLisenter {
-    int getCommandLevel();
+    int getCommandLevel();      //这个标记可以去掉，通过H5页面传递过来的类型进行动态判断
     void executeRequest(Context context, int commandLevel, String cmd, WebView webView);
     void handleCallback(String result);
 }

@@ -8,6 +8,11 @@ import com.jack.library_webview.base.h5callnative.WebCallNativeLisenter;
  * @创建者 Jack
  * @创建时间 2021/4/5 20:54
  * @描述 native跟web交互定义的接口
+ *
+ * [将 JavaScript 代码绑定到 Android 代码](https://developer.android.com/guide/webapps/webview.html#BindingJavaScript)
+ *
+ * 可以实现：JavaScript 代码可以调用 Android 代码中的方法
+ *
  */
 public final class H5CallNativeJsInterface {
 

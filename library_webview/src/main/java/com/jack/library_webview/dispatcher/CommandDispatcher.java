@@ -2,12 +2,12 @@ package com.jack.library_webview.dispatcher;
 
 import android.content.Context;
 import android.os.IBinder;
-import android.util.Log;
+import android.os.RemoteException;
 import android.webkit.WebView;
-
 import com.jack.library_command.command.callback.CommandCallBack;
 import com.jack.library_command.command.constants.CommandConstants;
 import com.jack.library_command.command.manager.CommandsManager;
+import com.jack.library_webview.IWeb2NativeCallback;
 import com.jack.library_webview.IWeb2NativeInterface;
 import com.jack.library_webview.base.webview.BaseWebView;
 import com.jack.library_webview.process.BinderConstants;
@@ -18,6 +18,8 @@ import cn.jack.library_util.MainLooper;
  * @创建者 Jack
  * @创建时间 2021/4/6 9:57
  * @描述 初始化aidl，管理native跟h5之间交互的事件
+ *
+ * 复习android艺术探索 ipc章节
  */
 public class CommandDispatcher {
     private static CommandDispatcher instance;
@@ -53,7 +55,26 @@ public class CommandDispatcher {
             execCommandRequest(context,commandLevel,cmd,webView);
         }else if(commandLevel == CommandConstants.LEVEL_REMOTE){
             //2.远端(进程间通讯)
+            execRemoteCommandRequest(context,commandLevel,cmd,webView);
+        }
+    }
 
+    private void execRemoteCommandRequest(Context context, int commandLevel, String cmd, WebView webView) {
+        //判断是不是web所在的进程
+
+        //假装在判断
+        if (mIWeb2NativeInterface != null) {
+            try {
+                mIWeb2NativeInterface.handleWebAction(commandLevel, cmd, new IWeb2NativeCallback.Stub() {
+                    @Override
+                    public void onResult(int responseCode, String actionName, String response) throws RemoteException {
+                        System.out.println(" execRemoteCommandRequest ");
+                        handleCallback(responseCode, actionName, response, webView);
+                    }
+                });
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -11,12 +11,17 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.annotation.Nullable;
+
 import com.jack.library_webview.base.callback.WebViewCallBack;
 
 /**
  * @创建者 Jack
  * @创建时间 2021/4/5 20:58
  * @描述 自定义实现WebViewClient，拓展功能和解耦
+ *
+ * [处理网页导航](https://developer.android.com/guide/webapps/webview.html#HandlingNavigation)
+ *
  */
 public class CostomWebViewClient extends WebViewClient {
 
@@ -30,10 +35,13 @@ public class CostomWebViewClient extends WebViewClient {
         this.webView = webView;
     }
 
-    @Override
-    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-        return super.shouldOverrideUrlLoading(view, request);
-    }
+    //https://developer.android.com/reference/android/webkit/WebViewClient#shouldOverrideUrlLoading(android.webkit.WebView,%20java.lang.String)
+    //官网上 对 shouldOverrideUrlLoading的 返回值有具体的解释 ===> true to cancel the current load, otherwise return false.
+    //返回值为true:Webview中止加载Url。为false:Webview继续加载。
+//    @Override
+//    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+//        return super.shouldOverrideUrlLoading(view, request);
+//    }
 
     /**
      * 支持电话、短信、邮件、地图跳转，跳转的都是手机系统自带的应用
@@ -53,6 +61,19 @@ public class CostomWebViewClient extends WebViewClient {
             return true;
         }
         return false;
+    }
+
+    @Nullable
+    @Override
+    public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+        //可根据url的信息，对请求进行拦截处理.eg:以下伪代码
+
+        //if(好满足){
+        //WebResourceResponse response = new WebResourceResponse("image/png", "utf-8", is);
+        //renturn response;
+        // }
+
+        return super.shouldInterceptRequest(view, request);
     }
 
     @Override

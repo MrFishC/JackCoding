@@ -14,6 +14,7 @@ import cn.jack.library_common_business.loadsir.ViewStateLayout;
 import jack.retrofit2_rxjava2.exception.ErrorStatusInfo;
 import jack.wrapper.base.contract.IBaseViewStateContract;
 import jack.wrapper.base.mvvm.model.BaseModel;
+import jack.wrapper.base.mvvm.viewModel.liveData.BaseUIChangeLiveData;
 import jack.wrapper.base.mvvm.viewModel.liveData.UIChangeLiveData;
 
 /**
@@ -46,7 +47,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
     //这里可以封装一个LiveData的实现类,View层发生改变的观察者,封装观察一些通用的ui变化的观察者.具体每一个界面的单独变化在具体的BaseViewModel实现类中添加
     //让ViewModel层持有LiveData层引用,当数据发生变化的时候,view层通过设置对ViewModel的监听能够知道数据发生改变
-    private UIChangeLiveData mUIChangeLiveData;
+    private BaseUIChangeLiveData mUIChangeLiveData;
 
     //处理Loadsir框架的问题
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -105,9 +106,9 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     }
 
     // todo ------------------------------------------------  公共部分,v层通过观察vm层,自行决定是否需要调用v层的方法  --------------------------------------------------------------
-    public UIChangeLiveData getUC() {
+    public BaseUIChangeLiveData getUC() {
         if (mUIChangeLiveData == null) {
-            mUIChangeLiveData = new UIChangeLiveData();
+            mUIChangeLiveData = BaseUIChangeLiveData.getInstance();
         }
         return mUIChangeLiveData;
     }
@@ -123,6 +124,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
      * @param title
      */
     public void showDialog(String title) {
+        if(mUIChangeLiveData != null)
         mUIChangeLiveData.getShowDialogEvent().postValue(title);
     }
 
@@ -140,6 +142,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
      * @param clz 所跳转的目的Activity类
      */
     public void startActivity(Class<?> clz) {
+        if(mUIChangeLiveData != null)
         startActivity(clz, null);
     }
 

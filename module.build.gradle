@@ -102,7 +102,7 @@ dependencies{
 //    implementation rootProject.ext.dependencies["eventbus"]
 //    annotationProcessor rootProject.ext.dependencies["eventbus-annotation"]
 
-    testImplementation  rootProject.ext.dependencies["constraint"]
+    testImplementation  rootProject.ext.dependencies["junit"]
     androidTestImplementation  rootProject.ext.dependencies["test_junit"]
     androidTestImplementation  rootProject.ext.dependencies["test_espresso_core"]
 

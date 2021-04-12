@@ -33,7 +33,9 @@ import jack.wrapper.base.mvvm.view.fragment.BaseFragment;
 /**
  * 1.列表
  * 2.轮播图()
- * 3.搜索
+ * 3.搜索   参考 ===> https://github.com/Carson-Ho/Search_Layout
+ *
+ *
  */
 @Route(path = RouterPathFragment.HomeFirst.PAGER_HOME_FIRST)
 public class ModuleFragment01 extends BaseFragment<FragmentHome01Binding, HomePageOneViewModle> implements OnRefreshLoadMoreListener {

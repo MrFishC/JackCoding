@@ -15,9 +15,9 @@ ext {
             buildToolsVersion      : "29.0.2",
 
             constraintVersion      : "2.0.1",
-            junit                  : "1.1.1",
-            test_junit             : "3.2.0",
-            test_espresso_core     : "2.0.4",
+            junit                  : "4.+",
+            test_junit             : "1.1.1",
+            test_espresso_core     : "3.2.0",
 
 //            timber                 : "4.7.1",
             appcompatVersion       : "1.0.0",

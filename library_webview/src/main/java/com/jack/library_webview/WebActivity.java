@@ -7,9 +7,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.jack.library_command.command.constants.CommandConstants;
 import com.jack.library_command.command.base.CommandLisenter;
 import com.jack.library_command.command.callback.CommandCallBack;
+import com.jack.library_command.command.constants.CommandConstants;
 import com.jack.library_command.command.manager.CommandsManager;
 import com.jack.library_webview.databinding.ActivityCommonWebBinding;
 import com.jack.library_webview.fragment.BaseH5Fragment;
@@ -45,13 +45,13 @@ public class WebActivity extends BaseSimpleActiviy<ActivityCommonWebBinding> {
     public void prepareParam() {
         super.prepareParam();
 
-        registerCommandInfo();
-        registerCommandInfo2();
-        registerCommandInfo3();
-        registerCommandInfo4();
-        registerCommandInfo5();
-        registerCommandInfo6();
-        registerCommandInfo7();
+//        registerCommandInfo();
+//        registerCommandInfo2();
+//        registerCommandInfo3();
+//        registerCommandInfo4();
+//        registerCommandInfo5();
+//        registerCommandInfo6();
+//        registerCommandInfo7();
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();

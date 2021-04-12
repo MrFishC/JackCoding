@@ -10,6 +10,8 @@ import jack.retrofit2_rxjava2.util.net.NetCheckHelper;
  * @创建者 Jack
  * @创建时间 2021/4/5 20:56
  * @描述 webview设置类
+ *
+ *  提供对其他各种实用设置的访问权限
  */
 public class WebViewSettingManager {
 
@@ -35,6 +37,7 @@ public class WebViewSettingManager {
 //        }
 
         WebSettings settings = webView.getSettings();
+        //[启用 JavaScript](https://developer.android.com/guide/webapps/webview.html#EnablingJavaScript)
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);
         settings.setBuiltInZoomControls(false);
