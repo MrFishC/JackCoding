@@ -59,12 +59,6 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         super(application);
     }
 
-    //若要对mModel进行赋值，子类必须要调用父类=该构造方法
-//    public BaseViewModel(@NonNull Application application, M model) {
-//        super(application);
-//        this.mModel = model;
-//    }
-
     @Override
     public void onCreate(@NonNull LifecycleOwner owner) {
 

@@ -2,14 +2,10 @@ package cn.jack.module_login.mvvm.view;
 
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
-
 import androidx.lifecycle.Observer;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jakewharton.rxbinding3.widget.RxTextView;
-
 import cn.jack.library_arouter.router.RouterPathActivity;
-import cn.jack.library_util.AppContext;
 import cn.jack.library_util.LogUtils;
 import cn.jack.module_login.BR;
 import cn.jack.module_login.R;
@@ -44,11 +40,6 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
     }
 
     @Override
-    public RegisterViewModel initViewModel() {
-        return new RegisterViewModel(AppContext.getApplication());
-    }
-
-    @Override
     protected void registorUIChangeLiveDataCallBack() {
         super.registorUIChangeLiveDataCallBack();
 
@@ -76,7 +67,6 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
         Observable<CharSequence> observableAgainPassword = RxTextView.textChanges(mBinding.againPassword);
 
         //表单的验证
-
         Observable.combineLatest(observablePhone, observablePassword, observableAgainPassword,
                 new Function3<CharSequence, CharSequence, CharSequence, InfoVerification>() {
 

@@ -4,13 +4,15 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.hjq.bar.OnTitleBarListener;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
+
 import java.util.List;
+
 import cn.jack.library_arouter.router.RouterPathActivity;
 import cn.jack.library_common_business.adapter.ArticleInfoAdapter;
 import cn.jack.library_common_business.entiy.ArticleInfo;
@@ -63,11 +65,10 @@ public class SubjectActivity extends BaseActivity<ActivityCollectionBinding, Sub
         return true;
     }
 
-    @Override
-    public SubjectViewModel initViewModel() {
-        return ViewModelProviders.of(this).get(SubjectViewModel.class);     //todo 复习源码 原理
-//        return new SubjectViewModel(AppContext.getApplication());
-    }
+//    @Override
+//    public SubjectViewModel initViewModel() {
+//        return ViewModelProviders.of(this).get(SubjectViewModel.class);     //todo 复习源码 原理
+//    }
 
     @Override
     protected void registorUIChangeLiveDataCallBack() {

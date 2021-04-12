@@ -11,7 +11,6 @@ import com.jakewharton.rxbinding3.widget.RxTextView;
 import cn.jack.library_arouter.manager.ArouterManager;
 import cn.jack.library_arouter.router.RouterPathActivity;
 import cn.jack.library_common_business.constant.C;
-import cn.jack.library_util.AppContext;
 import cn.jack.library_util.LogUtils;
 import cn.jack.library_util.SPUtils;
 import cn.jack.module_login.BR;
@@ -42,11 +41,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Override
     public int initVariableId() {
         return BR.viewModel;
-    }
-
-    @Override
-    public LoginViewModel initViewModel() {
-        return new LoginViewModel(AppContext.getApplication());
     }
 
     @Override

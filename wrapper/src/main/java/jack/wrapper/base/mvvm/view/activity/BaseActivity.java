@@ -84,21 +84,24 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
     private void initViewDataBinding() {
         //DataBindingUtil类需要在project的build中配置 dataBinding {enabled true }, 同步后会自动关联android.databinding包
         mBinding = DataBindingUtil.setContentView(this, initContentView());
-        mViewModel = initViewModel();
 
-        //使用自定义的ViewModelFactory来创建ViewModel
-        if (mViewModel == null) {
-            Class modelClass;
-            //Type:是 Java 编程语言中所有类型的公共高级接口。它们包括原始类型、参数化类型、数组类型、类型变量和基本类型。
-            Type type = getClass().getGenericSuperclass();  //获得带有泛型的父类 //其它:getSuperclass()获得该类的父类
-            if (type instanceof ParameterizedType) {        //ParameterizedType参数化类型，即泛型
-                modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];    //getActualTypeArguments获取参数化类型的数组，泛型可能有多个
-            } else {
-                //如果没有指定泛型参数，则默认使用BaseViewModel
-                modelClass = BaseViewModel.class;
-            }
-            mViewModel = (VM) createViewModel(this, modelClass);
+        Class modelClass = null;
+        //Type:是 Java 编程语言中所有类型的公共高级接口。它们包括原始类型、参数化类型、数组类型、类型变量和基本类型。
+        //获得带有泛型的父类 //其它:getSuperclass()获得该类的父类
+        Type type = getClass().getGenericSuperclass();
+        if (type instanceof ParameterizedType) {
+            //ParameterizedType参数化类型，即泛型
+            //getActualTypeArguments获取参数化类型的数组，泛型可能有多个
+            modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];
         }
+
+        if(modelClass == null){
+            //只要按照规则定义了泛型，则mViewModel不会为null
+            throw new NullPointerException("VM must be define ...");
+        }
+
+        //ViewModel的初始化交给了父类，子类只需要按照规则定义泛型即可
+        mViewModel = (VM) createViewModel(this, modelClass);
 
         //在基类中定义mBinding.setVariable(BR.xxx,y)相当于是约定，在布局中的layout-data-variable节点只要设定了name=viewModel，type=对应的子ViewModel
         //即实现databinding与ViewModel组件无缝协作
@@ -264,17 +267,6 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
      * @return BR的id (BR由系统生成)
      */
     public abstract int initVariableId();
-
-    /**
-     * 初始化ViewModel
-     *
-     * 子类选择性重写initViewModel()方法，返回ViewModel对象;
-     * 默认会创建VM类型的ViewModel,如果没有指定VM,则会创建BaseViewModel;
-     * @return 继承BaseViewModel的ViewModel
-     */
-    public VM initViewModel() {
-        return null;
-    }
 
     /**
      *  通过 ViewModelProfiders#of(FragmentActivity) 来创建一个 ViewModelProvider，然后调用 get 方法创建出所需要的 mode实例

@@ -68,7 +68,8 @@ public class ModuleFragment04 extends BaseSimpleFragment<FragmentHome04Binding> 
     @Override
     public void prepareListener() {
         super.prepareListener();
-        mBinding.collectTitleBar.getLeftView().setVisibility(View.INVISIBLE);
+        mBinding.collect.titleBar.getTitleView().setText("我的收藏");
+        mBinding.collect.titleBar.getLeftView().setVisibility(View.INVISIBLE);
     }
 
     @Override
