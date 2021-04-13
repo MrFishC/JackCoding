@@ -25,7 +25,7 @@
                 android:layout_height="match_parent"/>
 
             <com.google.android.material.navigation.NavigationView
-                android:layout_width="450dp"
+                android:layout_width="280dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 app:headerLayout="@layout/layout_drawer_header"
