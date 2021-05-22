@@ -108,7 +108,7 @@ public abstract class BaseActivity<V extends ViewDataBinding,VM extends BaseView
         //关联ViewModel       相当于通过<variable>标签指定类（然后在控件的属性值中就可以使用）[子类initVariableId()的返回的为BR.xxx,其中xxx必须和xml的<variable>标签一样]
         mBinding.setVariable(initVariableId(), mViewModel);
 
-        //让ViewModel拥有View的生命周期感应
+        //让ViewModel拥有View的生命周期感应:即mViewModel成为观察者
         getLifecycle().addObserver(mViewModel);
 
     }
