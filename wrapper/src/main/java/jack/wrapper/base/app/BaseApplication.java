@@ -5,13 +5,18 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.kingja.loadsir.core.LoadSir;
 import com.limpoxe.support.library_service_manager.ServiceManager;
 import com.tencent.mmkv.MMKV;
+
 import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
+
 import cn.jack.library_common_business.loadsir.callback.CustomCallback;
 import cn.jack.library_common_business.loadsir.callback.EmptyCallback;
 import cn.jack.library_common_business.loadsir.callback.FailedCallback;

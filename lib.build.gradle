@@ -6,6 +6,9 @@
 
 apply plugin: 'com.android.library'
 
+//hilt依赖
+//apply plugin: 'dagger.hilt.android.plugin'
+
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
@@ -62,5 +65,11 @@ dependencies {
     //ARouter配置2
     implementation rootProject.ext.dependencies["arouter-api"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
+
+    //将hilt在该gradle文件中进行配置    而module.build.gradle是服务于业务模块的，即hilt服务于业务模块（个人选择，且推荐，hilt用的范围太广并非好事，这是一把双刃剑）即可
+    //hilt      该项目封装的基类 对hilt的使用不太友好 暂时先不添加了
+//    api rootProject.ext.dependencies["hilt-android"]
+//    annotationProcessor rootProject.ext.dependencies["hilt-compiler"]
 
 }
