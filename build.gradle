@@ -1,41 +1,20 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
-apply from: "config.gradle"
-
 buildscript {
-
-    //buildscript里是gradle脚本执行所需依赖
-    
-    repositories {
-        google()        //对应一个代码仓库，主要是Google自家的扩展依赖库
-        jcenter()       //对应一个代码仓库，包含的大多是一些第三方的开源库
-        //声明了这两行配置之后，我们就可以在项目中轻松引用任何google和jcenter仓库中的依赖库了
-    }
     dependencies {
-        //要想使用gradle来构建Android项目，则需要声明com.android.tools.build:gradle:x.x.x这个插件
-        classpath 'com.android.tools.build:gradle:4.1.1'
-
         //protobuf配置1
         //https://github.com/google/protobuf-gradle-plugin   0.8.15 要求 Gradle >= 5.6 and Java 8.
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.15'
-
-        //hilt插件路径
-//        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.28-alpha'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
-allprojects {
-    //allprojects里是项目本身需要的依赖
-    repositories {
-        google()
-        jcenter()
-        maven { url 'https://jitpack.io' }
-    }
+plugins {
+    id 'com.android.application' version '7.2.1' apply false
+    id 'com.android.library' version '7.2.1' apply false
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+apply from: "config.gradle"
+
