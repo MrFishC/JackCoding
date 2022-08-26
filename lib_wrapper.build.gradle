@@ -1,0 +1,52 @@
+//lib_wrapper独享的gradle配置文件 --->其目标是为了 让lib_wrapper独立出来（其jar包会被上传到服务器，以插件的形式进行依赖），便于后期的维护
+
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
+
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+//apply plugin: 'com.google.dagger.hilt.android'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation rootProject.ext.dependencies["core-ktx"]
+    implementation rootProject.ext.dependencies["material"]
+    implementation rootProject.ext.dependencies["constraint"]
+
+    implementation rootProject.ext.dependencies["lifecycle-viewmodel-ktx"]
+    implementation rootProject.ext.dependencies["lifecycle-livedata-ktx"]
+    implementation rootProject.ext.dependencies["lifecycle-runtime-ktx"]
+    implementation rootProject.ext.dependencies["activity-ktx"]
+    implementation rootProject.ext.dependencies["hilt-android"]
+    kapt rootProject.ext.dependencies["hilt-compiler"]
+}

@@ -1,6 +1,8 @@
 //apply from: "../lib.build.gradle"
 
 apply plugin: 'com.android.library'     //...
+apply plugin: 'dagger.hilt.android.plugin'
+//apply plugin: 'com.google.dagger.hilt.android'
 
 android {       //...
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -13,10 +15,10 @@ android {       //...
 
         //这里不需要添加arouter的配置，只需要在dependencies中依赖arouter即可
         //将eventbus的总线注解处理器生成的代码配置统一在app的build.gradle中配置(未能生成代码，具体原因不明)
-        //原因：在每个模块中配置，估计是和arouter的配置发生了冲突  导致项目会报错：具体原因暂时不明白(android studio 不支持同事存在两个annotationProcessor)
+        //原因：在每个模块中配置，估计是和arouter的配置发生了冲突  导致项目会报错：具体原因暂时不明白(android studio 不支持同时存在两个annotationProcessor)
         javaCompileOptions {
             annotationProcessorOptions {            //需要加深对annotationProcessorOptions的理解
-                arguments = [ eventBusIndex : 'jack.wrapper.bus.MyEventBusIndex' ]  //一定会在当前目录下生成
+                arguments += [ eventBusIndex : 'jack.wrapper.bus.MyEventBusIndex' ]  //一定会在当前目录下生成
 //                System.out.println(" 在gradle中打印一下 " + project.getName())
             }
         }
@@ -107,4 +109,6 @@ dependencies {
     api project(':library_service_manager')
     api project(':library_command')
 
+    implementation rootProject.ext.dependencies["hilt-android"]
+    annotationProcessor  rootProject.ext.dependencies["hilt-compiler"]
 }

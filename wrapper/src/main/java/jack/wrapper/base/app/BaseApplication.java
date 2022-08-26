@@ -28,6 +28,7 @@ import cn.jack.library_image.glide.GlideManager;
 import cn.jack.library_image.image.ImageManager;
 import cn.jack.library_util.AppContext;
 import cn.jack.library_util.LogUtils;
+import dagger.hilt.android.HiltAndroidApp;
 import jack.wrapper.BuildConfig;
 import jack.wrapper.bus.MyEventBusIndex;
 
@@ -38,6 +39,7 @@ import jack.wrapper.bus.MyEventBusIndex;
  * describe:在宿主app中新建application的子类实现该基类
  */
 
+@HiltAndroidApp
 public class BaseApplication extends Application{
 
     @Override
