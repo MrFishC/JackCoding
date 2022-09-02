@@ -2,7 +2,9 @@
 
 apply plugin: 'com.android.library'     //...
 apply plugin: 'dagger.hilt.android.plugin'
-//apply plugin: 'com.google.dagger.hilt.android'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
+
 
 android {       //...
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -46,6 +48,10 @@ android {       //...
     //开启dataBinding
     dataBinding {
         enabled true
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 
 }
@@ -109,6 +115,9 @@ dependencies {
     api project(':library_service_manager')
     api project(':library_command')
 
+    api project(':lib_wrapper_mvvm')
+    api project(':lib_wrapper_net')
+
     implementation rootProject.ext.dependencies["hilt-android"]
-    annotationProcessor  rootProject.ext.dependencies["hilt-compiler"]
+    kapt  rootProject.ext.dependencies["hilt-compiler"]
 }

@@ -12,151 +12,173 @@ ext {
 
     version = [
 
-            constraintVersion     : "2.0.1",
-            junit                 : "4.+",
-            test_junit            : "1.1.1",
-            test_espresso_core    : "3.2.0",
+            constraintVersion                          : "2.0.1",
+            junit                                      : "4.+",
+            test_junit                                 : "1.1.1",
+            test_espresso_core                         : "3.2.0",
 
 //            timber                 : "4.7.1",
-            appcompatVersion      : "1.0.0",
-            aacVersion            : "2.0.0",
-            materialVersion       : "1.1.0",
+            appcompatVersion                           : "1.0.0",
+            aacVersion                                 : "2.0.0",
+            materialVersion                            : "1.1.0",
 
-            arouterApiVersion     : "1.5.1",
-            arouterCompilerVersion: "1.5.1",
+            arouterApiVersion                          : "1.5.1",
+            arouterCompilerVersion                     : "1.5.1",
 
-            immersionbar          : "3.0.0",
+            immersionbar                               : "3.0.0",
 
-            eventbus              : "3.1.1",
-            dagger_android        : "2.33",
+            eventbus                                   : "3.1.1",
+            dagger_android                             : "2.33",
 
-            core_ktx              : "1.7.0",
-            lifecycle_version     : "2.6.0-alpha01",
-            activity_version      : "1.5.1",
-            fragment_version      : "1.5.2",
-            hilt_version          : "2.38.1",
+            core_ktx                                   : "1.7.0",
+            lifecycle_version                          : "2.6.0-alpha01",
+            activity_version                           : "1.5.1",
+            fragment_version                           : "1.5.2",
+            hilt_version                               : "2.38.1",
+
+            multidexVersion                            : "2.0.1",
+
+            kotlinx_coroutines_core_version            : "1.5.1",
+            kotlinx_coroutines_android_version         : "1.5.1",
     ]
 
     dependencies = [
 
-            "appcompat"                    : "androidx.appcompat:appcompat:${version["appcompatVersion"]}",
-            "constraint"                   : "androidx.constraintlayout:constraintlayout:${version["constraintVersion"]}",
-            "material"                     : "com.google.android.material:material:${version["materialVersion"]}",
+            "appcompat"                          : "androidx.appcompat:appcompat:${version["appcompatVersion"]}",
+            "constraint"                         : "androidx.constraintlayout:constraintlayout:${version["constraintVersion"]}",
+            "material"                           : "com.google.android.material:material:${version["materialVersion"]}",
 
             //test
-            "junit"                        : "junit:junit:${version["junit"]}",
-            "test_junit"                   : "androidx.test.ext:junit:${version["test_junit"]}",
-            "test_espresso_core"           : "androidx.test.espresso:espresso-core:${version["test_espresso_core"]}",
+            "junit"                              : "junit:junit:${version["junit"]}",
+            "test_junit"                         : "androidx.test.ext:junit:${version["test_junit"]}",
+            "test_espresso_core"                 : "androidx.test.espresso:espresso-core:${version["test_espresso_core"]}",
 
             //Google AAC (For Lifecycles, LiveData, and ViewModel)
-            "lifecycle-runtime"            : "androidx.lifecycle:lifecycle-runtime:${version["aacVersion"]}",
-            "lifecycle-extensions"         : "androidx.lifecycle:lifecycle-extensions:${version["aacVersion"]}",
-            "lifecycle-compiler"           : "androidx.lifecycle:lifecycle-compiler:${version["aacVersion"]}",
+            "lifecycle-runtime"                  : "androidx.lifecycle:lifecycle-runtime:${version["aacVersion"]}",
+            "lifecycle-extensions"               : "androidx.lifecycle:lifecycle-extensions:${version["aacVersion"]}",
+            "lifecycle-compiler"                 : "androidx.lifecycle:lifecycle-compiler:${version["aacVersion"]}",
 
             //Net Rxjava系列
-            "rxjava2"                      : "io.reactivex.rxjava2:rxjava:2.2.8",
-            "rxandroid2"                   : "io.reactivex.rxjava2:rxandroid:2.1.1",
-            "retrofit2"                    : "com.squareup.retrofit2:retrofit:2.5.0",
-            "interceptor"                  : "com.squareup.okhttp3:logging-interceptor:3.13.1",
-            "retrofit2:adapter"            : "com.squareup.retrofit2:adapter-rxjava2:2.5.0",
-            "gson"                         : "com.google.code.gson:gson:2.8.5",
-            "converter-gson"               : "com.squareup.retrofit2:converter-gson:2.5.0",
-            "fastjson"                     : "com.alibaba:fastjson:1.1.71.android",
+//            "rxjava2"                      : "io.reactivex.rxjava2:rxjava:2.2.8",
+//            "rxandroid2"                   : "io.reactivex.rxjava2:rxandroid:2.1.1",
+//            "retrofit2"                    : "com.squareup.retrofit2:retrofit:2.5.0",
+//            "interceptor"                  : "com.squareup.okhttp3:logging-interceptor:3.13.1",
+//            "retrofit2:adapter"            : "com.squareup.retrofit2:adapter-rxjava2:2.5.0",
+//            "gson"                         : "com.google.code.gson:gson:2.8.5",
+//            "converter-gson"               : "com.squareup.retrofit2:converter-gson:2.5.0",
+//            "fastjson"                     : "com.alibaba:fastjson:1.1.71.android",
+
+            "rxjava2"                            : "io.reactivex.rxjava2:rxjava:2.2.8",
+            "rxandroid2"                         : "io.reactivex.rxjava2:rxandroid:2.1.1",
+
+            "retrofit2"                          : "com.squareup.retrofit2:retrofit:2.9.0",
+            "interceptor"                        : "com.squareup.okhttp3:logging-interceptor:4.9.0",
+            "converter-gson"                     : "com.squareup.retrofit2:converter-gson:2.9.0",
+
+            "retrofit2:adapter"                  : "com.squareup.retrofit2:adapter-rxjava2:2.9.0",
+            "gson"                               : "com.google.code.gson:gson:2.8.5",
+            "fastjson"                           : "com.alibaba:fastjson:1.1.71.android",
+
 
             //https://github.com/JakeWharton/RxBinding/tree/3.1.0
-            "rxbinding3-appcompat"         : "com.jakewharton.rxbinding3:rxbinding-appcompat:3.1.0",
+            "rxbinding3-appcompat"               : "com.jakewharton.rxbinding3:rxbinding-appcompat:3.1.0",
 //            "rxbinding-material"                     : "com.jakewharton.rxbinding3:rxbinding-material:3.1.0",
 
             //https://github.com/trello/RxLifecycle/tree/v3.1.0
-            "rxlifecycle3-components"      : "com.trello.rxlifecycle3:rxlifecycle-components:3.1.0",
+            "rxlifecycle3-components"            : "com.trello.rxlifecycle3:rxlifecycle-components:3.1.0",
 
             //日志
 //            "timber"                               : "com.jakewharton.timber:timber:${version["timber"]}",
 
             //图片
-            "glide"                        : 'com.github.bumptech.glide:glide:4.12.0',
-            "glide-transformations"        : 'jp.wasabeef:glide-transformations:4.3.0',
-            "glide-compiler"               : 'com.github.bumptech.glide:compiler:4.12.0',
+            "glide"                              : 'com.github.bumptech.glide:glide:4.12.0',
+            "glide-transformations"              : 'jp.wasabeef:glide-transformations:4.3.0',
+            "glide-compiler"                     : 'com.github.bumptech.glide:compiler:4.12.0',
 
 
             //底部导航栏
 //            "bottom-navigation-bar"                  : "com.ashokvarma.android:bottom-navigation-bar:2.2.0",
 
             //状态栏 https://github.com/gyf-dev/ImmersionBar
-            "immersionbar"                 : "com.gyf.immersionbar:immersionbar:${version["immersionbar"]}",
+            "immersionbar"                       : "com.gyf.immersionbar:immersionbar:${version["immersionbar"]}",
             // fragment快速实现（可选）
-            "immersionbar-components"      : "com.gyf.immersionbar:immersionbar-components:${version["immersionbar"]}",
+            "immersionbar-components"            : "com.gyf.immersionbar:immersionbar-components:${version["immersionbar"]}",
 
             //https://github.com/scwang90/SmartRefreshLayout
-            "refresh_layout_kernel"        : 'com.scwang.smart:refresh-layout-kernel:2.0.3',      //核心必须依赖
-            "refresh_header_classics"      : 'com.scwang.smart:refresh-header-classics:2.0.3',     //经典刷新头
+            "refresh_layout_kernel"              : 'com.scwang.smart:refresh-layout-kernel:2.0.3',      //核心必须依赖
+            "refresh_header_classics"            : 'com.scwang.smart:refresh-header-classics:2.0.3',     //经典刷新头
 
-            "BaseRecyclerViewAdapterHelper": 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4',
+            "BaseRecyclerViewAdapterHelper"      : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4',
 
-            "MagicIndicator"               : 'com.github.hackware1993:MagicIndicator:1.7.0',
+            "MagicIndicator"                     : 'com.github.hackware1993:MagicIndicator:1.7.0',
 
             //arouter
-            "arouter-api"                  : "com.alibaba:arouter-api:${version["arouterApiVersion"]}",
+            "arouter-api"                        : "com.alibaba:arouter-api:${version["arouterApiVersion"]}",
             //arouter注解处理器
-            "arouter-compiler"             : "com.alibaba:arouter-compiler:${version["arouterApiVersion"]}",
+            "arouter-compiler"                   : "com.alibaba:arouter-compiler:${version["arouterApiVersion"]}",
 
             //事件总线
-            "eventbus"                     : "org.greenrobot:eventbus:${version["eventbus"]}",
+            "eventbus"                           : "org.greenrobot:eventbus:${version["eventbus"]}",
             // 事件总线注解处理器
-            "eventbus-annotation"          : "org.greenrobot:eventbus-annotation-processor:${version["eventbus"]}",
+            "eventbus-annotation"                : "org.greenrobot:eventbus-annotation-processor:${version["eventbus"]}",
 
             //欢迎页面使用
-            "ferriswheel"                  : 'ru.github.igla:ferriswheel:1.2',
+            "ferriswheel"                        : 'ru.github.igla:ferriswheel:1.2',
 
             //https://github.com/mxn21/FlowingDrawer    首页使用
-            "flowingdrawer-core"           : 'com.mxn.soul:flowingdrawer-core:2.1.0',
-            "nineoldandroids_library"      : 'com.nineoldandroids:library:2.4.0',
+            "flowingdrawer-core"                 : 'com.mxn.soul:flowingdrawer-core:2.1.0',
+            "nineoldandroids_library"            : 'com.nineoldandroids:library:2.4.0',
 
             //https://github.com/Tencent/QMUI_Android
-            "qmui"                         : 'com.qmuiteam:qmui:2.0.0-alpha10',
+            "qmui"                               : 'com.qmuiteam:qmui:2.0.0-alpha10',
 
             //通用的标题栏
-            "titlebar"                     : "com.hjq:titlebar:6.0",
+            "titlebar"                           : "com.hjq:titlebar:6.0",
 
             //https://github.com/Tencent/MMKV
-            "mmkv"                         : "com.tencent:mmkv-static:1.2.7",
+            "mmkv"                               : "com.tencent:mmkv-static:1.2.7",
 
             //https://github.com/franmontiel/PersistentCookieJar
-            "PersistentCookieJar"          : "com.github.franmontiel:PersistentCookieJar:v1.0.1",
+            "PersistentCookieJar"                : "com.github.franmontiel:PersistentCookieJar:v1.0.1",
 
             //状态布局 https://github.com/KingJA/LoadSir
-            "loadsir"                      : 'com.kingja.loadsir:loadsir:1.3.8',
+            "loadsir"                            : 'com.kingja.loadsir:loadsir:1.3.8',
 
             //https://github.com/youth5201314/banner
-            "banner"                       : 'com.youth.banner:banner:2.1.0',
+            "banner"                             : 'com.youth.banner:banner:2.1.0',
 
             //https://github.com/orhanobut/logger
-            "logger"                       : 'com.orhanobut:logger:2.2.0',
+            "logger"                             : 'com.orhanobut:logger:2.2.0',
 
             //https://github.com/google/dagger
-            "dagger2"                      : "com.google.dagger:dagger:${version["dagger_android"]}",
+            "dagger2"                            : "com.google.dagger:dagger:${version["dagger_android"]}",
             //dagger-android基于dagger2，但存在区别，更好使用
 //            "dagger-android"                           : "com.google.dagger:dagger-android:${version["dagger_android"]}",
-            "dagger-compiler"              : "com.google.dagger:dagger-compiler:${version["dagger_android"]}",
+            "dagger-compiler"                    : "com.google.dagger:dagger-compiler:${version["dagger_android"]}",
 //            "dagger-android-processor"                 : "com.google.dagger:dagger-android-processor:${version["dagger_android"]}",
 
             //kotin相关==================================
-            "core-ktx"                     : "androidx.core:core-ktx:${version["core_ktx"]}",
+            "core-ktx"                           : "androidx.core:core-ktx:${version["core_ktx"]}",
 
             //jetpack相关==================================
             // ViewModel
-            "lifecycle-viewmodel-ktx"      : "androidx.lifecycle:lifecycle-viewmodel-ktx:${version["lifecycle_version"]}",
+            "lifecycle-viewmodel-ktx"            : "androidx.lifecycle:lifecycle-viewmodel-ktx:${version["lifecycle_version"]}",
             // LiveData
-            "lifecycle-livedata-ktx"       : "androidx.lifecycle:lifecycle-livedata-ktx:${version["lifecycle_version"]}",
+            "lifecycle-livedata-ktx"             : "androidx.lifecycle:lifecycle-livedata-ktx:${version["lifecycle_version"]}",
             // Lifecycles only (without ViewModel or LiveData)
-            "lifecycle-runtime-ktx"        : "androidx.lifecycle:lifecycle-runtime-ktx:${version["lifecycle_version"]}",
+            "lifecycle-runtime-ktx"              : "androidx.lifecycle:lifecycle-runtime-ktx:${version["lifecycle_version"]}",
 
             // Kotlin
-            "activity-ktx"                 : "androidx.activity:activity-ktx:${version["activity_version"]}",
-            "fragment-ktx"                 : "androidx.fragment:fragment-ktx:${version["fragment_version"]}",
+            "activity-ktx"                       : "androidx.activity:activity-ktx:${version["activity_version"]}",
+            "fragment-ktx"                       : "androidx.fragment:fragment-ktx:${version["fragment_version"]}",
 
-            "hilt-android"                 : "com.google.dagger:hilt-android:${version["hilt_version"]}",
-            "hilt-compiler"                : "com.google.dagger:hilt-compiler:${version["hilt_version"]}",
+            "kotlinx-coroutines-core"            : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${version["kotlinx_coroutines_core_version"]}",
+            "kotlinx-coroutines-android"         : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${version["kotlinx_coroutines_android_version"]}",
+
+            "hilt-android"                       : "com.google.dagger:hilt-android:${version["hilt_version"]}",
+            "hilt-compiler"                      : "com.google.dagger:hilt-android-compiler:${version["hilt_version"]}",
+
+            "multidex"                           : "androidx.multidex:multidex:${version["multidexVersion"]}",
 
     ]
 

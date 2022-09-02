@@ -5,9 +5,7 @@
 //}             //若保持，则会报错  org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:  替换成 apply plugin: 'com.android.library'
 
 apply plugin: 'com.android.library'
-
-//hilt依赖
-//apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -55,6 +53,9 @@ android {
         enabled true
     }
 
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {

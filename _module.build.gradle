@@ -1,0 +1,104 @@
+//该gradle只提供给 业务模块使用
+if (isBuildModule.toBoolean()) {
+    //作为独立App应用运行
+    apply plugin: 'com.android.application'
+} else {
+    //作为组件运行
+    apply plugin: 'com.android.library'
+}
+
+apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
+    defaultConfig {
+
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        //如果是独立模块，则使用当前组件的包名
+        if (isBuildModule.toBoolean()){
+            //组件模式下设置applicationId
+            applicationId rootProject.ext.android["module_applicationId"]
+        }
+
+        //ARouter配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+
+    }
+
+    /*java插件引入了一个概念叫做SourceSets，通过修改SourceSets中的属性，可以指定哪些源文件
+    （或文件夹下的源文件）要被编译，哪些源文件要被排除。这样在不同的开发模式下就会读取到不同的 AndroidManifest.xml
+     ，然后我们需要修改这两个表单的内容以为我们不同的开发模式服务。*/
+
+    //原则：组件在自己的AndroidManifest.xml各自配置，application标签无需添加属性，也不需要指定activity的intent-filter。当合并打包时，gradle会将每个组件的AndroidManifest合并到宿主App中。
+    sourceSets {
+        main {
+            if (isBuildModule.toBoolean()) {
+                //组件独立运行时，就需要单独的一个AndroidManifest.xml作为调试用。可以在src/main文件夹下创建一个alone/AndroidManifest.xml。配置application标签属性，并指定启动的activity。
+                manifest.srcFile 'src/main/alone/AndroidManifest.xml'
+            } else {
+                //合并到宿主
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                resources {
+                    //正式版本时，排除alone文件夹下所有调试文件
+                    exclude 'src/main/alone/*'
+                }
+            }
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //开启DataBinding
+    dataBinding {
+        enabled true
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    //统一资源前缀，规范资源引用
+    resourcePrefix project.getName() + "_"
+}
+
+dependencies{
+
+    //组件依赖基础库
+    api project(':lib_base')
+
+    //按需依赖第三方组件(通用的可以在lib_base中统一配置即可)
+    kapt rootProject.ext.dependencies["arouter-compiler"]
+    kapt rootProject.ext.dependencies["hilt-compiler"]
+}

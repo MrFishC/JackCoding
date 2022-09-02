@@ -3,7 +3,7 @@
     package="cn.jack.module_login">
 
     <application
-        android:name="jack.wrapper.base.app.BaseApplication"
+        android:name=".debug.DebugApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-import jack.retrofit2_rxjava2.util.net.NetCheckHelper;
-
 /**
  * @创建者 Jack
  * @创建时间 2021/4/5 20:56
@@ -42,11 +40,11 @@ public class WebViewSettingManager {
         settings.setSupportZoom(true);
         settings.setBuiltInZoomControls(false);
 
-        if (NetCheckHelper.getInstance().isNetworkConnected()) {
-            settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        } else {
-            settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        }
+//        if (NetCheckHelper.getInstance().isNetworkConnected()) {
+//            settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+//        } else {
+//            settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+//        }
 
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            mWebSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);

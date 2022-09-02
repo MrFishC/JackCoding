@@ -2,14 +2,9 @@ package jack.retrofit2_rxjava2.manager.rx;
 
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
 import io.reactivex.disposables.Disposable;
-import jack.retrofit2_rxjava2.exception.ApiException;
-import jack.retrofit2_rxjava2.exception.DataNullException;
 import jack.retrofit2_rxjava2.exception.ErrorStatusInfo;
-import jack.retrofit2_rxjava2.exception.NetErrorException;
 import jack.retrofit2_rxjava2.model.IModel;
-import jack.retrofit2_rxjava2.util.net.NetCheckHelper;
 
 /**
  * <p>描述：订阅的基类</p>
@@ -28,20 +23,20 @@ public abstract class RxBaseSubscriber<T> implements Observer<T> {
     public void onSubscribe(@NonNull Disposable d) {
 
         //判断是否有网络
-        if (!NetCheckHelper.getInstance().isNetworkConnected()) {
-
-            // 飞行模式下，模拟器 这里的代码都没有执行 。手机可以  （暂时不深究原因）
-            // System.out.println(" onStart  1");
-
-//            onNetError();     //统一交给RxExceptionManager处理
-            RxExceptionManager.getInstance().exceptionHandler(new NetErrorException("网络异常"));
-
-            onComplete();
-        }
-
-        if(mIModel != null){
-            mIModel.addSubscribe(d);
-        }
+//        if (!NetCheckHelper.getInstance().isNetworkConnected()) {
+//
+//            // 飞行模式下，模拟器 这里的代码都没有执行 。手机可以  （暂时不深究原因）
+//            // System.out.println(" onStart  1");
+//
+////            onNetError();     //统一交给RxExceptionManager处理
+//            RxExceptionManager.getInstance().exceptionHandler(new NetErrorException("网络异常"));
+//
+//            onComplete();
+//        }
+//
+//        if(mIModel != null){
+//            mIModel.addSubscribe(d);
+//        }
 
     }
 

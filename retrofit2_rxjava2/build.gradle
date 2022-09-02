@@ -11,11 +11,8 @@ dependencies {
     api rootProject.ext.dependencies["fastjson"]
     api rootProject.ext.dependencies["converter-gson"]
 
-//    api rootProject.ext.dependencies["timber"]
+    api rootProject.ext.dependencies["PersistentCookieJar"]
 
-    implementation rootProject.ext.dependencies["PersistentCookieJar"]
-
-    //避免重复依赖
-    implementation project(':library_util')
+    api "io.github.vincent-series:sharp-retrofit:1.9"
 
 }

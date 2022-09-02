@@ -1,15 +1,9 @@
 package jack.retrofit2_rxjava2.manager.rx;
 
-import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import jack.retrofit2_rxjava2.exception.ApiException;
 import jack.retrofit2_rxjava2.exception.DataNullException;
-import jack.retrofit2_rxjava2.exception.NetErrorException;
-import jack.retrofit2_rxjava2.exception.TimeOutException;
-import jack.retrofit2_rxjava2.model.IModel;
-import jack.retrofit2_rxjava2.util.net.NetCheckHelper;
 
 /**
  * <p>描述：订阅的基类</p>
@@ -24,21 +18,20 @@ public abstract class RxBaseSimpleSubscriber<T> extends DisposableObserver<T> {
     public void onStart() {
 
         //判断是否有网络
-        if (!NetCheckHelper.getInstance().isNetworkConnected()) {
-
-            // 飞行模式下，模拟器 这里的代码都没有执行 。手机可以  （暂时不深究原因）
-            //            System.out.println(" onStart  1");
-
-//            onNetError();
-            RxExceptionManager.getInstance().exceptionHandler(new NetErrorException("网络异常"));
-
-            if(!isDisposed()){
-                dispose();
-            }
-
-            onComplete();
-        }
-
+//        if (!NetCheckHelper.getInstance().isNetworkConnected()) {
+//
+//            // 飞行模式下，模拟器 这里的代码都没有执行 。手机可以  （暂时不深究原因）
+//            //            System.out.println(" onStart  1");
+//
+////            onNetError();
+//            RxExceptionManager.getInstance().exceptionHandler(new NetErrorException("网络异常"));
+//
+//            if(!isDisposed()){
+//                dispose();
+//            }
+//
+//            onComplete();
+//        }
     }
 
     @Override
@@ -67,12 +60,4 @@ public abstract class RxBaseSimpleSubscriber<T> extends DisposableObserver<T> {
 
     public abstract void onFailed(ApiException e);
     public abstract void onSuccess(T t);
-
-//    public void onTimeOut(){        //任何封装都不是完美的（待有更优的封装方式后替换）
-//
-//    }
-//    public void onNetError(){
-//
-//    }
-
 }

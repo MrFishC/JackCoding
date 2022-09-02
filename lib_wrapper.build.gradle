@@ -5,7 +5,6 @@ apply plugin: 'org.jetbrains.kotlin.android'
 
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
-//apply plugin: 'com.google.dagger.hilt.android'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -42,6 +41,7 @@ dependencies {
     implementation rootProject.ext.dependencies["core-ktx"]
     implementation rootProject.ext.dependencies["material"]
     implementation rootProject.ext.dependencies["constraint"]
+    implementation rootProject.ext.dependencies["multidex"]
 
     implementation rootProject.ext.dependencies["lifecycle-viewmodel-ktx"]
     implementation rootProject.ext.dependencies["lifecycle-livedata-ktx"]

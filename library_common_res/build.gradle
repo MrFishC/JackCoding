@@ -1,7 +1,38 @@
-apply from: "../lib.build.gradle"
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
 
 dependencies {
-
     //提高 Android UI 开发效率的 UI 库,只依赖了qmui
     //官网 https://github.com/Tencent/QMUI_Android
     api(rootProject.ext.dependencies["qmui"]) {
@@ -11,5 +42,4 @@ dependencies {
         exclude group: 'androidx.constraintlayout:constraintlayout'
         exclude group: 'androidx.swiperefreshlayout:swiperefreshlayout'
     }
-
 }

@@ -5,18 +5,12 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.kingja.loadsir.core.LoadSir;
 import com.limpoxe.support.library_service_manager.ServiceManager;
 import com.tencent.mmkv.MMKV;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
-
 import cn.jack.library_common_business.loadsir.callback.CustomCallback;
 import cn.jack.library_common_business.loadsir.callback.EmptyCallback;
 import cn.jack.library_common_business.loadsir.callback.FailedCallback;
@@ -28,9 +22,8 @@ import cn.jack.library_image.glide.GlideManager;
 import cn.jack.library_image.image.ImageManager;
 import cn.jack.library_util.AppContext;
 import cn.jack.library_util.LogUtils;
-import dagger.hilt.android.HiltAndroidApp;
 import jack.wrapper.BuildConfig;
-import jack.wrapper.bus.MyEventBusIndex;
+//import jack.wrapper.bus.MyEventBusIndex;
 
 /**
  * created by Jack
@@ -39,7 +32,6 @@ import jack.wrapper.bus.MyEventBusIndex;
  * describe:在宿主app中新建application的子类实现该基类
  */
 
-@HiltAndroidApp
 public class BaseApplication extends Application{
 
     @Override
@@ -188,12 +180,12 @@ public class BaseApplication extends Application{
     }
 
     private void initBus() {
-        MyEventBusIndex myEventBusIndex = new MyEventBusIndex();
-////        之前限制了BaseTopActivtiy为非public，在MyEventBusIndex中的静态代码块未生成相应的putIndex方法
-//        SubscriberInfo subscriberInfo = myEventBusIndex.getSubscriberInfo(BaseTopActivtiy.class);
-//        System.out.println(" 是否为空 " + (subscriberInfo == null));                              //false
-        EventBus.builder().addIndex(myEventBusIndex).installDefaultEventBus();
-//        System.out.println(" 是否为空 toString " + EventBus.getDefault().toString());             //EventBus[indexCount=1, eventInheritance=true]
+//        MyEventBusIndex myEventBusIndex = new MyEventBusIndex();
+//////        之前限制了BaseTopActivtiy为非public，在MyEventBusIndex中的静态代码块未生成相应的putIndex方法
+////        SubscriberInfo subscriberInfo = myEventBusIndex.getSubscriberInfo(BaseTopActivtiy.class);
+////        System.out.println(" 是否为空 " + (subscriberInfo == null));                              //false
+//        EventBus.builder().addIndex(myEventBusIndex).installDefaultEventBus();
+////        System.out.println(" 是否为空 toString " + EventBus.getDefault().toString());             //EventBus[indexCount=1, eventInheritance=true]
     }
 
     private void initImageLoader() {

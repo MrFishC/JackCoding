@@ -12,9 +12,8 @@ import okhttp3.RequestBody;
 
 /**
  * created by Jack
- * email:yucrun@163.com
  * date:19-5-5
- * describe:rxjava辅助类,单例
+ * describe:rxjava辅助类
  */
 public class RxUtils {
 
@@ -41,7 +40,7 @@ public class RxUtils {
      * @return
      */
     public <T> T obtainRetrofitService(Class<T> service){
-        return HttpManager.getRetrofitClient().create(service);
+        return HttpManager.INSTANCE.obtainRetrofitService(service);
     }
 
     /**
