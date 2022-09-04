@@ -32,6 +32,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
                         is EventResult.OnStart -> println("开始-注册页面")
                         is EventResult.OnNext -> println("成功-注册页面")
                         is EventResult.OnError -> println("错误-注册页面")
+                        is EventResult.OnEmpty -> println("空-注册页面")
                         is EventResult.OnComplete -> println("结束-注册页面")
                     }
                 }

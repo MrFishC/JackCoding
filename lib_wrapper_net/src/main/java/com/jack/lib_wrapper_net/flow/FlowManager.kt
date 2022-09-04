@@ -1,5 +1,7 @@
 package com.jack.lib_wrapper_net.flow
 
+import com.jack.lib_wrapper_net.model.ApiResponse
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
@@ -9,14 +11,71 @@ import kotlinx.coroutines.flow.*
  * @描述
  *
  */
-open class FlowManager<T> {
-    fun httpRequest(requestBlock: () -> Flow<EventResult<T>>) =
-        requestBlock().flowOn(Dispatchers.IO)
-            .catch { e -> emit(EventResult.OnError(e)) }
+object FlowManager {
+    /**
+     * 两种调用方法根据实际需求进行选择
+     *
+     * eg:
+    fun register(userName: String,passwd: String,againPasswd: String) =
+        FlowManager.httpRequest<UserInfo> {
+            HttpManager.obtainRetrofitService(ApiService::class.java)
+                .register(userName, passwd, againPasswd)
+                .map {
+                    EventResult.OnNext(it.data)
+                }
+            }
+     */
+    fun <T> httpRequest(requestBlock: () -> Flow<EventResult<T>>) =
+        requestBlock()
+            .flowOn(Dispatchers.IO)
+            .catch { e ->
+                emit(EventResult.OnError(e))
+            }
             .onStart {
                 emit(EventResult.OnStart)
             }.onCompletion {
                 emit(EventResult.OnComplete)
             }
+
+    /**
+     *
+     * eg:
+        fun register(
+        userName: String,
+        passwd: String,
+        againPasswd: String
+        ) = FlowManager.httpRequestSimple<UserInfo>(
+                HttpManager.obtainRetrofitService(ApiService::class.java)
+                .register(userName, passwd, againPasswd)
+            )
+     */
+    fun <T> httpRequestSimple(
+        parameters: Flow<ApiResponse<T>>,
+        coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
+    ): Flow<EventResult<T>> {
+        val transform: Flow<EventResult<T>> = parameters
+            .map {
+                /*数据剥壳，同时可以根据不同的状态来处理异常问题[或通过网络拦截器处理]*/
+                /*
+                if (it.errorCode == 1) {
+                    EventResult.OnError(Throwable(it.errorMsg))
+                } else {
+                    EventResult.OnNext(it.data)
+                }
+                */
+                EventResult.OnNext(it.data)
+            }
+
+        return transform.flowOn(coroutineDispatcher)
+            .catch { e ->
+                emit(EventResult.OnError(e))
+            }
+            .onStart {
+                emit(EventResult.OnStart)
+            }
+            .onCompletion {
+                emit(EventResult.OnComplete)
+            }
+    }
 }
 

@@ -11,10 +11,6 @@ class ApiResponse<T> {
     var data: T? = null
         private set
 
-    fun setData(data: T) {
-        this.data = data
-    }
-
     override fun toString(): String {
         return "ApiResponse{" +
                 "errorCode=" + errorCode +

@@ -5,9 +5,8 @@ import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import com.jack.lib_wrapper_mvvm.base.model.BaseWrapperModel
 import com.jack.lib_wrapper_net.flow.EventResult
 import com.jack.lib_wrapper_net.flow.FlowManager
-import com.jack.lib_wrapper_net.retrofit.RequestManager
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import jack.retrofit2_rxjava2.manager.HttpManager
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 /**
@@ -17,13 +16,12 @@ import javax.inject.Inject
  */
 class LoginHttpRepository @Inject constructor() : BaseWrapperModel() {
 
-    suspend fun login(userName: String?, passwd: String?): Flow<EventResult<UserInfo>> =
-        FlowManager<UserInfo>().httpRequest {
-            flow<EventResult<UserInfo>> {
-//                val apiResponse =
-                    RequestManager.retrofit.create(ApiService::class.java)
-                        .login(userName!!, passwd!!)
-//                emit(EventResult.OnNext(apiResponse.data!!))
-            }
+    fun login(userName: String, passwd: String) =
+        FlowManager.httpRequest<UserInfo> {
+            HttpManager.obtainRetrofitService(ApiService::class.java)
+                .login(userName, passwd)
+                .map {
+                    EventResult.OnNext(it.data)
+                }
         }
 }

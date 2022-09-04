@@ -15,7 +15,7 @@ abstract class BaseWrapperViewModel constructor() : ViewModel() {
     /*这里的Livedata用于Vm层管理View层显示或关闭对话框(不涉及任何网络请求相关的,网络请求部分会单独封装)*/
     val showDialogState by lazy { MutableLiveData<UiStateLayout>() }
 
-    private lateinit var mModel: BaseWrapperModel
+    private var mModel: BaseWrapperModel? = null
 
     constructor(model: BaseWrapperModel) : this(){
         mModel = model
@@ -44,7 +44,7 @@ abstract class BaseWrapperViewModel constructor() : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         /*viewmodle层执行onCleared方法时,执行BaseModel的onCleared方法*/
-        mModel.onCleared()
+        mModel?.onCleared()
     }
 
 }

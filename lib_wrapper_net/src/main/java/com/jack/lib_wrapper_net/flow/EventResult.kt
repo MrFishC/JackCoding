@@ -8,6 +8,7 @@ package com.jack.lib_wrapper_net.flow
 sealed class EventResult<out R> {
     object OnStart : EventResult<Nothing>()
     object OnComplete : EventResult<Nothing>()
-    data class OnNext<out T>(val data: T) : EventResult<T>()
+    data class OnNext<out T>(val data: T?) : EventResult<T>()
+    object OnEmpty: EventResult<Nothing>()
     data class OnError(val throwable: Throwable) : EventResult<Nothing>()
 }

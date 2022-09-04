@@ -7,11 +7,7 @@ import cn.jack.module_login.mvvm.modle.repository.LoginHttpRepository
 import com.jack.lib_wrapper_mvvm.base.viewmodel.BaseWrapperViewModel
 import com.jack.lib_wrapper_net.flow.EventResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.shareIn
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 /**
@@ -59,12 +55,10 @@ class LoginViewModel @Inject constructor(private val mRepository: LoginHttpRepos
     var mPasswd = ObservableField<String>()
 
     fun userLogin() {
-        viewModelScope.launch {
-            mRepository.login(mPhone.get(), mPasswd.get()).onEach {
+        mRepository.login("13611113310", "123456")
+            .onEach {
                 userInfoState.value = it
-                println("===> " + it + " " + userInfoState.value)
-            }
-        }
+            }.launchIn(viewModelScope)
     }
 
 }

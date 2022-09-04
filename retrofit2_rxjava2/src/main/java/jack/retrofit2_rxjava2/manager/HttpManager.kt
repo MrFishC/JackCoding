@@ -27,9 +27,7 @@ object HttpManager {
         .addConverterFactory(GsonConverterFactory.create())         // 添加Gson转换器
         .build()
 
-    /**
-     * 根据传入的 Class 获取对应的 Retrofit service
-    </T> */
+    /*根据传入的 Class 获取对应的 Retrofit service*/
     fun <T> obtainRetrofitService(service: Class<T>): T {
         return retrofitClient.create(service)
     }
