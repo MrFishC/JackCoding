@@ -34,7 +34,6 @@ android {
 dependencies {
     api project(':lib_wrapper_mvvm')
     api project(':lib_wrapper_net')
-    api project(':lib_wrapper_net')
 
     //其它公用组件==========================
     api project(':library_weight')
@@ -69,6 +68,19 @@ dependencies {
     api rootProject.ext.dependencies["converter-gson"]
 
     implementation rootProject.ext.dependencies["multidex"]
+
+    //处理rxjava2的内存泄露
+    api(rootProject.ext.dependencies["autodispose-android-archcomponents"]) {
+        exclude group: 'io.reactivex.rxjava2'
+        exclude group: 'androidx.annotation'
+        exclude group: 'androidx.lifecycle'
+    }
+
+    api(rootProject.ext.dependencies["rxbinding3-appcompat"]) {
+        exclude group: 'io.reactivex.rxjava2'
+        exclude group: 'androidx.appcompat'
+        exclude group: 'org.jetbrains.kotlin'
+    }
 
     testApi rootProject.ext.dependencies["junit"]
     androidTestApi rootProject.ext.dependencies["test_junit"]

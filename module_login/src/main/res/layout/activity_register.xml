@@ -121,17 +121,6 @@
                 android:layout_marginTop="10dp"
                 android:background="#1a000000" />
 
-<!--            <cn.jack.library_weight.SubmitButton-->
-<!--                android:layout_width="220dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_gravity="center_horizontal"-->
-<!--                style="@style/ButtonStyle"-->
-<!--                android:layout_marginHorizontal="40dp"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:text="注册"-->
-<!--                android:onClick="register"-->
-<!--                />-->
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/register_info"
                 android:layout_width="220dp"
@@ -142,8 +131,6 @@
                 android:layout_marginTop="30dp"
                 android:text="注册"
                 />
-<!--                android:onClick="@{viewModel.register}"-->
-<!--    直接在activity中定义-->
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

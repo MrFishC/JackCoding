@@ -1,4 +1,4 @@
-package jack.retrofit2_rxjava2.manager
+package com.jack.lib_wrapper_net.manager
 
 import okhttp3.OkHttpClient
 

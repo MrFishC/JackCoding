@@ -5,11 +5,9 @@ import androidx.lifecycle.viewModelScope
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.modle.repository.RegisterHttpRepository
 import com.jack.lib_wrapper_mvvm.base.viewmodel.BaseWrapperViewModel
-import com.jack.lib_wrapper_net.flow.EventResult
-import com.jack.lib_wrapper_net.model.ApiResponse
+import com.jack.lib_wrapper_net.model.EventResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -20,7 +18,6 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(private val repository: RegisterHttpRepository) :
     BaseWrapperViewModel(repository) {
-    private val TAG = RegisterViewModel::class.java.name
 
     private val registerUserInfoState =
         MutableStateFlow<EventResult<UserInfo>>(EventResult.OnComplete)
@@ -32,7 +29,9 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterHttp
     var mPasswd = MutableLiveData<String>()
     var mPasswdAgain = MutableLiveData<String>()
 
-    fun registerUser() {
+    fun registerUser(phone: String,
+                     passwd: String,
+                     passwdAgain: String) {
 
         //这种方式实现 无法调用    具体原因不清楚
 //        viewModelScope.launch {
@@ -43,10 +42,9 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterHttp
 //                }
 //        }
 
-        repository.register("13611113310", "123456", "1234567")
+        repository.register(phone, passwd, passwdAgain)
             .onEach {
                 registerUserInfoState.value = it
-                println("===> " + it + " " + registerUserInfoState.value)
             }.launchIn(viewModelScope)
     }
 }

@@ -3,9 +3,9 @@ package cn.jack.module_login.mvvm.modle.repository
 import cn.jack.module_login.api.ApiService
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import com.jack.lib_wrapper_mvvm.base.model.BaseWrapperModel
-import com.jack.lib_wrapper_net.flow.EventResult
+import com.jack.lib_wrapper_net.model.EventResult
 import com.jack.lib_wrapper_net.flow.FlowManager
-import jack.retrofit2_rxjava2.manager.HttpManager
+import com.jack.lib_wrapper_net.manager.HttpManager
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 

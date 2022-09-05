@@ -1,12 +1,12 @@
 package jack.retrofit2_rxjava2.manager.rx;
 
 import com.alibaba.fastjson.JSON;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import io.reactivex.observers.DisposableObserver;
-import jack.retrofit2_rxjava2.manager.HttpManager;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -40,7 +40,7 @@ public class RxUtils {
      * @return
      */
     public <T> T obtainRetrofitService(Class<T> service){
-        return HttpManager.INSTANCE.obtainRetrofitService(service);
+        return null;
     }
 
     /**

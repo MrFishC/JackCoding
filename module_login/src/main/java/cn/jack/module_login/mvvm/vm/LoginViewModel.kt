@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.modle.repository.LoginHttpRepository
 import com.jack.lib_wrapper_mvvm.base.viewmodel.BaseWrapperViewModel
-import com.jack.lib_wrapper_net.flow.EventResult
+import com.jack.lib_wrapper_net.model.EventResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -14,20 +14,6 @@ import javax.inject.Inject
  * @创建者 Jack
  * @创建时间 2021/3/17 13:45
  * @描述
- *
- *
- * https://juejin.cn/post/7064123524587192356
- *
- *
- * 学习其优点 https://juejin.cn/post/6938777676928778247
- * https://juejin.cn/post/7031479214683455502
- * https://juejin.cn/post/7088630212371415076
- *
- * 给力 http://blog.mxnzp.com/?p=209
- *
- *
- *
- * https://juejin.cn/post/7114181318644072479
  */
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val mRepository: LoginHttpRepository) :
@@ -41,21 +27,18 @@ class LoginViewModel @Inject constructor(private val mRepository: LoginHttpRepos
     //2.它的值是唯一的。
     //3.它允许被多个观察者共用 (因此是共享的数据流)。
     //4.它永远只会把最新的值重现给订阅者，这与活跃观察者的数量是无关的。
-    private val userInfoState = MutableStateFlow<EventResult<UserInfo>>(EventResult.OnStart)
+    private val userInfoState = MutableStateFlow<EventResult<UserInfo>>(EventResult.OnComplete)
 
     //使用Flow来监听，替换LiveData
     val userInfo =
         userInfoState.shareIn(viewModelScope, SharingStarted.WhileSubscribed(5000))
 
-    @JvmField
     var mPhone = ObservableField<String>()
 
-    //密码
-    @JvmField
     var mPasswd = ObservableField<String>()
 
-    fun userLogin() {
-        mRepository.login("13611113310", "123456")
+    fun userLogin(phone: String, passwd: String) {
+        mRepository.login(phone, passwd)
             .onEach {
                 userInfoState.value = it
             }.launchIn(viewModelScope)

@@ -10,7 +10,7 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.jack.lib_base.BuildConfig
 import jack.retrofit2_rxjava2.interceptor.TokenInterceptor
-import jack.retrofit2_rxjava2.manager.OkHttpManager
+import com.jack.lib_wrapper_net.manager.OkHttpManager
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit

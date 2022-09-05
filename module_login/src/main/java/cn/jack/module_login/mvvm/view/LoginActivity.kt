@@ -1,5 +1,7 @@
 package cn.jack.module_login.mvvm.view
 
+import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -7,17 +9,24 @@ import androidx.lifecycle.repeatOnLifecycle
 import cn.jack.library_arouter.manager.ArouterManager
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.module_login.databinding.ActivityLoginBinding
+import cn.jack.module_login.mvvm.modle.entity.InfoVerification
 import cn.jack.module_login.mvvm.vm.LoginViewModel
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.jack.lib_base.base.BaseActivity
-import com.jack.lib_wrapper_net.flow.EventResult
+import com.jack.lib_wrapper_net.model.EventResult
+import com.jakewharton.rxbinding3.widget.textChanges
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import com.uber.autodispose.autoDispose
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Observable
 import kotlinx.coroutines.launch
 
 /**
  * @创建者 Jack
  * @创建时间 2021/3/16 22:38
  * @描述
+ *
+ *  表单验证，使用Rxjava的combineLatest操作符
  */
 @AndroidEntryPoint
 @Route(path = RouterPathActivity.Login.PAGER_LOGIN)
@@ -40,8 +49,8 @@ class LoginActivity :
                 mViewModel.userInfo.collect {
                     when (it) {
                         is EventResult.OnStart -> println("开始")
-                        is EventResult.OnNext -> println("成功")
-                        is EventResult.OnError -> println("错误")
+                        is EventResult.OnNext -> openHome()
+                        is EventResult.OnError -> Toast.makeText(this@LoginActivity, it.throwable.message, Toast.LENGTH_SHORT).show()
                         is EventResult.OnComplete -> println("结束")
                     }
                 }
@@ -49,14 +58,47 @@ class LoginActivity :
         }
     }
 
+    private fun openHome() {
+        ArouterManager.getInstance().navigation2Home()
+    }
+
+    @SuppressLint("CheckResult")
     override fun prepareListener() {
         super.prepareListener()
 
-        //将轻量级的判断直接交给xml
-        //点击事件直接在xml中设置
-        //databinding的知识 需要进一步学习
+        /*表单验证-非简化代码*/
+//        Observable
+//            .combineLatest(
+//                mBinding.etLoginPhone.textChanges(),
+//                mBinding.etLoginPassword.textChanges(),
+//                object : BiFunction<CharSequence, CharSequence, InfoVerification> {
+//                    override fun apply(
+//                        phone: CharSequence,
+//                        passwd: CharSequence
+//                    ): InfoVerification {
+//                        return isValidInfo(phone, passwd)
+//                    }
+//                }
+//            )
+//            .autoDispose(AndroidLifecycleScopeProvider.from(this))
+//            .subscribe(object : Consumer<InfoVerification> {
+//                override fun accept(it: InfoVerification) {
+//                    mBinding.btnLoginCommit.isEnabled = it.flag
+//                }
+//            })
+
+        Observable.combineLatest(
+            mBinding.etLoginPhone.textChanges(),
+            mBinding.etLoginPassword.textChanges()
+        ) { phone, passwd -> isValidInfo(phone, passwd) }
+            .autoDispose(AndroidLifecycleScopeProvider.from(this))
+            .subscribe { it -> mBinding.btnLoginCommit.isEnabled = it.flag }
+
         mBinding.btnLoginCommit.setOnClickListener {
-            mViewModel.userLogin()
+            mViewModel.userLogin(
+                mBinding.etLoginPhone.toString(),
+                mBinding.etLoginPassword.toString()
+            )
         }
 
         mBinding.registerText.setOnClickListener {
@@ -64,68 +106,21 @@ class LoginActivity :
         }
     }
 
-    //    val observablePhone: Observable<CharSequence> = mBinding.etLoginPhone.textChanges()
-//    val observablePassword: Observable<CharSequence> = mBinding.etLoginPassword.textChanges()
-//    @SuppressLint("CheckResult")
-//    override fun prepareListener() {
-//        super.prepareListener()
-//        handleViewRepeatClick(mBinding!!.registerText) {
-//            ArouterManager.getInstance().navigation2Register()
-//        }
-//        handleViewRepeatClick(mBinding!!.btnLoginCommit, ViewRepeatClickLisenter {
-//            if (mLoginInfoVerification == null) {
-//                LogUtils.d("result-> " + "请输入账号密码")
-//                return@ViewRepeatClickLisenter
-//            }
-//            if (mLoginInfoVerification!!.flag) {
-//                LogUtils.d("result-> 登陆成功. " + mLoginInfoVerification!!.message)
-//                mViewModel!!.userLogin()
-//            } else {
-//                LogUtils.d("result-> " + mLoginInfoVerification!!.message)
-//            }
-//        })
-//
-//        Observable
-//            .combineLatest(observablePhone, observablePassword) { charSequence1, charSequence2 ->
-//                val result = InfoVerification()
-//                if (charSequence1.length == 0) {
-//                    result.flag = false
-//                    result.message = "手机号码不能为空"
-//                } else if (charSequence1.length != 11) {
-//                    result.flag = false
-//                    result.message = "手机号码需要11位"
-//                } else if (charSequence2.length == 0) {
-//                    result.flag = false
-//                    result.message = "密码不能为空"
-//                } else {
-//                    result.flag = true
-//                }
-//                result
-//            }
-//            .compose(bindToLifecycle())
-//            .subscribe { validationResult -> mLoginInfoVerification = validationResult }
-//    }
-//
-//    private var mLoginInfoVerification: InfoVerification? = InfoVerification()
-//    override fun prepareParam() {
-//        super.prepareParam()
-//        mViewModel!!.mPhone.set(SPUtils.getInstance().getData(C.C_USER_NAME, "").toString() + "")
-//        mViewModel!!.mPasswd.set(SPUtils.getInstance().getData(C.C_USER_PASSWD, "").toString() + "")
-//    } //    @Override
-//    //    protected void onCreate(Bundle savedInstanceState) {
-//    //        super.onCreate(savedInstanceState);
-//    //
-//    //        Disposable disposable = Observable.interval(1, TimeUnit.SECONDS)
-//    //                .subscribeOn(Schedulers.io())
-//    //                .observeOn(AndroidSchedulers.mainThread())
-//    //                //AutoDispose的使用就是这句
-//    //                //.as(AutoDispose.<Long>autoDisposable(AndroidLifecycleScopeProvider.from(this)))
-//    //                .subscribe(new Consumer<Long>() {
-//    //                    @Override
-//    //                    public void accept(Long aLong) throws Exception {
-//    //                        LogUtils.i("接收数据,当前线程"+Thread.currentThread().getName(), String.valueOf(aLong));
-//    //                    }
-//    //                });
-//    //
-//    //    }
+    /*验证的逻辑在这里统一处理*/
+    private fun isValidInfo(phone: CharSequence, passwd: CharSequence): InfoVerification {
+        val result = InfoVerification()
+        if (phone.isEmpty()) {
+            result.flag = false
+            result.message = "手机号码不能为空"
+        } else if (passwd.isEmpty()) {
+            result.flag = false
+            result.message = "密码不能为空"
+        } else if (phone.length != 11) {
+            result.flag = false
+            result.message = "手机号码需要11位"
+        } else {
+            result.flag = true
+        }
+        return result
+    }
 }
