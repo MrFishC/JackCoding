@@ -48,4 +48,7 @@ dependencies {
     //retrofit 2.8.0以上支持协程
     implementation rootProject.ext.dependencies["kotlinx-coroutines-core"]
     implementation rootProject.ext.dependencies["kotlinx-coroutines-android"]
+
+    implementation project(':library_util')
+    implementation project(':library_common_business')
 }

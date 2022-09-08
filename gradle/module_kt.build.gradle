@@ -1,4 +1,4 @@
-//该gradle只提供给 业务模块使用
+//业务模块使用
 if (isBuildModule.toBoolean()) {
     //作为独立App应用运行
     apply plugin: 'com.android.application'
@@ -23,6 +23,7 @@ android {
         versionName rootProject.ext.android["versionName"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //子模块混淆文件的指定是通过consumerProguardFiles这个属性来指定的，并不是proguardFiles 属性，而且我们无需配置其他的选项，只需要配置consumerProguardFiles属性就可以。该属性表示在打包的时候会自动寻找该module下我们指定的混淆文件对代码进行混淆。
         consumerProguardFiles "consumer-rules.pro"
 
         //如果是独立模块，则使用当前组件的包名
@@ -32,26 +33,22 @@ android {
         }
 
         //ARouter配置
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
-
     }
 
     /*java插件引入了一个概念叫做SourceSets，通过修改SourceSets中的属性，可以指定哪些源文件
     （或文件夹下的源文件）要被编译，哪些源文件要被排除。这样在不同的开发模式下就会读取到不同的 AndroidManifest.xml
      ，然后我们需要修改这两个表单的内容以为我们不同的开发模式服务。*/
-
-    //原则：组件在自己的AndroidManifest.xml各自配置，application标签无需添加属性，也不需要指定activity的intent-filter。当合并打包时，gradle会将每个组件的AndroidManifest合并到宿主App中。
     sourceSets {
         main {
             if (isBuildModule.toBoolean()) {
                 //组件独立运行时，就需要单独的一个AndroidManifest.xml作为调试用。可以在src/main文件夹下创建一个alone/AndroidManifest.xml。配置application标签属性，并指定启动的activity。
                 manifest.srcFile 'src/main/alone/AndroidManifest.xml'
             } else {
-                //合并到宿主
                 manifest.srcFile 'src/main/AndroidManifest.xml'
                 resources {
                     //正式版本时，排除alone文件夹下所有调试文件
@@ -81,13 +78,14 @@ android {
     }
 
     //开启DataBinding
-    dataBinding {
-        enabled true
+    buildFeatures {
+        dataBinding true
     }
 
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 
     //统一资源前缀，规范资源引用
     resourcePrefix project.getName() + "_"
@@ -95,10 +93,17 @@ android {
 
 dependencies{
 
+    //业务组件依赖Base========================================================
     //组件依赖基础库
     api project(':lib_base')
 
     //按需依赖第三方组件(通用的可以在lib_base中统一配置即可)
+
+    //ARouter配置 //https://github.com/alibaba/ARouter/blob/master/README_CN.md
+    implementation rootProject.ext.dependencies["arouter-api"]
     kapt rootProject.ext.dependencies["arouter-compiler"]
+
+    //hilt         https://developer.android.google.cn/training/dependency-injection/hilt-android?hl=zh-cn
+    implementation rootProject.ext.dependencies["hilt-android"]
     kapt rootProject.ext.dependencies["hilt-compiler"]
 }

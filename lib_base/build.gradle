@@ -29,6 +29,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -38,6 +42,8 @@ dependencies {
     //其它公用组件==========================
     api project(':library_weight')
     api project(':library_arouter')
+    api project(':library_util')
+    api project(':library_common_business')
 
     //其它公共库==========================
     api rootProject.ext.dependencies["appcompat"]

@@ -21,7 +21,7 @@ import cn.jack.library_common_business.service.baseservice.LoginImpl;
 import cn.jack.library_image.glide.GlideManager;
 import cn.jack.library_image.image.ImageManager;
 import cn.jack.library_util.AppContext;
-import cn.jack.library_util.LogUtils;
+import cn.jack.library_util.LogU;
 import jack.wrapper.BuildConfig;
 //import jack.wrapper.bus.MyEventBusIndex;
 
@@ -161,7 +161,7 @@ public class BaseApplication extends Application{
     }
 
     private void initLogger() {
-        LogUtils.getInstance().init(BuildConfig.DEBUG);
+//        LogU.getInstance().init(BuildConfig.DEBUG);
     }
 
     private void initLoadSir() {

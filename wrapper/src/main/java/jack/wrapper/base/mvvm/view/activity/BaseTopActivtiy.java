@@ -14,7 +14,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.concurrent.TimeUnit;
 
-import cn.jack.library_util.LogUtils;
+import cn.jack.library_util.LogU;
 import io.reactivex.functions.Consumer;
 import jack.wrapper.R;
 import jack.wrapper.base.mvvm.view.interf.IBaseView;
@@ -171,7 +171,7 @@ public abstract class BaseTopActivtiy extends RxAppCompatActivity implements IBa
                     @Override
                     public void accept(Object o) throws Exception {
 
-                        LogUtils.d(" 重复点击 " + view.getId() + " " + System.currentTimeMillis());
+//                        LogU.d(" 重复点击 " + view.getId() + " " + System.currentTimeMillis());
 
                         if(viewRepeatClickLisenter != null){
                             viewRepeatClickLisenter.repeatClick();

@@ -1,8 +1,10 @@
 package com.jack.lib_wrapper_mvvm.ext
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
+import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 
@@ -24,3 +26,14 @@ fun Activity.setStatusBarTranslucent(navigationBarColor: Int = Color.BLACK) {
 fun Activity.finisActivity() {
     finish()
 }
+
+//协变：将父类变为具体子类
+fun Activity.launchActivity(clazz: Class<out Activity>, bundleExtras: Bundle? = null) {
+    //apply函数的返回的是传入对象的本身
+    //使用场景：1.一个对象在初始化的时候需要对对象的属性进行赋值;2.动态的加载出一个XML的View的时候需要给View绑定数据
+    //代码会很简洁
+    startActivity(Intent(this, clazz).apply {
+        if (bundleExtras != null) putExtras(bundleExtras)
+    })
+}
+

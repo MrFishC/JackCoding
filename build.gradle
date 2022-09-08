@@ -21,7 +21,7 @@
 
 //====================按照以上的方式进行依赖，会出现不能使用viewModels，理论上推测感觉没有错误，实践试出来还是存在问题             gradle知识掌握的还不够,待安排
 
-apply from: "config.gradle"
+apply from: "/gradle/config.gradle"
 
 buildscript {
     repositories {

@@ -1,5 +1,6 @@
 package com.jack.lib_wrapper_mvvm.base.viewmodel
 
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jack.lib_wrapper_mvvm.base.model.BaseWrapperModel
@@ -11,7 +12,7 @@ import com.jack.lib_wrapper_mvvm.uistate.UiStateLayout
  * @描述
  */
 
-abstract class BaseWrapperViewModel constructor() : ViewModel() {
+abstract class BaseWrapperViewModel constructor() : ViewModel() , DefaultLifecycleObserver {
     /*这里的Livedata用于Vm层管理View层显示或关闭对话框(不涉及任何网络请求相关的,网络请求部分会单独封装)*/
     val showDialogState by lazy { MutableLiveData<UiStateLayout>() }
 

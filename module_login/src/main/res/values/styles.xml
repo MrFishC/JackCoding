@@ -1,7 +1,7 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- 默认文本框样式 -->
-    <style name="EditTextStyle">
+    <style name="EditTextStyle" tools:ignore="ResourceName">
         <item name="android:background">@null</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColorHint">#A4A4A4</item>
@@ -13,7 +13,7 @@
     </style>
 
     <!-- 默认圆角按钮样式 -->
-    <style name="ButtonStyle" parent="Widget.AppCompat.Button.Borderless">
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button.Borderless" tools:ignore="ResourceName">
         <item name="android:paddingStart">20dp</item>
         <item name="android:paddingEnd">20dp</item>
         <item name="android:paddingTop">8dp</item>

@@ -20,7 +20,7 @@ import java.util.List;
 
 import cn.jack.library_arouter.router.RouterPathFragment;
 import cn.jack.library_common_business.entiy.ArticleInfo;
-import cn.jack.library_util.LogUtils;
+import cn.jack.library_util.LogU;
 import cn.jack.module_fragment_01.BR;
 import cn.jack.module_fragment_01.R;
 import cn.jack.module_fragment_01.databinding.FragmentHome01Binding;
@@ -105,7 +105,7 @@ public class ModuleFragment01 extends BaseFragment<FragmentHome01Binding, HomePa
 
     private void showBannerInfos(List<BanInfos> banInfos) {
 
-        LogUtils.d("轮播图 ",banInfos);
+//        LogU.d("轮播图 ",banInfos);
 
 
         mBanner.setAdapter(new ImageNetAdapter(banInfos))

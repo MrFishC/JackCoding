@@ -5,6 +5,9 @@ import android.app.Application
 import android.content.Context
 import android.os.Process
 import androidx.multidex.MultiDex
+import cn.jack.library_util.KvStoreUtil
+import cn.jack.library_util.LogU
+import cn.jack.library_util.ToastU
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
@@ -69,12 +72,25 @@ open class BaseApplication : Application() {
 //        initLoadSir()
 //        initImageLoader()
 //        initBus()
-//        initMMKV()
-//        initLogger()
+        initMMKV()
+        initLogger()
+        initToastU()
 //        initServiceManager()
 
         /*注册监听每个activity的生命周期,便于堆栈式管理*/
 
+    }
+
+    private fun initToastU() {
+        ToastU.init(this)
+    }
+
+    private fun initLogger() {
+        LogU.init(BuildConfig.DEBUG,"HiLog")
+    }
+
+    private fun initMMKV() {
+        KvStoreUtil.getInstance()?.init(this)
     }
 
     private fun initNetwork() {

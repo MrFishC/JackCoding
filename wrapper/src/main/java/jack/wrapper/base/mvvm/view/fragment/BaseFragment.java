@@ -32,7 +32,7 @@ import cn.jack.library_common_business.loadsir.callback.EmptyCallback;
 import cn.jack.library_common_business.loadsir.callback.FailedCallback;
 import cn.jack.library_common_business.loadsir.callback.LoadingCallback;
 import cn.jack.library_common_business.loadsir.callback.TimeoutCallback;
-import cn.jack.library_util.LogUtils;
+import cn.jack.library_util.LogU;
 import io.reactivex.functions.Consumer;
 import jack.wrapper.base.mvvm.view.interf.ILoadSirLisenter;
 import jack.wrapper.base.mvvm.viewModel.BaseViewModel;
@@ -250,7 +250,7 @@ public abstract class BaseFragment<V extends ViewDataBinding,VM extends BaseView
                     @Override
                     public void accept(Object o) throws Exception {
 
-                        LogUtils.d(" 重复点击 " + view.getId() + " " + System.currentTimeMillis());
+//                        LogU.d(" 重复点击 " + view.getId() + " " + System.currentTimeMillis());
 
                         if(viewRepeatClickLisenter != null){
                             viewRepeatClickLisenter.repeatClick();

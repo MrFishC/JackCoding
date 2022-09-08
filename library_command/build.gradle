@@ -1,2 +1,2 @@
-apply from: "../lib.build.gradle"
+apply from: "../gradle/lib.build.gradle"
 

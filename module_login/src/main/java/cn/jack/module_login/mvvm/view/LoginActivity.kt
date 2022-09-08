@@ -1,15 +1,18 @@
 package cn.jack.module_login.mvvm.view
 
 import android.annotation.SuppressLint
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import cn.jack.library_arouter.manager.ArouterManager
 import cn.jack.library_arouter.router.RouterPathActivity
+import cn.jack.library_common_business.constant.C
+import cn.jack.library_util.KvStoreUtil
+import cn.jack.library_util.ToastU
 import cn.jack.module_login.databinding.ActivityLoginBinding
 import cn.jack.module_login.mvvm.modle.entity.InfoVerification
+import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.vm.LoginViewModel
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.jack.lib_base.base.BaseActivity
@@ -48,18 +51,37 @@ class LoginActivity :
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mViewModel.userInfo.collect {
                     when (it) {
-                        is EventResult.OnStart -> println("开始")
-                        is EventResult.OnNext -> openHome()
-                        is EventResult.OnError -> Toast.makeText(this@LoginActivity, it.throwable.message, Toast.LENGTH_SHORT).show()
-                        is EventResult.OnComplete -> println("结束")
+                        is EventResult.OnStart -> visibleDialog()
+                        is EventResult.OnNext -> openHome(it.data)
+                        is EventResult.OnError -> {
+                            hideDialog()
+                            mBinding.btnLoginCommit.reset()
+                            it.throwable.message?.let { it1 ->
+                                ToastU.normal(
+                                    it1
+                                )
+                            }
+                        }
+                        is EventResult.OnComplete -> {
+                            mBinding.btnLoginCommit.reset()
+                            hideDialog()
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun openHome() {
-        ArouterManager.getInstance().navigation2Home()
+    private fun openHome(data: UserInfo?) {
+        KvStoreUtil.getInstance()?.save(C.Login.user_name, data?.email)
+        mBinding.btnLoginCommit.reset()
+//        ArouterManager.getInstance().navigation2Home()
+    }
+
+    override fun prepareData() {
+        super.prepareData()
+        mBinding.viewModel = mViewModel
+        mViewModel.mPhone.set(KvStoreUtil.getInstance()?.getString(C.C_USER_NAME))
     }
 
     @SuppressLint("CheckResult")
@@ -123,4 +145,5 @@ class LoginActivity :
         }
         return result
     }
+
 }

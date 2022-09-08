@@ -4,7 +4,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import javax.inject.Inject;
 import cn.jack.library_common_business.entiy.ProjectInfoList;
-import cn.jack.library_util.LogUtils;
+import cn.jack.library_util.LogU;
 import cn.jack.module_fragment_02.contract.ISubjectLisenter;
 //import cn.jack.module_fragment_02.di.DaggerViewModelComponent;
 import jack.retrofit2_rxjava2.exception.ErrorStatusInfo;
@@ -27,7 +27,7 @@ public class SubjectViewModel extends BaseViewModel<SubjectHttpRepository> imple
     public SubjectViewModel(@NonNull Application application) {
         super(application);
 
-        LogUtils.d("初始化实际 " + System.currentTimeMillis());
+//        LogU.d("初始化实际 " + System.currentTimeMillis());
 //        DaggerViewModelComponent.builder().build().inject(this);
         mModel = mSubjectHttpRepository;
     }

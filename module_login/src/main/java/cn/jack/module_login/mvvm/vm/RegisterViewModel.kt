@@ -29,9 +29,11 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterHttp
     var mPasswd = MutableLiveData<String>()
     var mPasswdAgain = MutableLiveData<String>()
 
-    fun registerUser(phone: String,
-                     passwd: String,
-                     passwdAgain: String) {
+    fun registerUser(
+        phone: String,
+        passwd: String,
+        passwdAgain: String
+    ) {
 
         //这种方式实现 无法调用    具体原因不清楚
 //        viewModelScope.launch {

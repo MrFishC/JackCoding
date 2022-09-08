@@ -7,6 +7,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import cn.jack.library_arouter.manager.ArouterManager
 import cn.jack.library_arouter.router.RouterPathActivity
+import cn.jack.library_common_business.constant.C
+import cn.jack.library_util.KvStoreUtil
+import cn.jack.library_util.ToastU
 import cn.jack.module_login.databinding.ActivityRegisterBinding
 import cn.jack.module_login.mvvm.modle.entity.InfoVerification
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
@@ -38,10 +41,17 @@ class RegisterActivity :
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mViewModel.registerUserInfo.collect {
                     when (it) {
-                        is EventResult.OnStart -> println("开始-注册页面")
+                        is EventResult.OnStart -> visibleDialog()
                         is EventResult.OnNext -> registerSuccess(it.data)
-                        is EventResult.OnError -> println("错误-注册页面")
-                        is EventResult.OnComplete -> println("结束-注册页面")
+                        is EventResult.OnError -> {
+                            hideDialog()
+                            it.throwable.message?.let { it1 ->
+                                ToastU.normal(
+                                    it1
+                                )
+                            }
+                        }
+                        is EventResult.OnComplete -> hideDialog()
                     }
                 }
             }
@@ -49,6 +59,7 @@ class RegisterActivity :
     }
 
     private fun registerSuccess(data: UserInfo?) {
+        KvStoreUtil.getInstance()?.save(C.Login.user_name, data?.username)
         ArouterManager.getInstance().navigation2Login()
     }
 
@@ -56,7 +67,11 @@ class RegisterActivity :
         super.prepareListener()
 
         mBinding.registerInfo.setOnClickListener {
-            mViewModel.registerUser(mBinding.etAccount.toString(),mBinding.etAccount.toString(),mBinding.etAccount.toString())
+            mViewModel.registerUser(
+                mBinding.etAccount.text.toString(),
+                mBinding.etPassword.text.toString(),
+                mBinding.againPassword.text.toString()
+            )
         }
 
         Observable.combineLatest(

@@ -1,4 +1,4 @@
-apply from: "../lib.build.gradle"
+apply from: "../gradle/lib.build.gradle"
 
 dependencies {
     implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]

@@ -2,9 +2,9 @@ package cn.jack.module_login.mvvm.view
 
 import android.annotation.SuppressLint
 import android.os.Handler
-import cn.jack.library_arouter.manager.ArouterManager
 import cn.jack.module_login.databinding.ActivitysPlashBinding
 import com.jack.lib_base.base.BaseSimpleActivity
+import com.jack.lib_wrapper_mvvm.ext.launchActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseSimpleActivity<ActivitysPlashBinding>(ActivitysPlashBinding::inflate) {
@@ -15,7 +15,7 @@ class SplashActivity : BaseSimpleActivity<ActivitysPlashBinding>(ActivitysPlashB
         super.prepareData()
         mBinding.ferrisWheelView.startAnimation()
         mHandler.postDelayed({
-            ArouterManager.getInstance().navigation2Login()
+            launchActivity(LoginActivity::class.java)
             finish()
         }, 3000)
     }
