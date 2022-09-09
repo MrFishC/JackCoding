@@ -1,5 +1,6 @@
-package jack.retrofit2_rxjava2.interceptor
+package com.jack.lib_wrapper_net.interceptor
 
+import cn.jack.library_common_business.constant.C
 import cn.jack.library_util.KvStoreUtil
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -20,8 +21,7 @@ class TokenInterceptor : Interceptor {
         val url = request.url.toString()
 
         if (needAddToken(url)) {
-            val token = "" //获取本地存储的token
-//            KvStoreUtil.getInstance()?.getString(C.Login.user_name, data?.email)
+            val token = KvStoreUtil.getInstance()?.getString(C.Login.user_token) + ""
             val updateRequest = request.newBuilder().header(TOKEN, token).build()
             return chain.proceed(updateRequest)
         }
