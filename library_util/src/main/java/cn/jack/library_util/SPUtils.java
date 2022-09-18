@@ -43,7 +43,7 @@ public class SPUtils {
     }
 
     private SPUtils(final String spName) {
-        mPreferences = AppContext.getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
+        mPreferences = ContextU.Companion.context().getSharedPreferences(spName, Context.MODE_PRIVATE);
     }
 
     /**

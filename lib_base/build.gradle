@@ -36,14 +36,23 @@ android {
 }
 
 dependencies {
+
+
     api project(':lib_wrapper_mvvm')
     api project(':lib_wrapper_net')
 
     //其它公用组件==========================
     api project(':library_weight')
     api project(':library_arouter')
+    api project(':library_image')
     api project(':library_util')
     api project(':library_common_business')
+
+    testApi rootProject.ext.dependencies["junit"]
+    androidTestApi rootProject.ext.dependencies["test_junit"]
+    androidTestApi rootProject.ext.dependencies["test_espresso_core"]
+
+    debugApi 'com.squareup.leakcanary:leakcanary-android:2.6'
 
     //其它公共库==========================
     api rootProject.ext.dependencies["appcompat"]
@@ -54,6 +63,7 @@ dependencies {
     api rootProject.ext.dependencies["lifecycle-livedata-ktx"]
     api rootProject.ext.dependencies["lifecycle-runtime-ktx"]
     api rootProject.ext.dependencies["activity-ktx"]
+    api rootProject.ext.dependencies["fragment-ktx"]
     api rootProject.ext.dependencies["core-ktx"]
 
     //retrofit 2.8.0以上支持协程
@@ -72,6 +82,7 @@ dependencies {
     api rootProject.ext.dependencies["gson"]
     api rootProject.ext.dependencies["fastjson"]
     api rootProject.ext.dependencies["converter-gson"]
+    api rootProject.ext.dependencies["kotlin-reflect"]
 
     implementation rootProject.ext.dependencies["multidex"]
 
@@ -88,7 +99,14 @@ dependencies {
         exclude group: 'org.jetbrains.kotlin'
     }
 
-    testApi rootProject.ext.dependencies["junit"]
-    androidTestApi rootProject.ext.dependencies["test_junit"]
-    androidTestApi rootProject.ext.dependencies["test_espresso_core"]
+    //==========================
+    //下拉刷新
+    api rootProject.ext.dependencies["refresh_layout_kernel"]
+    //下拉刷新 - 经典头部
+    api rootProject.ext.dependencies["refresh_header_classics"]
+
+    api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+
+    api rootProject.ext.dependencies["MagicIndicator"]
+
 }

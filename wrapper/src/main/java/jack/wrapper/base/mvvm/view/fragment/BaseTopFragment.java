@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import com.gyf.immersionbar.ImmersionBar;
 import com.gyf.immersionbar.components.SimpleImmersionOwner;
 import com.trello.rxlifecycle3.components.support.RxFragment;
-import cn.jack.library_util.AppContext;
+import cn.jack.library_util.ContextU;
 import jack.wrapper.base.mvvm.view.interf.IBaseView;
 import jack.wrapper.base.mvvm.view.interf.IStatusSwitchLisenter;
 
@@ -50,7 +50,7 @@ abstract class BaseTopFragment extends RxFragment implements IBaseView , IStatus
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mApplication = AppContext.getApplication();
+        mApplication = ContextU.Companion.application();
     }
 
     @Override

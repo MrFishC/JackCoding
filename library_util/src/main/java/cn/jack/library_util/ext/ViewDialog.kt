@@ -1,7 +1,8 @@
 package cn.jack.library_util.ext
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import cn.jack.library_util.ToastU
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.core.BasePopupView
 
@@ -51,3 +52,31 @@ fun AppCompatActivity.loadDialog(title: String = "正在加载中..."): BasePopu
 fun AppCompatActivity.closeDialog(delay: Long = 300) {
     popupView?.delayDismiss(delay)
 }
+
+fun Fragment.loadDialog(title: String = "正在加载中..."): BasePopupView {
+    if (popupView == null) {
+        popupView = XPopup.Builder(this.context)
+            .asLoading(title)
+            .show()
+    }
+
+    return popupView!!
+}
+
+
+fun Fragment.closeDialog(delay: Long = 300) {
+    popupView?.delayDismiss(delay)
+}
+
+fun Fragment.showToast(text: String?) {
+    text?.let {
+        ToastU.normal(it)
+    }
+}
+
+fun AppCompatActivity.showToast(text: String?) {
+    text?.let {
+        ToastU.normal(it)
+    }
+}
+

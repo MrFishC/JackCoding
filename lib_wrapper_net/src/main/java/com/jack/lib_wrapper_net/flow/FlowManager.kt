@@ -57,14 +57,11 @@ object FlowManager {
         val transform: Flow<EventResult<T>> = parameters
             .map {
                 /*数据剥壳，同时可以根据不同的状态来处理异常问题[或通过网络拦截器处理]*/
-
                 if (it.errorCode == 0) {
                     EventResult.OnNext(it.data)
                 } else {
                     EventResult.OnError(Throwable(it.errorMsg))
                 }
-
-//                EventResult.OnNext(it.data)
             }
 
         return transform.flowOn(coroutineDispatcher)

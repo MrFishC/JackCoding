@@ -9,7 +9,7 @@ import cn.jack.library_arouter.manager.ArouterManager
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_common_business.constant.C
 import cn.jack.library_util.KvStoreUtil
-import cn.jack.library_util.ToastU
+import cn.jack.library_util.ext.showToast
 import cn.jack.module_login.databinding.ActivityLoginBinding
 import cn.jack.module_login.mvvm.modle.entity.InfoVerification
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
@@ -37,6 +37,8 @@ class LoginActivity :
     BaseActivity<ActivityLoginBinding, LoginViewModel>(ActivityLoginBinding::inflate) {
     override val mViewModel: LoginViewModel by viewModels()
 
+    override fun injectARouter(): Boolean = true
+
     override fun observeViewModel() {
         super.observeViewModel()
 
@@ -56,11 +58,7 @@ class LoginActivity :
                         is EventResult.OnError -> {
                             hideDialog()
                             mBinding.btnLoginCommit.reset()
-                            it.throwable.message?.let { it1 ->
-                                ToastU.normal(
-                                    it1
-                                )
-                            }
+                            showToast(it.throwable.message)
                         }
                         is EventResult.OnComplete -> {
                             mBinding.btnLoginCommit.reset()
@@ -75,13 +73,14 @@ class LoginActivity :
     private fun openHome(data: UserInfo?) {
         KvStoreUtil.getInstance()?.save(C.Login.user_name, data?.email)
         mBinding.btnLoginCommit.reset()
-//        ArouterManager.getInstance().navigation2Home()
+        ArouterManager.getInstance().navigation2Home()
     }
 
     override fun prepareData() {
         super.prepareData()
         mBinding.viewModel = mViewModel
         mViewModel.mPhone.set(KvStoreUtil.getInstance()?.getString(C.C_USER_NAME))
+        mViewModel.mPasswd.set(KvStoreUtil.getInstance()?.getString(C.C_USER_PASSWD))
     }
 
     @SuppressLint("CheckResult")
@@ -118,12 +117,13 @@ class LoginActivity :
 
         mBinding.btnLoginCommit.setOnClickListener {
             mViewModel.userLogin(
-                mBinding.etLoginPhone.toString(),
-                mBinding.etLoginPassword.toString()
+                mViewModel.mPhone.get()!!,
+                mViewModel.mPasswd.get()!!
             )
         }
 
         mBinding.registerText.setOnClickListener {
+            //跳转报错  kotlin和java混编导致
             ArouterManager.getInstance().navigation2Register()
         }
     }

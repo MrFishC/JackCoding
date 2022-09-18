@@ -12,9 +12,7 @@ import cn.jack.library_arouter.router.RouterPathFragment;
  */
 public class ArouterManager {
 
-    /**
-     * 使用静态内部类的方式实现单例
-     */
+    /*使用静态内部类的方式实现单例*/
     public static ArouterManager getInstance() {
         return ArouterManager.Holder.INSTANCE;
     }

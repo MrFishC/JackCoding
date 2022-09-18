@@ -1,5 +1,7 @@
 package cn.jack.module_login.mvvm.modle.repository
 
+import cn.jack.library_common_business.constant.C
+import cn.jack.library_util.KvStoreUtil
 import cn.jack.module_login.api.ApiService
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import com.jack.lib_wrapper_mvvm.base.model.BaseWrapperModel
@@ -23,6 +25,8 @@ class LoginHttpRepository @Inject constructor() : BaseWrapperModel() {
                 .map {
 //                    EventResult.OnNext(it.data)
                     if (it.errorCode == 0) {
+                        KvStoreUtil.getInstance()?.save(C.C_USER_NAME,userName)
+                        KvStoreUtil.getInstance()?.save(C.C_USER_PASSWD,passwd)
                         EventResult.OnNext(it.data)
                     } else {
                         EventResult.OnError(Throwable(it.errorMsg))

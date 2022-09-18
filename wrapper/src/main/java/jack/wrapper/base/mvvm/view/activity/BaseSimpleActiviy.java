@@ -1,7 +1,6 @@
 package jack.wrapper.base.mvvm.view.activity;
 
 import android.os.Bundle;
-
 import androidx.annotation.LayoutRes;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -18,14 +17,10 @@ public abstract class BaseSimpleActiviy<V extends ViewDataBinding> extends BaseT
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mBinding = DataBindingUtil.setContentView(this, setLayoutRes());
-
         initImmersionBar();
-
         //默认的初始化的顺序
         init();
-
     }
 
     /**

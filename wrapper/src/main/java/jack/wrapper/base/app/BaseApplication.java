@@ -20,8 +20,7 @@ import cn.jack.library_common_business.service.ServiceConstants;
 import cn.jack.library_common_business.service.baseservice.LoginImpl;
 import cn.jack.library_image.glide.GlideManager;
 import cn.jack.library_image.image.ImageManager;
-import cn.jack.library_util.AppContext;
-import cn.jack.library_util.LogU;
+import cn.jack.library_util.ContextU;
 import jack.wrapper.BuildConfig;
 //import jack.wrapper.bus.MyEventBusIndex;
 
@@ -91,7 +90,7 @@ public class BaseApplication extends Application{
     public synchronized void setApplication(@NonNull Application application) {
 
         //初始化全局的context和application
-        AppContext.init(application,this);
+        ContextU.Companion.init(application,this);
 
         initLoadSir();
 
@@ -190,7 +189,7 @@ public class BaseApplication extends Application{
 
     private void initImageLoader() {
         GlideManager glideManager = new GlideManager.Builder().create();
-        ImageManager.getInstance().init(glideManager);
+        ImageManager.Companion.getInstance().init(glideManager);
     }
 
     private void initArouter() {

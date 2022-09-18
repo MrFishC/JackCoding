@@ -8,7 +8,7 @@
         android:orientation="vertical">
 
         <!-- 抽取代码 -->
-        <include android:id="@+id/collect" layout="@layout/layout_common_top_databinding"/>
+<!--        <include android:id="@+id/collect" layout="@layout/layout_common_top_databinding"/>-->
 
 <!--        <include layout="@layout/default_status_view"/>-->
 

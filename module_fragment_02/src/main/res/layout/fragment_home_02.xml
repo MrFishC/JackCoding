@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/default_status_view"/>
+<!--        <include layout="@layout/default_status_view"/>-->
 
         <com.hjq.bar.TitleBar
             android:id="@+id/project_sort_title_bar"

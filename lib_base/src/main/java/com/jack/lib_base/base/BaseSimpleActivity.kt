@@ -14,7 +14,7 @@ import com.jack.lib_wrapper_mvvm.interfa.IBaseView
  * @描述
  */
 abstract class BaseSimpleActivity<VB : ViewDataBinding>(override var block: (LayoutInflater) -> VB) :
-    BaseWrapperActivity<VB>(block), IBaseView, IStatusSwitchLisenter {
+    BaseWrapperActivity<VB>(block), IStatusSwitchLisenter {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

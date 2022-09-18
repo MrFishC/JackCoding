@@ -5,6 +5,8 @@ import android.app.Application
 import android.content.Context
 import android.os.Process
 import androidx.multidex.MultiDex
+import cn.jack.library_image.util.ImageU
+import cn.jack.library_util.ContextU
 import cn.jack.library_util.KvStoreUtil
 import cn.jack.library_util.LogU
 import cn.jack.library_util.ToastU
@@ -70,15 +72,20 @@ open class BaseApplication : Application() {
         initArouter()
         initNetwork()
 //        initLoadSir()
-//        initImageLoader()
+        initImageLoader()
 //        initBus()
         initMMKV()
         initLogger()
         initToastU()
+        initContextU()
 //        initServiceManager()
 
         /*注册监听每个activity的生命周期,便于堆栈式管理*/
 
+    }
+
+    private fun initContextU() {
+        ContextU.init(this,this)
     }
 
     private fun initToastU() {
@@ -86,16 +93,21 @@ open class BaseApplication : Application() {
     }
 
     private fun initLogger() {
-        LogU.init(BuildConfig.DEBUG,"HiLog")
+        LogU.init(BuildConfig.DEBUG, "HiLog")
     }
 
     private fun initMMKV() {
         KvStoreUtil.getInstance()?.init(this)
     }
 
+    private fun initImageLoader() {
+        ImageU.init()
+    }
+
     private fun initNetwork() {
         val logging = HttpLoggingInterceptor()
-        logging.level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+        logging.level =
+            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         val builder: OkHttpClient.Builder = OkHttpClient.Builder()
             .addInterceptor(TokenInterceptor())
             .addInterceptor(logging)
@@ -106,7 +118,7 @@ open class BaseApplication : Application() {
         OkHttpManager.instance.initClient(builder.build())
     }
 
-    open fun initArouter(){
+    open fun initArouter() {
 
     }
 }

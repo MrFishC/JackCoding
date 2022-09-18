@@ -46,28 +46,29 @@ android {
 
 dependencies {
 
-    //宿主依赖业务组件
-
-    //登录注册模块
-    implementation project(path: ':module_login')
-
+    /*hilt和arouter*/
     implementation rootProject.ext.dependencies["hilt-android"]
     kapt rootProject.ext.dependencies["hilt-compiler"]
-
     implementation rootProject.ext.dependencies["arouter-api"]
     kapt rootProject.ext.dependencies["arouter-compiler"]
+
+    //宿主依赖业务组件
+    if (!isBuildModule.toBoolean()) {
+        implementation project(path: ':module_login')   //登录注册模块
+        implementation project(path: ':module_home')    //主页模块
+        implementation project(path: ':module_fragment_01')
+        implementation project(path: ':module_fragment_02')
+        implementation project(path: ':module_fragment_03')
+        implementation project(path: ':module_fragment_04')
+    }
 
 //    implementation project(path: ':wrapper')
 //
 //    if (!isBuildModule.toBoolean()) {
 //        implementation project(path: ':module_login')
-//        implementation project(path: ':module_home')
 //        implementation project(path: ':library_webview')
 //
-//        implementation project(path: ':module_fragment_01')
-//        implementation project(path: ':module_fragment_02')
-//        implementation project(path: ':module_fragment_03')
-//        implementation project(path: ':module_fragment_04')
+
 //    }
 
 }

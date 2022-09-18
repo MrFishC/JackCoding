@@ -40,7 +40,7 @@ public class ArticleInfoAdapter extends BaseMultiItemQuickAdapter<ArticleInfo, B
             case C.ARTICLE_ITEM_TYPE_02:
                 helper.setText(R.id.tvContent, articleBean.getDesc())
                         .setImageResource(R.id.image_collection,articleBean.isCollect() ? R.mipmap.icon_collect : R.mipmap.icon_uncollect);
-                ImageManager.getInstance().getImageLoader().loadImageByNet(helper.getView(R.id.image).getContext(),articleBean.getEnvelopePic(), ((AppCompatImageView) helper.getView(R.id.image)));
+                ImageManager.Companion.getInstance().getImageLoader().loadImageByNet(helper.getView(R.id.image).getContext(),articleBean.getEnvelopePic(), ((AppCompatImageView) helper.getView(R.id.image)));
                 break;
         }
 

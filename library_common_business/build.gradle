@@ -3,18 +3,20 @@ apply from: "../gradle/lib.build.gradle"
 dependencies {
     implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
 
-    implementation project(':retrofit2_rxjava2')
+//    implementation project(':retrofit2_rxjava2')
     implementation project(':library_image')
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["material"]
 
     implementation rootProject.ext.dependencies["constraint"]
 
-    //状态布局
+    //状态布局  待移除
     api rootProject.ext.dependencies["loadsir"]
 
-    //轮播图
+    //轮播图   待私有化依赖
     api(rootProject.ext.dependencies["banner"]) {
         exclude group: 'androidx.viewpager2:viewpager2'
     }
+
+    implementation rootProject.ext.dependencies["retrofit2"]
 }

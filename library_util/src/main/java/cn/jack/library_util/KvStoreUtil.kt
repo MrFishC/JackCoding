@@ -16,7 +16,7 @@ class KvStoreUtil private constructor() {
         @Volatile
         private var instance: KvStoreUtil? = null
 
-        fun getInstance(): KvStoreUtil? {
+        fun getInstance(): KvStoreUtil {
             if (instance == null) {
                 synchronized(this) {
                     if (instance == null) {
@@ -25,7 +25,7 @@ class KvStoreUtil private constructor() {
                 }
             }
 
-            return instance
+            return instance!!
         }
     }
 

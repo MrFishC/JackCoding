@@ -10,6 +10,7 @@ import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_common_business.constant.C
 import cn.jack.library_util.KvStoreUtil
 import cn.jack.library_util.ToastU
+import cn.jack.library_util.ext.showToast
 import cn.jack.module_login.databinding.ActivityRegisterBinding
 import cn.jack.module_login.mvvm.modle.entity.InfoVerification
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
@@ -45,11 +46,7 @@ class RegisterActivity :
                         is EventResult.OnNext -> registerSuccess(it.data)
                         is EventResult.OnError -> {
                             hideDialog()
-                            it.throwable.message?.let { it1 ->
-                                ToastU.normal(
-                                    it1
-                                )
-                            }
+                            showToast(it.throwable.message)
                         }
                         is EventResult.OnComplete -> hideDialog()
                     }
