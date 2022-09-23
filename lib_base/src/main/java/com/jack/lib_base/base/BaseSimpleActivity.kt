@@ -6,7 +6,6 @@ import androidx.databinding.ViewDataBinding
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jack.lib_base.interfac.IStatusSwitchLisenter
 import com.jack.lib_wrapper_mvvm.base.view.BaseWrapperActivity
-import com.jack.lib_wrapper_mvvm.interfa.IBaseView
 
 /**
  * @创建者 Jack

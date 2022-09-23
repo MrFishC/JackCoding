@@ -5,7 +5,6 @@ dependencies {
     api rootProject.ext.dependencies["titlebar"]
     api rootProject.ext.dependencies["mmkv"]
     api rootProject.ext.dependencies["logger"]
-    //    api rootProject.ext.dependencies["timber"]
     api rootProject.ext.dependencies["toasty"]
     api rootProject.ext.dependencies["shimmer-android"] //骨架屏：http://facebook.github.io/shimmer-android/
     

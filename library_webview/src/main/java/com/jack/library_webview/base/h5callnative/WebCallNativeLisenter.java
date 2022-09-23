@@ -6,5 +6,5 @@ package com.jack.library_webview.base.h5callnative;
  * @描述
  */
 public interface WebCallNativeLisenter {
-    void call(String msg);
+    void call(String cmd,String param);
 }

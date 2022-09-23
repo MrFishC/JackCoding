@@ -15,15 +15,15 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.jack.library_command.command.constants.CommandConstants;
 import com.jack.library_webview.R;
-import com.jack.library_webview.WebConstants;
+import com.jack.library_webview.util.WebConstants;
 import com.jack.library_webview.base.callback.WebViewCallBack;
 import com.jack.library_webview.base.set.WebViewSettingManager;
 import com.jack.library_webview.base.webview.BaseWebView;
 import com.jack.library_webview.databinding.LayoutWebviewContainerBinding;
 import com.jack.library_webview.dispatcher.CommandDispatcher;
 import com.jack.library_webview.request.ExecuteLisenter;
+import com.jack.library_webview.util.LogW;
 
 /**
  * @创建者 Jack
@@ -33,8 +33,8 @@ import com.jack.library_webview.request.ExecuteLisenter;
 public class BaseH5Fragment extends Fragment implements WebViewCallBack, ExecuteLisenter {
 
     protected LayoutWebviewContainerBinding mBinding;
-    private BaseWebView mWebView;
-    private String mWebUrl;
+    private   BaseWebView                   mWebView;
+    private   String                        mWebUrl;
 
     public static BaseH5Fragment newInstance(String url) {
         BaseH5Fragment fragment = new BaseH5Fragment();
@@ -53,6 +53,12 @@ public class BaseH5Fragment extends Fragment implements WebViewCallBack, Execute
         }
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        CommandDispatcher.getInstance().initAidlConnect(context.getApplicationContext());
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,9 +67,9 @@ public class BaseH5Fragment extends Fragment implements WebViewCallBack, Execute
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        CommandDispatcher.getInstance().initAidlConnect(getContext());
+        //        CommandDispatcher.getInstance().initAidlConnect(Objects.requireNonNull(getContext()).getApplicationContext());
         addWebView();
     }
 
@@ -82,14 +88,14 @@ public class BaseH5Fragment extends Fragment implements WebViewCallBack, Execute
 
         mWebView.setExecuteLisenter(this);
 
-        mWebView.initWebview(getContext(),this);
+        mWebView.initWebview(getContext(), this);
         loadUrl();
     }
 
-    private void loadUrl(){
-        mWebView.loadUrl(mWebUrl);
+    private void loadUrl() {
+        //mWebView.loadUrl(mWebUrl);
         //测试加载本地HTML
-//        mWebView.loadUrl("file:///android_asset/aidl.html");
+        mWebView.loadUrl("file:///android_asset/aidl.html");
     }
 
     @Override
@@ -120,19 +126,41 @@ public class BaseH5Fragment extends Fragment implements WebViewCallBack, Execute
 
     }
 
-    public int getCommandLevel(){
-        return CommandConstants.LEVEL_LOCAL;        //temp 写固定参数不好拓展。
+    @Override
+    public int getCommandLevel(int levelCommand) {
+        return levelCommand;
     }
 
     @Override
-    public void executeRequest(Context context, int commandLevel, String cmd, WebView webView) {
-        CommandDispatcher.getInstance().execute(context,commandLevel,cmd,mWebView);
+    public void executeRequest(Context context, int commandLevel, String cmd, String param, WebView webView) {
+        LogW.Companion.d(" executeRequest " + " commandLevel " + commandLevel + " cmd " + cmd + " param " + param);
+        CommandDispatcher.getInstance().execute(context, commandLevel, cmd, param, mWebView);
     }
 
     @Override
     public void handleCallback(String result) {
+        //H5页面--->原生页面--->H5页面自身
         //远程调用后，结果又返回到这里了
-        System.out.println(" 调用结束了 ");
+        LogW.Companion.d(" handleCallback  " + " result " + result);
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            return onBackHandle();
+        }
+        return false;
+    }
+
+    private boolean onBackHandle() {
+        if (mWebView != null) {
+            if (mWebView.canGoBack()) {
+                mWebView.goBack();
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
 }

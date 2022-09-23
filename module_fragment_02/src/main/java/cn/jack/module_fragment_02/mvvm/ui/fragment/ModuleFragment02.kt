@@ -2,9 +2,13 @@ package cn.jack.module_fragment_02.mvvm.ui.fragment
 
 import android.text.TextUtils
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.library_arouter.BundleParams
+import cn.jack.library_arouter.manager.ArouterManager
+import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_arouter.router.RouterPathFragment
 import cn.jack.library_common_business.adapter.ArticleInfoAdapter
 import cn.jack.library_common_business.entiy.ArticleInfo
@@ -174,7 +178,7 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
                                 "项目分类", true, false
                             )
                             //将数据存储在本地
-//                            keepSortInfosInLocal(it.data!!)
+                            keepSortInfosInLocal(it.data!!)
                         }
                         is EventResult.OnError -> {
                             hideDialog()
@@ -213,21 +217,19 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
 
     private fun showSortDailog() {
         //查询本地数据
-//        val sortJson: String? = KvStoreUtil.getInstance().getString("sort")
-//
-//        if (!TextUtils.isEmpty(sortJson)) {
-//            val sortInfos: List<SortInfo> =
-//                JSON.parseArray<SortInfo>(sortJson, SortInfo::class.java)
-//            showSortDialog(
-//                sortInfos, true, true, true,
-//                "项目分类", true, false
-//            )
-//        } else {
-//            //无数据,请求接口
-//            sortInfos()
-//        }
+        val sortJson: String? = KvStoreUtil.getInstance().getString("sort")
 
-        sortInfos()
+        if (!TextUtils.isEmpty(sortJson)) {
+            val sortInfos: List<SortInfo> =
+                JSON.parseArray<SortInfo>(sortJson, SortInfo::class.java)
+            showSortDialog(
+                sortInfos, true, true, true,
+                "项目分类", true, false
+            )
+        } else {
+            //无数据,请求接口
+            sortInfos()
+        }
     }
 
     //将数据存储在本地
@@ -287,6 +289,16 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
     private lateinit var mArticleInfoAdapter: ArticleInfoAdapter
     private fun initAdapter() {
         mArticleInfoAdapter = ArticleInfoAdapter()
+
+        mArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
+            val articleInfo =  adapter.data[position] as ArticleInfo
+            ArouterManager.getInstance().navigationTo(
+                bundleOf(
+                    BundleParams.WEB_URL to articleInfo.link
+                ), RouterPathActivity.Web.PAGER_WEB
+            )
+        }
+
         mBinding.findRecycleView.adapter = mArticleInfoAdapter
         mArticleInfoAdapter.setOnItemChildClickListener(this)
     }

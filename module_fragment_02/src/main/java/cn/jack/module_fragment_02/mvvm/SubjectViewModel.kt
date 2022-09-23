@@ -22,7 +22,7 @@ class SubjectViewModel @Inject constructor(private val mRepository: SubjectHttpR
 
     val projectInfoList_ = mProjectInfoList.shareIn(viewModelScope, SharingStarted.WhileSubscribed(5000))
 
-    fun listSubject(refresh: Boolean, articleId: String) {
+    fun listSubject(refresh: Boolean, articleId: Int) {
         mRepository.pageSubject(refresh, articleId).onEach {
             mProjectInfoList.value = it
         }.launchIn(viewModelScope)

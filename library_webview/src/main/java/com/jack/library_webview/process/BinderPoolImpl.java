@@ -11,7 +11,7 @@ import com.jack.library_webview.IBinderPool;
  * @描述
  */
 public class BinderPoolImpl extends IBinderPool.Stub{
-
+    //IBinderPool.Stub:抽象类，继承自Binder，实现了IBinderPool定义的AIDL接口
     private Context context;
 
     public BinderPoolImpl(Context context) {

@@ -19,8 +19,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "JackCoding"
 
-include ':library_command'
-include ':library_service_manager'
+//include ':library_command'
+//include ':library_service_manager'
 include ':library_webview'
 include ':library_common_business'
 include ':library_image'

@@ -5,12 +5,16 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.kingja.loadsir.core.LoadSir;
 import com.limpoxe.support.library_service_manager.ServiceManager;
 import com.tencent.mmkv.MMKV;
+
 import java.util.List;
+
 import cn.jack.library_common_business.loadsir.callback.CustomCallback;
 import cn.jack.library_common_business.loadsir.callback.EmptyCallback;
 import cn.jack.library_common_business.loadsir.callback.FailedCallback;
@@ -18,8 +22,6 @@ import cn.jack.library_common_business.loadsir.callback.LoadingCallback;
 import cn.jack.library_common_business.loadsir.callback.TimeoutCallback;
 import cn.jack.library_common_business.service.ServiceConstants;
 import cn.jack.library_common_business.service.baseservice.LoginImpl;
-import cn.jack.library_image.glide.GlideManager;
-import cn.jack.library_image.image.ImageManager;
 import cn.jack.library_util.ContextU;
 import jack.wrapper.BuildConfig;
 //import jack.wrapper.bus.MyEventBusIndex;
@@ -188,8 +190,8 @@ public class BaseApplication extends Application{
     }
 
     private void initImageLoader() {
-        GlideManager glideManager = new GlideManager.Builder().create();
-        ImageManager.Companion.getInstance().init(glideManager);
+//        GlideManager glideManager = new GlideManager.Builder().create();
+//        ImageManager.Companion.getInstance().init(glideManager);
     }
 
     private void initArouter() {

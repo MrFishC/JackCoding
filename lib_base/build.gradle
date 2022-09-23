@@ -47,6 +47,7 @@ dependencies {
     api project(':library_image')
     api project(':library_util')
     api project(':library_common_business')
+    api project(':library_webview')
 
     testApi rootProject.ext.dependencies["junit"]
     androidTestApi rootProject.ext.dependencies["test_junit"]

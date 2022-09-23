@@ -2,16 +2,18 @@ package cn.jack.module_fragment_02.mvvm.ui.activity
 
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.library_arouter.BundleParams
+import cn.jack.library_arouter.manager.ArouterManager
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_common_business.adapter.ArticleInfoAdapter
 import cn.jack.library_common_business.entiy.ArticleInfo
 import cn.jack.library_util.ext.showToast
 import cn.jack.module_fragment_02.databinding.ActivityCollectionBinding
 import cn.jack.module_fragment_02.mvvm.SubjectViewModel
-import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hjq.bar.OnTitleBarListener
 import com.jack.lib_base.base.BaseActivity
@@ -20,6 +22,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import kotlin.properties.Delegates
 
 /**
  * @创建者 Jack
@@ -33,11 +36,13 @@ class SubjectActivity() :
     OnRefreshLoadMoreListener {
     override val mViewModel: SubjectViewModel by viewModels()
 
-    @Autowired
-    lateinit var articleTitle: String
+//    @JvmField
+//    @Autowired(name="articleTitle")           //该方式无法传递参数  具体原因不明
+//    var articleTitle: String? = null
 
-    @Autowired
-    lateinit var articleId: String
+    var mArticleTitle: String? = null
+
+    var mArticleId by Delegates.notNull<Int>()
 
     override fun injectARouter(): Boolean = true
 
@@ -87,12 +92,28 @@ class SubjectActivity() :
 
     private fun initAdapter() {
         mArticleInfoAdapter = ArticleInfoAdapter()
+
+        mArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
+            val articleInfo =  adapter.data[position] as ArticleInfo
+            ArouterManager.getInstance().navigationTo(
+                bundleOf(
+                    BundleParams.WEB_URL to articleInfo.link
+                ), RouterPathActivity.Web.PAGER_WEB
+            )
+        }
+
         mBinding.subjectRecycleView.adapter = mArticleInfoAdapter
     }
 
     override fun prepareData() {
         super.prepareData()
-        mBinding.subjectTitleBar.setTitle(articleTitle)
+
+        intent?.extras?.let {
+            mArticleTitle = it.getString(BundleParams.ARTICLE_TITLE)
+            mArticleId = it.getInt(BundleParams.ARTICLE_ID)
+        }
+
+        mBinding.subjectTitleBar.title = mArticleTitle
         mBinding.subjectTitleBar.setOnTitleBarListener(object : OnTitleBarListener {
             override fun onLeftClick(v: View) {
                 finish()
@@ -105,7 +126,7 @@ class SubjectActivity() :
         mBinding.subjectSmartRefreshLayout.setOnRefreshLoadMoreListener(this)
         initAdapter()
         mIsRefresh = true
-        mViewModel.listSubject(true, articleId)
+        mViewModel.listSubject(true, mArticleId)
 
         //设置View展示状态布局
 //        setLoadService(mBinding.subjectSmartRefreshLayout)
@@ -118,11 +139,11 @@ class SubjectActivity() :
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         mIsRefresh = true
-        mViewModel.listSubject(true, articleId)
+        mViewModel.listSubject(true, mArticleId)
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         mIsRefresh = true
-        mViewModel.listSubject(true, articleId)
+        mViewModel.listSubject(true, mArticleId)
     }
 }

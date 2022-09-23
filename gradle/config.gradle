@@ -17,7 +17,7 @@ ext {
             test_junit                                : "1.1.1",
             test_espresso_core                        : "3.2.0",
 
-            timber                                    : "4.7.1",
+            timber                                    : "5.0.1",
             appcompatVersion                          : "1.0.0",
             aacVersion                                : "2.0.0",
             materialVersion                           : "1.1.0",

@@ -16,7 +16,7 @@
 <!--        android:resizeableActivity="true"
         android:maxAspectRatio="2.4"-->
 
-        <activity android:name="cn.jack.module_login.mvvm.view.SplashActivity"
+        <activity android:name="cn.jack.module_home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

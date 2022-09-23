@@ -33,6 +33,6 @@ interface ApiArticleService {
     @GET("article/list/{page}/json")
     fun pageArticleList(
         @Path("page") page: Int,
-        @Query("cid") id: String
+        @Query("cid") id: Int
     ): Flow<ApiResponse<ProjectInfoList>>
 }

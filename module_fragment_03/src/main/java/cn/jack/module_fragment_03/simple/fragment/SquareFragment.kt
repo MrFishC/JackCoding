@@ -4,10 +4,13 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.library_arouter.BundleParams
 import cn.jack.library_arouter.manager.ArouterManager
+import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_arouter.router.RouterPathFragment
 import cn.jack.library_util.ext.showToast
 import cn.jack.module_fragment_03.R
@@ -118,7 +121,12 @@ open class SquareFragment : BaseSimpleFragment<FragmentSquareBinding>(FragmentSq
                 textView.text = article.name
                 flexboxLayout.addView(textView)
                 textView.setOnClickListener {
-                    ArouterManager.getInstance().navigation2Web(article.lisenseLink)
+                    ArouterManager.getInstance().navigationTo(
+                        bundleOf(
+                            BundleParams.ARTICLE_TITLE to article.name,
+                            BundleParams.ARTICLE_ID to article.id
+                        ), RouterPathActivity.Subject.PAGER_SUBJECT
+                    )
                 }
             }
 

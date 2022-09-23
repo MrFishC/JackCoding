@@ -3,7 +3,7 @@
     package="com.jack.library_webview">
 
     <application>
-        <activity android:name=".WebActivity"/>
+        <activity android:name=".WebActivity" android:process=":web.remote"/>
         <service android:name="com.jack.library_webview.process.service.MainProcessService"/>
     </application>
 </manifest>

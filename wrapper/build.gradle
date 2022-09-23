@@ -112,8 +112,8 @@ dependencies {
     api project(':library_common_res')
     api project(':library_image')
     api project(':library_common_business')
-    api project(':library_service_manager')
-    api project(':library_command')
+//    api project(':library_service_manager')
+//    api project(':library_command')
 
     api project(':lib_wrapper_mvvm')
     api project(':lib_wrapper_net')

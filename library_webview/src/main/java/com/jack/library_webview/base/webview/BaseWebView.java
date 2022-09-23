@@ -4,13 +4,16 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.webkit.WebView;
+
 import com.jack.library_webview.base.wbclient.CostomWebChromeClient;
 import com.jack.library_webview.base.wbclient.CostomWebViewClient;
 import com.jack.library_webview.base.h5callnative.WebCallNativeLisenter;
 import com.jack.library_webview.base.interf.H5CallNativeJsInterface;
 import com.jack.library_webview.base.callback.WebViewCallBack;
 import com.jack.library_webview.base.set.WebViewSettingManager;
+import com.jack.library_webview.command.CommandConstants;
 import com.jack.library_webview.request.ExecuteLisenter;
+import com.jack.library_webview.util.LogW;
 
 /**
  * @创建者 Jack
@@ -51,9 +54,10 @@ public class BaseWebView extends WebView {
 
         addJavascriptInterface(new H5CallNativeJsInterface(new WebCallNativeLisenter() {
             @Override
-            public void call(String msg) {
+            public void call(String cmd,String param) {
                 if(mExecuteLisenter != null){
-                    mExecuteLisenter.executeRequest(context,mExecuteLisenter.getCommandLevel(),msg,BaseWebView.this);
+                    LogW.Companion.d(" mExecuteLisenter  " + " cmd " + cmd + " param " + param);
+                    mExecuteLisenter.executeRequest(context,mExecuteLisenter.getCommandLevel(CommandConstants.LEVEL_LOCAL),cmd,param,BaseWebView.this);
                 }
             }
         }), H5CallNativeJsInterface.AGREE_MENT);

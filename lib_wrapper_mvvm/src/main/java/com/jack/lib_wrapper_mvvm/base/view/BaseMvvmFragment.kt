@@ -1,5 +1,6 @@
 package com.jack.lib_wrapper_mvvm.base.view
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.databinding.ViewDataBinding
 import com.jack.lib_wrapper_mvvm.base.viewmodel.BaseWrapperViewModel

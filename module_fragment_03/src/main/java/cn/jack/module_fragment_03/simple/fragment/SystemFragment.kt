@@ -4,9 +4,13 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.library_arouter.manager.ArouterManager
+import cn.jack.library_arouter.BundleParams
+import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_arouter.router.RouterPathFragment
 import cn.jack.library_util.ext.showToast
 import cn.jack.module_fragment_03.R
@@ -28,7 +32,8 @@ import kotlinx.coroutines.launch
  * 使用随机布局实现
  */
 @Route(path = RouterPathFragment.HomeThird.PAGER_HOME_SYSTEM)
-open class SystemFragment : BaseSimpleFragment<FragmentSystemBinding>(FragmentSystemBinding::inflate) {
+open class SystemFragment :
+    BaseSimpleFragment<FragmentSystemBinding>(FragmentSystemBinding::inflate) {
 
 //    override fun isRegisterLoadSir(): Boolean {
 //        return true
@@ -50,7 +55,7 @@ open class SystemFragment : BaseSimpleFragment<FragmentSystemBinding>(FragmentSy
                     when (it) {
                         is EventResult.OnStart -> visibleDialog()
                         is EventResult.OnNext -> {
-                            if(it.data == null){
+                            if (it.data == null) {
                                 return@collect
                             }
                             setData(it.data!!)
@@ -111,11 +116,16 @@ open class SystemFragment : BaseSimpleFragment<FragmentSystemBinding>(FragmentSy
             tvTitle.text = name
             val flexboxLayout = view.findViewById<FlexboxLayout>(R.id.flex_layout)
             val children = res.articles
-            for(element in children){
+            for (element in children) {
                 val textView = findLabel(flexboxLayout)
                 textView.text = element.title
                 textView.setOnClickListener {
-//                    ArouterManager.getInstance().navigation2Subject(children[k].title, children[k].chapterId)
+                    ArouterManager.getInstance().navigationTo(
+                        bundleOf(
+                            BundleParams.ARTICLE_TITLE to element.title,
+                            BundleParams.ARTICLE_ID to element.chapterId
+                        ), RouterPathActivity.Subject.PAGER_SUBJECT
+                    )
                 }
                 flexboxLayout.addView(textView)
             }

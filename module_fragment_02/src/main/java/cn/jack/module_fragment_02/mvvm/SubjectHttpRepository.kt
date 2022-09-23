@@ -17,7 +17,7 @@ import javax.inject.Inject
 class SubjectHttpRepository @Inject constructor(): BaseWrapperModel() {
     private var mPage = 0
 
-    fun pageSubject(refresh: Boolean, articleId: String) =
+    fun pageSubject(refresh: Boolean, articleId: Int) =
         FlowManager.httpRequest<ProjectInfoList> {
             HttpManager.obtainRetrofitService(ApiArticleService::class.java)
                 .pageArticleList(mPage, articleId)

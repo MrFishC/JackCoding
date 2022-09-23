@@ -2,11 +2,17 @@ package cn.jack.module_fragment_01.mvvm.view.fragment
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.library_arouter.BundleParams
+import cn.jack.library_arouter.manager.ArouterManager
+import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_arouter.router.RouterPathFragment
+import cn.jack.library_common_business.entiy.ArticleInfo
+import cn.jack.library_util.LogU
 import cn.jack.library_util.ext.showToast
 import cn.jack.module_fragment_01.R
 import cn.jack.module_fragment_01.databinding.FragmentHome01Binding
@@ -15,6 +21,7 @@ import cn.jack.module_fragment_01.mvvm.view.adapter.HomeArticleInfoAdapter
 import cn.jack.module_fragment_01.mvvm.view.adapter.ImageNetAdapter
 import cn.jack.module_fragment_01.mvvm.vm.HomePageOneViewModle
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.jack.lib_base.base.BaseFragment
 import com.jack.lib_wrapper_net.model.EventResult
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -71,7 +78,7 @@ class ModuleFragment01 :
                                 return@collect
                             }
 
-                           val articleList = it.data!!.projectInfoList!!.datas
+                            val articleList = it.data!!.projectInfoList!!.datas
                             if (mIsRefresh) {
                                 mHomeArticleInfoAdapter.setList(articleList)
                                 showBannerInfos(it.data!!.bannerInfo!!)
@@ -106,6 +113,14 @@ class ModuleFragment01 :
     private lateinit var mHomeArticleInfoAdapter: HomeArticleInfoAdapter
     private fun initAdapter() {
         mHomeArticleInfoAdapter = HomeArticleInfoAdapter(R.layout.layout_home_article_item)
+        mHomeArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
+           val articleInfo =  adapter.data[position] as ArticleInfo
+            ArouterManager.getInstance().navigationTo(
+                bundleOf(
+                    BundleParams.WEB_URL to articleInfo.link
+                ), RouterPathActivity.Web.PAGER_WEB
+            )
+        }
         mBinding.recyclerView.adapter = mHomeArticleInfoAdapter
         addHeadView()
     }

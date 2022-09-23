@@ -1,5 +1,7 @@
 package cn.jack.library_arouter.manager;
 
+import android.os.Bundle;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 
 import cn.jack.library_arouter.router.RouterPathActivity;
@@ -25,34 +27,40 @@ public class ArouterManager {
 
     }
 
-    public void navigation2Home(){
+    public void navigation2Home() {
         ARouter.getInstance().build(RouterPathActivity.Home.PAGER_HOME).navigation();
     }
 
-    public void navigation2Login(){
+    public void navigation2Login() {
         ARouter.getInstance().build(RouterPathActivity.Login.PAGER_LOGIN).navigation();
     }
 
-    public void navigation2Register(){
+    public void navigation2Register() {
         ARouter.getInstance().build(RouterPathActivity.Register.PAGER_REGISTER).navigation();
     }
 
-    public void navigation2Web(String webUrl){
+    public void navigation2Web(String webUrl) {
         ARouter.getInstance().build(RouterPathActivity.Web.PAGER_WEB)
-                .withString("webUrl",webUrl)
+                .withString("webUrl", webUrl)
                 .navigation();
     }
 
 
-    public void navigation2HomeFragment01(){
+    public void navigation2HomeFragment01() {
         ARouter.getInstance().build(RouterPathFragment.HomeFirst.PAGER_HOME_FIRST).navigation();
     }
 
-    public void navigation2Subject(String articleTitle,String articleId){
-        ARouter.getInstance().build(RouterPathActivity.Subject.PAGER_SUBJECT)
-                .withString("articleTitle",articleTitle)
-                .withString("articleId",articleId)
+    public void navigationTo(String toPath) {
+        ARouter.getInstance().build(toPath)
                 .navigation();
+    }
+
+    public void navigationTo(Bundle bundle,String toPath) {
+        if(bundle != null){
+            ARouter.getInstance().build(toPath)
+                    .with(bundle)
+                    .navigation();
+        }
     }
 
 }
