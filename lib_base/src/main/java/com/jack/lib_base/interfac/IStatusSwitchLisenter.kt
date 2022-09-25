@@ -27,12 +27,8 @@ interface IStatusSwitchLisenter {
     fun isDefaultStatusBar(): Boolean = true
 
     /**
-     * 是否使用Loadsir
+     * 是否使用Loadsir-针对整个页面
      */
     fun isRegisterLoadSir(): Boolean = false
 
-    /**
-     * 指定的View是否使用Loadsir
-     */
-    fun isViewRegisterLoadSir(): Boolean = false
 }

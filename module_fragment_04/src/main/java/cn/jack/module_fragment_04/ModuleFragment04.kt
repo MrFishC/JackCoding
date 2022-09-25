@@ -80,6 +80,12 @@ class ModuleFragment04 : BaseSimpleFragment<FragmentHome04Binding>(FragmentHome0
                                 mArticleInfoAdapter.addData(datas)
                             }
                         }
+                        is EventResult.OnFail -> {
+                            hideDialog()
+                            showToast(it.throwable.message)
+                            mBinding.collectSmartRefreshLayout.finishRefresh()
+                            mBinding.collectSmartRefreshLayout.finishLoadMore()
+                        }
                         is EventResult.OnError -> {
                             hideDialog()
                             showToast(it.throwable.message)
@@ -137,7 +143,7 @@ class ModuleFragment04 : BaseSimpleFragment<FragmentHome04Binding>(FragmentHome0
                     if (it.errorCode == 0) {
                         EventResult.OnNext(it.data)
                     } else {
-                        EventResult.OnError(Throwable(it.errorMsg))
+                        EventResult.OnFail(Throwable(it.errorMsg))
                     }
                 }
         }.onEach {

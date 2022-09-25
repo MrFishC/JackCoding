@@ -21,6 +21,7 @@ import cn.jack.module_fragment_01.mvvm.view.adapter.ImageNetAdapter
 import cn.jack.module_fragment_01.mvvm.vm.HomePageOneViewModle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.jack.lib_base.base.view.BaseFragment
+import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.model.EventResult
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
@@ -44,21 +45,12 @@ class ModuleFragment01 :
     OnRefreshLoadMoreListener {
     override val mViewModel: HomePageOneViewModle by viewModels()
 
-    private var mIsRefresh = false
-    override fun isRegisterLoadSir(): Boolean {
-        return true
-    }
-
-    override fun isViewRegisterLoadSir(): Boolean {
-        return true
-    }
+    private var mIsRefresh = true
 
     override fun prepareData() {
         super.prepareData()
         initAdapter()
-//        setLoadService(mBinding.refreshLayout)
-        mIsRefresh = true
-        mViewModel.loadHomeInfos(true)
+        mViewModel.loadHomeInfos(mIsRefresh)
     }
 
     override fun observeViewModel() {
@@ -67,12 +59,17 @@ class ModuleFragment01 :
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mViewModel.homeInfos_.collect {
                     when (it) {
-                        is EventResult.OnStart -> visibleDialog()
+                        is EventResult.OnStart -> {
+                            if (mIsRefresh) {
+                                setLayoutState(LayoutState.OnLoading)
+                            }
+                        }
                         is EventResult.OnNext -> {
                             if (it.data == null) {
-                                showToast("数据为空")
+//                                showToast("数据为空")
                                 mBinding.refreshLayout.finishRefresh()
                                 mBinding.refreshLayout.finishLoadMore()
+                                setLayoutState(LayoutState.OnEmpty)
                                 return@collect
                             }
 
@@ -80,17 +77,26 @@ class ModuleFragment01 :
                             if (mIsRefresh) {
                                 mHomeArticleInfoAdapter.setList(articleList)
                                 showBannerInfos(it.data!!.bannerInfo!!)
+                                setLayoutState(LayoutState.OnSuccess)
                             } else {
                                 mHomeArticleInfoAdapter.addData(articleList)
                                 showBannerInfos(it.data!!.bannerInfo!!)
                             }
+
+                            mIsRefresh = false
+                        }
+                        is EventResult.OnFail -> {
+//                            hideDialog()
+//                            showToast(it.throwable.message)
+                            setLayoutState(LayoutState.OnFailed)
                         }
                         is EventResult.OnError -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
+//                            hideDialog()
+//                            showToast(it.throwable.message)
+                            setLayoutState(LayoutState.OnNetError)
                         }
                         is EventResult.OnComplete -> {
-                            hideDialog()
+//                            hideDialog()
                         }
                     }
 
@@ -112,7 +118,7 @@ class ModuleFragment01 :
     private fun initAdapter() {
         mHomeArticleInfoAdapter = HomeArticleInfoAdapter(R.layout.layout_home_article_item)
         mHomeArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
-           val articleInfo =  adapter.data[position] as ArticleInfo
+            val articleInfo = adapter.data[position] as ArticleInfo
             ArouterManager.getInstance().navigationTo(
                 bundleOf(
                     BundleParams.WEB_URL to articleInfo.link
@@ -138,23 +144,23 @@ class ModuleFragment01 :
         mBanner = headView.findViewById(R.id.banner)
     }
 
-//    override fun dataReload() {
-//        mIsRefresh = true
-//        mViewModel.loadHomeInfos(true)
-//    }
+    override fun dataReload() {
+        mIsRefresh = true
+        mViewModel.loadHomeInfos(mIsRefresh)
+    }
 
     override fun prepareListener() {
         super.prepareListener()
         mBinding.refreshLayout.setOnRefreshLoadMoreListener(this)
+        setTargetLoadService(mBinding.refreshLayout)
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
-        mIsRefresh = false
-        mViewModel.loadHomeInfos(false)
+        mViewModel.loadHomeInfos(mIsRefresh)
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         mIsRefresh = true
-        mViewModel.loadHomeInfos(true)
+        mViewModel.loadHomeInfos(mIsRefresh)
     }
 }

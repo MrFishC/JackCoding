@@ -28,7 +28,7 @@ class LoginHttpRepository @Inject constructor() : BaseWrapperModel() {
                         KvStoreUtil.getInstance().save(C.C_USER_PASSWD,passwd)
                         EventResult.OnNext(it.data)
                     } else {
-                        EventResult.OnError(Throwable(it.errorMsg))
+                        EventResult.OnFail(Throwable(it.errorMsg))
                     }
                 }
         }

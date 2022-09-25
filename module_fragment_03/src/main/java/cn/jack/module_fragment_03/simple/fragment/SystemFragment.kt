@@ -20,6 +20,7 @@ import cn.jack.module_fragment_03.service.ApiService
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.flexbox.FlexboxLayout
 import com.jack.lib_base.base.view.BaseSimpleFragment
+import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.flow.FlowManager
 import com.jack.lib_wrapper_net.manager.HttpManager
 import com.jack.lib_wrapper_net.model.EventResult
@@ -35,42 +36,53 @@ import kotlinx.coroutines.launch
 open class SystemFragment :
     BaseSimpleFragment<FragmentSystemBinding>(FragmentSystemBinding::inflate) {
 
-//    override fun isRegisterLoadSir(): Boolean {
-//        return true
-//    }
-
     private val systemAndSquareInfo =
         MutableStateFlow<EventResult<List<NavInfo>>>(EventResult.OnComplete)
 
     private val systemAndSquareInfo_ =
         systemAndSquareInfo.shareIn(lifecycleScope, SharingStarted.WhileSubscribed(5000))
 
+    override fun prepareListener() {
+        super.prepareListener()
+        setTargetLoadService(mBinding.nestScrollView)
+    }
+
     override fun prepareData() {
         super.prepareData()
-        httpDataInfo()
+//        httpDataInfo()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 systemAndSquareInfo_.collect {
                     when (it) {
-                        is EventResult.OnStart -> visibleDialog()
+                        is EventResult.OnStart -> setLayoutState(LayoutState.OnLoading)
                         is EventResult.OnNext -> {
                             if (it.data == null) {
+                                setLayoutState(LayoutState.OnEmpty)
                                 return@collect
                             }
                             setData(it.data!!)
+                            setLayoutState(LayoutState.OnSuccess)
                         }
+                        is EventResult.OnFail -> setLayoutState(LayoutState.OnFailed)
                         is EventResult.OnError -> {
                             hideDialog()
                             showToast(it.throwable.message)
+                            setLayoutState(LayoutState.OnNetError)
                         }
                         is EventResult.OnComplete -> {
-                            hideDialog()
+//                            hideDialog()
                         }
                     }
                 }
             }
         }
+    }
+
+    override fun loadData() {
+        super.loadData()
+        println("loadData1")
+        httpDataInfo()
     }
 
 //    fun dataReload() {

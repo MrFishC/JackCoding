@@ -10,4 +10,5 @@ sealed class EventResult<out R> {
     object OnComplete : EventResult<Nothing>()
     data class OnNext<out T>(val data: T?) : EventResult<T>()
     data class OnError(val throwable: Throwable) : EventResult<Nothing>()
+    data class OnFail(val throwable: Throwable) : EventResult<Nothing>()
 }

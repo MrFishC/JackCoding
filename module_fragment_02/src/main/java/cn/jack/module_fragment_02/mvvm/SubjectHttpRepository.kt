@@ -19,13 +19,19 @@ class SubjectHttpRepository @Inject constructor(): BaseWrapperModel() {
 
     fun pageSubject(refresh: Boolean, articleId: Int) =
         FlowManager.httpRequest<ProjectInfoList> {
+            if (refresh) {
+                mPage = 0
+            } else {
+                mPage++
+            }
+
             HttpManager.obtainRetrofitService(ApiArticleService::class.java)
                 .pageArticleList(mPage, articleId)
                 .map {
                     if (it.errorCode == 0) {
                         EventResult.OnNext(it.data)
                     } else {
-                        EventResult.OnError(Throwable(it.errorMsg))
+                        EventResult.OnFail(Throwable(it.errorMsg))
                     }
                 }
         }

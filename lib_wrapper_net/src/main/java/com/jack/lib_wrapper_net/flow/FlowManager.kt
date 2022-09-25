@@ -60,7 +60,7 @@ object FlowManager {
                 if (it.errorCode == 0) {
                     EventResult.OnNext(it.data)
                 } else {
-                    EventResult.OnError(Throwable(it.errorMsg))
+                    EventResult.OnFail(Throwable(it.errorMsg))
                 }
             }
 

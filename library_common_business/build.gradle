@@ -3,15 +3,18 @@ apply from: "../gradle/lib.build.gradle"
 dependencies {
     implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
 
-//    implementation project(':retrofit2_rxjava2')
     implementation project(':library_image')
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["material"]
 
     implementation rootProject.ext.dependencies["constraint"]
 
-    //状态布局  待移除
-    api rootProject.ext.dependencies["loadsir"]
+    //状态布局
+    api(rootProject.ext.dependencies["loadsir"]) {
+        exclude group: 'androidx.annotation:annotation'
+        exclude group: 'androidx.constraintlayout:constraintlayout'
+        exclude group: 'androidx.fragment:fragment'
+    }
 
     //轮播图   待私有化依赖
     api(rootProject.ext.dependencies["banner"]) {

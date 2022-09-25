@@ -4,14 +4,17 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.databinding.ViewDataBinding
+import cn.jack.library_common_business.loadsir.callback.*
 import cn.jack.library_util.ext.closeDialog
 import cn.jack.library_util.ext.loadDialog
 import com.alibaba.android.arouter.launcher.ARouter
-import com.jack.lib_base.base.vm.BaseViewModle
 import com.jack.lib_base.interfac.ILoadSirLisenter
 import com.jack.lib_base.interfac.IStatusSwitchLisenter
 import com.jack.lib_base.uistate.LayoutState
+import com.jack.lib_base.uistate.ext.postCallbackDelayed
+import com.jack.lib_base.uistate.ext.postSuccessDelayed
 import com.jack.lib_wrapper_mvvm.base.view.BaseMvvmActivity
+import com.jack.lib_wrapper_mvvm.base.viewmodel.BaseWrapperViewModel
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import finisActivity
@@ -22,7 +25,7 @@ import setStatusBarTranslucent
  * @创建时间 2022/8/29 0029 20:37
  * @描述
  */
-abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModle>(override var block: (LayoutInflater) -> VB) :
+abstract class BaseActivity<VB : ViewDataBinding, VM : BaseWrapperViewModel>(override var block: (LayoutInflater) -> VB) :
     BaseMvvmActivity<VB, VM>(block), IStatusSwitchLisenter, ILoadSirLisenter {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,37 +36,34 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModle>(override v
         }
 
         if (isRegisterLoadSir()) {
-            if (!isViewRegisterLoadSir()) {
-                setLoadService(this)
-            }
+            setTargetLoadService(this)
+        }
 
-            //监听VM层（状态布局属性的变化）
-            setViewStateChangeLisenter()
+    }
+
+    protected fun setLayoutState(layoutState: LayoutState) {
+        when (layoutState) {
+            LayoutState.OnLoading -> mBaseLoadService?.postCallbackDelayed(
+                LoadingCallback::class.java,
+                0
+            )
+            LayoutState.OnFailed -> mBaseLoadService?.postCallbackDelayed(FailedCallback::class.java)
+            LayoutState.OnEmpty -> mBaseLoadService?.postCallbackDelayed(EmptyCallback::class.java)
+            LayoutState.OnTimeout -> mBaseLoadService?.postCallbackDelayed(TimeoutCallback::class.java)
+            LayoutState.OnCustom -> mBaseLoadService?.postCallbackDelayed(CustomCallback::class.java)
+            LayoutState.OnNetError -> mBaseLoadService?.postCallbackDelayed(TimeoutCallback::class.java)
+            LayoutState.OnSuccess -> mBaseLoadService?.postSuccessDelayed()
         }
     }
 
-    private fun setViewStateChangeLisenter() {
-        mViewModel.changeLayoutState.observe(this){
-            when(it){
-                LayoutState.onLoading -> print("")
-                LayoutState.onFailed -> print("")
-                LayoutState.onEmpty -> print("")
-                LayoutState.onTimeout -> print("")
-                LayoutState.onCustom -> print("")
-            }
-        }
-    }
+    private var mBaseLoadService: LoadService<Any>? = null
 
-    //虽然状态布局在view层变化，但是都是由数据驱动的，即m层代码 ---> vm --->v层监听vm的变化做出相应的改变
-    private lateinit var mBaseLoadService: LoadService<Any>
-
-    protected open fun setLoadService(target: Any?) {
-        mBaseLoadService = LoadSir.getDefault().register(this) {
+    /*指定的View若要设置，则需要主动调用该方法。注意：建议同一个页面，isRegisterLoadSir设置为true和主动调用下方方法，根据业务两者取其一即可，避免同时使用*/
+    protected open fun setTargetLoadService(target: Any?) {
+        mBaseLoadService = LoadSir.getDefault().register(target) {
             dataReload()
         }
     }
-
-    override fun isRegisterLoadSir(): Boolean = true
 
     override fun prepareParam() {
         setStatusBarTranslucent(Color.BLACK)

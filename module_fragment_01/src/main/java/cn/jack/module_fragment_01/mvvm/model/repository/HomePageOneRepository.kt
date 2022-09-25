@@ -34,9 +34,9 @@ class HomePageOneRepository @Inject constructor() : BaseWrapperModel() {
                 EventResult.OnNext(HomeInfos(bannerData.data, articleData.data))
             } else {
                 if (articleData.errorCode != 0) {
-                    EventResult.OnError(Throwable(articleData.errorMsg))
+                    EventResult.OnFail(Throwable(articleData.errorMsg))
                 } else
-                    EventResult.OnError(Throwable(bannerData.errorMsg))
+                    EventResult.OnFail(Throwable(bannerData.errorMsg))
             }
         }
     }

@@ -11,12 +11,12 @@ import cn.jack.library_arouter.manager.ArouterManager
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_common_business.adapter.ArticleInfoAdapter
 import cn.jack.library_common_business.entiy.ArticleInfo
-import cn.jack.library_util.ext.showToast
 import cn.jack.module_fragment_02.databinding.ActivityCollectionBinding
 import cn.jack.module_fragment_02.mvvm.SubjectViewModel
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hjq.bar.OnTitleBarListener
 import com.jack.lib_base.base.view.BaseActivity
+import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.model.EventResult
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
@@ -47,8 +47,7 @@ class SubjectActivity() :
     override fun injectARouter(): Boolean = true
 
     private lateinit var mArticleInfoAdapter: ArticleInfoAdapter
-    private var mIsRefresh = false
-
+    private var mIsRefresh = true
 
     override fun observeViewModel() {
         super.observeViewModel()
@@ -56,11 +55,16 @@ class SubjectActivity() :
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mViewModel.projectInfoList_.collect {
                     when (it) {
-                        is EventResult.OnStart -> visibleDialog()
+                        is EventResult.OnStart -> {
+                            if (mIsRefresh) {
+                                setLayoutState(LayoutState.OnLoading)
+                            }
+                        }
                         is EventResult.OnNext -> {
                             if (it.data == null) {
                                 mBinding.subjectSmartRefreshLayout.finishRefresh()
                                 mBinding.subjectSmartRefreshLayout.finishLoadMore()
+                                setLayoutState(LayoutState.OnEmpty)
                                 return@collect
                             }
                             val datas: List<ArticleInfo> = it.data!!.datas
@@ -69,18 +73,29 @@ class SubjectActivity() :
                             }
                             if (mIsRefresh) {
                                 mArticleInfoAdapter.setList(datas)
+                                setLayoutState(LayoutState.OnSuccess)
                             } else {
                                 mArticleInfoAdapter.addData(datas)
                             }
+
+                            mIsRefresh = false
+                        }
+                        is EventResult.OnFail -> {
+//                            hideDialog()
+//                            showToast(it.throwable.message)
+                            mBinding.subjectSmartRefreshLayout.finishRefresh()
+                            mBinding.subjectSmartRefreshLayout.finishLoadMore()
+                            setLayoutState(LayoutState.OnFailed)
                         }
                         is EventResult.OnError -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
+//                            hideDialog()
+//                            showToast(it.throwable.message)
+                            setLayoutState(LayoutState.OnNetError)
                             mBinding.subjectSmartRefreshLayout.finishRefresh()
                             mBinding.subjectSmartRefreshLayout.finishLoadMore()
                         }
                         is EventResult.OnComplete -> {
-                            hideDialog()
+//                            hideDialog()
                             mBinding.subjectSmartRefreshLayout.finishRefresh()
                             mBinding.subjectSmartRefreshLayout.finishLoadMore()
                         }
@@ -94,7 +109,7 @@ class SubjectActivity() :
         mArticleInfoAdapter = ArticleInfoAdapter()
 
         mArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
-            val articleInfo =  adapter.data[position] as ArticleInfo
+            val articleInfo = adapter.data[position] as ArticleInfo
             ArouterManager.getInstance().navigationTo(
                 bundleOf(
                     BundleParams.WEB_URL to articleInfo.link
@@ -125,25 +140,24 @@ class SubjectActivity() :
 
         mBinding.subjectSmartRefreshLayout.setOnRefreshLoadMoreListener(this)
         initAdapter()
-        mIsRefresh = true
-        mViewModel.listSubject(true, mArticleId)
 
         //设置View展示状态布局
-//        setLoadService(mBinding.subjectSmartRefreshLayout)
+        setTargetLoadService(mBinding.subjectSmartRefreshLayout)
+
+        mViewModel.listSubject(mIsRefresh, mArticleId)
     }
 
-//    fun dataReload() {
-//        mIsRefresh = true
-//        mViewModel.listSubject(true, articleId)
-//    }
+    override fun dataReload() {
+        mIsRefresh = true
+        mViewModel.listSubject(mIsRefresh, mArticleId)
+    }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
-        mIsRefresh = true
-        mViewModel.listSubject(true, mArticleId)
+        mViewModel.listSubject(mIsRefresh, mArticleId)
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         mIsRefresh = true
-        mViewModel.listSubject(true, mArticleId)
+        mViewModel.listSubject(mIsRefresh, mArticleId)
     }
 }

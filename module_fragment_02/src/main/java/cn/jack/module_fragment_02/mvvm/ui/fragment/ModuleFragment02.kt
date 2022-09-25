@@ -26,6 +26,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.hjq.bar.OnTitleBarListener
 import com.jack.lib_base.base.view.BaseSimpleFragment
+import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.flow.FlowManager
 import com.jack.lib_wrapper_net.manager.HttpManager
 import com.jack.lib_wrapper_net.model.EventResult
@@ -46,10 +47,7 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
     OnRefreshLoadMoreListener,
     OnItemChildClickListener {
 
-//    val isRegisterLoadSir: Boolean
-//        get() = true
-//    val isViewRegisterLoadSir: Boolean
-//        get() = true
+    private var mIsRefresh = true
 
     private val uncollectArticle =
         MutableStateFlow<EventResult<String>>(EventResult.OnComplete)
@@ -81,9 +79,6 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
         super.prepareData()
         initAdapter()
 
-        //在fragment中的view中使用loadsir
-//        setLoadService(mBinding.findSmartRefreshLayout)
-
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 uncollectArticle_.collect {
@@ -95,6 +90,10 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
 //                            }
                             articleInfo.isCollect = !articleInfo.isCollect
                             mArticleInfoAdapter.notifyItemChanged(position)
+                        }
+                        is EventResult.OnFail -> {
+                            hideDialog()
+                            showToast(it.throwable.message)
                         }
                         is EventResult.OnError -> {
                             hideDialog()
@@ -120,6 +119,10 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
                             articleInfo.isCollect = !articleInfo.isCollect
                             mArticleInfoAdapter.notifyItemChanged(position)
                         }
+                        is EventResult.OnFail -> {
+                            hideDialog()
+                            showToast(it.throwable.message)
+                        }
                         is EventResult.OnError -> {
                             hideDialog()
                             showToast(it.throwable.message)
@@ -136,29 +139,41 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 projectInfoList_.collect {
                     when (it) {
-                        is EventResult.OnStart -> visibleDialog()
+                        is EventResult.OnStart -> {
+                            if (mIsRefresh) {
+                                setLayoutState(LayoutState.OnLoading)
+                            }
+                        }
                         is EventResult.OnNext -> {
                             if (it.data == null) {
+                                setLayoutState(LayoutState.OnEmpty)
                                 return@collect
                             }
                             if (it.data!!.curPage == 0) {
                                 mArticleInfoAdapter.setList(it.data!!.datas)
+                                setLayoutState(LayoutState.OnSuccess)
                             } else {
                                 mArticleInfoAdapter.addData(it.data!!.datas)
                             }
+                            mIsRefresh = false
+                        }
+                        is EventResult.OnFail -> {
+//                            hideDialog()
+//                            showToast(it.throwable.message)
+                            setLayoutState(LayoutState.OnFailed)
                         }
                         is EventResult.OnError -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                            mBinding.findSmartRefreshLayout.finishRefresh()
-                            mBinding.findSmartRefreshLayout.finishLoadMore()
+                            setLayoutState(LayoutState.OnNetError)
+//                            hideDialog()
+//                            showToast(it.throwable.message)
                         }
                         is EventResult.OnComplete -> {
-                            hideDialog()
-                            mBinding.findSmartRefreshLayout.finishRefresh()
-                            mBinding.findSmartRefreshLayout.finishLoadMore()
+//                            hideDialog()
+
                         }
                     }
+                    mBinding.findSmartRefreshLayout.finishRefresh()
+                    mBinding.findSmartRefreshLayout.finishLoadMore()
                 }
             }
         }
@@ -180,6 +195,10 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
                             //将数据存储在本地
                             keepSortInfosInLocal(it.data!!)
                         }
+                        is EventResult.OnFail -> {
+                            hideDialog()
+                            showToast(it.throwable.message)
+                        }
                         is EventResult.OnError -> {
                             hideDialog()
                             showToast(it.throwable.message)
@@ -195,12 +214,13 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
 
     override fun loadData() {
         super.loadData()
-        listProjects(id, true)
+        listProjects(id, mIsRefresh)
     }
 
-//    fun dataReload() {
-//        listProjects(id, true)
-//    }
+    override fun dataReload() {
+        mIsRefresh = true
+        listProjects(id, mIsRefresh)
+    }
 
     override fun prepareListener() {
         super.prepareListener()
@@ -213,6 +233,7 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
                 showSortDailog()
             }
         })
+        setTargetLoadService(mBinding.findSmartRefreshLayout)
     }
 
     private fun showSortDailog() {
@@ -241,7 +262,7 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
                     if (it.errorCode == 0) {
                         EventResult.OnNext(it.data)
                     } else {
-                        EventResult.OnError(Throwable(it.errorMsg))
+                        EventResult.OnFail(Throwable(it.errorMsg))
                     }
                 }
         }.onEach {
@@ -291,7 +312,7 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
         mArticleInfoAdapter = ArticleInfoAdapter()
 
         mArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
-            val articleInfo =  adapter.data[position] as ArticleInfo
+            val articleInfo = adapter.data[position] as ArticleInfo
             ArouterManager.getInstance().navigationTo(
                 bundleOf(
                     BundleParams.WEB_URL to articleInfo.link
@@ -304,11 +325,12 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
-        listProjects(cid, false)
+        listProjects(cid, mIsRefresh)
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-        listProjects(cid, true)
+        mIsRefresh = true
+        listProjects(cid, mIsRefresh)
     }
 
     private var page = 0
@@ -327,7 +349,7 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
                     if (it.errorCode == 0) {
                         EventResult.OnNext(it.data)
                     } else {
-                        EventResult.OnError(Throwable(it.errorMsg))
+                        EventResult.OnFail(Throwable(it.errorMsg))
                     }
                 }
         }.onEach {
@@ -355,7 +377,7 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
                     if (it.errorCode == 0) {
                         EventResult.OnNext(it.data)
                     } else {
-                        EventResult.OnError(Throwable(it.errorMsg))
+                        EventResult.OnFail(Throwable(it.errorMsg))
                     }
                 }
         }.onEach {
@@ -377,7 +399,7 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
                     if (it.errorCode == 0) {
                         EventResult.OnNext(it.data)
                     } else {
-                        EventResult.OnError(Throwable(it.errorMsg))
+                        EventResult.OnFail(Throwable(it.errorMsg))
                     }
                 }
         }.onEach {

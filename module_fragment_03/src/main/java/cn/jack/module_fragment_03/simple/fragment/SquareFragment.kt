@@ -12,7 +12,6 @@ import cn.jack.library_arouter.BundleParams
 import cn.jack.library_arouter.manager.ArouterManager
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_arouter.router.RouterPathFragment
-import cn.jack.library_util.ext.showToast
 import cn.jack.module_fragment_03.R
 import cn.jack.module_fragment_03.databinding.FragmentSquareBinding
 import cn.jack.module_fragment_03.entity.SystemInfo
@@ -20,6 +19,7 @@ import cn.jack.module_fragment_03.service.ApiService
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.flexbox.FlexboxLayout
 import com.jack.lib_base.base.view.BaseSimpleFragment
+import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.flow.FlowManager
 import com.jack.lib_wrapper_net.manager.HttpManager
 import com.jack.lib_wrapper_net.model.EventResult
@@ -32,11 +32,8 @@ import kotlinx.coroutines.launch
  * Description: 广场
  */
 @Route(path = RouterPathFragment.HomeThird.PAGER_HOME_SQUARE)
-open class SquareFragment : BaseSimpleFragment<FragmentSquareBinding>(FragmentSquareBinding::inflate) {
-
-//    override fun isRegisterLoadSir(): Boolean {
-//        return true
-//    }
+open class SquareFragment :
+    BaseSimpleFragment<FragmentSquareBinding>(FragmentSquareBinding::inflate) {
 
     private val mSystemInfo =
         MutableStateFlow<EventResult<List<SystemInfo>>>(EventResult.OnComplete)
@@ -44,6 +41,10 @@ open class SquareFragment : BaseSimpleFragment<FragmentSquareBinding>(FragmentSq
     private val systemAndSquareInfo_ =
         mSystemInfo.shareIn(lifecycleScope, SharingStarted.WhileSubscribed(5000))
 
+    override fun prepareListener() {
+        super.prepareListener()
+        setTargetLoadService(mBinding.indicatorScrollView)
+    }
 
     override fun prepareData() {
         super.prepareData()
@@ -53,19 +54,27 @@ open class SquareFragment : BaseSimpleFragment<FragmentSquareBinding>(FragmentSq
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 systemAndSquareInfo_.collect {
                     when (it) {
-                        is EventResult.OnStart -> visibleDialog()
+                        is EventResult.OnStart -> setLayoutState(LayoutState.OnLoading)
                         is EventResult.OnNext -> {
-                            if(it.data == null){
+                            if (it.data == null) {
+                                setLayoutState(LayoutState.OnEmpty)
                                 return@collect
                             }
                             setData(it.data!!)
+                            setLayoutState(LayoutState.OnSuccess)
+                        }
+                        is EventResult.OnFail -> {
+//                            hideDialog()
+//                            showToast(it.throwable.message)
+                            setLayoutState(LayoutState.OnFailed)
                         }
                         is EventResult.OnError -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
+//                            hideDialog()
+//                            showToast(it.throwable.message)
+                            setLayoutState(LayoutState.OnNetError)
                         }
                         is EventResult.OnComplete -> {
-                            hideDialog()
+//                            hideDialog()
                         }
                     }
                 }
@@ -73,7 +82,13 @@ open class SquareFragment : BaseSimpleFragment<FragmentSquareBinding>(FragmentSq
         }
     }
 
-//    fun dataReload() {
+//    override fun loadData() {
+//        super.loadData()
+//        httpDataInfo()
+//    }
+//
+//    override fun dataReload() {
+//        println("体系---")
 //        httpDataInfo()
 //    }
 
@@ -85,7 +100,7 @@ open class SquareFragment : BaseSimpleFragment<FragmentSquareBinding>(FragmentSq
                     if (it.errorCode == 0) {
                         EventResult.OnNext(it.data)
                     } else {
-                        EventResult.OnError(Throwable(it.errorMsg))
+                        EventResult.OnFail(Throwable(it.errorMsg))
                     }
                 }
         }.onEach {

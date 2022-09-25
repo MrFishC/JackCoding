@@ -3,9 +3,15 @@
     package="cn.jack.module_login">
 
     <application>
-        <activity android:name=".mvvm.view.SplashActivity"/>
-        <activity android:name=".mvvm.view.RegisterActivity"/>
-        <activity android:name=".mvvm.view.LoginActivity"/>
+        <activity android:name=".mvvm.view.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".mvvm.view.RegisterActivity" />
+        <activity android:name=".mvvm.view.LoginActivity" />
     </application>
 
 </manifest>

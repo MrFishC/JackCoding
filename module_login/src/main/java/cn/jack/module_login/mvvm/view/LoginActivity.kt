@@ -16,6 +16,7 @@ import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.vm.LoginViewModel
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.jack.lib_base.base.view.BaseActivity
+import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.model.EventResult
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
@@ -55,6 +56,11 @@ class LoginActivity :
                     when (it) {
                         is EventResult.OnStart -> visibleDialog()
                         is EventResult.OnNext -> openHome(it.data)
+                        is EventResult.OnFail -> {
+                            hideDialog()
+                            mBinding.btnLoginCommit.reset()
+                            showToast(it.throwable.message)
+                        }
                         is EventResult.OnError -> {
                             hideDialog()
                             mBinding.btnLoginCommit.reset()
@@ -64,6 +70,16 @@ class LoginActivity :
                             mBinding.btnLoginCommit.reset()
                             hideDialog()
                         }
+                        //登录页面测试状态布局，实际上不需要
+//                        is EventResult.OnStart -> setLayoutState(LayoutState.OnLoading)
+//                        is EventResult.OnNext -> setLayoutState(LayoutState.OnSuccess)
+//                        is EventResult.OnFail -> setLayoutState(LayoutState.OnFailed)
+//                        is EventResult.OnError -> {
+////                            setLayoutState(LayoutState.OnNetError)
+//                            mBinding.btnLoginCommit.reset()
+////                            showToast(it.throwable.message)   //有了状态布局就不需要吐司
+//                        }
+//                        is EventResult.OnComplete -> mBinding.btnLoginCommit.reset()
                     }
                 }
             }
@@ -71,9 +87,11 @@ class LoginActivity :
     }
 
     private fun openHome(data: UserInfo?) {
-        KvStoreUtil.getInstance()?.save(C.Login.user_name, data?.email)
+        KvStoreUtil.getInstance().save(C.Login.user_name, data?.email)
         mBinding.btnLoginCommit.reset()
         ArouterManager.getInstance().navigation2Home()
+
+
     }
 
     override fun prepareData() {

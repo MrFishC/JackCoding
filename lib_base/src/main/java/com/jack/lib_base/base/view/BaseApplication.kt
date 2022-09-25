@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.os.Process
 import androidx.multidex.MultiDex
+import cn.jack.library_common_business.loadsir.callback.*
 import cn.jack.library_image.util.ImageU
 import cn.jack.library_util.ContextU
 import cn.jack.library_util.KvStoreUtil
@@ -16,6 +17,8 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.jack.lib_base.BuildConfig
 import com.jack.lib_wrapper_net.interceptor.TokenInterceptor
 import com.jack.lib_wrapper_net.manager.OkHttpManager
+import com.kingja.loadsir.callback.SuccessCallback
+import com.kingja.loadsir.core.LoadSir
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
@@ -71,7 +74,7 @@ open class BaseApplication : Application() {
     fun setApplication(application: Application) {
         initArouter()
         initNetwork()
-//        initLoadSir()
+        initLoadSir()
         initImageLoader()
 //        initBus()
         initMMKV()
@@ -85,7 +88,7 @@ open class BaseApplication : Application() {
     }
 
     private fun initContextU() {
-        ContextU.init(this,this)
+        ContextU.init(this, this)
     }
 
     private fun initToastU() {
@@ -102,6 +105,19 @@ open class BaseApplication : Application() {
 
     private fun initImageLoader() {
         ImageU.init()
+    }
+
+    private fun initLoadSir() {
+        LoadSir.beginBuilder()
+            .addCallback(LoadingCallback())
+            .addCallback(FailedCallback())
+            .addCallback(EmptyCallback())
+            .addCallback(TimeoutCallback())
+            .addCallback(CustomCallback())
+            //注意：因为使用了Flow，封装了onCompletion回调，故在使用状态布局的时候，设置SuccessCallback的位置需要注意
+            //要结合flow的封装情况来设置
+            .setDefaultCallback(SuccessCallback::class.java)    //这里可以不设置
+            .commit()
     }
 
     private fun initNetwork() {

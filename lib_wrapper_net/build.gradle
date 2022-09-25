@@ -41,10 +41,24 @@ dependencies {
 //    implementation rootProject.ext.dependencies["fastjson"]
 //    implementation rootProject.ext.dependencies["converter-gson"]
 
+    api rootProject.ext.dependencies["rxjava2"]
+    api rootProject.ext.dependencies["rxandroid2"]
+    api rootProject.ext.dependencies["retrofit2:adapter"]
+
+    api rootProject.ext.dependencies["retrofit2"]
+    api rootProject.ext.dependencies["interceptor"]
+    api rootProject.ext.dependencies["gson"]
+    api rootProject.ext.dependencies["fastjson"]
+    api rootProject.ext.dependencies["converter-gson"]
+
+    api rootProject.ext.dependencies["PersistentCookieJar"]
+
+    api "io.github.vincent-series:sharp-retrofit:1.9"
+
     implementation rootProject.ext.dependencies["core-ktx"]
 
     //先实现rxjava结合retrofit的kotlin稳定版，再增加flow+retrofit的版本的网路请求库
-    api project(path: ':retrofit2_rxjava2')
+//    api project(path: ':retrofit2_rxjava2')
 
     //retrofit 2.8.0以上支持协程
     implementation rootProject.ext.dependencies["kotlinx-coroutines-core"]

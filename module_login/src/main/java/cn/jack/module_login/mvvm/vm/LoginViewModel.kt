@@ -4,7 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.viewModelScope
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.modle.repository.LoginHttpRepository
-import com.jack.lib_wrapper_mvvm.base.viewmodel.BaseWrapperViewModel
+import com.jack.lib_base.base.vm.BaseViewModle
 import com.jack.lib_wrapper_net.model.EventResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -17,7 +17,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val mRepository: LoginHttpRepository) :
-    BaseWrapperViewModel() {
+    BaseViewModle() {
 
     //StateFlow的使用场景与LiveData是非常接近的
     //与LiveData组件不同的是，这里开发者必须为MutableFlow指定默认值。
