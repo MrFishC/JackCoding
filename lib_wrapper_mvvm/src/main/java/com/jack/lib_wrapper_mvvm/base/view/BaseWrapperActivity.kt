@@ -1,12 +1,9 @@
 package com.jack.lib_wrapper_mvvm.base.view
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import com.jack.lib_wrapper_mvvm.ext.finisActivity
-import com.jack.lib_wrapper_mvvm.ext.setStatusBarTranslucent
 import com.jack.lib_wrapper_mvvm.interfa.IBaseView
 
 /**
@@ -31,17 +28,9 @@ abstract class BaseWrapperActivity<VB : ViewDataBinding>(open var block: (Layout
         prepareListener()
     }
 
-    override fun prepareParam() {
-        setStatusBarTranslucent(Color.BLACK)
-    }
-
     override fun prepareData() {}
 
     override fun prepareListener() {}
-
-    override fun onBackPressed() {
-        finisActivity()
-    }
 
     open fun hideDialog(){
 

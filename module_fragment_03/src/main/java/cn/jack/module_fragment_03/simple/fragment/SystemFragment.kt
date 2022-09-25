@@ -19,7 +19,7 @@ import cn.jack.module_fragment_03.entity.NavInfo
 import cn.jack.module_fragment_03.service.ApiService
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.flexbox.FlexboxLayout
-import com.jack.lib_base.base.BaseSimpleFragment
+import com.jack.lib_base.base.view.BaseSimpleFragment
 import com.jack.lib_wrapper_net.flow.FlowManager
 import com.jack.lib_wrapper_net.manager.HttpManager
 import com.jack.lib_wrapper_net.model.EventResult

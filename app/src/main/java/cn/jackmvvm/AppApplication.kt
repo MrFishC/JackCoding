@@ -1,7 +1,7 @@
 package cn.jackmvvm
 
 import com.alibaba.android.arouter.launcher.ARouter
-import com.jack.lib_base.base.BaseApplication
+import com.jack.lib_base.base.view.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
 
 /**

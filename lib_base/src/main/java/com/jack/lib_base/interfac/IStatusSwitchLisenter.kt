@@ -11,40 +11,28 @@ interface IStatusSwitchLisenter {
      * 默认不使用Inject
      * 使用ARouter传递参数需要重写该方法，设置返回值为true
      */
-    fun injectARouter(): Boolean {
-        return false
-    }
+    fun injectARouter(): Boolean = false
 
     /**
      * 是否注册EventBus，默认不注册
      */
-    fun isRegisterEventBus(): Boolean {
-        return false
-    }
+    fun isRegisterEventBus(): Boolean = false
 
     /**
      * 状态栏默认为黑色
      * @return
      */
-    fun isBlack(): Boolean {
-        return true
-    }
+    fun isBlack(): Boolean = true
 
-    fun isDefaultStatusBar(): Boolean {
-        return true
-    }
+    fun isDefaultStatusBar(): Boolean = true
 
     /**
      * 是否使用Loadsir
      */
-    fun isRegisterLoadSir(): Boolean {
-        return false
-    }
+    fun isRegisterLoadSir(): Boolean = false
 
     /**
      * 指定的View是否使用Loadsir
      */
-    fun isViewRegisterLoadSir(): Boolean {
-        return false
-    }
+    fun isViewRegisterLoadSir(): Boolean = false
 }

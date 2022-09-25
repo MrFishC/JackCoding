@@ -9,7 +9,7 @@ import cn.jack.module_fragment_03.simple.adapter.TabNavigatorAdapter
 import cn.jack.module_fragment_03.simple.adapter.ViewPagerFragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.jack.lib_base.base.BaseSimpleFragment
+import com.jack.lib_base.base.view.BaseSimpleFragment
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
 
 /**

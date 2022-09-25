@@ -1,6 +1,6 @@
 package cn.jack.module_login.debug
 
-import com.jack.lib_base.base.BaseApplication
+import com.jack.lib_base.base.view.BaseApplication
 
 /**
  * @创建者 Jack

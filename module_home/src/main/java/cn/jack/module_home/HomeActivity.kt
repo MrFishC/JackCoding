@@ -6,7 +6,7 @@ import cn.jack.library_arouter.router.RouterPathFragment
 import cn.jack.module_home.databinding.ActivityHomeBinding
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.jack.lib_base.base.BaseSimpleActivity
+import com.jack.lib_base.base.view.BaseSimpleActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

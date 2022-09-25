@@ -23,10 +23,9 @@ class LoginHttpRepository @Inject constructor() : BaseWrapperModel() {
             HttpManager.obtainRetrofitService(ApiService::class.java)
                 .login(userName, passwd)
                 .map {
-//                    EventResult.OnNext(it.data)
                     if (it.errorCode == 0) {
-                        KvStoreUtil.getInstance()?.save(C.C_USER_NAME,userName)
-                        KvStoreUtil.getInstance()?.save(C.C_USER_PASSWD,passwd)
+                        KvStoreUtil.getInstance().save(C.C_USER_NAME,userName)
+                        KvStoreUtil.getInstance().save(C.C_USER_PASSWD,passwd)
                         EventResult.OnNext(it.data)
                     } else {
                         EventResult.OnError(Throwable(it.errorMsg))

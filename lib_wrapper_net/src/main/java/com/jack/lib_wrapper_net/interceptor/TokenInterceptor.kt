@@ -21,7 +21,7 @@ class TokenInterceptor : Interceptor {
         val url = request.url.toString()
 
         if (needAddToken(url)) {
-            val token = KvStoreUtil.getInstance()?.getString(C.Login.user_token) + ""
+            val token = KvStoreUtil.getInstance().getString(C.Login.user_token) + ""
             val updateRequest = request.newBuilder().header(TOKEN, token).build()
             return chain.proceed(updateRequest)
         }

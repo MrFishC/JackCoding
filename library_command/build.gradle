@@ -1,2 +1,0 @@
-apply from: "../gradle/lib.build.gradle"
-

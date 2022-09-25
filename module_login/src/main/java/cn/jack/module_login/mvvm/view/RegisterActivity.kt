@@ -9,14 +9,13 @@ import cn.jack.library_arouter.manager.ArouterManager
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_common_business.constant.C
 import cn.jack.library_util.KvStoreUtil
-import cn.jack.library_util.ToastU
 import cn.jack.library_util.ext.showToast
 import cn.jack.module_login.databinding.ActivityRegisterBinding
 import cn.jack.module_login.mvvm.modle.entity.InfoVerification
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.vm.RegisterViewModel
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.jack.lib_base.base.BaseActivity
+import com.jack.lib_base.base.view.BaseActivity
 import com.jack.lib_wrapper_net.model.EventResult
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider

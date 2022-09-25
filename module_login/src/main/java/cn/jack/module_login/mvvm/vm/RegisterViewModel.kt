@@ -17,7 +17,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class RegisterViewModel @Inject constructor(private val repository: RegisterHttpRepository) :
-    BaseWrapperViewModel(repository) {
+    BaseWrapperViewModel() {
 
     private val registerUserInfoState =
         MutableStateFlow<EventResult<UserInfo>>(EventResult.OnComplete)

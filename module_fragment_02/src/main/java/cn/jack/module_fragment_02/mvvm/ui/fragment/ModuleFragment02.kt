@@ -25,7 +25,7 @@ import com.alibaba.fastjson.JSON
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.hjq.bar.OnTitleBarListener
-import com.jack.lib_base.base.BaseSimpleFragment
+import com.jack.lib_base.base.view.BaseSimpleFragment
 import com.jack.lib_wrapper_net.flow.FlowManager
 import com.jack.lib_wrapper_net.manager.HttpManager
 import com.jack.lib_wrapper_net.model.EventResult
