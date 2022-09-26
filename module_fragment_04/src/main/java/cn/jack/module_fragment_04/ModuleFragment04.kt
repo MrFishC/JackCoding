@@ -11,7 +11,7 @@ import cn.jack.library_arouter.router.RouterPathFragment
 import cn.jack.library_common_business.adapter.ArticleInfoAdapter
 import cn.jack.library_common_business.entiy.ArticleInfo
 import cn.jack.library_common_business.entiy.ProjectInfoList
-import cn.jack.library_common_business.service.api.ApiArticleService
+import cn.jack.library_common_business.service.ApiArticleService
 import cn.jack.library_util.ext.showToast
 import cn.jack.module_fragment_04.databinding.FragmentHome04Binding
 import com.alibaba.android.arouter.facade.annotation.Route

@@ -70,16 +70,6 @@ class LoginActivity :
                             mBinding.btnLoginCommit.reset()
                             hideDialog()
                         }
-                        //登录页面测试状态布局，实际上不需要
-//                        is EventResult.OnStart -> setLayoutState(LayoutState.OnLoading)
-//                        is EventResult.OnNext -> setLayoutState(LayoutState.OnSuccess)
-//                        is EventResult.OnFail -> setLayoutState(LayoutState.OnFailed)
-//                        is EventResult.OnError -> {
-////                            setLayoutState(LayoutState.OnNetError)
-//                            mBinding.btnLoginCommit.reset()
-////                            showToast(it.throwable.message)   //有了状态布局就不需要吐司
-//                        }
-//                        is EventResult.OnComplete -> mBinding.btnLoginCommit.reset()
                     }
                 }
             }
@@ -97,8 +87,8 @@ class LoginActivity :
     override fun prepareData() {
         super.prepareData()
         mBinding.viewModel = mViewModel
-        mViewModel.mPhone.set(KvStoreUtil.getInstance()?.getString(C.C_USER_NAME))
-        mViewModel.mPasswd.set(KvStoreUtil.getInstance()?.getString(C.C_USER_PASSWD))
+        mViewModel.mPhone.set(KvStoreUtil.getInstance().getString(C.C_USER_NAME))
+        mViewModel.mPasswd.set(KvStoreUtil.getInstance().getString(C.C_USER_PASSWD))
     }
 
     @SuppressLint("CheckResult")

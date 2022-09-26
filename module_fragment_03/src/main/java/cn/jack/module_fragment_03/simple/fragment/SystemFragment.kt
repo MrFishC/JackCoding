@@ -1,6 +1,7 @@
 package cn.jack.module_fragment_03.simple.fragment
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
@@ -8,8 +9,8 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import cn.jack.library_arouter.manager.ArouterManager
 import cn.jack.library_arouter.BundleParams
+import cn.jack.library_arouter.manager.ArouterManager
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_arouter.router.RouterPathFragment
 import cn.jack.library_util.ext.showToast
@@ -24,6 +25,7 @@ import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.flow.FlowManager
 import com.jack.lib_wrapper_net.manager.HttpManager
 import com.jack.lib_wrapper_net.model.EventResult
+import com.kingja.loadsir.core.LoadSir
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -42,26 +44,33 @@ open class SystemFragment :
     private val systemAndSquareInfo_ =
         systemAndSquareInfo.shareIn(lifecycleScope, SharingStarted.WhileSubscribed(5000))
 
-    override fun prepareListener() {
-        super.prepareListener()
-        setTargetLoadService(mBinding.nestScrollView)
-    }
+    private var isInitialLoaded = false
+
+    override fun isRegisterLoadSir(): Boolean = true
+
+//    override fun prepareListener() {
+//        super.prepareListener()
+//        setTargetLoadService(mBinding.nestScrollView)
+//    }
 
     override fun prepareData() {
         super.prepareData()
-//        httpDataInfo()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 systemAndSquareInfo_.collect {
                     when (it) {
-                        is EventResult.OnStart -> setLayoutState(LayoutState.OnLoading)
+                        is EventResult.OnStart -> {
+                            println("OnStart1")
+                            setLayoutState(LayoutState.OnLoading)
+                        }
                         is EventResult.OnNext -> {
                             if (it.data == null) {
                                 setLayoutState(LayoutState.OnEmpty)
                                 return@collect
                             }
                             setData(it.data!!)
+                            println("OnNext1")
                             setLayoutState(LayoutState.OnSuccess)
                         }
                         is EventResult.OnFail -> setLayoutState(LayoutState.OnFailed)
@@ -79,15 +88,18 @@ open class SystemFragment :
         }
     }
 
-    override fun loadData() {
-        super.loadData()
-        println("loadData1")
-        httpDataInfo()
+    override fun onResume() {
+        super.onResume()
+        if (!isInitialLoaded) {
+            println("222")
+            httpDataInfo()
+            isInitialLoaded = true
+        }
     }
 
-//    fun dataReload() {
-//        httpDataInfo()
-//    }
+    override fun dataReload() {
+        httpDataInfo()
+    }
 
     private fun httpDataInfo() {
         FlowManager.httpRequest<List<NavInfo>> {

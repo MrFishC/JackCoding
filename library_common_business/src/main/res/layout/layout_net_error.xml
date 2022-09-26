@@ -10,12 +10,12 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginBottom="4dp"
-        android:background="@drawable/time_out" />
+        android:background="@drawable/net_error" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Oh no, time out."
+        android:text="Oh no, net error."
         android:textColor="#333333"
         android:textSize="18sp" />
 

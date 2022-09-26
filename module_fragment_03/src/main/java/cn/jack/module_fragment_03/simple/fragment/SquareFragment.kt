@@ -41,26 +41,30 @@ open class SquareFragment :
     private val systemAndSquareInfo_ =
         mSystemInfo.shareIn(lifecycleScope, SharingStarted.WhileSubscribed(5000))
 
-    override fun prepareListener() {
-        super.prepareListener()
-        setTargetLoadService(mBinding.indicatorScrollView)
-    }
+    override fun isRegisterLoadSir(): Boolean = true
+//    override fun prepareListener() {
+//        super.prepareListener()
+//        setTargetLoadService(mBinding.indicatorScrollView)
+//    }
 
     override fun prepareData() {
         super.prepareData()
-        httpDataInfo()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 systemAndSquareInfo_.collect {
                     when (it) {
-                        is EventResult.OnStart -> setLayoutState(LayoutState.OnLoading)
+                        is EventResult.OnStart -> {
+                            println("OnStart12")
+                            setLayoutState(LayoutState.OnLoading)
+                        }
                         is EventResult.OnNext -> {
                             if (it.data == null) {
                                 setLayoutState(LayoutState.OnEmpty)
                                 return@collect
                             }
                             setData(it.data!!)
+                            println("OnNext12")
                             setLayoutState(LayoutState.OnSuccess)
                         }
                         is EventResult.OnFail -> {
@@ -82,15 +86,20 @@ open class SquareFragment :
         }
     }
 
-//    override fun loadData() {
-//        super.loadData()
-//        httpDataInfo()
-//    }
-//
-//    override fun dataReload() {
-//        println("体系---")
-//        httpDataInfo()
-//    }
+    private var isInitialLoaded = false
+
+    override fun onResume() {
+        super.onResume()
+        if (!isInitialLoaded) {
+            println("111")
+            httpDataInfo()
+            isInitialLoaded = true
+        }
+    }
+
+    override fun dataReload() {
+        httpDataInfo()
+    }
 
     private fun httpDataInfo() {
         FlowManager.httpRequest<List<SystemInfo>> {

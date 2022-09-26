@@ -14,7 +14,7 @@ import com.jack.lib_wrapper_mvvm.interfa.IBaseView
  * @描述
  */
 abstract class BaseWrapperFragment<VB : ViewDataBinding>(open var block: (LayoutInflater) -> VB) :
-    Fragment() , IBaseView {
+    Fragment(), IBaseView {
 
     protected val mBinding: VB by lazy { block(layoutInflater) }
 
@@ -39,10 +39,15 @@ abstract class BaseWrapperFragment<VB : ViewDataBinding>(open var block: (Layout
         lazyLoad()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mIsViewCreated = false
+        mIsUIVisible = false
+    }
+
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         //isVisibleToUser这个boolean值表示:该Fragment的UI 用户是否可见
-        println("setUserVisibleHint " + mIsUIVisible + " isVisibleToUser " + isVisibleToUser)
         if (isVisibleToUser) {
             mIsUIVisible = true
             lazyLoad()
@@ -68,7 +73,6 @@ abstract class BaseWrapperFragment<VB : ViewDataBinding>(open var block: (Layout
 
     //需要懒加载的子类则自行重写该方法
     open fun loadData() {
-        println("loadData2")
     }
 
     override fun prepareParam() {
@@ -83,7 +87,7 @@ abstract class BaseWrapperFragment<VB : ViewDataBinding>(open var block: (Layout
 
     }
 
-    open fun hideDialog(){
+    open fun hideDialog() {
 
     }
 

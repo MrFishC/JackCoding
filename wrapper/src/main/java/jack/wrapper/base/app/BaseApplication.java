@@ -20,7 +20,6 @@ import cn.jack.library_common_business.loadsir.callback.EmptyCallback;
 import cn.jack.library_common_business.loadsir.callback.FailedCallback;
 import cn.jack.library_common_business.loadsir.callback.LoadingCallback;
 import cn.jack.library_common_business.loadsir.callback.TimeoutCallback;
-import cn.jack.library_common_business.service.ServiceConstants;
 import cn.jack.library_common_business.service.baseservice.LoginImpl;
 import cn.jack.library_util.ContextU;
 import jack.wrapper.BuildConfig;

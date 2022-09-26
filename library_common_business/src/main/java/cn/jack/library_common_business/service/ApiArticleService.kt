@@ -1,4 +1,4 @@
-package cn.jack.library_common_business.service.api
+package cn.jack.library_common_business.service
 
 import cn.jack.library_common_business.entiy.ApiResponse
 import cn.jack.library_common_business.entiy.ProjectInfoList

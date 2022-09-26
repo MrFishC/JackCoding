@@ -1,7 +1,7 @@
 package cn.jack.module_fragment_02.mvvm
 
 import cn.jack.library_common_business.entiy.ProjectInfoList
-import cn.jack.library_common_business.service.api.ApiArticleService
+import cn.jack.library_common_business.service.ApiArticleService
 import com.jack.lib_wrapper_mvvm.base.model.BaseWrapperModel
 import com.jack.lib_wrapper_net.flow.FlowManager
 import com.jack.lib_wrapper_net.manager.HttpManager

@@ -2,6 +2,8 @@ package com.jack.lib_base.base.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import cn.jack.library_common_business.loadsir.callback.*
 import com.alibaba.android.arouter.launcher.ARouter
@@ -32,6 +34,23 @@ open class BaseSimpleFragment<VB : ViewDataBinding>(override var block: (LayoutI
 
     private var mBaseLoadService: LoadService<Any>? = null
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return if (isRegisterLoadSir()) {
+            //对整个有页面的布局设置状态
+            mBaseLoadService = LoadSir.getDefault().register(mBinding.root) {
+                dataReload()
+            }
+            mBaseLoadService!!.loadLayout
+        } else {
+            super.onCreateView(inflater, container, savedInstanceState)
+        }
+
+    }
+
     /**
      * 对Fragment中指定的View设置状态布局
      */
@@ -41,6 +60,7 @@ open class BaseSimpleFragment<VB : ViewDataBinding>(override var block: (LayoutI
         }
     }
 
+    //在使用的时候需要谨慎，fragment不要同时 既对整个页面的布局设置状态 又对指定的View设置状态布局
     protected fun setLayoutState(layoutState: LayoutState) {
         when (layoutState) {
             LayoutState.OnLoading -> mBaseLoadService?.postCallbackDelayed(
@@ -51,7 +71,7 @@ open class BaseSimpleFragment<VB : ViewDataBinding>(override var block: (LayoutI
             LayoutState.OnEmpty -> mBaseLoadService?.postCallbackDelayed(EmptyCallback::class.java)
             LayoutState.OnTimeout -> mBaseLoadService?.postCallbackDelayed(TimeoutCallback::class.java)
             LayoutState.OnCustom -> mBaseLoadService?.postCallbackDelayed(CustomCallback::class.java)
-            LayoutState.OnNetError -> mBaseLoadService?.postCallbackDelayed(TimeoutCallback::class.java)
+            LayoutState.OnNetError -> mBaseLoadService?.postCallbackDelayed(NetErrorCallback::class.java)
             LayoutState.OnSuccess -> mBaseLoadService?.postSuccessDelayed()
         }
     }

@@ -50,8 +50,8 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseWrapperViewModel>(ove
             LayoutState.OnFailed -> mBaseLoadService?.postCallbackDelayed(FailedCallback::class.java)
             LayoutState.OnEmpty -> mBaseLoadService?.postCallbackDelayed(EmptyCallback::class.java)
             LayoutState.OnTimeout -> mBaseLoadService?.postCallbackDelayed(TimeoutCallback::class.java)
+            LayoutState.OnNetError -> mBaseLoadService?.postCallbackDelayed(NetErrorCallback::class.java)
             LayoutState.OnCustom -> mBaseLoadService?.postCallbackDelayed(CustomCallback::class.java)
-            LayoutState.OnNetError -> mBaseLoadService?.postCallbackDelayed(TimeoutCallback::class.java)
             LayoutState.OnSuccess -> mBaseLoadService?.postSuccessDelayed()
         }
     }

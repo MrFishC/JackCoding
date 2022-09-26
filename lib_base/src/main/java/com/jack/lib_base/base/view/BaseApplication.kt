@@ -3,7 +3,9 @@ package com.jack.lib_base.base.view
 import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
+import android.os.Build
 import android.os.Process
+import android.webkit.WebView
 import androidx.multidex.MultiDex
 import cn.jack.library_common_business.loadsir.callback.*
 import cn.jack.library_image.util.ImageU
@@ -17,6 +19,7 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.jack.lib_base.BuildConfig
 import com.jack.lib_wrapper_net.interceptor.TokenInterceptor
 import com.jack.lib_wrapper_net.manager.OkHttpManager
+import com.jack.library_webview.cache.WebViewCacheU
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadSir
 import okhttp3.OkHttpClient
@@ -47,12 +50,17 @@ open class BaseApplication : Application() {
         if (processName != null) {
             if (processName == this.packageName) {
                 init()
+            } else {
+                //处理：Android P 不支持同时使用多个进程中具有相同数据目录的WebView
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    WebView.setDataDirectorySuffix(processName)
+                }
             }
         }
     }
 
     /*子类重写该方法可以执行额外的初始化工作,若没有额外的初始化工作,直接在AndroidManiest.xml中配置该application;*/
-    protected fun init() {
+    private fun init() {
         setApplication(this)
     }
 
@@ -77,6 +85,7 @@ open class BaseApplication : Application() {
         initLoadSir()
         initImageLoader()
 //        initBus()
+        initWebV()
         initMMKV()
         initLogger()
         initToastU()
@@ -103,6 +112,10 @@ open class BaseApplication : Application() {
         KvStoreUtil.getInstance().init(this)
     }
 
+    private fun initWebV() {
+        WebViewCacheU.init(this);
+    }
+
     private fun initImageLoader() {
         ImageU.init()
     }
@@ -113,6 +126,7 @@ open class BaseApplication : Application() {
             .addCallback(FailedCallback())
             .addCallback(EmptyCallback())
             .addCallback(TimeoutCallback())
+            .addCallback(NetErrorCallback())
             .addCallback(CustomCallback())
             //注意：因为使用了Flow，封装了onCompletion回调，故在使用状态布局的时候，设置SuccessCallback的位置需要注意
             //要结合flow的封装情况来设置
