@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.kingja.loadsir.core.LoadSir;
-import com.limpoxe.support.library_service_manager.ServiceManager;
 import com.tencent.mmkv.MMKV;
 
 import java.util.List;
@@ -20,7 +19,6 @@ import cn.jack.library_common_business.loadsir.callback.EmptyCallback;
 import cn.jack.library_common_business.loadsir.callback.FailedCallback;
 import cn.jack.library_common_business.loadsir.callback.LoadingCallback;
 import cn.jack.library_common_business.loadsir.callback.TimeoutCallback;
-import cn.jack.library_common_business.service.baseservice.LoginImpl;
 import cn.jack.library_util.ContextU;
 import jack.wrapper.BuildConfig;
 //import jack.wrapper.bus.MyEventBusIndex;
@@ -123,7 +121,7 @@ public class BaseApplication extends Application{
 
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                AppManager.getAppManager().addActivity(activity);
+//                AppManager.getAppManager().addActivity(activity);
             }
 
             @Override
@@ -148,16 +146,16 @@ public class BaseApplication extends Application{
 
             @Override
             public void onActivityDestroyed(Activity activity) {
-                AppManager.getAppManager().removeActivity(activity);
+//                AppManager.getAppManager().removeActivity(activity);
             }
         });
     }
 
     private void initServiceManager() {
-        ServiceManager.init(this);
-
-        //根据自己的业务自定义实现接口和具体类，然后在ServiceManager中注册
-        ServiceManager.publishService(ServiceConstants.C_LOGIN, LoginImpl.class.getName());
+//        ServiceManager.init(this);
+//
+//        //根据自己的业务自定义实现接口和具体类，然后在ServiceManager中注册
+//        ServiceManager.publishService(ServiceConstants.C_LOGIN, LoginImpl.class.getName());
     }
 
     private void initLogger() {

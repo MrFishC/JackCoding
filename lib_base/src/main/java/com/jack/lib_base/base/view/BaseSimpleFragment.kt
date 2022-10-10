@@ -40,7 +40,7 @@ open class BaseSimpleFragment<VB : ViewDataBinding>(override var block: (LayoutI
         savedInstanceState: Bundle?
     ): View {
         return if (isRegisterLoadSir()) {
-            //对整个有页面的布局设置状态
+            //对整个页面的布局设置状态
             mBaseLoadService = LoadSir.getDefault().register(mBinding.root) {
                 dataReload()
             }

@@ -40,8 +40,8 @@ abstract class BaseWrapperViewModel constructor() : ViewModel() , DefaultLifecyc
 
         // 修改状态
         when {
-            hide -> showDialogState.postValue(DialogState.HIDE)
-            loading -> showDialogState.postValue(DialogState.LOADING)
+            hide -> showDialogState.postValue(DialogState.OnHide)
+            loading -> showDialogState.postValue(DialogState.OnLoading)
         }
     }
 

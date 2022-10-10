@@ -1,0 +1,78 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
+    defaultConfig {
+
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //子模块混淆文件的指定是通过consumerProguardFiles这个属性来指定的，并不是proguardFiles 属性，而且我们无需配置其他的选项，只需要配置consumerProguardFiles属性就可以。该属性表示在打包的时候会自动寻找该module下我们指定的混淆文件对代码进行混淆。
+        consumerProguardFiles "consumer-rules.pro"
+
+        //ARouter配置
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //开启DataBinding
+    buildFeatures {
+        dataBinding true
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+
+    //统一资源前缀，规范资源引用
+    resourcePrefix project.getName() + "_"
+}
+
+dependencies{
+
+    //业务组件依赖Base========================================================
+    //组件依赖基础库
+    api project(':lib_base')
+
+    //按需依赖第三方组件(通用的可以在lib_base中统一配置即可)
+
+    //ARouter配置 //https://github.com/alibaba/ARouter/blob/master/README_CN.md
+    implementation rootProject.ext.dependencies["arouter-api"]
+    kapt rootProject.ext.dependencies["arouter-compiler"]
+
+    //hilt         https://developer.android.google.cn/training/dependency-injection/hilt-android?hl=zh-cn
+    implementation rootProject.ext.dependencies["hilt-android"]
+    kapt rootProject.ext.dependencies["hilt-compiler"]
+}

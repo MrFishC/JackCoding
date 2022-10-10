@@ -106,7 +106,7 @@ public class BaseH5Fragment extends Fragment implements WebViewCallBack, Execute
     private void addWebView() {
         //mWebView = new BaseWebView(getContext());
         mWebView = WebViewCacheU.Companion.acquireWebViewInternal(Objects.requireNonNull(getContext()));
-//        WebViewSettingManager.getInstance().settings(mWebView);
+        WebViewSettingManager.getInstance().settings(mWebView);
 
         if (mWebView.getParent() != null) {
             ((ViewGroup) mWebView.getParent()).removeView(mWebView);

@@ -26,7 +26,7 @@ abstract class BaseMvvmFragment<VB : ViewDataBinding, VM : BaseWrapperViewModel>
 
         mViewModel.showDialogState.observe(this) {
             when (it) {
-                DialogState.LOADING -> visibleDialog()
+                DialogState.OnLoading -> visibleDialog()
                 else -> hideDialog()
             }
         }

@@ -1,7 +1,6 @@
 package com.jack.lib_wrapper_mvvm.base.view
 
 import android.view.LayoutInflater
-import androidx.activity.viewModels
 import androidx.databinding.ViewDataBinding
 import com.jack.lib_wrapper_mvvm.base.viewmodel.BaseWrapperViewModel
 import com.jack.lib_wrapper_mvvm.interfa.IBaseView
@@ -30,7 +29,7 @@ abstract class BaseMvvmActivity<VB : ViewDataBinding, VM : BaseWrapperViewModel>
 
         mViewModel.showDialogState.observe(this) {
             when (it) {
-                DialogState.LOADING -> visibleDialog()
+                DialogState.OnLoading -> visibleDialog()
                 else -> hideDialog()
             }
         }

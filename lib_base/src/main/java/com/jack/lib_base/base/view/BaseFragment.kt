@@ -36,7 +36,7 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseWrapperViewModel>(ove
         }
     }
 
-    //目前的业务需求，对指定的View设置状态布局即可
+    //目前的业务需求，默认是对指定的View设置状态布局  BaseSimpleFragment中封装的是对整个页面设置状态布局
 //    override fun onCreateView(
 //        inflater: LayoutInflater,
 //        container: ViewGroup?,

@@ -12,7 +12,6 @@ import com.kingja.loadsir.core.LoadService
 
 fun LoadService<Any>.postCallbackDelayed(callback: Class<out Callback>, delayedTime: Long = 1000) {
     MainLooper.getInstance().postDelayed(Runnable {
-        println("callback " + callback)
         this.showCallback(callback)
     }, delayedTime)
 }
