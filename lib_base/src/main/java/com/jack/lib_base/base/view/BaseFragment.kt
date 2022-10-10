@@ -10,8 +10,8 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.jack.lib_base.interfac.ILoadSirLisenter
 import com.jack.lib_base.interfac.IStatusSwitchLisenter
 import com.jack.lib_base.uistate.LayoutState
-import com.jack.lib_base.uistate.ext.postCallbackDelayed
-import com.jack.lib_base.uistate.ext.postSuccessDelayed
+import com.jack.lib_base.ext.postCallbackDelayed
+import com.jack.lib_base.ext.postSuccessDelayed
 import com.jack.lib_wrapper_mvvm.base.view.BaseMvvmFragment
 import com.jack.lib_wrapper_mvvm.base.viewmodel.BaseWrapperViewModel
 import com.kingja.loadsir.core.LoadService
@@ -84,5 +84,9 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseWrapperViewModel>(ove
     override fun hideDialog() {
         super.hideDialog()
         closeDialog()
+    }
+
+    fun navigation(){
+
     }
 }

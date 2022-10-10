@@ -20,6 +20,7 @@ import cn.jack.module_fragment_01.mvvm.view.adapter.HomeArticleInfoAdapter
 import cn.jack.module_fragment_01.mvvm.view.adapter.ImageNetAdapter
 import cn.jack.module_fragment_01.mvvm.vm.HomePageOneViewModle
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.jack.lib_base.base.view.BaseFragment
 import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.model.EventResult
@@ -120,9 +121,9 @@ class ModuleFragment01 :
         mHomeArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
             val articleInfo = adapter.data[position] as ArticleInfo
             ArouterManager.getInstance().navigationTo(
-                bundleOf(
+                RouterPathActivity.Web.PAGER_WEB, bundleOf(
                     BundleParams.WEB_URL to articleInfo.link
-                ), RouterPathActivity.Web.PAGER_WEB
+                )
             )
         }
         mBinding.recyclerView.adapter = mHomeArticleInfoAdapter

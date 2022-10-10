@@ -79,9 +79,10 @@ class LoginActivity :
     private fun openHome(data: UserInfo?) {
         KvStoreUtil.getInstance().save(C.Login.user_name, data?.email)
         mBinding.btnLoginCommit.reset()
-        ArouterManager.getInstance().navigation2Home()
-
-
+//        ArouterManager.getInstance().navigation2Home()
+        ArouterManager.getInstance().navigationTo(
+            RouterPathActivity.Home.PAGER_HOME
+        )
     }
 
     override fun prepareData() {
@@ -131,8 +132,10 @@ class LoginActivity :
         }
 
         mBinding.registerText.setOnClickListener {
-            //跳转报错  kotlin和java混编导致
-            ArouterManager.getInstance().navigation2Register()
+//            ArouterManager.getInstance().navigation2Register()
+            ArouterManager.getInstance().navigationTo(
+                RouterPathActivity.Register.PAGER_REGISTER
+            )
         }
     }
 

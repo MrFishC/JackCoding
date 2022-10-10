@@ -55,8 +55,11 @@ class RegisterActivity :
     }
 
     private fun registerSuccess(data: UserInfo?) {
-        KvStoreUtil.getInstance()?.save(C.Login.user_name, data?.username)
-        ArouterManager.getInstance().navigation2Login()
+        KvStoreUtil.getInstance().save(C.Login.user_name, data?.username)
+//        ArouterManager.getInstance().navigation2Login()
+        ArouterManager.getInstance().navigationTo(
+            RouterPathActivity.Login.PAGER_LOGIN
+        )
     }
 
     override fun prepareListener() {

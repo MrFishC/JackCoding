@@ -1,7 +1,6 @@
 package cn.jack.module_fragment_03.simple.fragment
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
@@ -25,7 +24,6 @@ import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.flow.FlowManager
 import com.jack.lib_wrapper_net.manager.HttpManager
 import com.jack.lib_wrapper_net.model.EventResult
-import com.kingja.loadsir.core.LoadSir
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -48,11 +46,6 @@ open class SystemFragment :
 
     override fun isRegisterLoadSir(): Boolean = true
 
-//    override fun prepareListener() {
-//        super.prepareListener()
-//        setTargetLoadService(mBinding.nestScrollView)
-//    }
-
     override fun prepareData() {
         super.prepareData()
 
@@ -61,7 +54,6 @@ open class SystemFragment :
                 systemAndSquareInfo_.collect {
                     when (it) {
                         is EventResult.OnStart -> {
-                            println("OnStart1")
                             setLayoutState(LayoutState.OnLoading)
                         }
                         is EventResult.OnNext -> {
@@ -70,7 +62,6 @@ open class SystemFragment :
                                 return@collect
                             }
                             setData(it.data!!)
-                            println("OnNext1")
                             setLayoutState(LayoutState.OnSuccess)
                         }
                         is EventResult.OnFail -> setLayoutState(LayoutState.OnFailed)
@@ -91,7 +82,6 @@ open class SystemFragment :
     override fun onResume() {
         super.onResume()
         if (!isInitialLoaded) {
-            println("222")
             httpDataInfo()
             isInitialLoaded = true
         }
@@ -145,10 +135,10 @@ open class SystemFragment :
                 textView.text = element.title
                 textView.setOnClickListener {
                     ArouterManager.getInstance().navigationTo(
-                        bundleOf(
+                        RouterPathActivity.Subject.PAGER_SUBJECT, bundleOf(
                             BundleParams.ARTICLE_TITLE to element.title,
                             BundleParams.ARTICLE_ID to element.chapterId
-                        ), RouterPathActivity.Subject.PAGER_SUBJECT
+                        )
                     )
                 }
                 flexboxLayout.addView(textView)
