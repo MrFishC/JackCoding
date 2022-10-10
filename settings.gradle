@@ -19,8 +19,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "JackCoding"
 
-//include ':library_command'
-//include ':library_service_manager'
 include ':library_webview'
 include ':library_common_business'
 include ':library_image'
@@ -34,7 +32,7 @@ include ':library_arouter'
 include ':library_common_res'
 include ':module_login'
 include ':module_home'
-include ':app', ':wrapper', ':retrofit2_rxjava2'
+include ':app'
 include ':lib_wrapper_net'
 include ':lib_wrapper_mvvm'
 include ':lib_base'

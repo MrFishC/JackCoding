@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<View xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:id="@+id/status_bar_view"
-    android:layout_height="@dimen/status_bar_height"
-    />
-
-    <!-- ④ 使用ImmersionBar的statusBarView(View view)方法，可以用来适配渐变色状态栏、侧滑返回 layout_height : 19以上指定为25dp-->
