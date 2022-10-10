@@ -111,9 +111,9 @@ class SubjectActivity() :
         mArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
             val articleInfo = adapter.data[position] as ArticleInfo
             ArouterManager.getInstance().navigationTo(
-                bundleOf(
+                RouterPathActivity.Web.PAGER_WEB, bundleOf(
                     BundleParams.WEB_URL to articleInfo.link
-                ), RouterPathActivity.Web.PAGER_WEB
+                )
             )
         }
 

@@ -91,7 +91,6 @@ open class SquareFragment :
     override fun onResume() {
         super.onResume()
         if (!isInitialLoaded) {
-            println("111")
             httpDataInfo()
             isInitialLoaded = true
         }
@@ -146,10 +145,10 @@ open class SquareFragment :
                 flexboxLayout.addView(textView)
                 textView.setOnClickListener {
                     ArouterManager.getInstance().navigationTo(
-                        bundleOf(
+                        RouterPathActivity.Subject.PAGER_SUBJECT, bundleOf(
                             BundleParams.ARTICLE_TITLE to article.name,
                             BundleParams.ARTICLE_ID to article.id
-                        ), RouterPathActivity.Subject.PAGER_SUBJECT
+                        )
                     )
                 }
             }

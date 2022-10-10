@@ -34,20 +34,16 @@ import kotlinx.coroutines.launch
 class ModuleFragment04 : BaseSimpleFragment<FragmentHome04Binding>(FragmentHome04Binding::inflate),
     OnRefreshLoadMoreListener {
 
-    //    val isRegisterLoadSir: Boolean
-//        get() = true
-//    val isViewRegisterLoadSir: Boolean
-//        get() = true
     private lateinit var mArticleInfoAdapter: ArticleInfoAdapter
     private fun initAdapter() {
         mArticleInfoAdapter = ArticleInfoAdapter()
 
         mArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
-            val articleInfo =  adapter.data[position] as ArticleInfo
+            val articleInfo = adapter.data[position] as ArticleInfo
             ArouterManager.getInstance().navigationTo(
-                bundleOf(
+                RouterPathActivity.Web.PAGER_WEB, bundleOf(
                     BundleParams.WEB_URL to articleInfo.link
-                ), RouterPathActivity.Web.PAGER_WEB
+                )
             )
         }
 
@@ -66,7 +62,7 @@ class ModuleFragment04 : BaseSimpleFragment<FragmentHome04Binding>(FragmentHome0
                     when (it) {
                         is EventResult.OnStart -> visibleDialog()
                         is EventResult.OnNext -> {
-                            if(it.data == null){
+                            if (it.data == null) {
                                 return@collect
                             }
                             val datas = it.data!!.datas
