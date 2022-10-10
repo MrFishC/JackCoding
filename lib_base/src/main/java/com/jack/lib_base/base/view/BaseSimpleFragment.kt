@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import cn.jack.library_common_business.loadsir.callback.*
+import com.jack.lib_base.uistate.loadsir.callback.*
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jack.lib_base.interfac.ILoadSirLisenter
 import com.jack.lib_base.interfac.IStatusSwitchLisenter

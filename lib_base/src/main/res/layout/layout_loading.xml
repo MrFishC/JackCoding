@@ -10,7 +10,7 @@
     <!--        android:layout_width="wrap_content"-->
     <!--        android:layout_height="wrap_content"/>-->
 
-    <cn.jack.library_common_business.loadsir.weight.HwLoadingView
+    <com.jack.lib_base.uistate.loadsir.weight.HwLoadingView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:hlv_color="#999999"

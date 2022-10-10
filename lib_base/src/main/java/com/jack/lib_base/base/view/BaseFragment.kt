@@ -3,7 +3,7 @@ package com.jack.lib_base.base.view
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.databinding.ViewDataBinding
-import cn.jack.library_common_business.loadsir.callback.*
+import com.jack.lib_base.uistate.loadsir.callback.*
 import cn.jack.library_util.ext.closeDialog
 import cn.jack.library_util.ext.loadDialog
 import com.alibaba.android.arouter.launcher.ARouter

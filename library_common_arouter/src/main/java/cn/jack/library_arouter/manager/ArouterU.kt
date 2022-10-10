@@ -8,16 +8,16 @@ import com.alibaba.android.arouter.launcher.ARouter
  * @创建时间 2021/3/4 17:07
  * @描述
  */
-class ArouterManager private constructor() {
+class ArouterU private constructor() {
     companion object {
         @Volatile
-        private var instance: ArouterManager? = null
+        private var instance: ArouterU? = null
 
-        fun getInstance(): ArouterManager {
+        fun getInstance(): ArouterU {
             if (instance == null) {
                 synchronized(this) {
                     if (instance == null) {
-                        instance = ArouterManager()
+                        instance = ArouterU()
                     }
                 }
             }

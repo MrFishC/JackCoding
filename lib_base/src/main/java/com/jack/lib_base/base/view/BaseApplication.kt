@@ -7,7 +7,7 @@ import android.os.Build
 import android.os.Process
 import android.webkit.WebView
 import androidx.multidex.MultiDex
-import cn.jack.library_common_business.loadsir.callback.*
+import com.jack.lib_base.uistate.loadsir.callback.*
 import cn.jack.library_image.util.ImageU
 import cn.jack.library_util.ContextU
 import cn.jack.library_util.KvStoreUtil
@@ -17,7 +17,7 @@ import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.jack.lib_base.BuildConfig
-import com.jack.lib_wrapper_net.interceptor.TokenInterceptor
+import com.jack.lib_base.interceptor.TokenInterceptor
 import com.jack.lib_wrapper_net.manager.OkHttpManager
 import com.jack.library_webview.cache.WebViewCacheU
 import com.kingja.loadsir.callback.SuccessCallback
