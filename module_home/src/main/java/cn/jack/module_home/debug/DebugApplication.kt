@@ -1,6 +1,6 @@
-package cn.jack.module_login.debug
+package cn.jack.module_home.debug
 
-import cn.jack.module_login.BuildConfig
+import cn.jack.module_home.BuildConfig
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jack.lib_base.base.view.BaseApplication
 import dagger.hilt.android.HiltAndroidApp

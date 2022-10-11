@@ -9,7 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import cn.jack.library_arouter.BundleParams
-import cn.jack.library_arouter.manager.ArouterManager
+import cn.jack.library_arouter.manager.ArouterU
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_arouter.router.RouterPathFragment
 import cn.jack.library_util.ext.showToast
@@ -134,7 +134,7 @@ open class SystemFragment :
                 val textView = findLabel(flexboxLayout)
                 textView.text = element.title
                 textView.setOnClickListener {
-                    ArouterManager.getInstance().navigationTo(
+                    ArouterU.getInstance().navigationTo(
                         RouterPathActivity.Subject.PAGER_SUBJECT, bundleOf(
                             BundleParams.ARTICLE_TITLE to element.title,
                             BundleParams.ARTICLE_ID to element.chapterId

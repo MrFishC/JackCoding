@@ -1,4 +1,4 @@
-package cn.jack.library_common_business.loadsir.weight;
+package com.jack.lib_base.uistate.loadsir.weight;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

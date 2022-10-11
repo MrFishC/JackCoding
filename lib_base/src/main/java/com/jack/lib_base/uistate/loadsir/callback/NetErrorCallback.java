@@ -1,13 +1,11 @@
-package cn.jack.library_common_business.loadsir.callback;
+package com.jack.lib_base.uistate.loadsir.callback;
 
 import android.content.Context;
 import android.view.View;
 import android.widget.Toast;
 
+import com.jack.lib_base.R;
 import com.kingja.loadsir.callback.Callback;
-
-import cn.jack.library_common_business.R;
-
 
 /**
  * Description:TODO

@@ -12,7 +12,7 @@ class RouterPathFragment {
         private const val HOME_FIRST = "/home_first"
 
         /*首页-home-first*/
-        const val PAGER_HOME_FIRST = HOME_FIRST + "/Home_First"
+        const val PAGER_HOME_FIRST = "$HOME_FIRST/Home_First"
     }
 
     /**
@@ -22,7 +22,7 @@ class RouterPathFragment {
         private const val HOME_SECOND = "/home_second"
 
         /*首页-home_second*/
-        const val PAGER_HOME_SECOND = HOME_SECOND + "/Home_Second"
+        const val PAGER_HOME_SECOND = "$HOME_SECOND/Home_Second"
     }
 
     /**
@@ -32,15 +32,15 @@ class RouterPathFragment {
         private const val HOME_THIRD = "/home_third"
 
         /*首页-home_third*/
-        const val PAGER_HOME_THIRD = HOME_THIRD + "/Home_Third"
+        const val PAGER_HOME_THIRD = "$HOME_THIRD/Home_Third"
         private const val HOME_SQUARE = "/home_square"
 
         /*首页-home_Square*/
-        const val PAGER_HOME_SQUARE = HOME_SQUARE + "/Home_Square"
+        const val PAGER_HOME_SQUARE = "$HOME_SQUARE/Home_Square"
         private const val HOME_SYSTEM = "/home_system"
 
         /*首页-home_System*/
-        const val PAGER_HOME_SYSTEM = HOME_SYSTEM + "/Home_System"
+        const val PAGER_HOME_SYSTEM = "$HOME_SYSTEM/Home_System"
     }
 
     /**
@@ -50,6 +50,6 @@ class RouterPathFragment {
         private const val HOME_FOUR = "/home_four"
 
         /*首页-home_four*/
-        const val PAGER_HOME_FOUR = HOME_FOUR + "/Home_Four"
+        const val PAGER_HOME_FOUR = "$HOME_FOUR/Home_Four"
     }
 }

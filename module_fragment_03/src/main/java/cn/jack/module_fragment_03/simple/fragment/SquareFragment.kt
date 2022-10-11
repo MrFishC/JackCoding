@@ -9,7 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import cn.jack.library_arouter.BundleParams
-import cn.jack.library_arouter.manager.ArouterManager
+import cn.jack.library_arouter.manager.ArouterU
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_arouter.router.RouterPathFragment
 import cn.jack.module_fragment_03.R
@@ -144,7 +144,7 @@ open class SquareFragment :
                 textView.text = article.name
                 flexboxLayout.addView(textView)
                 textView.setOnClickListener {
-                    ArouterManager.getInstance().navigationTo(
+                    ArouterU.getInstance().navigationTo(
                         RouterPathActivity.Subject.PAGER_SUBJECT, bundleOf(
                             BundleParams.ARTICLE_TITLE to article.name,
                             BundleParams.ARTICLE_ID to article.id

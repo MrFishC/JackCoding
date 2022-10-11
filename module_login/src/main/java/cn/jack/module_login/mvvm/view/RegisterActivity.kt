@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import cn.jack.library_arouter.manager.ArouterManager
+import cn.jack.library_arouter.manager.ArouterU
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_common_business.constant.C
 import cn.jack.library_util.KvStoreUtil
@@ -57,7 +57,7 @@ class RegisterActivity :
     private fun registerSuccess(data: UserInfo?) {
         KvStoreUtil.getInstance().save(C.Login.user_name, data?.username)
 //        ArouterManager.getInstance().navigation2Login()
-        ArouterManager.getInstance().navigationTo(
+        ArouterU.getInstance().navigationTo(
             RouterPathActivity.Login.PAGER_LOGIN
         )
     }

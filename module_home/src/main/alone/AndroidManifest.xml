@@ -3,16 +3,15 @@
     package="cn.jack.module_home">
 
     <application
-        android:name="com.jack.lib_wrapper_mvvm.base.BaseApplication"
+        android:name=".debug.DebugApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/Theme.JackMvvm">
+        android:theme="@style/AppTheme">
         <activity android:name=".HomeActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

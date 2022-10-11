@@ -26,6 +26,11 @@ class ArouterU private constructor() {
         }
     }
 
+//    fun navigationTo(toPath: String) {
+//        ARouter.getInstance().build(toPath)
+//            .navigation()
+//    }
+
     fun navigationTo(toPath: String, bundle: Bundle? = null) {
         if (bundle != null) {
             ARouter.getInstance().build(toPath)

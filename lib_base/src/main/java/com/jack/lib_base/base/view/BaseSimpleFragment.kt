@@ -12,7 +12,7 @@ import com.jack.lib_base.interfac.IStatusSwitchLisenter
 import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_base.ext.postCallbackDelayed
 import com.jack.lib_base.ext.postSuccessDelayed
-import com.jack.lib_wrapper_mvvm.base.view.BaseWrapperFragment
+import com.jack.lib_wrapper_mvvm.mvvm.view.BaseWrapperFragment
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 

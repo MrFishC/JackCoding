@@ -1,5 +1,5 @@
 //该gradle只提供给 业务模块使用
-if (isBuildModule.toBoolean()) {
+if (!isBuildModule.toBoolean()) {
     //作为独立App应用运行
     apply plugin: 'com.android.application'
 } else {
@@ -26,7 +26,7 @@ android {
         consumerProguardFiles "consumer-rules.pro"
 
         //如果是独立模块，则使用当前组件的包名
-        if (isBuildModule.toBoolean()){
+        if (!isBuildModule.toBoolean()){
             //组件模式下设置applicationId
             applicationId rootProject.ext.android["module_applicationId"]
         }

@@ -1,4 +1,4 @@
-package com.jack.lib_wrapper_mvvm.base.model
+package com.jack.lib_wrapper_mvvm.mvvm.model
 import com.jack.lib_wrapper_mvvm.interfa.IModel
 
 /**

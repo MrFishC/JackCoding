@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import cn.jack.library_arouter.manager.ArouterManager
+import cn.jack.library_arouter.manager.ArouterU
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_common_business.constant.C
 import cn.jack.library_util.KvStoreUtil
@@ -16,7 +16,6 @@ import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.vm.LoginViewModel
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.jack.lib_base.base.view.BaseActivity
-import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.model.EventResult
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
@@ -80,7 +79,7 @@ class LoginActivity :
         KvStoreUtil.getInstance().save(C.Login.user_name, data?.email)
         mBinding.btnLoginCommit.reset()
 //        ArouterManager.getInstance().navigation2Home()
-        ArouterManager.getInstance().navigationTo(
+        ArouterU.getInstance().navigationTo(
             RouterPathActivity.Home.PAGER_HOME
         )
     }
@@ -133,7 +132,7 @@ class LoginActivity :
 
         mBinding.registerText.setOnClickListener {
 //            ArouterManager.getInstance().navigation2Register()
-            ArouterManager.getInstance().navigationTo(
+            ArouterU.getInstance().navigationTo(
                 RouterPathActivity.Register.PAGER_REGISTER
             )
         }

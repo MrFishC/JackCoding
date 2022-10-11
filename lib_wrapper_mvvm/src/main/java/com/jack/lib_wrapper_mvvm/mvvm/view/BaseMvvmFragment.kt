@@ -1,8 +1,8 @@
-package com.jack.lib_wrapper_mvvm.base.view
+package com.jack.lib_wrapper_mvvm.mvvm.view
 
 import android.view.LayoutInflater
 import androidx.databinding.ViewDataBinding
-import com.jack.lib_wrapper_mvvm.base.viewmodel.BaseWrapperViewModel
+import com.jack.lib_wrapper_mvvm.mvvm.viewmodel.BaseWrapperViewModel
 import com.jack.lib_wrapper_mvvm.uistate.DialogState
 
 /**

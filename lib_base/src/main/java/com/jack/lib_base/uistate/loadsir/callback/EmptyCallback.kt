@@ -1,6 +1,6 @@
-package cn.jack.library_common_business.loadsir.callback
+package com.jack.lib_base.uistate.loadsir.callback
 
-import cn.jack.library_common_business.R
+import com.jack.lib_base.R
 import com.kingja.loadsir.callback.Callback
 
 /**

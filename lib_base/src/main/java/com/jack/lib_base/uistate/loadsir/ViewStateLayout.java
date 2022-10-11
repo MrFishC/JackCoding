@@ -1,4 +1,4 @@
-package cn.jack.library_common_business.loadsir;
+package com.jack.lib_base.uistate.loadsir;
 
 /**
  * @创建者 Jack

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'org.jetbrains.kotlin.android'
+//apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -11,10 +12,20 @@ android {
         versionName rootProject.ext.android["versionName"]
         consumerProguardFiles "consumer-rules.pro"
 
+        //ARouter配置1：
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [AROUTER_MODULE_NAME: project.getName()]
+//            }
+//        }
+//        kapt {
+//            arguments {
+//                arg("AROUTER_MODULE_NAME", project.getName())
+//            }
+//        }
     }
 
     buildTypes {
-
         debug {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -39,4 +50,6 @@ android {
 
 dependencies {
     implementation rootProject.ext.dependencies["arouter-api"]
+//    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+//    kapt rootProject.ext.dependencies["arouter-compiler"]
 }

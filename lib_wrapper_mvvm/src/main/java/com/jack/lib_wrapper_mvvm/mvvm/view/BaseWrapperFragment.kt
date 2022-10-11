@@ -1,4 +1,4 @@
-package com.jack.lib_wrapper_mvvm.base.view
+package com.jack.lib_wrapper_mvvm.mvvm.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
