@@ -10,7 +10,7 @@ import dagger.hilt.android.HiltAndroidApp
  * @创建时间 2022/8/29 0029 12:29
  * @描述 每个业务模块使用
  */
-@HiltAndroidApp
+//@HiltAndroidApp
 class DebugApplication : BaseApplication() {
 
     override fun initArouter() {

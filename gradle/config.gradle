@@ -34,7 +34,8 @@ ext {
             lifecycle_version                         : "2.6.0-alpha01",
             activity_version                          : "1.5.1",
             fragment_version                          : "1.5.2",
-            hilt_version                              : "2.38.1",
+//            hilt_version                              : "2.38.1",
+            hilt_version                              : "2.44",
 
             multidexVersion                           : "2.0.1",
 

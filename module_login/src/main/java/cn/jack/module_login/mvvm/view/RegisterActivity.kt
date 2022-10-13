@@ -48,6 +48,7 @@ class RegisterActivity :
                             showToast(it.throwable.message)
                         }
                         is EventResult.OnComplete -> hideDialog()
+                        is EventResult.OnFail -> showToast(it.throwable.message)
                     }
                 }
             }

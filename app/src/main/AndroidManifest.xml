@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         >
+
 <!--        android:resizeableActivity="true"
         android:maxAspectRatio="2.4"-->
 

@@ -123,9 +123,9 @@ public class BaseH5Fragment extends Fragment implements WebViewCallBack, Execute
     }
 
     private void loadUrl() {
-        //mWebView.loadUrl(mWebUrl);
+        mWebView.loadUrl(mWebUrl);
         //测试加载本地HTML
-        mWebView.loadUrl("file:///android_asset/aidl.html");
+//        mWebView.loadUrl("file:///android_asset/aidl.html");
     }
 
     @Override
