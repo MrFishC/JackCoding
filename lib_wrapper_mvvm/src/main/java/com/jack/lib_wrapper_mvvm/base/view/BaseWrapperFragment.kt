@@ -42,7 +42,6 @@ abstract class BaseWrapperFragment<VB : ViewDataBinding>(open var block: (Layout
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         //isVisibleToUser这个boolean值表示:该Fragment的UI 用户是否可见
-        println("setUserVisibleHint " + mIsUIVisible + " isVisibleToUser " + isVisibleToUser)
         if (isVisibleToUser) {
             mIsUIVisible = true
             lazyLoad()
