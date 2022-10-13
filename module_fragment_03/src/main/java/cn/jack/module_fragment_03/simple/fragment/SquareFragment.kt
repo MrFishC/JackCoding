@@ -9,7 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import cn.jack.library_arouter.BundleParams
-import cn.jack.library_arouter.manager.ArouterManager
+import cn.jack.library_arouter.manager.ArouterU
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_arouter.router.RouterPathFragment
 import cn.jack.module_fragment_03.R
@@ -41,26 +41,30 @@ open class SquareFragment :
     private val systemAndSquareInfo_ =
         mSystemInfo.shareIn(lifecycleScope, SharingStarted.WhileSubscribed(5000))
 
-    override fun prepareListener() {
-        super.prepareListener()
-        setTargetLoadService(mBinding.indicatorScrollView)
-    }
+    override fun isRegisterLoadSir(): Boolean = true
+//    override fun prepareListener() {
+//        super.prepareListener()
+//        setTargetLoadService(mBinding.indicatorScrollView)
+//    }
 
     override fun prepareData() {
         super.prepareData()
-        httpDataInfo()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 systemAndSquareInfo_.collect {
                     when (it) {
-                        is EventResult.OnStart -> setLayoutState(LayoutState.OnLoading)
+                        is EventResult.OnStart -> {
+                            println("OnStart12")
+                            setLayoutState(LayoutState.OnLoading)
+                        }
                         is EventResult.OnNext -> {
                             if (it.data == null) {
                                 setLayoutState(LayoutState.OnEmpty)
                                 return@collect
                             }
                             setData(it.data!!)
+                            println("OnNext12")
                             setLayoutState(LayoutState.OnSuccess)
                         }
                         is EventResult.OnFail -> {
@@ -82,15 +86,19 @@ open class SquareFragment :
         }
     }
 
-//    override fun loadData() {
-//        super.loadData()
-//        httpDataInfo()
-//    }
-//
-//    override fun dataReload() {
-//        println("体系---")
-//        httpDataInfo()
-//    }
+    private var isInitialLoaded = false
+
+    override fun onResume() {
+        super.onResume()
+        if (!isInitialLoaded) {
+            httpDataInfo()
+            isInitialLoaded = true
+        }
+    }
+
+    override fun dataReload() {
+        httpDataInfo()
+    }
 
     private fun httpDataInfo() {
         FlowManager.httpRequest<List<SystemInfo>> {
@@ -136,11 +144,11 @@ open class SquareFragment :
                 textView.text = article.name
                 flexboxLayout.addView(textView)
                 textView.setOnClickListener {
-                    ArouterManager.getInstance().navigationTo(
-                        bundleOf(
+                    ArouterU.getInstance().navigationTo(
+                        RouterPathActivity.Subject.PAGER_SUBJECT, bundleOf(
                             BundleParams.ARTICLE_TITLE to article.name,
                             BundleParams.ARTICLE_ID to article.id
-                        ), RouterPathActivity.Subject.PAGER_SUBJECT
+                        )
                     )
                 }
             }

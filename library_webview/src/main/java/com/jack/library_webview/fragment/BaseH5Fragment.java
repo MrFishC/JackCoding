@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +18,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.jack.library_webview.R;
+import com.jack.library_webview.cache.WebViewCacheU;
 import com.jack.library_webview.util.WebConstants;
 import com.jack.library_webview.base.callback.WebViewCallBack;
 import com.jack.library_webview.base.set.WebViewSettingManager;
@@ -24,6 +27,8 @@ import com.jack.library_webview.databinding.LayoutWebviewContainerBinding;
 import com.jack.library_webview.dispatcher.CommandDispatcher;
 import com.jack.library_webview.request.ExecuteLisenter;
 import com.jack.library_webview.util.LogW;
+
+import java.util.Objects;
 
 /**
  * @创建者 Jack
@@ -70,12 +75,37 @@ public class BaseH5Fragment extends Fragment implements WebViewCallBack, Execute
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //        CommandDispatcher.getInstance().initAidlConnect(Objects.requireNonNull(getContext()).getApplicationContext());
+        initLayout();
         addWebView();
+    }
+
+    private View mLoadingView;
+    private View mErrorView;
+
+    private void initLayout() {
+        LayoutInflater inflater = getLayoutInflater();
+        mLoadingView = inflater.inflate(R.layout.layout_loading, null);
+        mErrorView = inflater.inflate(R.layout.layout_error, null);
+        mErrorView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reload();
+            }
+        });
+    }
+
+    private void reload() {
+        if (mBinding.rootView.getChildCount() > 0) {
+            mBinding.rootView.removeAllViews();
+            mBinding.rootView.addView(mWebView);
+            mWebView.reload();
+        }
     }
 
     @SuppressLint("AddJavascriptInterface")
     private void addWebView() {
-        mWebView = new BaseWebView(getContext());
+        //mWebView = new BaseWebView(getContext());
+        mWebView = WebViewCacheU.Companion.acquireWebViewInternal(Objects.requireNonNull(getContext()));
         WebViewSettingManager.getInstance().settings(mWebView);
 
         if (mWebView.getParent() != null) {
@@ -102,28 +132,48 @@ public class BaseH5Fragment extends Fragment implements WebViewCallBack, Execute
     public void onDestroyView() {
         super.onDestroyView();
 
-        //todo
-
+        mLoadingView = null;
+        mErrorView = null;
     }
 
     @Override
     public void onPageStarted(String url) {
+        System.out.println("onPageStarted");
 
+        if (mBinding.rootView.getChildCount() > 0) {
+            mBinding.rootView.removeAllViews();
+            mBinding.rootView.addView(mLoadingView);
+        }
     }
 
     @Override
     public void onPageFinished(String url) {
-
+        System.out.println("onPageFinished");
+        if (mBinding.rootView.getChildCount() > 0) {
+            mBinding.rootView.removeAllViews();
+            mBinding.rootView.addView(mWebView);
+        }
     }
 
     @Override
     public void onReceivedError() {
+        System.out.println("onReceivedError");
 
+        if (mBinding.rootView.getChildCount() > 0) {
+            mBinding.rootView.removeAllViews();
+            mBinding.rootView.addView(mErrorView);
+            mWebView.stopLoading();
+        }
     }
 
     @Override
     public void onReceivedHttpError() {
-
+        System.out.println("onReceivedHttpError");
+        if (mBinding.rootView.getChildCount() > 0) {
+            mBinding.rootView.removeAllViews();
+            mBinding.rootView.addView(mErrorView);
+            mWebView.stopLoading();
+        }
     }
 
     @Override

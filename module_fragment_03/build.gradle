@@ -1,4 +1,4 @@
-apply from: "../gradle/module_kt.build.gradle"
+apply from: "../gradle/module_home_fragment_kt.build.gradle"
 dependencies {
     //每个业务模块都按照implementation的方式依赖
 //    implementation project(path: ':wrapper')

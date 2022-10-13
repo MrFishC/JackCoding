@@ -8,8 +8,8 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import cn.jack.library_arouter.manager.ArouterManager
 import cn.jack.library_arouter.BundleParams
+import cn.jack.library_arouter.manager.ArouterU
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_arouter.router.RouterPathFragment
 import cn.jack.library_util.ext.showToast
@@ -42,20 +42,20 @@ open class SystemFragment :
     private val systemAndSquareInfo_ =
         systemAndSquareInfo.shareIn(lifecycleScope, SharingStarted.WhileSubscribed(5000))
 
-    override fun prepareListener() {
-        super.prepareListener()
-        setTargetLoadService(mBinding.nestScrollView)
-    }
+    private var isInitialLoaded = false
+
+    override fun isRegisterLoadSir(): Boolean = true
 
     override fun prepareData() {
         super.prepareData()
-//        httpDataInfo()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 systemAndSquareInfo_.collect {
                     when (it) {
-                        is EventResult.OnStart -> setLayoutState(LayoutState.OnLoading)
+                        is EventResult.OnStart -> {
+                            setLayoutState(LayoutState.OnLoading)
+                        }
                         is EventResult.OnNext -> {
                             if (it.data == null) {
                                 setLayoutState(LayoutState.OnEmpty)
@@ -79,15 +79,17 @@ open class SystemFragment :
         }
     }
 
-    override fun loadData() {
-        super.loadData()
-        println("loadData1")
-        httpDataInfo()
+    override fun onResume() {
+        super.onResume()
+        if (!isInitialLoaded) {
+            httpDataInfo()
+            isInitialLoaded = true
+        }
     }
 
-//    fun dataReload() {
-//        httpDataInfo()
-//    }
+    override fun dataReload() {
+        httpDataInfo()
+    }
 
     private fun httpDataInfo() {
         FlowManager.httpRequest<List<NavInfo>> {
@@ -132,11 +134,11 @@ open class SystemFragment :
                 val textView = findLabel(flexboxLayout)
                 textView.text = element.title
                 textView.setOnClickListener {
-                    ArouterManager.getInstance().navigationTo(
-                        bundleOf(
+                    ArouterU.getInstance().navigationTo(
+                        RouterPathActivity.Subject.PAGER_SUBJECT, bundleOf(
                             BundleParams.ARTICLE_TITLE to element.title,
                             BundleParams.ARTICLE_ID to element.chapterId
-                        ), RouterPathActivity.Subject.PAGER_SUBJECT
+                        )
                     )
                 }
                 flexboxLayout.addView(textView)

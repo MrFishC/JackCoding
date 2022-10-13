@@ -3,17 +3,17 @@ package com.jack.lib_base.base.view
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.databinding.ViewDataBinding
-import cn.jack.library_common_business.loadsir.callback.*
+import com.jack.lib_base.uistate.loadsir.callback.*
 import cn.jack.library_util.ext.closeDialog
 import cn.jack.library_util.ext.loadDialog
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jack.lib_base.interfac.ILoadSirLisenter
 import com.jack.lib_base.interfac.IStatusSwitchLisenter
 import com.jack.lib_base.uistate.LayoutState
-import com.jack.lib_base.uistate.ext.postCallbackDelayed
-import com.jack.lib_base.uistate.ext.postSuccessDelayed
-import com.jack.lib_wrapper_mvvm.base.view.BaseMvvmFragment
-import com.jack.lib_wrapper_mvvm.base.viewmodel.BaseWrapperViewModel
+import com.jack.lib_base.ext.postCallbackDelayed
+import com.jack.lib_base.ext.postSuccessDelayed
+import com.jack.lib_wrapper_mvvm.mvvm.view.BaseMvvmFragment
+import com.jack.lib_wrapper_mvvm.mvvm.viewmodel.BaseWrapperViewModel
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 
@@ -36,7 +36,7 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseWrapperViewModel>(ove
         }
     }
 
-    //目前的业务需求，对指定的View设置状态布局即可
+    //目前的业务需求，默认是对指定的View设置状态布局  BaseSimpleFragment中封装的是对整个页面设置状态布局
 //    override fun onCreateView(
 //        inflater: LayoutInflater,
 //        container: ViewGroup?,
@@ -70,8 +70,8 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseWrapperViewModel>(ove
             LayoutState.OnFailed -> mBaseLoadService?.postCallbackDelayed(FailedCallback::class.java)
             LayoutState.OnEmpty -> mBaseLoadService?.postCallbackDelayed(EmptyCallback::class.java)
             LayoutState.OnTimeout -> mBaseLoadService?.postCallbackDelayed(TimeoutCallback::class.java)
+            LayoutState.OnNetError -> mBaseLoadService?.postCallbackDelayed(NetErrorCallback::class.java)
             LayoutState.OnCustom -> mBaseLoadService?.postCallbackDelayed(CustomCallback::class.java)
-            LayoutState.OnNetError -> mBaseLoadService?.postCallbackDelayed(TimeoutCallback::class.java)
             LayoutState.OnSuccess -> mBaseLoadService?.postSuccessDelayed()
         }
     }
@@ -84,5 +84,9 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseWrapperViewModel>(ove
     override fun hideDialog() {
         super.hideDialog()
         closeDialog()
+    }
+
+    fun navigation(){
+
     }
 }

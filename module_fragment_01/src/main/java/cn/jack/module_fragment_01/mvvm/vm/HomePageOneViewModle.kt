@@ -3,7 +3,7 @@ package cn.jack.module_fragment_01.mvvm.vm
 import androidx.lifecycle.viewModelScope
 import cn.jack.module_fragment_01.mvvm.model.entity.HomeInfos
 import cn.jack.module_fragment_01.mvvm.model.repository.HomePageOneRepository
-import com.jack.lib_wrapper_mvvm.base.viewmodel.BaseWrapperViewModel
+import com.jack.lib_wrapper_mvvm.mvvm.viewmodel.BaseWrapperViewModel
 import com.jack.lib_wrapper_net.model.EventResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*

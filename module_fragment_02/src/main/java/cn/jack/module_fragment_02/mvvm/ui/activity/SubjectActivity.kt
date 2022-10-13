@@ -7,7 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import cn.jack.library_arouter.BundleParams
-import cn.jack.library_arouter.manager.ArouterManager
+import cn.jack.library_arouter.manager.ArouterU
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_common_business.adapter.ArticleInfoAdapter
 import cn.jack.library_common_business.entiy.ArticleInfo
@@ -110,10 +110,10 @@ class SubjectActivity() :
 
         mArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
             val articleInfo = adapter.data[position] as ArticleInfo
-            ArouterManager.getInstance().navigationTo(
-                bundleOf(
+            ArouterU.getInstance().navigationTo(
+                RouterPathActivity.Web.PAGER_WEB, bundleOf(
                     BundleParams.WEB_URL to articleInfo.link
-                ), RouterPathActivity.Web.PAGER_WEB
+                )
             )
         }
 

@@ -8,11 +8,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import cn.jack.library_arouter.BundleParams
-import cn.jack.library_arouter.manager.ArouterManager
+import cn.jack.library_arouter.manager.ArouterU
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_arouter.router.RouterPathFragment
 import cn.jack.library_common_business.entiy.ArticleInfo
-import cn.jack.library_util.ext.showToast
 import cn.jack.module_fragment_01.R
 import cn.jack.module_fragment_01.databinding.FragmentHome01Binding
 import cn.jack.module_fragment_01.mvvm.model.entity.BanInfos
@@ -119,10 +118,10 @@ class ModuleFragment01 :
         mHomeArticleInfoAdapter = HomeArticleInfoAdapter(R.layout.layout_home_article_item)
         mHomeArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
             val articleInfo = adapter.data[position] as ArticleInfo
-            ArouterManager.getInstance().navigationTo(
-                bundleOf(
+            ArouterU.getInstance().navigationTo(
+                RouterPathActivity.Web.PAGER_WEB, bundleOf(
                     BundleParams.WEB_URL to articleInfo.link
-                ), RouterPathActivity.Web.PAGER_WEB
+                )
             )
         }
         mBinding.recyclerView.adapter = mHomeArticleInfoAdapter

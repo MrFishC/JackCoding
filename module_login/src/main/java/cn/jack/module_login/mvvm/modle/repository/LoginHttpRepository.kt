@@ -4,7 +4,7 @@ import cn.jack.library_common_business.constant.C
 import cn.jack.library_util.KvStoreUtil
 import cn.jack.module_login.api.ApiService
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
-import com.jack.lib_wrapper_mvvm.base.model.BaseWrapperModel
+import com.jack.lib_wrapper_mvvm.mvvm.model.BaseWrapperModel
 import com.jack.lib_wrapper_net.model.EventResult
 import com.jack.lib_wrapper_net.flow.FlowManager
 import com.jack.lib_wrapper_net.manager.HttpManager

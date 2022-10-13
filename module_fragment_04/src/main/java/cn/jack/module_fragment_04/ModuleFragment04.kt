@@ -5,13 +5,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import cn.jack.library_arouter.BundleParams
-import cn.jack.library_arouter.manager.ArouterManager
+import cn.jack.library_arouter.manager.ArouterU
 import cn.jack.library_arouter.router.RouterPathActivity
 import cn.jack.library_arouter.router.RouterPathFragment
 import cn.jack.library_common_business.adapter.ArticleInfoAdapter
 import cn.jack.library_common_business.entiy.ArticleInfo
 import cn.jack.library_common_business.entiy.ProjectInfoList
-import cn.jack.library_common_business.service.api.ApiArticleService
+import cn.jack.library_common_business.service.ApiArticleService
 import cn.jack.library_util.ext.showToast
 import cn.jack.module_fragment_04.databinding.FragmentHome04Binding
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -34,20 +34,16 @@ import kotlinx.coroutines.launch
 class ModuleFragment04 : BaseSimpleFragment<FragmentHome04Binding>(FragmentHome04Binding::inflate),
     OnRefreshLoadMoreListener {
 
-    //    val isRegisterLoadSir: Boolean
-//        get() = true
-//    val isViewRegisterLoadSir: Boolean
-//        get() = true
     private lateinit var mArticleInfoAdapter: ArticleInfoAdapter
     private fun initAdapter() {
         mArticleInfoAdapter = ArticleInfoAdapter()
 
         mArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
-            val articleInfo =  adapter.data[position] as ArticleInfo
-            ArouterManager.getInstance().navigationTo(
-                bundleOf(
+            val articleInfo = adapter.data[position] as ArticleInfo
+            ArouterU.getInstance().navigationTo(
+                RouterPathActivity.Web.PAGER_WEB, bundleOf(
                     BundleParams.WEB_URL to articleInfo.link
-                ), RouterPathActivity.Web.PAGER_WEB
+                )
             )
         }
 
@@ -66,7 +62,7 @@ class ModuleFragment04 : BaseSimpleFragment<FragmentHome04Binding>(FragmentHome0
                     when (it) {
                         is EventResult.OnStart -> visibleDialog()
                         is EventResult.OnNext -> {
-                            if(it.data == null){
+                            if (it.data == null) {
                                 return@collect
                             }
                             val datas = it.data!!.datas

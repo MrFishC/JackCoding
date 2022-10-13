@@ -1,8 +1,12 @@
 package com.jack.library_webview.base.set;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import com.jack.library_webview.util.LogW;
+import com.jack.library_webview.util.SystemInfoUtil;
 
 /**
  * @创建者 Jack

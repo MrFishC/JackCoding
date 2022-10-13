@@ -2,7 +2,7 @@ package cn.jack.module_fragment_01.mvvm.model.repository
 
 import cn.jack.module_fragment_01.api.ApiService
 import cn.jack.module_fragment_01.mvvm.model.entity.HomeInfos
-import com.jack.lib_wrapper_mvvm.base.model.BaseWrapperModel
+import com.jack.lib_wrapper_mvvm.mvvm.model.BaseWrapperModel
 import com.jack.lib_wrapper_net.flow.FlowManager
 import com.jack.lib_wrapper_net.manager.HttpManager
 import com.jack.lib_wrapper_net.model.EventResult

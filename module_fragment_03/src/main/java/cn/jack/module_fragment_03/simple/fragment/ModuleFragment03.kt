@@ -20,6 +20,8 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigat
  * 4.公众号
  *
  * 颜色统一一下
+ *
+ * 存在的问题，在两个子fragment，使用对指定的View设置状态布局 没有效果。 目前按照对整个页面设置状态布局的方式。
  */
 @Route(path = RouterPathFragment.HomeThird.PAGER_HOME_THIRD)
 class ModuleFragment03 : BaseSimpleFragment<FragmentHome03Binding>(FragmentHome03Binding::inflate) {
@@ -47,9 +49,12 @@ class ModuleFragment03 : BaseSimpleFragment<FragmentHome03Binding>(FragmentHome0
             ARouter.getInstance().build(RouterPathFragment.HomeThird.PAGER_HOME_SQUARE)
                 .navigation() as Fragment
         )
+
         val viewPagerFragmentStateAdapter = ViewPagerFragmentStateAdapter(
             requireActivity(), fragments
         )
+
+        //ViewPager2出来之后 FragmentStatePagerAdapter 就退出历史舞台。
         mBinding.viewPager2.offscreenPageLimit = stringArray.size
         mBinding.viewPager2.adapter = viewPagerFragmentStateAdapter
         mBinding.viewPager2.registerOnPageChangeCallback(mChangeCallback)

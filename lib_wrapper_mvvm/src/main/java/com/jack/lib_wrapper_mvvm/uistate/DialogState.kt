@@ -5,7 +5,7 @@ package com.jack.lib_wrapper_mvvm.uistate
  * @创建时间 2022/8/26 0026 15:14
  * @描述
  */
-enum class DialogState {
-    HIDE,       // 隐藏
-    LOADING,    // 加载中
+sealed class DialogState {
+    object OnHide : DialogState()
+    object OnLoading : DialogState()
 }

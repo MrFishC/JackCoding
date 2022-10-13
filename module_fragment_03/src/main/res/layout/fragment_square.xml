@@ -18,9 +18,9 @@
                 android:layout_height="match_parent"
                 android:paddingLeft="6dp"
                 android:paddingRight="6dp"
-                app:indicator_expandingRatio="0.2"
                 app:indicator_expandingAllItemRatio="0.9"
-                app:indicator_itemPadding="6dp"/>
+                app:indicator_expandingRatio="0.2"
+                app:indicator_itemPadding="6dp" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/linear_container"
