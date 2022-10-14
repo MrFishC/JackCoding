@@ -4,13 +4,13 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.databinding.ViewDataBinding
-import cn.jack.library_util.ext.closeDialog
-import cn.jack.library_util.ext.loadDialog
+import com.jack.lib_base.ext.closeDialog
+import com.jack.lib_base.ext.loadDialog
 import com.alibaba.android.arouter.launcher.ARouter
+import com.jack.lib_base.ext.finisActivity
+import com.jack.lib_base.ext.setStatusBarTranslucent
 import com.jack.lib_base.interfac.IStatusSwitchLisenter
 import com.jack.lib_wrapper_mvvm.mvvm.view.BaseWrapperActivity
-import finisActivity
-import setStatusBarTranslucent
 
 /**
  * @创建者 Jack

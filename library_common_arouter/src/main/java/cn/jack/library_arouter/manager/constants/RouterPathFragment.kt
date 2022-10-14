@@ -1,4 +1,4 @@
-package cn.jack.library_arouter.router
+package cn.jack.library_arouter.manager.constants
 
 /**
  * created by Jack

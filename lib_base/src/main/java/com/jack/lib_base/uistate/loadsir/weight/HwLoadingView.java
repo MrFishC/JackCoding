@@ -12,7 +12,7 @@ import android.view.animation.LinearInterpolator;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import cn.jack.library_common_business.R;
+import com.jack.lib_base.R;
 
 /**
  * @创建者 Jack

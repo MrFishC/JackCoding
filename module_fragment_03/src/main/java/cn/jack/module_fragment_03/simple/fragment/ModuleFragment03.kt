@@ -2,7 +2,7 @@ package cn.jack.module_fragment_03.simple.fragment
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
-import cn.jack.library_arouter.router.RouterPathFragment
+import cn.jack.library_arouter.manager.constants.RouterPathFragment
 import cn.jack.module_fragment_03.R
 import cn.jack.module_fragment_03.databinding.FragmentHome03Binding
 import cn.jack.module_fragment_03.simple.adapter.TabNavigatorAdapter

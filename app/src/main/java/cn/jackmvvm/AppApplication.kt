@@ -1,7 +1,7 @@
 package cn.jackmvvm
 
+import cn.jack.lib_common.CustomApplication
 import com.alibaba.android.arouter.launcher.ARouter
-import com.jack.lib_base.base.view.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -10,7 +10,7 @@ import dagger.hilt.android.HiltAndroidApp
  * @描述
  */
 @HiltAndroidApp
-class AppApplication : BaseApplication() {
+class AppApplication : CustomApplication() {
 
     override fun initArouter() {
         if (BuildConfig.DEBUG) {

@@ -8,10 +8,9 @@ package com.jack.lib_base.interfac
 interface IStatusSwitchLisenter {
 
     /**
-     * 默认不使用Inject
-     * 使用ARouter传递参数需要重写该方法，设置返回值为true
+     * 默认使用Inject
      */
-    fun injectARouter(): Boolean = false
+    fun injectARouter(): Boolean = true
 
     /**
      * 是否注册EventBus，默认不注册

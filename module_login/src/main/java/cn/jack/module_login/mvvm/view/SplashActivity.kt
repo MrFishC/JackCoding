@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Handler
 import cn.jack.module_login.databinding.ActivitysPlashBinding
 import com.jack.lib_base.base.view.BaseSimpleActivity
-import launchActivity
+import com.jack.lib_base.ext.launchActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseSimpleActivity<ActivitysPlashBinding>(ActivitysPlashBinding::inflate) {

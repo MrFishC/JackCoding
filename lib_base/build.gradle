@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
 }
 
@@ -37,21 +36,10 @@ android {
 
 dependencies {
 
-    api project(':lib_wrapper_mvvm')
-    //其它公用组件==========================
-    api project(':library_webview')
-    api project(':lib_wrapper_net')
-    api project(':library_image')
-    api project(':library_util')
-    api project(':library_common_arouter')
-    api project(':library_weight')
-    api project(':library_common_business')
+//    api project(':lib_wrapper_mvvm')
+    api 'com.github.MrFishC:ycr_mvvm_base:V2.0'
 
-    testApi rootProject.ext.dependencies["junit"]
-    androidTestApi rootProject.ext.dependencies["test_junit"]
-    androidTestApi rootProject.ext.dependencies["test_espresso_core"]
-
-    debugApi 'com.squareup.leakcanary:leakcanary-android:2.6'
+    implementation rootProject.ext.dependencies["multidex"]
 
     //其它公共库==========================
     api rootProject.ext.dependencies["appcompat"]
@@ -65,38 +53,7 @@ dependencies {
     api rootProject.ext.dependencies["fragment-ktx"]
     api rootProject.ext.dependencies["core-ktx"]
 
-    implementation rootProject.ext.dependencies["arouter-api"]
-    //kapt rootProject.ext.dependencies["arouter-compiler"]
-
-    implementation rootProject.ext.dependencies["hilt-android"]
-    kapt rootProject.ext.dependencies["hilt-compiler"]
-
-    implementation rootProject.ext.dependencies["multidex"]
-
-    //==========================
-    //下拉刷新
-    api rootProject.ext.dependencies["refresh_layout_kernel"]
-    //下拉刷新 - 经典头部
-    api rootProject.ext.dependencies["refresh_header_classics"]
-
-    api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
-
-    api rootProject.ext.dependencies["MagicIndicator"]
-
-    //供给其它模块使用-如实现表单校验
-    api rootProject.ext.dependencies["rxjava2"]
-    api rootProject.ext.dependencies["rxandroid2"]
-    //处理rxjava2的内存泄露
-    api(rootProject.ext.dependencies["autodispose-android-archcomponents"]) {
-        exclude group: 'io.reactivex.rxjava2'
-        exclude group: 'androidx.annotation'
-        exclude group: 'androidx.lifecycle'
-    }
-    api(rootProject.ext.dependencies["rxbinding3-appcompat"]) {
-        exclude group: 'io.reactivex.rxjava2'
-        exclude group: 'androidx.appcompat'
-        exclude group: 'org.jetbrains.kotlin'
-    }
+    api rootProject.ext.dependencies["arouter-api"]
 
     //状态布局
     api(rootProject.ext.dependencies["loadsir"]) {
@@ -104,5 +61,8 @@ dependencies {
         exclude group: 'androidx.constraintlayout:constraintlayout'
         exclude group: 'androidx.fragment:fragment'
     }
+    //状态栏
+    api rootProject.ext.dependencies["MagicIndicator"]
 
+    api rootProject.ext.dependencies["XPopup"]
 }

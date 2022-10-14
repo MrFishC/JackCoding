@@ -1,8 +1,8 @@
 package cn.jack.module_home
 
 import androidx.fragment.app.Fragment
-import cn.jack.library_arouter.router.RouterPathActivity
-import cn.jack.library_arouter.router.RouterPathFragment
+import cn.jack.library_arouter.manager.constants.RouterPathActivity
+import cn.jack.library_arouter.manager.constants.RouterPathFragment
 import cn.jack.module_home.databinding.ActivityHomeBinding
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter

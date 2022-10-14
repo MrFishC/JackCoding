@@ -6,9 +6,9 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import cn.jack.library_arouter.BundleParams
-import cn.jack.library_arouter.manager.ArouterU
-import cn.jack.library_arouter.router.RouterPathActivity
+import cn.jack.library_arouter.manager.params.BundleParams
+import cn.jack.library_arouter.manager.router.ArouterU
+import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_common_business.adapter.ArticleInfoAdapter
 import cn.jack.library_common_business.entiy.ArticleInfo
 import cn.jack.module_fragment_02.databinding.ActivityCollectionBinding
@@ -43,8 +43,6 @@ class SubjectActivity() :
     var mArticleTitle: String? = null
 
     var mArticleId by Delegates.notNull<Int>()
-
-    override fun injectARouter(): Boolean = true
 
     private lateinit var mArticleInfoAdapter: ArticleInfoAdapter
     private var mIsRefresh = true

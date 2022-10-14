@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.databinding.ViewDataBinding
 import com.jack.lib_base.uistate.loadsir.callback.*
-import cn.jack.library_util.ext.closeDialog
-import cn.jack.library_util.ext.loadDialog
+import com.jack.lib_base.ext.closeDialog
+import com.jack.lib_base.ext.loadDialog
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jack.lib_base.interfac.ILoadSirLisenter
 import com.jack.lib_base.interfac.IStatusSwitchLisenter

@@ -5,20 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.databinding.ViewDataBinding
 import com.jack.lib_base.uistate.loadsir.callback.*
-import cn.jack.library_util.ext.closeDialog
-import cn.jack.library_util.ext.loadDialog
 import com.alibaba.android.arouter.launcher.ARouter
+import com.jack.lib_base.ext.*
 import com.jack.lib_base.interfac.ILoadSirLisenter
 import com.jack.lib_base.interfac.IStatusSwitchLisenter
 import com.jack.lib_base.uistate.LayoutState
-import com.jack.lib_base.ext.postCallbackDelayed
-import com.jack.lib_base.ext.postSuccessDelayed
 import com.jack.lib_wrapper_mvvm.mvvm.view.BaseMvvmActivity
 import com.jack.lib_wrapper_mvvm.mvvm.viewmodel.BaseWrapperViewModel
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
-import finisActivity
-import setStatusBarTranslucent
 
 /**
  * @创建者 Jack

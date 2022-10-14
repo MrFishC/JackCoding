@@ -1,6 +1,7 @@
 package com.jack.lib_base.ext
 
-import com.jack.library_webview.util.MainLooper
+import android.os.Handler
+import android.os.Looper
 import com.kingja.loadsir.callback.Callback
 import com.kingja.loadsir.core.LoadService
 
@@ -11,13 +12,19 @@ import com.kingja.loadsir.core.LoadService
  */
 
 fun LoadService<Any>.postCallbackDelayed(callback: Class<out Callback>, delayedTime: Long = 1000) {
-    MainLooper.getInstance().postDelayed(Runnable {
+    MainLooper.instance.postDelayed(Runnable {
         this.showCallback(callback)
     }, delayedTime)
 }
 
 fun LoadService<Any>.postSuccessDelayed(delayedTime: Long = 1000) {
-    MainLooper.getInstance().postDelayed(Runnable {
+    MainLooper.instance.postDelayed(Runnable {
         this.showSuccess()
     }, delayedTime)
+}
+
+class MainLooper private constructor(looper: Looper) : Handler(looper) {
+    companion object {
+        val instance = MainLooper(Looper.getMainLooper())
+    }
 }

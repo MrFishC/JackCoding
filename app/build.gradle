@@ -14,12 +14,6 @@ android {
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
-        //ARouter配置
-        kapt {
-            arguments {
-                arg("AROUTER_MODULE_NAME", project.getName())
-            }
-        }
     }
 
     compileOptions {
@@ -49,21 +43,9 @@ dependencies {
     /*hilt和arouter*/
     implementation rootProject.ext.dependencies["hilt-android"]
     kapt rootProject.ext.dependencies["hilt-compiler"]
-    implementation rootProject.ext.dependencies["arouter-api"]
-    kapt rootProject.ext.dependencies["arouter-compiler"]
+//    implementation rootProject.ext.dependencies["arouter-api"]
 
     //宿主依赖业务组件
-    if (!isBuildModule.toBoolean()) {
-        implementation project(path: ':module_login')   //登录注册模块
-        implementation project(path: ':module_home')    //主页模块
-        //若将以下四个fragment模块的依赖放入在module_home下依赖，会出现报错(待排查具体原因)：
-        // java.lang.ClassCastException: cn.jackmvvm.DaggerAppApplication_HiltComponents_SingletonC$FragmentCImpl cannot be cast to cn.jack.module_fragment_01.mvvm.view.fragment.ModuleFragment01_GeneratedInjector
-        implementation project(path: ':module_fragment_01')
-        implementation project(path: ':module_fragment_02')
-        implementation project(path: ':module_fragment_03')
-        implementation project(path: ':module_fragment_04')
-    }else {
-        implementation project(':lib_base')
-    }
-
+    implementation project(path: ':module_login')   //登录注册模块
+    implementation project(path: ':module_home')    //主页模块
 }

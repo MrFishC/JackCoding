@@ -9,4 +9,9 @@ dependencies {
     //抽屉布局
     implementation rootProject.ext.dependencies["flowingdrawer-core"]
     implementation rootProject.ext.dependencies["nineoldandroids_library"]
+
+    implementation project(path: ':module_fragment_01')
+    implementation project(path: ':module_fragment_02')
+    implementation project(path: ':module_fragment_03')
+    implementation project(path: ':module_fragment_04')
 }

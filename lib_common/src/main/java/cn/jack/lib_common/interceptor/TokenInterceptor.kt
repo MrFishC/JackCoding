@@ -1,4 +1,4 @@
-package com.jack.lib_base.interceptor
+package cn.jack.lib_common.interceptor
 
 import cn.jack.library_common_business.constant.C
 import cn.jack.library_util.KvStoreUtil

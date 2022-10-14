@@ -1,4 +1,4 @@
-package cn.jack.library_arouter
+package cn.jack.library_arouter.manager.params
 
 /**
  * @创建者 Jack

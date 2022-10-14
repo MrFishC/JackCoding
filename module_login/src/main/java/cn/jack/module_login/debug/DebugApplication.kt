@@ -1,9 +1,8 @@
 package cn.jack.module_login.debug
 
+import cn.jack.lib_common.CustomApplication
 import cn.jack.module_login.BuildConfig
 import com.alibaba.android.arouter.launcher.ARouter
-import com.jack.lib_base.base.view.BaseApplication
-import dagger.hilt.android.HiltAndroidApp
 
 /**
  * @创建者 Jack
@@ -11,8 +10,7 @@ import dagger.hilt.android.HiltAndroidApp
  * @描述 每个业务模块使用
  */
 //@HiltAndroidApp
-class DebugApplication : BaseApplication() {
-
+class DebugApplication : CustomApplication() {
     override fun initArouter() {
         if (BuildConfig.DEBUG) {
             ARouter.openLog()
@@ -20,5 +18,4 @@ class DebugApplication : BaseApplication() {
         }
         ARouter.init(this)
     }
-
 }

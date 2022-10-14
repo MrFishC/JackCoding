@@ -1,4 +1,4 @@
-package com.jack.lib_base.base.view
+package com.jack.lib_base.base
 
 import android.app.ActivityManager
 import android.app.Application
@@ -8,30 +8,15 @@ import android.os.Process
 import android.webkit.WebView
 import androidx.multidex.MultiDex
 import com.jack.lib_base.uistate.loadsir.callback.*
-import cn.jack.library_image.util.ImageU
-import cn.jack.library_util.ContextU
-import cn.jack.library_util.KvStoreUtil
-import cn.jack.library_util.LogU
-import cn.jack.library_util.ToastU
-import com.franmontiel.persistentcookiejar.PersistentCookieJar
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
-import com.jack.lib_base.BuildConfig
-import com.jack.lib_base.interceptor.TokenInterceptor
-import com.jack.lib_wrapper_net.manager.OkHttpManager
-import com.jack.library_webview.cache.WebViewCacheU
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadSir
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import java.util.concurrent.TimeUnit
 
 /**
  * @创建者 Jack
  * @创建时间 2022/8/27 0027 17:05
  * @描述
  */
-open class BaseApplication : Application() {
+abstract class BaseApplication : Application() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
@@ -40,6 +25,7 @@ open class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         checkApplication()
     }
 
@@ -81,43 +67,10 @@ open class BaseApplication : Application() {
     @Synchronized
     fun setApplication(application: Application) {
         initArouter()
-        initNetwork()
         initLoadSir()
-        initImageLoader()
 //        initBus()
-        initWebV()
-        initMMKV()
-        initLogger()
-        initToastU()
-        initContextU()
-//        initServiceManager()
-
+        initOthers()
         /*注册监听每个activity的生命周期,便于堆栈式管理*/
-
-    }
-
-    private fun initContextU() {
-        ContextU.init(this, this)
-    }
-
-    private fun initToastU() {
-        ToastU.init(this)
-    }
-
-    private fun initLogger() {
-        LogU.init(BuildConfig.DEBUG, "HiLog")
-    }
-
-    private fun initMMKV() {
-        KvStoreUtil.getInstance().init(this)
-    }
-
-    private fun initWebV() {
-        WebViewCacheU.init(this);
-    }
-
-    private fun initImageLoader() {
-        ImageU.init()
     }
 
     private fun initLoadSir() {
@@ -134,21 +87,6 @@ open class BaseApplication : Application() {
             .commit()
     }
 
-    private fun initNetwork() {
-        val logging = HttpLoggingInterceptor()
-        logging.level =
-            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-        val builder: OkHttpClient.Builder = OkHttpClient.Builder()
-            .addInterceptor(TokenInterceptor())
-            .addInterceptor(logging)
-            .cookieJar(PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(this)))
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-        OkHttpManager.instance.initClient(builder.build())
-    }
-
-    open fun initArouter() {
-
-    }
+    abstract fun initOthers()
+    abstract fun initArouter()
 }

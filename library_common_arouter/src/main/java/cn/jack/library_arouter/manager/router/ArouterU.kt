@@ -1,4 +1,4 @@
-package cn.jack.library_arouter.manager
+package cn.jack.library_arouter.manager.router
 
 import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
@@ -25,11 +25,6 @@ class ArouterU private constructor() {
             return instance!!
         }
     }
-
-//    fun navigationTo(toPath: String) {
-//        ARouter.getInstance().build(toPath)
-//            .navigation()
-//    }
 
     fun navigationTo(toPath: String, bundle: Bundle? = null) {
         if (bundle != null) {

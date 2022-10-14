@@ -8,11 +8,11 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import cn.jack.library_arouter.BundleParams
-import cn.jack.library_arouter.manager.ArouterU
-import cn.jack.library_arouter.router.RouterPathActivity
-import cn.jack.library_arouter.router.RouterPathFragment
-import cn.jack.library_util.ext.showToast
+import cn.jack.lib_common.ext.showToast
+import cn.jack.library_arouter.manager.constants.RouterPathActivity
+import cn.jack.library_arouter.manager.constants.RouterPathFragment
+import cn.jack.library_arouter.manager.params.BundleParams
+import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.module_fragment_03.R
 import cn.jack.module_fragment_03.databinding.FragmentSystemBinding
 import cn.jack.module_fragment_03.entity.NavInfo

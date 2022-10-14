@@ -5,11 +5,11 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import cn.jack.library_arouter.manager.ArouterU
-import cn.jack.library_arouter.router.RouterPathActivity
+import cn.jack.lib_common.ext.showToast
+import cn.jack.library_arouter.manager.constants.RouterPathActivity
+import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_common_business.constant.C
 import cn.jack.library_util.KvStoreUtil
-import cn.jack.library_util.ext.showToast
 import cn.jack.module_login.databinding.ActivityRegisterBinding
 import cn.jack.module_login.mvvm.modle.entity.InfoVerification
 import cn.jack.module_login.mvvm.modle.entity.UserInfo

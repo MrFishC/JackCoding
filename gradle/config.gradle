@@ -178,8 +178,8 @@ ext {
             "toasty"                            : "com.github.GrenderG:Toasty:${version["Toasty_version"]}",
             "shimmer-android"                   : "com.facebook.shimmer:shimmer:${version["shimmer_android_version"]}",//https://github.com/facebook/shimmer-android
 
-            "material-dialogs-core"             : "com.afollestad.material-dialogs:core:${version["material_dialogs_version"]}",//https://github.com/afollestad/material-dialogs#core
-            "material-dialogs-lifecycle"        : "com.afollestad.material-dialogs:lifecycle:${version["material_dialogs_version"]}",//https://github.com/afollestad/material-dialogs#core
+//            "material-dialogs-core"             : "com.afollestad.material-dialogs:core:${version["material_dialogs_version"]}",//https://github.com/afollestad/material-dialogs#core
+//            "material-dialogs-lifecycle"        : "com.afollestad.material-dialogs:lifecycle:${version["material_dialogs_version"]}",//https://github.com/afollestad/material-dialogs#core
             "XPopup"                            : "com.github.li-xiaojun:XPopup:${version["xPopup_version"]}",//https://github.com/li-xiaojun/XPopup
     ]
 

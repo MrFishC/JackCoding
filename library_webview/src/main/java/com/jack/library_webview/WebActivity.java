@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jack.library_webview.fragment.BaseH5Fragment;
 
-import cn.jack.library_arouter.BundleParams;
-import cn.jack.library_arouter.router.RouterPathActivity;
+import cn.jack.library_arouter.manager.params.BundleParams;
+import cn.jack.library_arouter.manager.constants.RouterPathActivity;
 
 
 /**
