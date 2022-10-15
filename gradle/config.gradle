@@ -2,7 +2,7 @@ ext {
 
     android = [
             compileSdkVersion   : 32,
-            minSdkVersion       : 24,
+            minSdkVersion       : 25,
             targetSdkVersion    : 32,
             versionCode         : 1,
             versionName         : "1.0.1",
@@ -25,7 +25,7 @@ ext {
             arouterApiVersion                         : "1.5.1",
             arouterCompilerVersion                    : "1.5.1",
 
-            immersionbar                              : "3.0.0",
+            immersionbar                              : "3.2.2",
 
             eventbus                                  : "3.1.1",
             dagger_android                            : "2.33",
@@ -34,7 +34,6 @@ ext {
             lifecycle_version                         : "2.6.0-alpha01",
             activity_version                          : "1.5.1",
             fragment_version                          : "1.5.2",
-//            hilt_version                              : "2.38.1",
             hilt_version                              : "2.44",
 
             multidexVersion                           : "2.0.1",
@@ -115,9 +114,9 @@ ext {
 
             //"bottom-navigation-bar"                  : "com.ashokvarma.android:bottom-navigation-bar:2.2.0",      //底部导航栏
 
-            "immersionbar"                      : "com.gyf.immersionbar:immersionbar:${version["immersionbar"]}",   //状态栏 https://github.com/gyf-dev/ImmersionBar
+            "immersionbar"                      : "com.geyifeng.immersionbar:immersionbar:${version["immersionbar"]}",  // 基础依赖包，必须要依赖 //状态栏 https://github.com/gyf-dev/ImmersionBar
 
-            "immersionbar-components"           : "com.gyf.immersionbar:immersionbar-components:${version["immersionbar"]}",// fragment快速实现（可选）
+            "immersionbar-ktx"           : "com.geyifeng.immersionbar:immersionbar-ktx:${version["immersionbar"]}", // kotlin扩展（可选）
 
             "refresh_layout_kernel"             : "com.scwang.smart:refresh-layout-kernel:${version["refresh_layout_kernel_version"]}",      //核心必须依赖 //https://github.com/scwang90/SmartRefreshLayout
             "refresh_header_classics"           : "com.scwang.smart:refresh-header-classics:${version["refresh_layout_kernel_version"]}",    //经典刷新头

@@ -2,15 +2,11 @@ package com.jack.lib_base.uistate.loadsir.callback
 
 import android.content.Context
 import android.view.View
-import android.widget.Toast
 import com.jack.lib_base.R
 import com.kingja.loadsir.callback.Callback
 
 /**
- * Description:TODO
- * Create Time:2017/9/3 10:22
- * Author:KingJA
- * Email:kingjavip@gmail.com
+ * 一般情况下用不上，可以根据需求自定义实现页面内容
  */
 class CustomCallback : Callback() {
     override fun onCreateView(): Int {
@@ -18,15 +14,10 @@ class CustomCallback : Callback() {
     }
 
     override fun onReloadEvent(context: Context, view: View): Boolean {
-        Toast.makeText(context.applicationContext, "Hello buddy, how r u! :p", Toast.LENGTH_SHORT)
-            .show()
-        view.findViewById<View>(R.id.iv_gift).setOnClickListener {
-            Toast.makeText(
-                context.applicationContext,
-                "It's your gift! :p",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+        /*可以设置吐司等提示*/
+//        view.findViewById<View>(R.id.iv_gift).setOnClickListener {
+//            /*可以设置吐司等提示*/
+//        }
         return true
     }
 }

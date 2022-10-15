@@ -61,8 +61,11 @@ dependencies {
         exclude group: 'androidx.constraintlayout:constraintlayout'
         exclude group: 'androidx.fragment:fragment'
     }
-    //状态栏
+
     api rootProject.ext.dependencies["MagicIndicator"]
+
+    api rootProject.ext.dependencies["immersionbar"]
+    api rootProject.ext.dependencies["immersionbar-ktx"]
 
     api rootProject.ext.dependencies["XPopup"]
 }

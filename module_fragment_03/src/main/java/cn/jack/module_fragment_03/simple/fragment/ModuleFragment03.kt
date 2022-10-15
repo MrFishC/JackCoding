@@ -1,5 +1,6 @@
 package cn.jack.module_fragment_03.simple.fragment
 
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
@@ -9,6 +10,7 @@ import cn.jack.module_fragment_03.simple.adapter.TabNavigatorAdapter
 import cn.jack.module_fragment_03.simple.adapter.ViewPagerFragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.gyf.immersionbar.ktx.immersionBar
 import com.jack.lib_base.base.view.BaseSimpleFragment
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
 

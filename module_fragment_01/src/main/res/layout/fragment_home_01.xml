@@ -9,9 +9,10 @@
 
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayout"
@@ -43,7 +44,7 @@
 
         </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </layout>

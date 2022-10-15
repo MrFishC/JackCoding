@@ -24,6 +24,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.fastjson.JSON
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
+import com.gyf.immersionbar.ImmersionBar.setTitleBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.hjq.bar.OnTitleBarListener
 import com.jack.lib_base.base.view.BaseSimpleFragment
 import com.jack.lib_base.uistate.LayoutState
@@ -75,6 +77,12 @@ class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome0
     private val projectSortInfo_ =
         projectSortInfo.shareIn(lifecycleScope, SharingStarted.WhileSubscribed(5000))
 
+    override fun initImmersionBar(view: View) {
+        super.initImmersionBar(view)
+        immersionBar {
+            titleBar(mBinding.projectSortTitleBar)
+        }
+    }
     override fun prepareData() {
         super.prepareData()
         initAdapter()

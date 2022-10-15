@@ -2,16 +2,21 @@ package com.jack.lib_base.base.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.databinding.ViewDataBinding
-import com.jack.lib_base.uistate.loadsir.callback.*
+import com.alibaba.android.arouter.launcher.ARouter
+import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ImmersionBar.setStatusBarView
+import com.gyf.immersionbar.ktx.immersionBar
 import com.jack.lib_base.ext.closeDialog
 import com.jack.lib_base.ext.loadDialog
-import com.alibaba.android.arouter.launcher.ARouter
+import com.jack.lib_base.ext.postCallbackDelayed
+import com.jack.lib_base.ext.postSuccessDelayed
+import com.jack.lib_base.interfac.IHandler
 import com.jack.lib_base.interfac.ILoadSirLisenter
 import com.jack.lib_base.interfac.IStatusSwitchLisenter
 import com.jack.lib_base.uistate.LayoutState
-import com.jack.lib_base.ext.postCallbackDelayed
-import com.jack.lib_base.ext.postSuccessDelayed
+import com.jack.lib_base.uistate.loadsir.callback.*
 import com.jack.lib_wrapper_mvvm.mvvm.view.BaseMvvmFragment
 import com.jack.lib_wrapper_mvvm.mvvm.viewmodel.BaseWrapperViewModel
 import com.kingja.loadsir.core.LoadService
@@ -23,7 +28,8 @@ import com.kingja.loadsir.core.LoadSir
  * @描述
  */
 abstract class BaseFragment<VB : ViewDataBinding, VM : BaseWrapperViewModel>(override var block: (LayoutInflater) -> VB) :
-    BaseMvvmFragment<VB, VM>(block), IStatusSwitchLisenter, ILoadSirLisenter {
+    BaseMvvmFragment<VB, VM>(block), IStatusSwitchLisenter, ILoadSirLisenter,
+    IHandler {
 
     //Fragment中使用Loadsir同Activity差异较大
     private var mBaseLoadService: LoadService<Any>? = null
@@ -35,6 +41,24 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseWrapperViewModel>(ove
             ARouter.getInstance().inject(this)
         }
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (isStatusBar()) {
+            initImmersionBar(view)
+        }
+    }
+
+    protected open fun initImmersionBar(view: View) {
+        if (staBarView(view) != null) {
+            immersionBar {
+                setStatusBarView(requireActivity(), staBarView(view))
+            }
+        }
+    }
+
+    protected fun staBarView(view: View): View? = null
 
     //目前的业务需求，默认是对指定的View设置状态布局  BaseSimpleFragment中封装的是对整个页面设置状态布局
 //    override fun onCreateView(
@@ -76,6 +100,11 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseWrapperViewModel>(ove
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        removeCallbacks()
+    }
+
     override fun visibleDialog() {
         super.visibleDialog()
         loadDialog()
@@ -84,9 +113,5 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseWrapperViewModel>(ove
     override fun hideDialog() {
         super.hideDialog()
         closeDialog()
-    }
-
-    fun navigation(){
-
     }
 }

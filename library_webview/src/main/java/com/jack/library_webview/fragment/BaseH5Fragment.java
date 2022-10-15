@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,15 +16,15 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.jack.library_webview.R;
-import com.jack.library_webview.cache.WebViewCacheU;
-import com.jack.library_webview.util.WebConstants;
 import com.jack.library_webview.base.callback.WebViewCallBack;
 import com.jack.library_webview.base.set.WebViewSettingManager;
 import com.jack.library_webview.base.webview.BaseWebView;
+import com.jack.library_webview.cache.WebViewCacheU;
 import com.jack.library_webview.databinding.LayoutWebviewContainerBinding;
 import com.jack.library_webview.dispatcher.CommandDispatcher;
 import com.jack.library_webview.request.ExecuteLisenter;
 import com.jack.library_webview.util.LogW;
+import com.jack.library_webview.util.WebConstants;
 
 import java.util.Objects;
 

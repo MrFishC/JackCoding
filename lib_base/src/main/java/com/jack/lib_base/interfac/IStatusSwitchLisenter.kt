@@ -18,11 +18,19 @@ interface IStatusSwitchLisenter {
     fun isRegisterEventBus(): Boolean = false
 
     /**
-     * 状态栏默认为黑色
-     * @return
+     * 默认使用沉寂式状态栏
      */
-    fun isBlack(): Boolean = true
+    fun isStatusBar(): Boolean = true
 
+    /**
+     * 状态栏背景颜色默认为透明
+     */
+    fun isTransparent(): Boolean = true
+
+
+    /**
+     * 状态栏字体是深色，不写默认为亮色
+     */
     fun isDefaultStatusBar(): Boolean = true
 
     /**

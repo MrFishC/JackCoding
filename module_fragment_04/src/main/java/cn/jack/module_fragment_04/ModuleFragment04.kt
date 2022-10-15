@@ -1,5 +1,6 @@
 package cn.jack.module_fragment_04
 
+import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ import cn.jack.library_common_business.entiy.ProjectInfoList
 import cn.jack.library_common_business.service.ApiArticleService
 import cn.jack.module_fragment_04.databinding.FragmentHome04Binding
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.gyf.immersionbar.ktx.immersionBar
 import com.jack.lib_base.base.view.BaseSimpleFragment
 import com.jack.lib_wrapper_net.flow.FlowManager
 import com.jack.lib_wrapper_net.manager.HttpManager
@@ -33,6 +35,13 @@ import kotlinx.coroutines.launch
 @Route(path = RouterPathFragment.HomeFour.PAGER_HOME_FOUR)
 class ModuleFragment04 : BaseSimpleFragment<FragmentHome04Binding>(FragmentHome04Binding::inflate),
     OnRefreshLoadMoreListener {
+
+    override fun initImmersionBar(view: View) {
+        super.initImmersionBar(view)
+        immersionBar {
+            titleBar(mBinding.projectSortTitleBar)
+        }
+    }
 
     private lateinit var mArticleInfoAdapter: ArticleInfoAdapter
     private fun initAdapter() {

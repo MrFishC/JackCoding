@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import com.jack.lib_base.uistate.loadsir.callback.*
 import com.alibaba.android.arouter.launcher.ARouter
+import com.gyf.immersionbar.ImmersionBar.setStatusBarView
+import com.gyf.immersionbar.ktx.immersionBar
+import com.jack.lib_base.ext.postCallbackDelayed
+import com.jack.lib_base.ext.postSuccessDelayed
+import com.jack.lib_base.interfac.IHandler
 import com.jack.lib_base.interfac.ILoadSirLisenter
 import com.jack.lib_base.interfac.IStatusSwitchLisenter
 import com.jack.lib_base.uistate.LayoutState
-import com.jack.lib_base.ext.postCallbackDelayed
-import com.jack.lib_base.ext.postSuccessDelayed
+import com.jack.lib_base.uistate.loadsir.callback.*
 import com.jack.lib_wrapper_mvvm.mvvm.view.BaseWrapperFragment
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
@@ -22,7 +25,8 @@ import com.kingja.loadsir.core.LoadSir
  * @描述
  */
 open class BaseSimpleFragment<VB : ViewDataBinding>(override var block: (LayoutInflater) -> VB) :
-    BaseWrapperFragment<VB>(block), IStatusSwitchLisenter, ILoadSirLisenter {
+    BaseWrapperFragment<VB>(block), IStatusSwitchLisenter, ILoadSirLisenter,
+    IHandler {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +35,24 @@ open class BaseSimpleFragment<VB : ViewDataBinding>(override var block: (LayoutI
             ARouter.getInstance().inject(this)
         }
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (isStatusBar()) {
+            initImmersionBar(view)
+        }
+    }
+
+    protected open fun initImmersionBar(view: View) {
+        if (staBarView(view) != null) {
+            immersionBar {
+                setStatusBarView(requireActivity(), staBarView(view))
+            }
+        }
+    }
+
+    protected fun staBarView(view: View): View? = null
 
     private var mBaseLoadService: LoadService<Any>? = null
 
@@ -74,6 +96,11 @@ open class BaseSimpleFragment<VB : ViewDataBinding>(override var block: (LayoutI
             LayoutState.OnNetError -> mBaseLoadService?.postCallbackDelayed(NetErrorCallback::class.java)
             LayoutState.OnSuccess -> mBaseLoadService?.postSuccessDelayed()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        removeCallbacks()
     }
 
 }
