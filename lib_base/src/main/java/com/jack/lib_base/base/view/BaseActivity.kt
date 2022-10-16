@@ -3,8 +3,10 @@ package com.jack.lib_base.base.view
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.databinding.ViewDataBinding
 import com.alibaba.android.arouter.launcher.ARouter
+import com.gyf.immersionbar.ImmersionBar.setStatusBarView
 import com.gyf.immersionbar.ktx.immersionBar
 import com.jack.lib_base.R
 import com.jack.lib_base.ext.*
@@ -71,23 +73,37 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseWrapperViewModel>(ove
      * 初始化沉浸式
      */
     protected open fun initImmersionBar() {
-        //设置共同沉浸式样式
+        //该方法的三个if语句执行一个即可，若执行第三个if语句，使用了fitsSystemWindows，状态栏背景设置的是透明色
         immersionBar {
-            if (isTransparent()) {
+            if (titBarView() != null) {
+                titleBar(titBarView())
+            }
+
+            if (staBarView() != null) {
+                statusBarView(staBarView())
+            }
+
+            //如果子类没有自定义实现titBarView或staBarView 则给出默认设置
+            if (titBarView() == null && staBarView() == null) {
+                //通用设置
                 /*状态栏背景颜色，不写默认透明色*/
                 statusBarColor(R.color.transparent)
-            } else {
-                statusBarColor(R.color.white)
+                /*状态栏字体是深色，不写默认为亮色*/
+                statusBarDarkFont(isDefaultStatusBar())
+                /*导航栏颜色，不写默认黑色*/
+                navigationBarColor(R.color.white)
+                autoDarkModeEnable(true, 0.2f)
+                /*自动状态栏字体和导航栏图标变色，必须指定状态栏背景颜色和导航栏背景颜色才可以自动变色哦*/
+                fitsSystemWindows(true)//解决状态栏和布局重叠问题，状态栏背景只能设置纯色 fragment基类不要设置该行代码
             }
-            /*状态栏字体是深色，不写默认为亮色*/
-            statusBarDarkFont(isDefaultStatusBar())
-            /*导航栏颜色，不写默认黑色*/
-            navigationBarColor(R.color.white)
-            /*自动状态栏字体和导航栏图标变色，必须指定状态栏颜色和导航栏颜色才可以自动变色哦*/
-            autoDarkModeEnable(true, 0.2f)
-            /*状态栏与布局顶部重叠解决方案，建议方案（非唯一）：子类重写initImmersionBar方法调用immersionBar的titleBar api，设置对应的控件id*/
         }
     }
+
+    /*标题栏 titBarView 方法跟 staBarView方法，是解决状态栏和布局重叠问题，任选其一[子类实现一个即可]*/
+    protected open fun titBarView(): View? = null
+
+    /*状态栏高度需要设置为0*/
+    protected open fun staBarView(): View? = null
 
     override fun onDestroy() {
         super.onDestroy()

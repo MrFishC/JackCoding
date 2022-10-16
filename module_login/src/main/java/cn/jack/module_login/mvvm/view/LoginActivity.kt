@@ -1,6 +1,7 @@
 package cn.jack.module_login.mvvm.view
 
 import android.annotation.SuppressLint
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -39,6 +40,14 @@ import kotlinx.coroutines.launch
 class LoginActivity :
     BaseActivity<ActivityLoginBinding, LoginViewModel>(ActivityLoginBinding::inflate) {
     override val mViewModel: LoginViewModel by viewModels()
+
+//    override fun titBarView(): View {
+//        return mBinding.toolbar
+//    }
+
+//    override fun staBarView(): View {
+//        return mBinding.statusBar
+//    }
 
     override fun observeViewModel() {
         super.observeViewModel()

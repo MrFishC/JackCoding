@@ -1,13 +1,14 @@
 package com.jack.lib_base.base.view
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import com.alibaba.android.arouter.launcher.ARouter
-import com.gyf.immersionbar.ImmersionBar.setStatusBarView
 import com.gyf.immersionbar.ktx.immersionBar
+import com.jack.lib_base.R
 import com.jack.lib_base.ext.postCallbackDelayed
 import com.jack.lib_base.ext.postSuccessDelayed
 import com.jack.lib_base.interfac.IHandler
@@ -44,15 +45,35 @@ open class BaseSimpleFragment<VB : ViewDataBinding>(override var block: (LayoutI
         }
     }
 
+//    override fun onConfigurationChanged(newConfig: Configuration) {
+//        super.onConfigurationChanged(newConfig)
+//        initImmersionBar(mBinding.root)
+//    }
+
     protected open fun initImmersionBar(view: View) {
-        if (staBarView(view) != null) {
-            immersionBar {
-                setStatusBarView(requireActivity(), staBarView(view))
+        immersionBar {
+            if (titBarView(view) != null) {
+                titleBar(titBarView(view))
             }
+
+            if (staBarView(view) != null) {
+                statusBarView(staBarView(view))
+            }
+
+            //通用设置
+            statusBarColor(R.color.transparent)
+            statusBarDarkFont(isDefaultStatusBar())
+            navigationBarColor(R.color.white)
+            autoDarkModeEnable(true, 0.2f)
+
         }
     }
 
-    protected fun staBarView(view: View): View? = null
+    /*标题栏 titBarView 方法跟 staBarView方法，是解决状态栏和布局重叠问题，任选其一[子类实现一个即可]*/
+    protected open fun titBarView(view: View): View? = null
+
+    /*状态栏高度需要设置为0*/
+    protected open fun staBarView(view: View): View? = null
 
     private var mBaseLoadService: LoadService<Any>? = null
 

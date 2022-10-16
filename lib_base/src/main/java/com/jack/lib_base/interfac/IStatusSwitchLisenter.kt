@@ -18,7 +18,7 @@ interface IStatusSwitchLisenter {
     fun isRegisterEventBus(): Boolean = false
 
     /**
-     * 默认使用沉寂式状态栏
+     * 是否使用沉寂式状态栏
      */
     fun isStatusBar(): Boolean = true
 

@@ -7,11 +7,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- 抽取代码 -->
-<!--        <include android:id="@+id/collect" layout="@layout/layout_common_top_databinding"/>-->
-
-<!--        <include layout="@layout/default_status_view"/>-->
-
         <com.hjq.bar.TitleBar
             android:id="@+id/collect_title_bar"
             android:layout_width="match_parent"

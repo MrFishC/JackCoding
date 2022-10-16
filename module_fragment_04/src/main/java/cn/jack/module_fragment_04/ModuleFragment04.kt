@@ -36,12 +36,7 @@ import kotlinx.coroutines.launch
 class ModuleFragment04 : BaseSimpleFragment<FragmentHome04Binding>(FragmentHome04Binding::inflate),
     OnRefreshLoadMoreListener {
 
-    override fun initImmersionBar(view: View) {
-        super.initImmersionBar(view)
-        immersionBar {
-            titleBar(mBinding.projectSortTitleBar)
-        }
-    }
+    override fun titBarView(view: View): View = mBinding.collectTitleBar
 
     private lateinit var mArticleInfoAdapter: ArticleInfoAdapter
     private fun initAdapter() {

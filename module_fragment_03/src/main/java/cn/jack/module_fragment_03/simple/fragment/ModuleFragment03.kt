@@ -10,7 +10,6 @@ import cn.jack.module_fragment_03.simple.adapter.TabNavigatorAdapter
 import cn.jack.module_fragment_03.simple.adapter.ViewPagerFragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.gyf.immersionbar.ktx.immersionBar
 import com.jack.lib_base.base.view.BaseSimpleFragment
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
 
@@ -27,6 +26,8 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigat
  */
 @Route(path = RouterPathFragment.HomeThird.PAGER_HOME_THIRD)
 class ModuleFragment03 : BaseSimpleFragment<FragmentHome03Binding>(FragmentHome03Binding::inflate) {
+
+    override fun staBarView(view: View): View = mBinding.defaultIncludeStaBar.statusBar
 
     override fun loadData() {
         super.loadData()

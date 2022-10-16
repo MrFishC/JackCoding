@@ -7,10 +7,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import cn.jack.library_arouter.manager.params.BundleParams
-import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
+import cn.jack.library_arouter.manager.params.BundleParams
+import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_common_business.entiy.ArticleInfo
 import cn.jack.module_fragment_01.R
 import cn.jack.module_fragment_01.databinding.FragmentHome01Binding
