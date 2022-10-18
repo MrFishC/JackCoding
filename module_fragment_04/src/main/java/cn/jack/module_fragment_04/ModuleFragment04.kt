@@ -2,6 +2,7 @@ package cn.jack.module_fragment_04
 
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -36,6 +37,11 @@ class ModuleFragment04 : BaseSimpleFragment<ModuleFragment04FragmentHome04Bindin
     OnRefreshLoadMoreListener {
 
     override fun titBarView(view: View): View = mBinding.collectTitleBar
+
+    override fun perpareWork() {
+        super.perpareWork()
+        mBinding.collectTitleBar.leftView.isVisible = false
+    }
 
     private lateinit var mArticleInfoAdapter: ArticleInfoAdapter
     private fun initAdapter() {

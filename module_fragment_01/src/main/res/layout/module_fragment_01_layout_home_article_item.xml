@@ -5,21 +5,21 @@
     tools:ignore="MissingDefaultResource"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="0dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    app:cardElevation="5dp">
+    android:elevation="@dimen/dp_0"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_10"
+    android:layout_marginTop="@dimen/dp_5"
+    android:layout_marginBottom="@dimen/dp_5"
+    app:cardElevation="@dimen/dp_5">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -30,22 +30,22 @@
                 android:id="@+id/tag_fresh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="@dimen/dp_4"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="新"
                 android:textColor="#FF3300"
-                android:textSize="14sp" />
+                android:textSize="@dimen/sp_14" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_title"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="#7C7B7B"
-                android:textSize="14sp"
+                android:textSize="@dimen/sp_14"
                 tools:text="标题" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#999999"
-                android:textSize="12sp"
+                android:textSize="@dimen/sp_12"
                 tools:text="时间" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -62,17 +62,17 @@
             android:id="@+id/text_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dp_10"
             android:ellipsize="end"
             android:maxLines="2"
             android:textColor="#000000"
-            android:textSize="12sp"
+            android:textSize="@dimen/sp_12"
             />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dp_10"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#999999"
-                android:textSize="12sp"
+                android:textSize="@dimen/sp_12"
                 tools:text="作者" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="#999999"
-                android:textSize="12sp"
+                android:textSize="@dimen/sp_12"
                 tools:text="分类"
                 android:layout_marginLeft="10dp"/>
 
@@ -99,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/icon_uncollect"
-                android:padding="5dp"/>
+                android:padding="@dimen/dp_5"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -64,4 +64,10 @@ dependencies {
         exclude group: 'androidx.appcompat'
         exclude group: 'org.jetbrains.kotlin'
     }
+
+    implementation project(':library_common_res')
+
+    implementation(rootProject.ext.dependencies["banner"]) {
+        exclude group: 'androidx.viewpager2:viewpager2'
+    }
 }

@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="40dp">
+            android:paddingBottom="@dimen/dp_40">
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

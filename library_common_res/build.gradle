@@ -30,6 +30,17 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    sourceSets {
+        main {
+            //res资源目录配置
+            res.srcDirs(
+                    'src/main/res',
+                    //smallestWidth 限定符适配原理:与屏幕分辨率限定符适配原理一样，系统都是根据限定符去寻找对应的 dimens.xml 文件。 区别就在于屏幕分辨率限定符适配是拿 px 值等比例缩放，而 smallestWidth 限定符适配是拿 dp 值来等比缩放而已。
+                    'src/main/res-sw',
+            )
+        }
+    }
+
 }
 
 dependencies {

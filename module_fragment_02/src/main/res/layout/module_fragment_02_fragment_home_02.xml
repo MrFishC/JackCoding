@@ -10,7 +10,7 @@
         <com.hjq.bar.TitleBar
             android:id="@+id/project_sort_title_bar"
             android:layout_width="match_parent"
-            android:layout_height="44dp"
+            android:layout_height="@dimen/dp_44"
             app:rightIcon="@mipmap/icon_sort"
             app:title="项目分类"
             app:titleColor="@color/color_aa000000"

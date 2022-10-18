@@ -15,16 +15,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:hlv_color="#999999"
-        app:hlv_size="70dp"
+        app:hlv_size="@dimen/dp_70"
         tools:ignore="MissingClass" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="@dimen/dp_7"
         android:text="加载中..."
         android:textColor="#999999"
-        android:textSize="12sp"/>
+        android:textSize="@dimen/sp_12"/>
 
 </LinearLayout>
 

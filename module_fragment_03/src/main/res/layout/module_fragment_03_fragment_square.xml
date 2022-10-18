@@ -16,18 +16,18 @@
                 android:id="@+id/indicator_view"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
-                android:paddingLeft="6dp"
-                android:paddingRight="6dp"
+                android:paddingLeft="@dimen/dp_6"
+                android:paddingRight="@dimen/dp_6"
                 app:indicator_expandingAllItemRatio="0.9"
                 app:indicator_expandingRatio="0.2"
-                app:indicator_itemPadding="6dp" />
+                app:indicator_itemPadding="@dimen/dp_6" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/linear_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingBottom="40dp">
+                android:paddingBottom="@dimen/dp_40">
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

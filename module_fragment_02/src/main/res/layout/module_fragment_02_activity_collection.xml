@@ -13,12 +13,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-<!--        <include layout="@layout/default_status_view"/>-->
-
         <com.hjq.bar.TitleBar
             android:id="@+id/subject_title_bar"
             android:layout_width="match_parent"
-            android:layout_height="44dp"
+            android:layout_height="@dimen/dp_44"
             app:titleColor="@color/color_aa000000"
             />
 

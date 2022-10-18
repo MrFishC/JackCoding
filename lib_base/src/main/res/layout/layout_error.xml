@@ -7,13 +7,13 @@
               android:orientation="vertical">
 
     <ImageView
-     android:layout_marginBottom="4dp"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
+     android:layout_marginBottom="@dimen/dp_4"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_80"
         android:background="@drawable/error"/>
 
     <TextView
-        android:textSize="15sp"
+        android:textSize="@dimen/sp_15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="加载失败"/>
