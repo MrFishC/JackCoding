@@ -14,7 +14,7 @@ import cn.jack.library_arouter.manager.constants.RouterPathFragment
 import cn.jack.library_arouter.manager.params.BundleParams
 import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.module_fragment_03.R
-import cn.jack.module_fragment_03.databinding.FragmentSystemBinding
+import cn.jack.module_fragment_03.databinding.ModuleFragment03FragmentSystemBinding
 import cn.jack.module_fragment_03.entity.NavInfo
 import cn.jack.module_fragment_03.service.ApiService
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
  */
 @Route(path = RouterPathFragment.HomeThird.PAGER_HOME_SYSTEM)
 open class SystemFragment :
-    BaseSimpleFragment<FragmentSystemBinding>(FragmentSystemBinding::inflate) {
+    BaseSimpleFragment<ModuleFragment03FragmentSystemBinding>(ModuleFragment03FragmentSystemBinding::inflate) {
 
     private val systemAndSquareInfo =
         MutableStateFlow<EventResult<List<NavInfo>>>(EventResult.OnComplete)
@@ -109,12 +109,12 @@ open class SystemFragment :
 
     @SuppressLint("InflateParams")
     private fun findItem(): View {
-        return layoutInflater.inflate(R.layout.layout_square_item, null, false) as View
+        return layoutInflater.inflate(R.layout.module_fragment_03_layout_square_item, null, false) as View
     }
 
     private fun findLabel(flexboxLayout: FlexboxLayout): AppCompatTextView {
         return layoutInflater.inflate(
-            R.layout.layout_flexbox_text_item,
+            R.layout.module_fragment_03_layout_flexbox_text_item,
             flexboxLayout,
             false
         ) as AppCompatTextView

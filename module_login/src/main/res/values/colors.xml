@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-<!--    <color name="white">#FFFFFFFF</color>-->
 
     <!-- 按钮按压时的颜色 -->
-    <color name="common_button_pressed_color">#AA5A8DDF</color>
+    <color name="module_login_common_button_pressed_color">#AA5A8DDF</color>
     <!-- 按钮禁用时的颜色 -->
-    <color name="common_button_disable_color">#BBBBBB</color>
+    <color name="module_login_common_button_disable_color">#BBBBBB</color>
     <!-- 分割线的颜色 -->
-    <color name="common_line_color">#ECECEC</color>
+    <color name="module_login_common_line_color">#ECECEC</color>
     <!-- 矢量图标的颜色 -->
-    <color name="common_icon_color">#7C7C7C</color>
+    <color name="module_login_common_icon_color">#7C7C7C</color>
 
     <!-- 对话框确认按钮的文本颜色 -->
-    <color name="common_confirm_text_color">#007AFF</color>
+    <color name="module_login_common_confirm_text_color">#007AFF</color>
     <!-- 对话框取消按钮的文本颜色 -->
-    <color name="common_cancel_text_color">#F44336</color>
+    <color name="module_login_common_cancel_text_color">#F44336</color>
 
-    <color name="common_accent_color">#5A8DDF</color>
+    <color name="module_login_common_accent_color">#5A8DDF</color>
 
 </resources>

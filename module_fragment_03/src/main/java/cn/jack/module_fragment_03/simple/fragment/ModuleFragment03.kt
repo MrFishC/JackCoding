@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
 import cn.jack.module_fragment_03.R
-import cn.jack.module_fragment_03.databinding.FragmentHome03Binding
+import cn.jack.module_fragment_03.databinding.ModuleFragment03FragmentHome03Binding
 import cn.jack.module_fragment_03.simple.adapter.TabNavigatorAdapter
 import cn.jack.module_fragment_03.simple.adapter.ViewPagerFragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -25,7 +25,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigat
  * 存在的问题，在两个子fragment，使用对指定的View设置状态布局 没有效果。 目前按照对整个页面设置状态布局的方式。
  */
 @Route(path = RouterPathFragment.HomeThird.PAGER_HOME_THIRD)
-class ModuleFragment03 : BaseSimpleFragment<FragmentHome03Binding>(FragmentHome03Binding::inflate) {
+class ModuleFragment03 : BaseSimpleFragment<ModuleFragment03FragmentHome03Binding>(ModuleFragment03FragmentHome03Binding::inflate) {
 
     override fun staBarView(view: View): View = mBinding.defaultIncludeStaBar.statusBar
 
@@ -36,7 +36,7 @@ class ModuleFragment03 : BaseSimpleFragment<FragmentHome03Binding>(FragmentHome0
 
     private fun initIndicator() {
         val commonNavigator = CommonNavigator(context)
-        val stringArray = resources.getStringArray(R.array.square_title)
+        val stringArray = resources.getStringArray(R.array.module_fragment_03_square_title)
         val tabNavigatorAdapter = TabNavigatorAdapter(listOf(*stringArray))             //未明白这里代码含义
         tabNavigatorAdapter.setOnTabClickListener { _, index: Int ->
             mBinding.viewPager2.currentItem = index

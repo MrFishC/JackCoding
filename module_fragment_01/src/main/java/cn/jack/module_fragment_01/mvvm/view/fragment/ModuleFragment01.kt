@@ -13,7 +13,7 @@ import cn.jack.library_arouter.manager.params.BundleParams
 import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_common_business.entiy.ArticleInfo
 import cn.jack.module_fragment_01.R
-import cn.jack.module_fragment_01.databinding.FragmentHome01Binding
+import cn.jack.module_fragment_01.databinding.ModuleFragment01HomeBinding
 import cn.jack.module_fragment_01.mvvm.model.entity.BanInfos
 import cn.jack.module_fragment_01.mvvm.view.adapter.HomeArticleInfoAdapter
 import cn.jack.module_fragment_01.mvvm.view.adapter.ImageNetAdapter
@@ -40,7 +40,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 @Route(path = RouterPathFragment.HomeFirst.PAGER_HOME_FIRST)
 class ModuleFragment01 :
-    BaseFragment<FragmentHome01Binding, HomePageOneViewModle>(FragmentHome01Binding::inflate),
+    BaseFragment<ModuleFragment01HomeBinding, HomePageOneViewModle>(ModuleFragment01HomeBinding::inflate),
     OnRefreshLoadMoreListener {
     override val mViewModel: HomePageOneViewModle by viewModels()
 
@@ -115,7 +115,7 @@ class ModuleFragment01 :
 
     private lateinit var mHomeArticleInfoAdapter: HomeArticleInfoAdapter
     private fun initAdapter() {
-        mHomeArticleInfoAdapter = HomeArticleInfoAdapter(R.layout.layout_home_article_item)
+        mHomeArticleInfoAdapter = HomeArticleInfoAdapter(R.layout.module_fragment_01_layout_home_article_item)
         mHomeArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
             val articleInfo = adapter.data[position] as ArticleInfo
             ArouterU.getInstance().navigationTo(

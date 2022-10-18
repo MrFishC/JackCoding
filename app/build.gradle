@@ -43,9 +43,12 @@ dependencies {
     /*hilt和arouter*/
     implementation rootProject.ext.dependencies["hilt-android"]
     kapt rootProject.ext.dependencies["hilt-compiler"]
-//    implementation rootProject.ext.dependencies["arouter-api"]
 
-    //宿主依赖业务组件
-    implementation project(path: ':module_login')   //登录注册模块
-    implementation project(path: ':module_home')    //主页模块
+    if (!isBuildModule.toBoolean()) {
+        //宿主依赖业务组件
+        implementation project(path: ':module_login')   //登录注册模块
+        implementation project(path: ':module_home')    //主页模块
+    } else {
+        implementation project(':lib_common')
+    }
 }

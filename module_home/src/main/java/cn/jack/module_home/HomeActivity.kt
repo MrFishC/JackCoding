@@ -3,7 +3,7 @@ package cn.jack.module_home
 import androidx.fragment.app.Fragment
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
-import cn.jack.module_home.databinding.ActivityHomeBinding
+import cn.jack.module_home.databinding.ModuleHomeActivityHomeBinding
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jack.lib_base.base.view.BaseSimpleActivity
@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 @Route(path = RouterPathActivity.Home.PAGER_HOME)
-class HomeActivity : BaseSimpleActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate) {
+class HomeActivity : BaseSimpleActivity<ModuleHomeActivityHomeBinding>(ModuleHomeActivityHomeBinding::inflate) {
     private val tabText = arrayOf("首页", "项目", "体系", "收藏")
 
     //未选中icon

@@ -14,9 +14,8 @@ import cn.jack.library_common_business.adapter.ArticleInfoAdapter
 import cn.jack.library_common_business.entiy.ArticleInfo
 import cn.jack.library_common_business.entiy.ProjectInfoList
 import cn.jack.library_common_business.service.ApiArticleService
-import cn.jack.module_fragment_04.databinding.FragmentHome04Binding
+import cn.jack.module_fragment_04.databinding.ModuleFragment04FragmentHome04Binding
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.gyf.immersionbar.ktx.immersionBar
 import com.jack.lib_base.base.view.BaseSimpleFragment
 import com.jack.lib_wrapper_net.flow.FlowManager
 import com.jack.lib_wrapper_net.manager.HttpManager
@@ -33,7 +32,7 @@ import kotlinx.coroutines.launch
  * 3.滑动删除
  */
 @Route(path = RouterPathFragment.HomeFour.PAGER_HOME_FOUR)
-class ModuleFragment04 : BaseSimpleFragment<FragmentHome04Binding>(FragmentHome04Binding::inflate),
+class ModuleFragment04 : BaseSimpleFragment<ModuleFragment04FragmentHome04Binding>(ModuleFragment04FragmentHome04Binding::inflate),
     OnRefreshLoadMoreListener {
 
     override fun titBarView(view: View): View = mBinding.collectTitleBar
@@ -101,12 +100,6 @@ class ModuleFragment04 : BaseSimpleFragment<FragmentHome04Binding>(FragmentHome0
                 }
             }
         }
-    }
-
-    override fun prepareListener() {
-        super.prepareListener()
-//        mBinding.collect.titleBar.getTitleView().setText("我的收藏")
-//        mBinding.collect.titleBar.getLeftView().setVisibility(View.INVISIBLE)
     }
 
     override fun loadData() {

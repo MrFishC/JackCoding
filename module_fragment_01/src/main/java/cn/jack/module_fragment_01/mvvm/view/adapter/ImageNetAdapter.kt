@@ -18,7 +18,7 @@ class ImageNetAdapter(mDatas: List<BanInfos>) : BannerAdapter<BanInfos, ImageHol
 
     override fun onCreateHolder(parent: ViewGroup, viewType: Int): ImageHolder {
         val imageView =
-            BannerUtils.getView(parent, R.layout.layout_banner_image) as AppCompatImageView
+            BannerUtils.getView(parent, R.layout.module_fragment_01_layout_banner_image) as AppCompatImageView
         //通过裁剪实现圆角
         BannerUtils.setBannerRound(imageView, 20f)
         return ImageHolder(imageView)

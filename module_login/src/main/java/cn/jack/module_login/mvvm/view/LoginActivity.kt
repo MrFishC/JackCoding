@@ -1,7 +1,6 @@
 package cn.jack.module_login.mvvm.view
 
 import android.annotation.SuppressLint
-import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -11,14 +10,11 @@ import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_common_business.constant.C
 import cn.jack.library_util.KvStoreUtil
-import cn.jack.module_login.databinding.ActivityLoginBinding
+import cn.jack.module_login.databinding.ModuleLoginActivityLoginBinding
 import cn.jack.module_login.mvvm.modle.entity.InfoVerification
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.vm.LoginViewModel
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.gyf.immersionbar.ImmersionBar
-import com.gyf.immersionbar.ktx.immersionBar
-import com.jack.lib_base.R
 import com.jack.lib_base.base.view.BaseActivity
 import com.jack.lib_wrapper_net.model.EventResult
 import com.jakewharton.rxbinding3.widget.textChanges
@@ -38,16 +34,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 @Route(path = RouterPathActivity.Login.PAGER_LOGIN)
 class LoginActivity :
-    BaseActivity<ActivityLoginBinding, LoginViewModel>(ActivityLoginBinding::inflate) {
+    BaseActivity<ModuleLoginActivityLoginBinding, LoginViewModel>(ModuleLoginActivityLoginBinding::inflate) {
     override val mViewModel: LoginViewModel by viewModels()
-
-//    override fun titBarView(): View {
-//        return mBinding.toolbar
-//    }
-
-//    override fun staBarView(): View {
-//        return mBinding.statusBar
-//    }
 
     override fun observeViewModel() {
         super.observeViewModel()

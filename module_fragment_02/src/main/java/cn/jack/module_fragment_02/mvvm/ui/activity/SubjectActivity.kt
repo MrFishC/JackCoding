@@ -6,12 +6,12 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.params.BundleParams
 import cn.jack.library_arouter.manager.router.ArouterU
-import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_common_business.adapter.ArticleInfoAdapter
 import cn.jack.library_common_business.entiy.ArticleInfo
-import cn.jack.module_fragment_02.databinding.ActivityCollectionBinding
+import cn.jack.module_fragment_02.databinding.ModuleFragment02ActivityCollectionBinding
 import cn.jack.module_fragment_02.mvvm.SubjectViewModel
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hjq.bar.OnTitleBarListener
@@ -32,7 +32,7 @@ import kotlin.properties.Delegates
 @AndroidEntryPoint
 @Route(path = RouterPathActivity.Subject.PAGER_SUBJECT)
 class SubjectActivity() :
-    BaseActivity<ActivityCollectionBinding, SubjectViewModel>(ActivityCollectionBinding::inflate),
+    BaseActivity<ModuleFragment02ActivityCollectionBinding, SubjectViewModel>(ModuleFragment02ActivityCollectionBinding::inflate),
     OnRefreshLoadMoreListener {
     override val mViewModel: SubjectViewModel by viewModels()
 

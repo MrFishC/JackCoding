@@ -17,7 +17,7 @@ import cn.jack.library_common_business.entiy.ProjectInfoList
 import cn.jack.library_common_business.service.ApiArticleService
 import cn.jack.library_util.ContextU
 import cn.jack.library_util.KvStoreUtil
-import cn.jack.module_fragment_02.databinding.FragmentHome02Binding
+import cn.jack.module_fragment_02.databinding.ModuleFragment02FragmentHome02Binding
 import cn.jack.module_fragment_02.entiy.SortInfo
 import cn.jack.module_fragment_02.service.ApiService
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -43,7 +43,7 @@ import kotlin.properties.Delegates
  * 2.项目分类（条件筛选）
  */
 @Route(path = RouterPathFragment.HomeSecond.PAGER_HOME_SECOND)
-class ModuleFragment02 : BaseSimpleFragment<FragmentHome02Binding>(FragmentHome02Binding::inflate),
+class ModuleFragment02 : BaseSimpleFragment<ModuleFragment02FragmentHome02Binding>(ModuleFragment02FragmentHome02Binding::inflate),
     OnRefreshLoadMoreListener,
     OnItemChildClickListener {
 

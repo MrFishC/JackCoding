@@ -10,7 +10,7 @@ import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_common_business.constant.C
 import cn.jack.library_util.KvStoreUtil
-import cn.jack.module_login.databinding.ActivityRegisterBinding
+import cn.jack.module_login.databinding.ModuleLoginActivityRegisterBinding
 import cn.jack.module_login.mvvm.modle.entity.InfoVerification
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.vm.RegisterViewModel
@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 @Route(path = RouterPathActivity.Register.PAGER_REGISTER)
 class RegisterActivity :
-    BaseActivity<ActivityRegisterBinding, RegisterViewModel>(ActivityRegisterBinding::inflate) {
+    BaseActivity<ModuleLoginActivityRegisterBinding, RegisterViewModel>(ModuleLoginActivityRegisterBinding::inflate) {
     override val mViewModel: RegisterViewModel by viewModels()
 
     override fun observeViewModel() {

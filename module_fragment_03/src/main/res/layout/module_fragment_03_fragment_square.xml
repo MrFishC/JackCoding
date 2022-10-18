@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.skydoves.indicatorscrollview.IndicatorScrollView
+        android:id="@+id/indicator_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.skydoves.indicatorscrollview.IndicatorView
+                android:id="@+id/indicator_view"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                app:indicator_expandingAllItemRatio="0.9"
+                app:indicator_expandingRatio="0.2"
+                app:indicator_itemPadding="6dp" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linear_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="40dp">
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.skydoves.indicatorscrollview.IndicatorScrollView>
+
+</layout>

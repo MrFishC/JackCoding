@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cn.jack.module_login.mvvm.vm.LoginViewModel" />
+
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/default_status_view" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/register_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:padding="20dp"
+                android:text="注册" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_login_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:orientation="vertical">
+
+                <cn.jack.library_weight.ClearEditText
+                    android:id="@+id/et_login_phone"
+                    style="@style/ModuleLoginEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="请输入手机号码"
+                    android:inputType="textVisiblePassword"
+                    android:singleLine="true"
+                    android:text="@={viewModel.mPhone}"
+                    app:regexType="mobile" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginHorizontal="40dp"
+                    android:background="#ececec" />
+
+                <cn.jack.library_weight.PasswordEditText
+                    android:id="@+id/et_login_password"
+                    style="@style/ModuleLoginEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="20dp"
+                    android:hint="请输入密码"
+                    android:imeOptions="actionDone"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:text="@={viewModel.mPasswd}" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginHorizontal="40dp"
+                    android:background="#ececec" />
+
+                <cn.jack.library_weight.SubmitButton
+                    android:id="@+id/btn_login_commit"
+                    style="@style/ModuleLoginButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="30dp"
+                    android:text="登录" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

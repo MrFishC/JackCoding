@@ -42,6 +42,7 @@ dependencies {
     api project(':library_common_arouter')
     api project(':library_weight')
     api project(':library_common_business')
+    api project(':library_common_res')
 
     debugApi 'com.squareup.leakcanary:leakcanary-android:2.6'
 }
