@@ -24,21 +24,23 @@
 apply from: "/gradle/config.gradle"
 
 buildscript {
+    apply from: "/gradle/config.gradle"
+
     repositories {
         google()
         mavenCentral()
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.3.0"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
+        classpath "com.android.tools.build:gradle:$build_gradle_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         //https://github.com/google/protobuf-gradle-plugin
         //protobuf配置1
-        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.15'
+        classpath "com.google.protobuf:protobuf-gradle-plugin:$protobuf_version"
         //https://developer.android.google.cn/training/dependency-injection/hilt-android#groovy
-        //hilt配置1
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.44'
+        //hilt配置1   version["hilt_version"]
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_plugin_version"
     }
 }
 

@@ -93,7 +93,7 @@ android {
 
 dependencies{
     //组件依赖基础业务库
-    api project(':lib_common')
+    api project(':basicCommon')
 
     //按需依赖第三方组件(通用的可以在lib_base中统一配置即可)
 

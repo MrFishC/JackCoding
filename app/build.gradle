@@ -46,9 +46,9 @@ dependencies {
 
     if (!isBuildModule.toBoolean()) {
         //宿主依赖业务组件
-        implementation project(path: ':module_login')   //登录注册模块
-        implementation project(path: ':module_home')    //主页模块
+        implementation project(path: ':businessLogin')   //登录注册模块
+        implementation project(path: ':businessHome')    //主页模块
     } else {
-        implementation project(':lib_common')
+        implementation project(':basicCommon')
     }
 }

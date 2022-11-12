@@ -1,9 +1,0 @@
-apply from: "../gradle/module_home_fragment_kt.build.gradle"
-
-dependencies {
-    //每个业务模块都按照implementation的方式依赖
-    //轮播图
-    implementation(rootProject.ext.dependencies["banner"]) {
-        exclude group: 'androidx.viewpager2:viewpager2'
-    }
-}

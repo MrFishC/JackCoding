@@ -1,0 +1,56 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            //res资源目录配置
+            res.srcDirs(
+                    'src/main/res',
+                    //smallestWidth 限定符适配原理:与屏幕分辨率限定符适配原理一样，系统都是根据限定符去寻找对应的 dimens.xml 文件。 区别就在于屏幕分辨率限定符适配是拿 px 值等比例缩放，而 smallestWidth 限定符适配是拿 dp 值来等比缩放而已。
+                    'src/main/res-sw',
+            )
+        }
+    }
+
+}
+
+dependencies {
+    //提高 Android UI 开发效率的 UI 库,只依赖了qmui
+    //官网 https://github.com/Tencent/QMUI_Android
+    api(rootProject.ext.dependencies["qmui"]) {
+        exclude group: 'androidx.appcompat'
+        exclude group: 'androidx.annotation'
+        exclude group: 'com.google.android.material:material'
+        exclude group: 'androidx.constraintlayout:constraintlayout'
+        exclude group: 'androidx.swiperefreshlayout:swiperefreshlayout'
+    }
+}

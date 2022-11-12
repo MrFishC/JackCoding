@@ -19,21 +19,37 @@ dependencyResolutionManagement {
 
 rootProject.name = "JackCoding"
 
-include ':lib_wrapper_mvvm'
-include ':lib_base'
-include ':lib_wrapper_net'
-include ':library_image'
-include ':library_webview'
-include ':library_weight'
-include ':library_util'
-include ':library_common_arouter'
-include ':library_common_res'
-include ':library_common_business'
+/*1.宿主层*/
 include ':app'
-include ':module_fragment_04'
-include ':module_fragment_03'
-include ':module_fragment_02'
-include ':module_fragment_01'
-include ':module_home'
-include ':module_login'
-include ':lib_common'
+
+/*2.业务组件层模块*/
+include ':businessLogin', ':businessHome', ':businessFragment1', ':businessFragment2', ':businessFragment3', ':businessFragment4'
+
+project(':businessLogin').projectDir = file('business/module_login')
+project(':businessHome').projectDir = file('business/module_home')
+project(':businessFragment1').projectDir = file('business/module_fragment_01')
+project(':businessFragment2').projectDir = file('business/module_fragment_02')
+project(':businessFragment3').projectDir = file('business/module_fragment_03')
+project(':businessFragment4').projectDir = file('business/module_fragment_04')
+
+/*3.业务基础层-服务于业务层模块*/
+include ':basicCommon', ':basicArouter', ':basicCBusiness'
+
+//业务层只需要依赖basicCommon即可
+project(':basicCommon').projectDir = file('dir_basic/lib_common')
+//basicCommon依赖了basicArouter和basicCBusiness
+project(':basicArouter').projectDir = file('dir_basic/library_common_arouter')
+project(':basicCBusiness').projectDir = file('dir_basic/library_common_business')
+
+/*4.基础组件层模块*/
+include ':commonWrapper', ':commonBase', ':commonHttp', ':commonImage',
+        ':commonWebview', ':commonTool', ':commonWeight', ':commonRes'
+
+project(':commonWrapper').projectDir = file('dir_common/lib_wrapper_mvvm')
+project(':commonBase').projectDir = file('dir_common/lib_base')
+project(':commonHttp').projectDir = file('dir_common/lib_wrapper_net')
+project(':commonImage').projectDir = file('dir_common/library_image')
+project(':commonWebview').projectDir = file('dir_common/library_webview')
+project(':commonTool').projectDir = file('dir_common/library_util')
+project(':commonWeight').projectDir = file('dir_common/library_weight')
+project(':commonRes').projectDir = file('dir_common/library_common_res')

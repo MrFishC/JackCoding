@@ -1,0 +1,17 @@
+apply from: "../../gradle/module_kt.build.gradle"
+
+dependencies {
+    //底部导航栏
+    //2.0.5  AndroidX版本、支持ViewPager2
+    //地址：https://github.com/Vincent7Wong/EasyNavigation
+    implementation 'com.github.Vincent7Wong:EasyNavigation:2.0.5'
+
+    //抽屉布局
+    implementation rootProject.ext.dependencies["flowingdrawer-core"]
+    implementation rootProject.ext.dependencies["nineoldandroids_library"]
+
+    implementation project(path: ':businessFragment1')
+    implementation project(path: ':businessFragment2')
+    implementation project(path: ':businessFragment3')
+    implementation project(path: ':businessFragment4')
+}

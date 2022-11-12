@@ -10,6 +10,11 @@ ext {
             module_applicationId: "cn.jack." + project.getName()       //组件模式下设置module的applicationId
     ]
 
+    build_gradle_version = '7.3.0'
+    kotlin_version = '1.7.10'
+    protobuf_version = '0.8.15'
+    hilt_plugin_version = '2.44'
+
     version = [
 
             constraintVersion                         : "2.0.1",

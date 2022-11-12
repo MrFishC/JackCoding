@@ -1,7 +1,0 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <string-array name="module_fragment_03_square_title">
-        <item>导航</item>
-        <item>体系</item>
-    </string-array>
-
-</resources>
