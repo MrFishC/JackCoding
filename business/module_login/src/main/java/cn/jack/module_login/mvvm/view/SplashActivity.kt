@@ -1,7 +1,5 @@
 package cn.jack.module_login.mvvm.view
 
-import android.animation.Animator
-import android.animation.Animator.AnimatorListener
 import android.annotation.SuppressLint
 import cn.jack.module_login.databinding.ModuleLoginActivitysPlashBinding
 import com.jack.lib_base.base.view.BaseSimpleActivity
@@ -27,20 +25,20 @@ class SplashActivity :
     private fun startAnimation() {
 //        mBinding.splashAnimation.setAnimation("splash_loading.json")
         mBinding.splashAnimation.setAnimation("lottie_animation.json")
-        mBinding.splashAnimation.addAnimatorListener(object : AnimatorListener {
-            override fun onAnimationStart(animation: Animator?) {
-            }
-
-            override fun onAnimationEnd(animation: Animator?) {
-                println("onAnimationEnd ")
-            }
-
-            override fun onAnimationCancel(animation: Animator?) {
-            }
-
-            override fun onAnimationRepeat(animation: Animator?) {
-            }
-        })
+//        mBinding.splashAnimation.addAnimatorListener(object : AnimatorListener {
+//            override fun onAnimationStart(animation: Animator?) {
+//            }
+//
+//            override fun onAnimationEnd(animation: Animator?) {
+//                println("onAnimationEnd ")
+//            }
+//
+//            override fun onAnimationCancel(animation: Animator?) {
+//            }
+//
+//            override fun onAnimationRepeat(animation: Animator?) {
+//            }
+//        })
         mBinding.splashAnimation.playAnimation()
     }
 

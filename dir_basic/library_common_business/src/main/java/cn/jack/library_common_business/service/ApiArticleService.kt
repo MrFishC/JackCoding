@@ -1,7 +1,7 @@
 package cn.jack.library_common_business.service
 
-import cn.jack.library_common_business.entiy.ApiResponse
 import cn.jack.library_common_business.entiy.ProjectInfoList
+import com.jack.lib_wrapper_net.model.ApiResponse
 import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.POST

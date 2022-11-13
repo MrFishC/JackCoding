@@ -67,7 +67,7 @@ class SubjectActivity() :
                             }
                             val datas: List<ArticleInfo> = it.data!!.datas
                             for (articleBean in datas) {
-                                articleBean.isCollect = true
+                                articleBean.collect = true
                             }
                             if (mIsRefresh) {
                                 mArticleInfoAdapter.setList(datas)

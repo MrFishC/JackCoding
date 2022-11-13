@@ -1,5 +1,6 @@
 package cn.jack.module_fragment_02.mvvm.ui.fragment
 
+import android.annotation.SuppressLint
 import android.text.TextUtils
 import android.view.View
 import androidx.core.os.bundleOf
@@ -79,6 +80,7 @@ class ModuleFragment02 : BaseSimpleFragment<ModuleFragment02FragmentHome02Bindin
         return mBinding.projectSortTitleBar
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun prepareData() {
         super.prepareData()
         initAdapter()
@@ -92,8 +94,9 @@ class ModuleFragment02 : BaseSimpleFragment<ModuleFragment02FragmentHome02Bindin
 //                            if (it.data == null) {
 //                                return@collect
 //                            }
-                            articleInfo.isCollect = !articleInfo.isCollect
-                            mArticleInfoAdapter.notifyItemChanged(position)
+                            articleInfo.collect = !articleInfo.collect
+//                            mArticleInfoAdapter.notifyItemChanged(position)
+                            mArticleInfoAdapter.notifyDataSetChanged()
                         }
                         is EventResult.OnFail -> {
                             hideDialog()
@@ -120,8 +123,9 @@ class ModuleFragment02 : BaseSimpleFragment<ModuleFragment02FragmentHome02Bindin
 //                            if (it.data == null) {
 //                                return@collect
 //                            }
-                            articleInfo.isCollect = !articleInfo.isCollect
-                            mArticleInfoAdapter.notifyItemChanged(position)
+                            articleInfo.collect = !articleInfo.collect
+//                            mArticleInfoAdapter.notifyItemChanged(position)
+                            mArticleInfoAdapter.notifyDataSetChanged()
                         }
                         is EventResult.OnFail -> {
                             hideDialog()
@@ -363,7 +367,7 @@ class ModuleFragment02 : BaseSimpleFragment<ModuleFragment02FragmentHome02Bindin
 
     override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
         val articleInfo: ArticleInfo = adapter.getItem(position) as ArticleInfo
-        if (articleInfo.isCollect) {
+        if (articleInfo.collect) {
             uncollectArticle(articleInfo, position, articleInfo.id)
         } else {
             collectArticle(articleInfo, position, articleInfo.id)

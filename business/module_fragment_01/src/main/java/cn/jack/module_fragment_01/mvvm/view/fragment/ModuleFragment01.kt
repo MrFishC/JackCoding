@@ -1,6 +1,5 @@
 package cn.jack.module_fragment_01.mvvm.view.fragment
 
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -8,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.lib_common.ext.showToast
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
 import cn.jack.library_arouter.manager.params.BundleParams
@@ -19,10 +19,9 @@ import cn.jack.module_fragment_01.mvvm.model.entity.BanInfos
 import cn.jack.module_fragment_01.mvvm.view.adapter.HomeArticleInfoAdapter
 import cn.jack.module_fragment_01.mvvm.view.adapter.ImageNetAdapter
 import cn.jack.module_fragment_01.mvvm.vm.HomePageOneViewModle
-import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.facade.callback.NavCallback
-import com.alibaba.android.arouter.launcher.ARouter
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.jack.lib_base.base.view.BaseFragment
 import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.model.EventResult
@@ -33,6 +32,7 @@ import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import kotlin.properties.Delegates
 
 /**
  * 1.列表
@@ -45,7 +45,7 @@ import kotlinx.coroutines.launch
 @Route(path = RouterPathFragment.HomeFirst.PAGER_HOME_FIRST)
 class ModuleFragment01 :
     BaseFragment<ModuleFragment01HomeBinding, HomePageOneViewModle>(ModuleFragment01HomeBinding::inflate),
-    OnRefreshLoadMoreListener {
+    OnRefreshLoadMoreListener, OnItemChildClickListener {
     override val mViewModel: HomePageOneViewModle by viewModels()
 
     private var mIsRefresh = true
@@ -108,6 +108,56 @@ class ModuleFragment01 :
                 }
             }
         }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mViewModel.collectAtrticle_.collect {
+                    when (it) {
+                        is EventResult.OnStart -> visibleDialog()
+                        is EventResult.OnNext -> {
+                            articleInfo.collect = !articleInfo.collect
+                            mHomeArticleInfoAdapter.notifyItemChanged(position)
+                        }
+                        is EventResult.OnFail -> {
+                            hideDialog()
+                            showToast(it.throwable.message)
+                        }
+                        is EventResult.OnError -> {
+                            hideDialog()
+                            showToast(it.throwable.message)
+                        }
+                        is EventResult.OnComplete -> {
+                            hideDialog()
+                        }
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mViewModel.uncollectArticle_.collect {
+                    when (it) {
+                        is EventResult.OnStart -> visibleDialog()
+                        is EventResult.OnNext -> {
+                            articleInfo.collect = !articleInfo.collect
+                            mHomeArticleInfoAdapter.notifyItemChanged(position)
+                        }
+                        is EventResult.OnFail -> {
+                            hideDialog()
+                            showToast(it.throwable.message)
+                        }
+                        is EventResult.OnError -> {
+                            hideDialog()
+                            showToast(it.throwable.message)
+                        }
+                        is EventResult.OnComplete -> {
+                            hideDialog()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun showBannerInfos(banInfos: List<BanInfos>) {
@@ -121,6 +171,9 @@ class ModuleFragment01 :
     private fun initAdapter() {
         mHomeArticleInfoAdapter =
             HomeArticleInfoAdapter(R.layout.module_fragment_01_layout_home_article_item)
+
+        mHomeArticleInfoAdapter.setOnItemChildClickListener(this)
+
         mHomeArticleInfoAdapter.setOnItemClickListener { adapter, _, position ->
             val articleInfo = adapter.data[position] as ArticleInfo
             ArouterU.getInstance().navigationToWithIntercept(
@@ -166,5 +219,22 @@ class ModuleFragment01 :
     override fun onRefresh(refreshLayout: RefreshLayout) {
         mIsRefresh = true
         mViewModel.loadHomeInfos(mIsRefresh)
+    }
+
+    private lateinit var articleInfo: ArticleInfo
+    private var position by Delegates.notNull<Int>()
+
+    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
+        //判断是否登录
+        val articleInfo: ArticleInfo = adapter.getItem(position) as ArticleInfo
+
+        this.articleInfo = articleInfo
+        this.position = position + 1 //因为有head的存在，故需要+1
+
+        if (articleInfo.collect) {
+            mViewModel.unCollection(articleInfo.id)
+        } else {
+            mViewModel.collection(articleInfo.id)
+        }
     }
 }

@@ -40,7 +40,8 @@ dependencies {
     /*该模块需要的依赖*/
     implementation project(':commonImage')
     implementation project(':commonRes')
-
+    implementation project(':commonHttp')
+    
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["material"]
     implementation rootProject.ext.dependencies["constraint"]
