@@ -65,7 +65,7 @@ ext {
             interceptor_version                       : "4.9.0",
             gson_version                              : "2.8.5",
             fastjson_version                          : "1.1.71.android",
-            kotlin_reflect_version                          : "1.3.61",
+            kotlin_reflect_version                    : "1.3.61",
             rxjava2_version                           : "2.2.8",
             rxandroid2_version                        : "2.1.1",
             autodispose_android_archcomponents_version: "1.4.0",
@@ -74,6 +74,7 @@ ext {
             shimmer_android_version                   : "0.5.0",
             material_dialogs_version                  : "3.3.0",
             xPopup_version                            : "2.9.0",
+            lottieVersion                             : "5.2.0",
     ]
 
     dependencies = [
@@ -104,7 +105,7 @@ ext {
             "retrofit2:adapter"                 : "com.squareup.retrofit2:adapter-rxjava2:${version["retrofit_version"]}",
             "gson"                              : "com.google.code.gson:gson:${version["gson_version"]}",
             "fastjson"                          : "com.alibaba:fastjson:${version["fastjson_version"]}",
-            "kotlin-reflect"                          : "org.jetbrains.kotlin:kotlin-reflect:${version["kotlin_reflect_version"]}",
+            "kotlin-reflect"                    : "org.jetbrains.kotlin:kotlin-reflect:${version["kotlin_reflect_version"]}",
 
             "rxbinding3-appcompat"              : "com.jakewharton.rxbinding3:rxbinding-appcompat:${version["rxbinding3_appcompat_version"]}",       //https://github.com/JakeWharton/RxBinding/tree/3.1.0
 
@@ -121,7 +122,7 @@ ext {
 
             "immersionbar"                      : "com.geyifeng.immersionbar:immersionbar:${version["immersionbar"]}",  // 基础依赖包，必须要依赖 //状态栏 https://github.com/gyf-dev/ImmersionBar
 
-            "immersionbar-ktx"           : "com.geyifeng.immersionbar:immersionbar-ktx:${version["immersionbar"]}", // kotlin扩展（可选）
+            "immersionbar-ktx"                  : "com.geyifeng.immersionbar:immersionbar-ktx:${version["immersionbar"]}", // kotlin扩展（可选）
 
             "refresh_layout_kernel"             : "com.scwang.smart:refresh-layout-kernel:${version["refresh_layout_kernel_version"]}",      //核心必须依赖 //https://github.com/scwang90/SmartRefreshLayout
             "refresh_header_classics"           : "com.scwang.smart:refresh-header-classics:${version["refresh_layout_kernel_version"]}",    //经典刷新头
@@ -185,6 +186,7 @@ ext {
 //            "material-dialogs-core"             : "com.afollestad.material-dialogs:core:${version["material_dialogs_version"]}",//https://github.com/afollestad/material-dialogs#core
 //            "material-dialogs-lifecycle"        : "com.afollestad.material-dialogs:lifecycle:${version["material_dialogs_version"]}",//https://github.com/afollestad/material-dialogs#core
             "XPopup"                            : "com.github.li-xiaojun:XPopup:${version["xPopup_version"]}",//https://github.com/li-xiaojun/XPopup
+            "lottie"                            : "com.airbnb.android:lottie:${version["lottieVersion"]}",//https://github.com/airbnb/lottie-android
     ]
 
 }

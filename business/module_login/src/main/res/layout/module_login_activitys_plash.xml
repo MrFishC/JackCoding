@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="ResourceName">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/color_ffffff"
+        >
 
-        <ru.github.igla.ferriswheel.FerrisWheelView
-            android:id="@+id/ferrisWheelView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            app:fwv_baseStrokeColor="@color/module_login_common_accent_color"
-            app:fwv_cabinSize="20dp"
-            app:fwv_cabinsNumber="10"
-            app:fwv_rotateSpeed="8" />
+        <!--        <ru.github.igla.ferriswheel.FerrisWheelView-->
+        <!--            android:id="@+id/ferrisWheelView"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_margin="20dp"-->
+        <!--            app:fwv_baseStrokeColor="@color/module_login_common_accent_color"-->
+        <!--            app:fwv_cabinSize="20dp"-->
+        <!--            app:fwv_cabinsNumber="10"-->
+        <!--            app:fwv_rotateSpeed="8" />-->
 
-    </LinearLayout>
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/splash_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_320"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
 
 </layout>
