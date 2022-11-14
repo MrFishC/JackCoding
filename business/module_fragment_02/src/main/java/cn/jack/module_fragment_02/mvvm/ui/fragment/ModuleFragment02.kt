@@ -14,6 +14,7 @@ import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_common_business.adapter.ArticleInfoAdapter
 import cn.jack.library_common_business.entiy.ArticleInfo
 import cn.jack.library_common_business.entiy.ProjectInfoList
+import cn.jack.library_common_business.fragment.SearchFragment
 import cn.jack.library_common_business.service.ApiArticleService
 import cn.jack.library_util.ContextU
 import cn.jack.library_util.KvStoreUtil
@@ -234,10 +235,15 @@ class ModuleFragment02 : BaseSimpleFragment<ModuleFragment02FragmentHome02Bindin
             override fun onLeftClick(v: View) {}
             override fun onTitleClick(v: View) {}
             override fun onRightClick(v: View) {
-                showSortDailog()
+//                showSortDailog()
+                openSearchDialogFragment()
             }
         })
         setTargetLoadService(mBinding.findSmartRefreshLayout)
+    }
+
+    private fun openSearchDialogFragment() {
+        SearchFragment().show(requireActivity().supportFragmentManager,"")
     }
 
     private fun showSortDailog() {

@@ -1,7 +1,5 @@
 package cn.jack.library_arouter.manager.router
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import cn.jack.library_util.ContextU
 import com.alibaba.android.arouter.facade.Postcard

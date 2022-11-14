@@ -34,12 +34,17 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
     /*该模块需要的依赖*/
     implementation project(':commonImage')
     implementation project(':commonRes')
+    implementation project(':commonBase')
 
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["material"]

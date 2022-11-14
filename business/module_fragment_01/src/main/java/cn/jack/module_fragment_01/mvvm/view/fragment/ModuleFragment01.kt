@@ -1,6 +1,5 @@
 package cn.jack.module_fragment_01.mvvm.view.fragment
 
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -19,10 +18,7 @@ import cn.jack.module_fragment_01.mvvm.model.entity.BanInfos
 import cn.jack.module_fragment_01.mvvm.view.adapter.HomeArticleInfoAdapter
 import cn.jack.module_fragment_01.mvvm.view.adapter.ImageNetAdapter
 import cn.jack.module_fragment_01.mvvm.vm.HomePageOneViewModle
-import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.facade.callback.NavCallback
-import com.alibaba.android.arouter.launcher.ARouter
 import com.jack.lib_base.base.view.BaseFragment
 import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.model.EventResult
