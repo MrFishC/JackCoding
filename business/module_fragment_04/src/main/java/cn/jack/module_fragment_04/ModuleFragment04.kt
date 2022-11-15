@@ -76,7 +76,7 @@ class ModuleFragment04 : BaseSimpleFragment<ModuleFragment04FragmentHome04Bindin
                             }
                             val datas = it.data!!.datas
                             for (articleBean in datas) {
-                                articleBean.isCollect = true
+                                articleBean.collect = true
                             }
 
                             if (page == 0) {

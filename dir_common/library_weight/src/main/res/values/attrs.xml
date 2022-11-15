@@ -39,4 +39,8 @@
         </attr>
     </declare-styleable>
 
+    <!-- 流式布局 -->
+    <declare-styleable name="UFlowLayout">
+
+    </declare-styleable>
 </resources>

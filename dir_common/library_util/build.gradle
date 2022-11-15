@@ -1,4 +1,5 @@
 apply from: "../../gradle/common.build.gradle"
+apply plugin: 'org.jetbrains.kotlin.android'
 
 dependencies {
     //通用标题栏
@@ -6,7 +7,8 @@ dependencies {
     api rootProject.ext.dependencies["mmkv"]
     api rootProject.ext.dependencies["logger"]
     api rootProject.ext.dependencies["toasty"]
-    api rootProject.ext.dependencies["shimmer-android"] //骨架屏：http://facebook.github.io/shimmer-android/
+    api rootProject.ext.dependencies["shimmer-android"]
+    //骨架屏：http://facebook.github.io/shimmer-android/
     
 //    api rootProject.ext.dependencies["material-dialogs-core"]
 //    api rootProject.ext.dependencies["material-dialogs-lifecycle"]

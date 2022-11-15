@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_56"
+    android:background="@color/color_ffffff"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    app:layout_scrollFlags="scroll|enterAlways">
+
+    <ImageButton
+        android:id="@+id/search_back_ib"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:background="@android:color/transparent"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/search_tv"
+        android:layout_width="@dimen/dp_54"
+        android:layout_height="@dimen/dp_28"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:contentDescription="@null"
+        android:gravity="center"
+        android:text="搜索"
+        android:textColor="@color/color_9b9b9b"
+        android:textSize="@dimen/sp_12" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_12"
+            android:inputType="text"
+            android:labelFor="@id/search_edit"
+            android:paddingStart="@dimen/dp_27"
+            android:paddingEnd="@dimen/dp_1"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/search_tint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp_6"
+            android:drawableStart="@drawable/ic_search"
+            android:gravity="center"
+            android:text="请输入关键字"
+            android:textColor="@color/color_9b9b9b"
+            android:textSize="@dimen/sp_14" />
+
+    </RelativeLayout>
+
+</com.google.android.material.appbar.MaterialToolbar>

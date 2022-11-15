@@ -1,5 +1,6 @@
 package cn.jack.module_fragment_01.mvvm.vm
 
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import cn.jack.module_fragment_01.mvvm.model.entity.HomeInfos
 import cn.jack.module_fragment_01.mvvm.model.repository.HomePageOneRepository
@@ -22,9 +23,34 @@ class HomePageOneViewModle @Inject constructor(private val mRepository: HomePage
 
     val homeInfos_ = mHomeInfos.shareIn(viewModelScope, SharingStarted.WhileSubscribed(5000))
 
+    private val collectAtrticle =
+        MutableStateFlow<EventResult<String>>(EventResult.OnComplete)
+
+    val collectAtrticle_ =
+        collectAtrticle.shareIn(viewModelScope, SharingStarted.WhileSubscribed(5000))
+
+    private val uncollectArticle =
+        MutableStateFlow<EventResult<String>>(EventResult.OnComplete)
+
+    val uncollectArticle_ =
+        uncollectArticle.shareIn(viewModelScope, SharingStarted.WhileSubscribed(5000))
+
+
     fun loadHomeInfos(refresh: Boolean) {
         mRepository.homeInfos(refresh).onEach {
             mHomeInfos.value = it
+        }.launchIn(viewModelScope)
+    }
+
+    fun collection(id: String) {
+        mRepository.collection(id).onEach {
+            collectAtrticle.value = it
+        }.launchIn(viewModelScope)
+    }
+
+    fun unCollection(id: String) {
+        mRepository.unCollection(id).onEach {
+            uncollectArticle.value = it
         }.launchIn(viewModelScope)
     }
 }

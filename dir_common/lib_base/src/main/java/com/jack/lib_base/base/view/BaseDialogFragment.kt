@@ -3,10 +3,7 @@ package com.jack.lib_base.base.view
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 
@@ -33,9 +30,11 @@ abstract class BaseDialogFragment<VB : ViewDataBinding>(var block: (LayoutInflat
     }
 
     open fun initParams() {
-        dialog?.window?.addFlags(Window.FEATURE_NO_TITLE)
         dialog?.setCanceledOnTouchOutside(false)
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.let {
+            it.addFlags(Window.FEATURE_NO_TITLE)
+            it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
     }
 
     abstract fun initData(savedInstanceState: Bundle?)
