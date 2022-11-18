@@ -46,7 +46,8 @@ dependencies {
     implementation project(':commonRes')
     implementation project(':commonBase')
     implementation project(':commonHttp')
-    
+    implementation project(':commonWeight')
+
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["material"]
     implementation rootProject.ext.dependencies["constraint"]

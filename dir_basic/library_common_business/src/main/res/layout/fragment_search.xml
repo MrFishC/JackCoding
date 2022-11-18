@@ -1,12 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#999">
 
         <include layout="@layout/search_edittext" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <cn.jack.library_weight.UFlowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/normal_bg"
+                android:text="Breath And Life"
+                android:textColor="#ff0000"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/normal_bg"
+                android:text="Fallen"
+                android:textColor="#ff0000"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/normal_bg"
+                android:text="Brand-new World"
+                android:textColor="#ff0000"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/normal_bg"
+                android:text="Save you from anything"
+                android:textColor="#ff0000"
+                android:textSize="13sp" />
+
+        </cn.jack.library_weight.UFlowLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </layout>
