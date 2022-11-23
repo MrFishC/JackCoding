@@ -9,52 +9,65 @@
 
         <include layout="@layout/search_edittext" />
 
-        <cn.jack.library_weight.UFlowLayout
+        <cn.jack.library_weight.flow.UFlowLayout
+            android:id="@+id/flow_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp">
+            android:layout_marginTop="6dp"
+            android:background="#ff0000"
+            android:padding="@dimen/dp_5">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="6dp"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/normal_bg"
-                android:text="Breath And Life"
-                android:textColor="#ff0000"
-                android:textSize="13sp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginRight="6dp"-->
+<!--                android:layout_marginBottom="6dp"-->
+<!--                android:background="@drawable/normal_bg"-->
+<!--                android:text="Breath And Life"-->
+<!--                android:textColor="#ff0000"-->
+<!--                android:textSize="13sp" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="6dp"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/normal_bg"
-                android:text="Fallen"
-                android:textColor="#ff0000"
-                android:textSize="13sp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginRight="6dp"-->
+<!--                android:layout_marginBottom="6dp"-->
+<!--                android:background="@drawable/normal_bg"-->
+<!--                android:text="Fallen"-->
+<!--                android:textColor="#ff0000"-->
+<!--                android:textSize="13sp" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="6dp"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/normal_bg"
-                android:text="Brand-new World"
-                android:textColor="#ff0000"
-                android:textSize="13sp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginRight="6dp"-->
+<!--                android:layout_marginBottom="6dp"-->
+<!--                android:background="@drawable/normal_bg"-->
+<!--                android:text="Brand-new World"-->
+<!--                android:textColor="#ff0000"-->
+<!--                android:textSize="13sp" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="6dp"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/normal_bg"
-                android:text="Save you from anything"
-                android:textColor="#ff0000"
-                android:textSize="13sp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginRight="6dp"-->
+<!--                android:layout_marginBottom="6dp"-->
+<!--                android:background="@drawable/normal_bg"-->
+<!--                android:text="Save you from"-->
+<!--                android:textColor="#ff0000"-->
+<!--                android:textSize="13sp" />-->
 
-        </cn.jack.library_weight.UFlowLayout>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginRight="6dp"-->
+<!--                android:layout_marginBottom="6dp"-->
+<!--                android:background="@drawable/normal_bg"-->
+<!--                android:text="Save you from anything"-->
+<!--                android:textColor="#ff0000"-->
+<!--                android:textSize="13sp" />-->
+
+        </cn.jack.library_weight.flow.UFlowLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

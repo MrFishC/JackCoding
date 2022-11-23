@@ -1,16 +1,17 @@
-package cn.jack.library_weight
+package cn.jack.library_weight.flow
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 
 /**
  * @创建者 Jack
  * @创建时间 2022/11/15 15:05
  * @描述 流式布局
  */
-class UFlowLayout @JvmOverloads constructor(
+open class UFlowLayout @JvmOverloads constructor(
     context: Context?,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
@@ -182,8 +183,12 @@ class UFlowLayout @JvmOverloads constructor(
             mLineViews = mTotalLine!![i]
             lineHeight = mLineHeight!![i]
 
+            //设置UFlowLayout默认居中  不太好看
+//            var currentViewWidth = mLineWidth!![i]
+
 //            left = paddingLeft
-            var left = paddingLeft  //left变量在循环内部定义，每次循环，left的值都会初始化为paddingLeft
+//            var left = paddingLeft  //left变量在循环内部定义，每次循环，left的值都会初始化为paddingLeft
+//            var left = (width - currentViewWidth) / 2 + paddingLeft
 
             for (k in 0 until mLineViews!!.size) {
                 val childView = mLineViews!![k]
@@ -219,4 +224,27 @@ class UFlowLayout @JvmOverloads constructor(
     override fun generateDefaultLayoutParams(): LayoutParams = MarginLayoutParams(
         LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT
     )
+
+    fun setAdapter(adapter: FlowAdapter) {
+        println("view === width1 $width")
+        println("view === height1 $height")
+
+        removeAllViews()
+
+//        layoutParams = MarginLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+
+        //遍历即将要添加到MarkFlowLayout中的所有子View
+        for (position in 0 until adapter.getItemCounts()) {
+           var view =  adapter.getView(this, adapter.getItem(position)) as TextView
+//            println("view === " + view.text)
+//            println("view === 1" + view.width)
+//            println("view === 2" + view.height)
+//            addView(view)
+        }
+        //todo 待研究 使用addView添加 自定义控件自身宽高为0
+        println("view === width $width")
+        println("view === height $height")
+//        println("view === 1 ${layoutParams.height}")
+//        println("view === 2 ${layoutParams.width}")
+    }
 }

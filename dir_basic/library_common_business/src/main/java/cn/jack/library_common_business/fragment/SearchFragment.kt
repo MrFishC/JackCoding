@@ -4,8 +4,14 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
 import android.view.WindowManager
+import android.widget.TextView
+import cn.jack.library_common_business.R
 import cn.jack.library_common_business.databinding.FragmentSearchBinding
+import cn.jack.library_weight.flow.FlowAdapter
+import cn.jack.library_weight.flow.UFlowLayout
 import com.jack.lib_base.base.view.BaseDialogFragment
 
 /**
@@ -29,8 +35,24 @@ class SearchFragment : BaseDialogFragment<FragmentSearchBinding>(FragmentSearchB
         }
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
+    private val mItems = listOf<String>(
+        "Hello", "Android", "Weclome Hi ", "Button", "TextView", "Hello",
+        "Android", "Weclome", "Button ImageView", "TextView", "Helloworld",
+        "Android", "Weclome Hello", "Button Text", "TextView"
+    )
 
+    override fun initData(savedInstanceState: Bundle?) {
+        mBinding.flowLayout.setAdapter(object : FlowAdapter(mItems) {
+            override fun getView(flowLayout: UFlowLayout, mark: String): View {
+                println("view === width 5： ${flowLayout.width}")
+                println("view === height 6： ${flowLayout.height}")
+
+                var textview: TextView =
+                    layoutInflater.inflate(R.layout.mark_text, flowLayout, false) as TextView
+                textview.text = mark
+                return textview
+            }
+        })
     }
 
 }
