@@ -2,10 +2,10 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_margin="@dimen/dp_5"
     android:background="@drawable/normal_bg"
     android:text="Helloworld"
-    android:textColor="#ff0000"
-    android:textSize="13sp">
+    android:textColor="@color/color_9b9b9b"
+    android:textSize="@dimen/sp_13">
 
 </TextView>

@@ -183,12 +183,15 @@ open class UFlowLayout @JvmOverloads constructor(
             mLineViews = mTotalLine!![i]
             lineHeight = mLineHeight!![i]
 
+            var left = paddingLeft  //left变量在循环内部定义，每次循环，left的值都会初始化为paddingLeft    //位置1
+
             //设置UFlowLayout默认居中  不太好看
 //            var currentViewWidth = mLineWidth!![i]
 
-//            left = paddingLeft
-//            var left = paddingLeft  //left变量在循环内部定义，每次循环，left的值都会初始化为paddingLeft
 //            var left = (width - currentViewWidth) / 2 + paddingLeft
+//            val currentLineWidth = mLineWidth!![i]
+//            left = (width - currentLineWidth) / 2 + paddingLeft
+            //问题（记录）：如果位置1代码不添加的情况下， 使用UFlowLayout在xml中包裹子View，子View能正常展示。但是如果使用动态的方式循环addView，则子View和自身都不会展示。
 
             for (k in 0 until mLineViews!!.size) {
                 val childView = mLineViews!![k]
@@ -225,26 +228,12 @@ open class UFlowLayout @JvmOverloads constructor(
         LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT
     )
 
-    fun setAdapter(adapter: FlowAdapter) {
-        println("view === width1 $width")
-        println("view === height1 $height")
-
+    fun <T> setAdapter(adapter: FlowAdapter<T>) {
         removeAllViews()
-
-//        layoutParams = MarginLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-
         //遍历即将要添加到MarkFlowLayout中的所有子View
-        for (position in 0 until adapter.getItemCounts()) {
-           var view =  adapter.getView(this, adapter.getItem(position)) as TextView
-//            println("view === " + view.text)
-//            println("view === 1" + view.width)
-//            println("view === 2" + view.height)
-//            addView(view)
+        for (position in 0 until adapter.count) {
+            val view = adapter.getView(position, adapter.getItem(position)) as TextView
+            addView(view)
         }
-        //todo 待研究 使用addView添加 自定义控件自身宽高为0
-        println("view === width $width")
-        println("view === height $height")
-//        println("view === 1 ${layoutParams.height}")
-//        println("view === 2 ${layoutParams.width}")
     }
 }
