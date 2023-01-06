@@ -75,6 +75,7 @@ ext {
             material_dialogs_version                  : "3.3.0",
             xPopup_version                            : "2.9.0",
             lottieVersion                             : "5.2.0",
+            roomVersion                               : "2.4.3",
     ]
 
     dependencies = [
@@ -187,6 +188,9 @@ ext {
 //            "material-dialogs-lifecycle"        : "com.afollestad.material-dialogs:lifecycle:${version["material_dialogs_version"]}",//https://github.com/afollestad/material-dialogs#core
             "XPopup"                            : "com.github.li-xiaojun:XPopup:${version["xPopup_version"]}",//https://github.com/li-xiaojun/XPopup
             "lottie"                            : "com.airbnb.android:lottie:${version["lottieVersion"]}",//https://github.com/airbnb/lottie-android
+
+            "roomRuntime"                       : "androidx.room:room-runtime:${version["roomVersion"]}",//https://developer.android.google.cn/jetpack/androidx/releases/room#kts
+            "roomCompiler"                      : "androidx.room:room-compiler:${version["roomVersion"]}",
     ]
 
 }

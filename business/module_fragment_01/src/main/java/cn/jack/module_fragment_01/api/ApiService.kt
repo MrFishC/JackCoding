@@ -1,10 +1,11 @@
 package cn.jack.module_fragment_01.api
 
+import cn.jack.library_common_business.entiy.ArticleInfo
 import cn.jack.library_common_business.entiy.ProjectInfoList
-import retrofit2.http.GET
 import cn.jack.module_fragment_01.mvvm.model.entity.BanInfos
 import com.jack.lib_wrapper_net.model.ApiResponse
 import kotlinx.coroutines.flow.Flow
+import retrofit2.http.GET
 import retrofit2.http.Path
 
 /**
@@ -13,6 +14,12 @@ import retrofit2.http.Path
  * @描述
  */
 interface ApiService {
+    /**
+     * 首页置顶文章列表
+     */
+    @GET("article/top/json")
+    fun topArticles(): Flow<ApiResponse<List<ArticleInfo>>>
+
     /**
      * 首页文章列表
      */

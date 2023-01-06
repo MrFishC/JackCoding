@@ -30,4 +30,9 @@ class RouterPathActivity {
         private const val WEB = "/web"
         const val PAGER_WEB = "$WEB/Web"
     }
+
+    object Search {
+        private const val RESULT = "/result"
+        const val PAGER_RESULT = "$RESULT/Result"
+    }
 }

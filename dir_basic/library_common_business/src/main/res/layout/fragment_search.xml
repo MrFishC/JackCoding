@@ -4,69 +4,126 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#999">
+        android:orientation="vertical">
 
-        <include layout="@layout/search_edittext" />
+        <include android:id="@+id/search_tip" layout="@layout/search_edittext" />
 
-        <cn.jack.library_weight.flow.UFlowLayout
-            android:id="@+id/flow_layout"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:padding="@dimen/dp_5">
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginRight="6dp"-->
-<!--                android:layout_marginBottom="6dp"-->
-<!--                android:background="@drawable/normal_bg"-->
-<!--                android:text="Breath And Life"-->
-<!--                android:textColor="#ff0000"-->
-<!--                android:textSize="13sp" />-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_16">
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginRight="6dp"-->
-<!--                android:layout_marginBottom="6dp"-->
-<!--                android:background="@drawable/normal_bg"-->
-<!--                android:text="Fallen"-->
-<!--                android:textColor="#ff0000"-->
-<!--                android:textSize="13sp" />-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_8"
+                    android:text="热门搜索"
+                    android:textColor="@color/color_00bcd4"
+                    android:textSize="@dimen/sp_16" />
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginRight="6dp"-->
-<!--                android:layout_marginBottom="6dp"-->
-<!--                android:background="@drawable/normal_bg"-->
-<!--                android:text="Brand-new World"-->
-<!--                android:textColor="#ff0000"-->
-<!--                android:textSize="13sp" />-->
+                <cn.jack.library_weight.flow.UFlowLayout
+                    android:id="@+id/flow_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:padding="@dimen/dp_5">
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginRight="6dp"-->
-<!--                android:layout_marginBottom="6dp"-->
-<!--                android:background="@drawable/normal_bg"-->
-<!--                android:text="Save you from"-->
-<!--                android:textColor="#ff0000"-->
-<!--                android:textSize="13sp" />-->
+                    <!--            <TextView-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:layout_marginRight="6dp"-->
+                    <!--                android:layout_marginBottom="6dp"-->
+                    <!--                android:background="@drawable/normal_bg"-->
+                    <!--                android:text="Breath And Life"-->
+                    <!--                android:textColor="#ff0000"-->
+                    <!--                android:textSize="13sp" />-->
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginRight="6dp"-->
-<!--                android:layout_marginBottom="6dp"-->
-<!--                android:background="@drawable/normal_bg"-->
-<!--                android:text="Save you from anything"-->
-<!--                android:textColor="#ff0000"-->
-<!--                android:textSize="13sp" />-->
+                    <!--            <TextView-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:layout_marginRight="6dp"-->
+                    <!--                android:layout_marginBottom="6dp"-->
+                    <!--                android:background="@drawable/normal_bg"-->
+                    <!--                android:text="Fallen"-->
+                    <!--                android:textColor="#ff0000"-->
+                    <!--                android:textSize="13sp" />-->
 
-        </cn.jack.library_weight.flow.UFlowLayout>
+                    <!--            <TextView-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:layout_marginRight="6dp"-->
+                    <!--                android:layout_marginBottom="6dp"-->
+                    <!--                android:background="@drawable/normal_bg"-->
+                    <!--                android:text="Brand-new World"-->
+                    <!--                android:textColor="#ff0000"-->
+                    <!--                android:textSize="13sp" />-->
+
+                    <!--            <TextView-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:layout_marginRight="6dp"-->
+                    <!--                android:layout_marginBottom="6dp"-->
+                    <!--                android:background="@drawable/normal_bg"-->
+                    <!--                android:text="Save you from"-->
+                    <!--                android:textColor="#ff0000"-->
+                    <!--                android:textSize="13sp" />-->
+
+                    <!--            <TextView-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:layout_marginRight="6dp"-->
+                    <!--                android:layout_marginBottom="6dp"-->
+                    <!--                android:background="@drawable/normal_bg"-->
+                    <!--                android:text="Save you from anything"-->
+                    <!--                android:textColor="#ff0000"-->
+                    <!--                android:textSize="13sp" />-->
+
+                </cn.jack.library_weight.flow.UFlowLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_24">
+
+                    <TextView
+                        android:id="@+id/search_history_clear_all_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:drawablePadding="@dimen/dp_6"
+                        android:text="清空"
+                        android:textColor="@color/color_bdbdbd" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_toStartOf="@+id/search_history_clear_all_tv"
+                        android:layout_toLeftOf="@+id/search_history_clear_all_tv"
+                        android:text="搜索历史"
+                        android:textColor="@color/color_00bcd4"
+                        android:textSize="@dimen/sp_16" />
+
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_history_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:background="@color/color_ffffff" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

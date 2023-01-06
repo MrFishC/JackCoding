@@ -14,12 +14,12 @@ abstract class FlowAdapter<T>(datas: List<T>) {
         mTagDatas = datas
     }
 
-    abstract fun getView(position: Int, t: T): View
+    abstract fun getView(position: Int, t: T?): View
 
     val count: Int
         get() = mTagDatas?.size ?: 0
 
-    fun getItem(position: Int): T {
+    fun getItem(position: Int): T? {
         return mTagDatas!![position]
     }
 }

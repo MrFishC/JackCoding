@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import com.gyf.immersionbar.ktx.immersionBar
 
 /**
  * @创建者 Jack
@@ -25,8 +26,19 @@ abstract class BaseDialogFragment<VB : ViewDataBinding>(var block: (LayoutInflat
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initImmersionBar()
         initParams()
         initData(savedInstanceState)
+    }
+
+    private fun initImmersionBar() {
+        immersionBar {
+            //通用设置
+            statusBarColor(com.jack.lib_base.R.color.transparent)
+            statusBarDarkFont(true)
+            navigationBarColor(com.jack.lib_base.R.color.white)
+            autoDarkModeEnable(true, 0.2f)
+        }
     }
 
     open fun initParams() {

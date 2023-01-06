@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -12,6 +13,17 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        //room配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
+            }
+        }
+
     }
 
     buildTypes {
@@ -47,6 +59,7 @@ dependencies {
     implementation project(':commonBase')
     implementation project(':commonHttp')
     implementation project(':commonWeight')
+    implementation project(':commonTool')
 
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["material"]
@@ -77,4 +90,8 @@ dependencies {
     implementation(rootProject.ext.dependencies["banner"]) {
         exclude group: 'androidx.viewpager2:viewpager2'
     }
+
+    //https://developer.android.google.cn/jetpack/androidx/releases/room#kts
+    implementation rootProject.ext.dependencies["roomRuntime"]
+    kapt rootProject.ext.dependencies["roomCompiler"]
 }

@@ -53,11 +53,36 @@ class ModuleFragment01 :
     override fun prepareData() {
         super.prepareData()
         initAdapter()
+        mViewModel.loadBinnerInfo()
         mViewModel.loadHomeInfos(mIsRefresh)
     }
 
     override fun observeViewModel() {
         super.observeViewModel()
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mViewModel.binnerInfos_.collect {
+                    when (it) {
+                        is EventResult.OnStart -> visibleDialog()
+                        is EventResult.OnNext -> {
+                            showBannerInfos(it.data!!)
+                        }
+                        is EventResult.OnFail -> {
+
+                        }
+                        is EventResult.OnError -> {
+
+
+                        }
+                        is EventResult.OnComplete -> {
+
+                        }
+                    }
+                }
+            }
+        }
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mViewModel.homeInfos_.collect {
@@ -76,14 +101,24 @@ class ModuleFragment01 :
                                 return@collect
                             }
 
-                            val articleList = it.data!!.projectInfoList!!.datas
+//                            val articleList = it.data!!.projectInfoList!!.datas
+//                            if (mIsRefresh) {
+//                                mHomeArticleInfoAdapter.setList(articleList)
+//                                showBannerInfos(it.data!!.bannerInfo!!)
+//                                setLayoutState(LayoutState.OnSuccess)
+//                            } else {
+//                                mHomeArticleInfoAdapter.addData(articleList)
+//                                showBannerInfos(it.data!!.bannerInfo!!)
+//                            }
+
+                            val articleList = it.data
                             if (mIsRefresh) {
                                 mHomeArticleInfoAdapter.setList(articleList)
-                                showBannerInfos(it.data!!.bannerInfo!!)
+//                                showBannerInfos(it.data!!.bannerInfo!!)
                                 setLayoutState(LayoutState.OnSuccess)
                             } else {
-                                mHomeArticleInfoAdapter.addData(articleList)
-                                showBannerInfos(it.data!!.bannerInfo!!)
+                                mHomeArticleInfoAdapter.addData(articleList!!)
+//                                showBannerInfos(it.data!!.bannerInfo!!)
                             }
 
                             mIsRefresh = false

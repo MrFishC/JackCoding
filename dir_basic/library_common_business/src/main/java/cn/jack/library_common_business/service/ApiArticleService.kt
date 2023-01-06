@@ -1,5 +1,6 @@
 package cn.jack.library_common_business.service
 
+import cn.jack.library_common_business.entiy.HotSearchBean
 import cn.jack.library_common_business.entiy.ProjectInfoList
 import com.jack.lib_wrapper_net.model.ApiResponse
 import kotlinx.coroutines.flow.Flow
@@ -35,4 +36,11 @@ interface ApiArticleService {
         @Path("page") page: Int,
         @Query("cid") id: Int
     ): Flow<ApiResponse<ProjectInfoList>>
+
+    /**
+     * 搜索热词
+     */
+    @GET("hotkey/json")
+    fun getHotSearchData(): Flow<ApiResponse<MutableList<HotSearchBean>>>
+
 }

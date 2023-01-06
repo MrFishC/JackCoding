@@ -2,10 +2,7 @@ package cn.jack.lib_common
 
 import cn.jack.lib_common.interceptor.TokenInterceptor
 import cn.jack.library_image.util.ImageU
-import cn.jack.library_util.ContextU
-import cn.jack.library_util.KvStoreUtil
-import cn.jack.library_util.LogU
-import cn.jack.library_util.ToastU
+import cn.jack.library_util.*
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
@@ -31,6 +28,11 @@ abstract class CustomApplication : BaseApplication(){
         initLogger()
         initToastU()
         initContextU()
+        initDisplayManager()
+    }
+
+    private fun initDisplayManager() {
+        DisplayManager.init(this)
     }
 
     private fun initContextU() {
