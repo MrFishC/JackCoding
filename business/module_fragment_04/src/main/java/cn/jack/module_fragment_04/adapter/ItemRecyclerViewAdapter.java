@@ -1,21 +1,12 @@
-package com.pj.module_main_first.mvvm.view.adapter;
+package cn.jack.module_fragment_04.adapter;
 
-import android.text.TextUtils;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
-import com.pj.librarywrapper.utils.LoadLocalIconUtil;
-import com.pj.librarywrapper.utils.UrlConfig;
-import com.pj.librarywrapper.utils.image.ImageManager;
-import com.pj.librarywrapper.utils.tools.LogUtils;
-import com.pj.module_main_first.R;
-import com.pj.module_main_first.mvvm.model.entiy.AllFunctionInfoRes;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+
+import cn.jack.module_fragment_04.entity.AllFunctionInfoRes;
+import cn.jack.module_fragment_04.R;
 
 /**
  * recycleview内部的recycleview

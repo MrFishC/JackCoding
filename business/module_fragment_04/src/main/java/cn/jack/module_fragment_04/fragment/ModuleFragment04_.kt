@@ -1,4 +1,4 @@
-//package cn.jack.module_fragment_04
+package cn.jack.module_fragment_04.fragment//package cn.jack.module_fragment_04
 //
 //import android.view.View
 //import androidx.core.os.bundleOf

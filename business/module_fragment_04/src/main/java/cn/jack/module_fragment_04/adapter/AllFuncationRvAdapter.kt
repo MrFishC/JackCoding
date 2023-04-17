@@ -1,4 +1,4 @@
-package cn.jack.module_fragment_04
+package cn.jack.module_fragment_04.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,59 +6,39 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.jack.library_util.ContextU
+import cn.jack.library_util.DensityTool
 import cn.jack.library_util.helper.SpaceItemDecoration
+import cn.jack.module_fragment_04.entity.AllFunctionInfoRes
+import cn.jack.module_fragment_04.R
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-
 
 /**
  * @创建者 Jack
  * @创建时间 2023/4/17 0017 19:44
  * @描述
  */
-class AllFuncationRvAdapter : BaseQuickAdapter<AllFunctionInfoRes, BaseViewHolder> {
+class AllFuncationRvAdapter(
+    allFunctionInfoRes: MutableList<AllFunctionInfoRes>,
+    private var lastItemChildrenEmpty: Boolean,
+    recyclerView: RecyclerView,
+    space: Int,
+    layoutResId: Int
+) : BaseQuickAdapter<AllFunctionInfoRes, BaseViewHolder>(layoutResId, data = allFunctionInfoRes) {
 
-    private val VIEW_TYPE_ITEM = 1
+    private val mViewTypeItem = 1
     private var parentHeight = 0
     private var itemHeight = 0
     private var itemTitleHeight = 0
-    private var mSpace: Int
-    private var mRecyclerView: RecyclerView
-    private var mAllFuncationInfos: List<AllFunctionInfoRes>
+    private var mSpace: Int = space
+    private var mRecyclerView: RecyclerView = recyclerView
+    private var mAllFuncationInfos: List<AllFunctionInfoRes> = allFunctionInfoRes
     private val countxx = 0
-    private var mLayoutResId = 0
-    private var lastItemChildrenEmpty = false
-
-    constructor(
-        allFunctionInfoRes: List<AllFunctionInfoRes>,
-        recyclerView: RecyclerView,
-        space: Int,
-        layoutResId: Int
-    ) : super(allFunctionInfoRes) {
-        mLayoutResId = layoutResId
-        mAllFuncationInfos = allFunctionInfoRes
-        mSpace = space
-        mRecyclerView = recyclerView
-    }
-
-    constructor(
-        allFunctionInfoRes: List<AllFunctionInfoRes>,
-        lastItemChildrenEmpty: Boolean,
-        recyclerView: RecyclerView,
-        space: Int,
-        layoutResId: Int
-    ) : super(allFunctionInfoRes) {
-        //        super(layoutResId, allFunctionInfoRes);       //这里若将layoutResId传递进去，如果item中children的集合为空，则会出现问题
-        this.lastItemChildrenEmpty = lastItemChildrenEmpty
-        mLayoutResId = layoutResId
-        mAllFuncationInfos = allFunctionInfoRes
-        mSpace = space
-        mRecyclerView = recyclerView
-    }
+    private var mLayoutResId = layoutResId
 
     override fun convert(helper: BaseViewHolder, item: AllFunctionInfoRes) {
         //负责将每一个将每一个子项holder绑定数据
-        if (helper.itemViewType === VIEW_TYPE_ITEM) {
+        if (helper.itemViewType == mViewTypeItem) {
             helper.setText(R.id.item_title_tv, item.name)
             helper.setImageResource(R.id.item_titie_iv, R.drawable.icon_three)
             val recyclerView = helper.getView<RecyclerView>(R.id.item_recycler_view)
@@ -75,23 +55,27 @@ class AllFuncationRvAdapter : BaseQuickAdapter<AllFunctionInfoRes, BaseViewHolde
             //一排所有的item总边距
             val width: Int = (screenWidth - DensityTool.dip2px(
                 ContextU.context(),
-                14 + 52
+                (14 + 52).toFloat()
             ) - mSpace * 4) / 4
-            val height: Int = DensityTool.dip2px(ContextU.context(), 67)
+            val height: Int = DensityTool.dip2px(ContextU.context(), 67.toFloat())
             if (recyclerView.itemDecorationCount == 0) {
                 recyclerView.addItemDecoration(SpaceItemDecoration(mSpace))
             }
 
             //可以做一下缓存 避免每次滑动都重新设置
             val itemRecyclerViewAdapter =
-                ItemRecyclerViewAdapter(R.layout.item_recycle_inner_content, width, height)
+                ItemRecyclerViewAdapter(
+                    R.layout.item_recycle_inner_content,
+                    width,
+                    height
+                )
             recyclerView.adapter = itemRecyclerViewAdapter
-            itemRecyclerViewAdapter.setNewData(item.children)
+            itemRecyclerViewAdapter.setNewInstance(item.children)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        return if (viewType == VIEW_TYPE_ITEM) {
+        return if (viewType == mViewTypeItem) {
             val view = LayoutInflater.from(parent.context).inflate(mLayoutResId, parent, false)
             view.post {
                 parentHeight = mRecyclerView.height
@@ -133,7 +117,7 @@ class AllFuncationRvAdapter : BaseQuickAdapter<AllFunctionInfoRes, BaseViewHolde
         return if (position == mAllFuncationInfos.size) {
             2
         } else {
-            VIEW_TYPE_ITEM
+            mViewTypeItem
         }
     }
 

@@ -1,9 +1,8 @@
-package cn.jack.module_fragment_04
+package cn.jack.library_util
 
 import android.content.Context
 import android.view.Display
 import android.view.WindowManager
-import cn.jack.library_util.ContextU
 
 /**
  * Created by jack
@@ -65,15 +64,15 @@ object DensityTool {
         return display.width
     }
 
-    /**                 todo 存在疑惑 这样做效果就不同了
-     * 更好的适配
-     * @param dimen 合适的dimen文件下的值
-     * @return
-     */
-    fun getDimenValue(dimen: Int): Int {
-        return dip2px(
-            ContextU.context(),
-            ContextU.context().getResources().getDimension(dimen)
-        )
-    }
+//    /**                 todo 存在疑惑 这样做效果就不同了
+//     * 更好的适配
+//     * @param dimen 合适的dimen文件下的值
+//     * @return
+//     */
+//    fun getDimenValue(dimen: Int): Int {
+//        return dip2px(
+//            ContextU.context(),
+//            ContextU.context().getResources().getDimension(dimen)
+//        )
+//    }
 }

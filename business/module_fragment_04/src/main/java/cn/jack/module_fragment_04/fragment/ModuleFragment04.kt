@@ -1,4 +1,4 @@
-package cn.jack.module_fragment_04
+package cn.jack.module_fragment_04.fragment
 
 import android.annotation.SuppressLint
 import android.view.View
@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
 import cn.jack.library_util.JsonU
+import cn.jack.module_fragment_04.R
+import cn.jack.module_fragment_04.adapter.AllFuncationRvAdapter
 import cn.jack.module_fragment_04.databinding.ModuleFragment04FragmentHome04Binding
+import cn.jack.module_fragment_04.entity.AllFunctionInfoRes
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
 import com.jack.lib_base.base.view.BaseSimpleFragment
@@ -25,7 +28,7 @@ class ModuleFragment04 :
     private var mManager: LinearLayoutManager? = null
 
 
-    private var mAllFuncationInfos: List<AllFunctionInfoRes>? = null
+    private var mAllFuncationInfos: MutableList<AllFunctionInfoRes>? = null
     override fun titBarView(view: View): View = mBinding.collectTitleBar
 
     override fun perpareWork() {
@@ -34,18 +37,18 @@ class ModuleFragment04 :
     }
 
     private fun initAdapter() {
-        mAllFuncationInfos = ArrayList()
+        mAllFuncationInfos = mutableListOf()
 
-        (mAllFuncationInfos as ArrayList<AllFunctionInfoRes>).addAll(
+        mAllFuncationInfos!!.addAll(
             JsonU.json2List(
                 jsonFileName = "treeListInfo.json",
                 clazz = AllFunctionInfoRes::class.java
             )!!
         )
 
-        if ((mAllFuncationInfos as ArrayList<AllFunctionInfoRes>).size != 0) {
+        if (mAllFuncationInfos!!.size != 0) {
             val itemChildren =
-                (mAllFuncationInfos as ArrayList<AllFunctionInfoRes>)[(mAllFuncationInfos as ArrayList<AllFunctionInfoRes>).size - 1].children
+                mAllFuncationInfos!![mAllFuncationInfos!!.size - 1].children
             lastItemChildrenEmpty = itemChildren!!.isEmpty()
         }
     }

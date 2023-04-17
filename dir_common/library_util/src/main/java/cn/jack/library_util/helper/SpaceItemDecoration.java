@@ -1,9 +1,10 @@
-package com.pj.librarywrapper.mvvm.view.helper;
+package cn.jack.library_util.helper;
 
 import android.graphics.Rect;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
+
 
 /**
  * created by Jack
