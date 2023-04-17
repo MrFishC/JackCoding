@@ -8,6 +8,8 @@ dependencies {
     api rootProject.ext.dependencies["logger"]
     api rootProject.ext.dependencies["toasty"]
     api rootProject.ext.dependencies["shimmer-android"]
+    implementation rootProject.ext.dependencies["fastjson"]
+    
     //骨架屏：http://facebook.github.io/shimmer-android/
     
 //    api rootProject.ext.dependencies["material-dialogs-core"]
