@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_67"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/inner_root_view">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/item_common_funcation_content_icon"
+            android:layout_width="@dimen/dp_29"
+            android:layout_height="@dimen/dp_29"
+            android:src="@drawable/icon_two"/>
+
+        <!--使用自定义组件IconFontView-->
+<!--        <cn.jack.librarycommoncustomview.textview.IconFontView-->
+<!--            android:id="@+id/icon_text"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/demo11"-->
+<!--            android:textSize="@dimen/sp_28"-->
+<!--            />-->
+
+<!--        <com.pj.module_main_first.mvvm.view.activity.thirdapp.IconView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="@dimen/sp_48"-->
+<!--            android:text="@string/icon"/>-->
+
+        <TextView
+            android:id="@+id/item_common_funcation_content_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_6"
+            android:text="功能名称"
+            android:textSize="@dimen/sp_12"
+            android:textColor="#FF585858"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

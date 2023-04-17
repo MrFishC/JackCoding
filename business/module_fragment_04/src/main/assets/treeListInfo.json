@@ -1,0 +1,550 @@
+{
+  "msg": "操作成功",
+  "stat": 1,
+  "data": [
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_home_work",
+            "appFunctionName": "集合",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_parent_notice",
+            "appFunctionName": "JVM",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_class_circle",
+            "appFunctionName": "并发",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "Java基础和高级"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_fuction_stu_achievement",
+            "appFunctionName": "四大组件",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_add_trip",
+            "appFunctionName": "异步消息",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_teacher_leave",
+            "appFunctionName": "事件分发",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_stu_club_class",
+            "appFunctionName": "View的绘制流程",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_t_attendance",
+            "appFunctionName": "Webview",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_headmaster_box",
+            "appFunctionName": "属性动画",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "Android基础"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_safe_danger",
+            "appFunctionName": "Handler",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_safe_danger",
+            "appFunctionName": "Binder",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_safe_danger",
+            "appFunctionName": "PMS",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_safe_danger",
+            "appFunctionName": "AMS",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_safe_danger",
+            "appFunctionName": "WMS",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_safe_danger",
+            "appFunctionName": "系统的启动流程",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "FrameWork"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_place_borrow",
+            "appFunctionName": "Grade",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_device_borrow",
+            "appFunctionName": "Git",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "Android构建"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "Okhttp",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "Retrofit",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "Glide",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "Dragger2",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "Hilt",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "Rxjava",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "开源框架"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_student_honor",
+            "appFunctionName": "Lifecycle",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_school_dynamic",
+            "appFunctionName": "Livedata",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "Databinding",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "ViewModel",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "Room",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "Navigation",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "WorkManager",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "Paging",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "Startup",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_all_school_moral",
+            "appFunctionName": "Compose",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "Jetpack"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_msg_notice",
+            "appFunctionName": "插件化",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "热修复",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "进程保活",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "曾经的前沿技术"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_msg_notice",
+            "appFunctionName": "启动优化",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "图片优化",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_msg_notice",
+            "appFunctionName": "Webview优化",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "网络优化",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_msg_notice",
+            "appFunctionName": "存储优化",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "Apk体积优化",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_msg_notice",
+            "appFunctionName": "Apk安全优化",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "崩溃优化",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_msg_notice",
+            "appFunctionName": "UI优化",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "内存优化",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_msg_notice",
+            "appFunctionName": "电量优化",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "性能优化"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_msg_notice",
+            "appFunctionName": "Mvc",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "Mvp",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "Mvvm",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "Mvi",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "架构"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "Flow",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "协程",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "Kotlin"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "创建型",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "结构型",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "行为型",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "设计模式"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "Uniapp",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "Flutter",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "跨平台"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "Vue",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "ElementUi",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "前端"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "NDK",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "音视频",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "C++",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "其它"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "计算机网络原理",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "操作系统",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "计算机组成原理",
+            "invokingWay": 1
+          }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_bureau_msg_notic",
+            "appFunctionName": "数据库原理",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "基础知识"
+    }
+  ]
+}
