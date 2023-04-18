@@ -83,8 +83,6 @@ class ModuleFragment04 :
             mAllFuncationInfos!!.addAll(jsonListInfos)
         }
 
-//        println("参数信息 ------ 7 ${mAllFuncationInfos!!.size}")
-
         if (!mAllFuncationInfos.isNullOrEmpty()) {
             val itemChildren =
                 mAllFuncationInfos!![mAllFuncationInfos!!.size - 1].children

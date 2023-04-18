@@ -33,12 +33,12 @@
 
     </LinearLayout>
 
+<!--            android:layout_marginEnd="@dimen/dp_33"
+        android:layout_marginStart="@dimen/dp_33"-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="@dimen/dp_33"
-        android:layout_marginStart="@dimen/dp_33"
         android:layout_marginTop="@dimen/dp_7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

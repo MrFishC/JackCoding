@@ -1,29 +1,22 @@
 package cn.jack.module_fragment_04.adapter;
 
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import cn.jack.module_fragment_04.entity.AllFunctionInfoRes;
 import cn.jack.module_fragment_04.R;
+import cn.jack.module_fragment_04.entity.AllFunctionInfoRes;
 
 /**
  * recycleview内部的recycleview
  */
 public class ItemRecyclerViewAdapter extends BaseQuickAdapter<AllFunctionInfoRes.ChildrenBean, BaseViewHolder> {
 
-    private int mWidth;
-    private int mHeight;
-
-    public ItemRecyclerViewAdapter(int layoutResId, int width, int height) {
+    public ItemRecyclerViewAdapter(int layoutResId) {
         super(layoutResId);
-        this.mWidth = width;
-        this.mHeight = height;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, AllFunctionInfoRes.ChildrenBean item) {
+    protected void convert(@NonNull BaseViewHolder helper, AllFunctionInfoRes.ChildrenBean item) {
 
         AllFunctionInfoRes.ChildrenBean.AttributesBean attributesBean = item.getAttributes();
 
@@ -51,16 +44,6 @@ public class ItemRecyclerViewAdapter extends BaseQuickAdapter<AllFunctionInfoRes
         //                    .setImageResource(R.id.item_common_funcation_content_icon, R.drawable.icon_two);
         //        }
 
-    }
-
-    @NonNull
-    @Override
-    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        BaseViewHolder baseViewHolder = super.onCreateViewHolder(parent, viewType);
-        RelativeLayout rootView = baseViewHolder.getView(R.id.inner_root_view);
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(mWidth, mHeight);
-        rootView.setLayoutParams(layoutParams);
-        return baseViewHolder;
     }
 
 }

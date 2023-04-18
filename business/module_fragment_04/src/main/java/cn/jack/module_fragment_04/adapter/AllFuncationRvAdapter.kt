@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.jack.library_util.ContextU
-import cn.jack.library_util.DensityU
-import cn.jack.library_util.helper.SpaceItemDecoration
-import cn.jack.module_fragment_04.entity.AllFunctionInfoRes
+import cn.jack.library_util.helper.GridSpacingItemDecoration
 import cn.jack.module_fragment_04.R
+import cn.jack.module_fragment_04.entity.AllFunctionInfoRes
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
@@ -38,12 +37,8 @@ class AllFuncationRvAdapter(
     private var mLayoutResId = layoutResId
 
     override fun convert(holder: BaseViewHolder, item: AllFunctionInfoRes) {
-//        println("参数信息 ------ 9  ${item.name}")
-
         //负责将每一个将每一个子项holder绑定数据
         if (holder.itemViewType == mViewTypeItem) {
-//            println("参数信息 ------ 3  ${holder.position}")
-
             holder.setText(R.id.item_title_tv, item.name)
             holder.setImageResource(R.id.item_titie_iv, R.drawable.icon_three)
             val recyclerView = holder.getView<RecyclerView>(R.id.item_recycler_view)
@@ -54,32 +49,26 @@ class AllFuncationRvAdapter(
                     GridLayoutManager.VERTICAL, false
                 )
 
-            // 设置item 的宽的大小
-            val screenWidth: Int = DensityU.getScreenWidth()
-
-            //一排所有的item总边距
-            val width: Int = (screenWidth - DensityU.dip2px(
-                14F + 52F
-            ) - mSpace * 4) / 4
-            val height: Int = DensityU.dip2px(67.toFloat())
-            if (recyclerView.itemDecorationCount == 0) {
-                recyclerView.addItemDecoration(SpaceItemDecoration(mSpace))
-            }
+            recyclerView.addItemDecoration(
+                GridSpacingItemDecoration(
+                    4,
+                    mSpace,
+                    true
+                )
+            )
+//            当我们确定Item的改变不会影响RecyclerView的宽高的时候可以设置setHasFixedSize(true)
+//            https://blog.csdn.net/wsdaijianjun/article/details/74735039
+            recyclerView.setHasFixedSize(true);
 
             //可以做一下缓存 避免每次滑动都重新设置
             val itemRecyclerViewAdapter =
-                ItemRecyclerViewAdapter(
-                    R.layout.item_recycle_inner_content,
-                    width,
-                    height
-                )
+                ItemRecyclerViewAdapter(R.layout.item_recycle_inner_content)
             recyclerView.adapter = itemRecyclerViewAdapter
             itemRecyclerViewAdapter.setNewInstance(item.children)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-//        println("参数信息 ------ 2  $viewType")
         return if (viewType == mViewTypeItem) {
             val view = LayoutInflater.from(parent.context).inflate(mLayoutResId, parent, false)
             view.post {
@@ -94,7 +83,6 @@ class AllFuncationRvAdapter(
             }
             ItemViewHolder(view)
         } else {
-//            println("参数信息 ------ 4  ${mAllFuncationInfos.size}")
             //Footer是最后留白的位置，以便最后一个item能够出发tab的切换
             //需要考虑一个问题，若二级列表中有数据和没有数据 Footer的高度计算存在区别
             val view = View(parent.context)
@@ -122,15 +110,13 @@ class AllFuncationRvAdapter(
     //若使用Java语言开发，则不需要做该处理
     override fun getItem(position: Int): AllFunctionInfoRes {
         //需要重写一下该方法做特殊处理
-//        println("参数信息 ------ 10  $position")
         if (position == mAllFuncationInfos.size) {       //做拦截处理 避免 super.getItem(position)执行时出现索引越界
-            return AllFunctionInfoRes()                 //返回一个空的AllFunctionInfoRes即可
+            return AllFunctionInfoRes()                  //返回一个空的AllFunctionInfoRes即可
         }
         return super.getItem(position)
     }
 
     override fun getItemViewType(position: Int): Int {
-//        println("参数信息 ------  $position")
         return if (position == mAllFuncationInfos.size) {
             2
         } else {
