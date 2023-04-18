@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 @Route(path = RouterPathActivity.Home.PAGER_HOME)
 class HomeActivity : BaseSimpleActivity<ModuleHomeActivityHomeBinding>(ModuleHomeActivityHomeBinding::inflate) {
-    private val tabText = arrayOf("首页", "项目", "体系", "收藏")
+    private val tabText = arrayOf("首页", "项目", "体系", "更多")
 
     //未选中icon
     private val normalIcon =

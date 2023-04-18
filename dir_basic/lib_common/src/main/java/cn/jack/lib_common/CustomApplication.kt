@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
  * @创建时间 2022/10/14 14:57
  * @描述  项目业务模块依赖层的Application，宿主层或独立的业务模块根据需要自定义实现类
  */
-abstract class CustomApplication : BaseApplication(){
+abstract class CustomApplication : BaseApplication() {
     override fun initOthers() {
         initNetwork()
         initImageLoader()
@@ -29,6 +29,16 @@ abstract class CustomApplication : BaseApplication(){
         initToastU()
         initContextU()
         initDisplayManager()
+        initJsonU()
+        initDensityU()
+    }
+
+    private fun initDensityU() {
+        DensityU.init(this)
+    }
+
+    private fun initJsonU() {
+        JsonU.init(this)
     }
 
     private fun initDisplayManager() {

@@ -2,11 +2,13 @@ package cn.jack.module_fragment_04.fragment
 
 import android.annotation.SuppressLint
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
+import cn.jack.library_util.DensityU
 import cn.jack.library_util.JsonU
+import cn.jack.library_util.helper.RecycleViewU
 import cn.jack.module_fragment_04.R
 import cn.jack.module_fragment_04.adapter.AllFuncationRvAdapter
 import cn.jack.module_fragment_04.databinding.ModuleFragment04FragmentHome04Binding
@@ -15,38 +17,75 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
 import com.jack.lib_base.base.view.BaseSimpleFragment
 import kotlinx.coroutines.flow.*
-import java.lang.reflect.Field
 
 /**
  * 功能列表
+ *
+ * 使用雷神模拟器运行该页面，内部的RecyclerView列表中的条目，其高度显示异常，真机测试正常，具体原因待排查
  */
 @Route(path = RouterPathFragment.HomeFour.PAGER_HOME_FOUR)
 class ModuleFragment04 :
     BaseSimpleFragment<ModuleFragment04FragmentHome04Binding>(ModuleFragment04FragmentHome04Binding::inflate) {
-    private val mSpace = 0
+    private val mSpace = DensityU.dip2px(6F)
     private var mAllFuncationRvAdapter: AllFuncationRvAdapter? = null
     private var mManager: LinearLayoutManager? = null
 
-
     private var mAllFuncationInfos: MutableList<AllFunctionInfoRes>? = null
-    override fun titBarView(view: View): View = mBinding.collectTitleBar
+    override fun titBarView(view: View): View = mBinding.funcationTitleBar
 
     override fun perpareWork() {
         super.perpareWork()
-        mBinding.collectTitleBar.leftView.isVisible = false
+        mBinding.funcationTitleBar.leftView.isVisible = false
+    }
+
+    override fun prepareListener() {
+        super.prepareListener()
+        //滑动RecyclerView list的时候，根据最上面一个Item的position来切换tab
+//        mBinding.recyclerView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+        mBinding.recyclerView.setOnScrollChangeListener { _, _, _, _, _ ->
+            mBinding.tabLayout.setScrollPosition(
+                mManager!!.findFirstVisibleItemPosition(),
+                0F,
+                true
+            )
+        }
+
+        mBinding.tabLayout.setSelectedTabIndicatorColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.color_000000
+            )
+        )
+        mBinding.tabLayout.setTabTextColors(
+            ContextCompat.getColor(requireContext(), R.color.color_ff585858),
+            ContextCompat.getColor(requireContext(), R.color.color_000000)
+        )
+        mBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                //点击tab的时候，RecyclerView自动滑到该tab对应的item位置
+                mManager!!.scrollToPositionWithOffset(tab.position, 0)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
     }
 
     private fun initAdapter() {
         mAllFuncationInfos = mutableListOf()
 
-        mAllFuncationInfos!!.addAll(
-            JsonU.json2List(
-                jsonFileName = "treeListInfo.json",
-                clazz = AllFunctionInfoRes::class.java
-            )!!
+        val jsonListInfos = JsonU.json2List(
+            jsonFileName = "treeListInfo.json",
+            clazz = AllFunctionInfoRes::class.java
         )
 
-        if (mAllFuncationInfos!!.size != 0) {
+        if (!jsonListInfos.isNullOrEmpty()) {
+            mAllFuncationInfos!!.addAll(jsonListInfos)
+        }
+
+//        println("参数信息 ------ 7 ${mAllFuncationInfos!!.size}")
+
+        if (!mAllFuncationInfos.isNullOrEmpty()) {
             val itemChildren =
                 mAllFuncationInfos!![mAllFuncationInfos!!.size - 1].children
             lastItemChildrenEmpty = itemChildren!!.isEmpty()
@@ -64,7 +103,7 @@ class ModuleFragment04 :
         mManager = LinearLayoutManager(context)
         mBinding.recyclerView.layoutManager = mManager
         mBinding.recyclerView.adapter = mAllFuncationRvAdapter
-        setMaxFlingVelocity(mBinding.recyclerView, 10000)
+        RecycleViewU.setMaxFlingVelocity(mBinding.recyclerView, 10000)
         initTablayout()
         mAllFuncationRvAdapter!!.notifyDataSetChanged()
     }
@@ -82,19 +121,6 @@ class ModuleFragment04 :
             mBinding.tabLayout.addTab(
                 mBinding.tabLayout.newTab().setText(allFunctionInfoRes.name).setTag(i)
             )
-        }
-    }
-
-    /**
-     * recyclerView滑动过快的时候会出现bug,限制recyclerView的最大滑动速度可以处理该问题
-     */
-    private fun setMaxFlingVelocity(recyclerView: RecyclerView, velocity: Int) {
-        try {
-            val field: Field = recyclerView.javaClass.getDeclaredField("mMaxFlingVelocity")
-            field.isAccessible = true
-            field.set(recyclerView, velocity)
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 

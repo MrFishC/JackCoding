@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ResourceName">
+    <!--    若这里不添加ignore databinding在生成文件时 会出现问题  这是使用databinding特别需要注意的点
+    还有一个注意的点，就是使用databinding时，不要随意的复制xml文件，有相似的文件名时自动生成文件会存在问题-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -8,12 +12,11 @@
         android:orientation="vertical">
 
         <com.hjq.bar.TitleBar
-            android:id="@+id/collect_title_bar"
+            android:id="@+id/funcation_title_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_44"
-            app:title="我的收藏"
-            app:titleColor="@color/color_aa000000"
-            />
+            app:title="功能列表"
+            app:titleColor="@color/color_aa000000" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
@@ -23,7 +26,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </layout>
