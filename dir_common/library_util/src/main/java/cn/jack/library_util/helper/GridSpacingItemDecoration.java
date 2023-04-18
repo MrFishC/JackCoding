@@ -2,7 +2,6 @@ package cn.jack.library_util.helper;
 
 import android.graphics.Rect;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,12 +34,11 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
         if (includeEdge) {
             //某列的left = 列间距 - 某列的left = 列间距 - 所在的列数 * （列间距 * (1 / 列数)）
             outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-            //outRect.right = 后列的left           //这里的推理为什么不是    某列的right = 列间距 - 后列的left   ？
-            //            打印一下数值 对比一下 temp1应该比temp2小  说明 自己的猜想是错误的
-            int temp1 = spacing - (column + 1) * spacing / spanCount;
-            int temp2 = (column + 1) * spacing / spanCount;
-
-            System.out.println("参数信息 temp1=" + temp1 + ",temp2=" + temp2);
+            //outRect.right = 后列的left           //这里的推理为什么不是    某列的right = 列间距 - 后列的left   ？        一时没思考出来 改日再来
+            //            打印一下数值 对比一下
+//            int temp1 = spacing - (column + 1) * spacing / spanCount;
+//            int temp2 = (column + 1) * spacing / spanCount;
+//            System.out.println("参数信息 temp1=" + temp1 + ",temp2=" + temp2);
 
             outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
 

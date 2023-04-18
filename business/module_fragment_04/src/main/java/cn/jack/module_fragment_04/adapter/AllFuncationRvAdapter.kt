@@ -49,13 +49,16 @@ class AllFuncationRvAdapter(
                     GridLayoutManager.VERTICAL, false
                 )
 
-            recyclerView.addItemDecoration(
-                GridSpacingItemDecoration(
-                    4,
-                    mSpace,
-                    true
+            if (recyclerView.itemDecorationCount == 0) {    //只能设置一次
+                recyclerView.addItemDecoration(
+                    GridSpacingItemDecoration(
+                        4,
+                        mSpace,
+                        true
+                    )
                 )
-            )
+            }
+
 //            当我们确定Item的改变不会影响RecyclerView的宽高的时候可以设置setHasFixedSize(true)
 //            https://blog.csdn.net/wsdaijianjun/article/details/74735039
             recyclerView.setHasFixedSize(true);
