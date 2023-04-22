@@ -125,7 +125,7 @@ open class BaseSimpleFragment<VB : ViewDataBinding>(override var block: (LayoutI
     }
 
     //使用ARouter跳转页面
-    protected open fun openActivityByARouter(aRouterPath: String?) {
+    protected open fun openActivityByARouter(aRouterPath: String) {
         if (!DoubleCU.isFastDoubleClick) ARouter.getInstance().build(aRouterPath).navigation()
     }
 
