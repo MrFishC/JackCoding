@@ -1,18 +1,23 @@
 //原来在工程build.gradle的buildscript和allprojects移动至setting.gradle并改名为pluginManagement 和dependencyResolutionManagement。
 pluginManagement {
     repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-        jcenter()
+//        gradlePluginPortal()
+//        google()
+//        mavenCentral()
+//        jcenter()
+        maven{ url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+        maven{ url 'https://maven.aliyun.com/repository/gradle-plugin'}
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
-        mavenCentral()
-        jcenter()
+//        google()
+//        mavenCentral()
+//        jcenter()
+        maven{ url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
         maven { url 'https://jitpack.io' }
     }
 }
@@ -53,3 +58,7 @@ project(':commonWebview').projectDir = file('dir_common/library_webview')
 project(':commonTool').projectDir = file('dir_common/library_util')
 project(':commonWeight').projectDir = file('dir_common/library_weight')
 project(':commonRes').projectDir = file('dir_common/library_common_res')
+
+/*5.simple模块*/
+include ':simpleRecycleview'
+project(':simpleRecycleview').projectDir = file('dir_simple/simple_recycleview')

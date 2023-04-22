@@ -7,6 +7,18 @@
         {
           "attributes": {
             "appFunctionIcon": "icon_function_home_work",
+            "appFunctionName": "CardLayout",
+            "invokingWay": 1
+          }
+        }
+      ],
+      "name": "RecycleView"
+    },
+    {
+      "children": [
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_home_work",
             "appFunctionName": "集合",
             "invokingWay": 1
           }

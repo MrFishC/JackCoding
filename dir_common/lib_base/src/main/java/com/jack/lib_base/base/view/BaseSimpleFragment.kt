@@ -1,6 +1,5 @@
 package com.jack.lib_base.base.view
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +15,7 @@ import com.jack.lib_base.interfac.ILoadSirLisenter
 import com.jack.lib_base.interfac.IStatusSwitchLisenter
 import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_base.uistate.loadsir.callback.*
+import com.jack.lib_base.util.DoubleCU
 import com.jack.lib_wrapper_mvvm.mvvm.view.BaseWrapperFragment
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
@@ -122,6 +122,11 @@ open class BaseSimpleFragment<VB : ViewDataBinding>(override var block: (LayoutI
     override fun onDestroy() {
         super.onDestroy()
         removeCallbacks()
+    }
+
+    //使用ARouter跳转页面
+    protected open fun openActivityByARouter(aRouterPath: String?) {
+        if (!DoubleCU.isFastDoubleClick) ARouter.getInstance().build(aRouterPath).navigation()
     }
 
 }

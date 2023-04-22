@@ -39,6 +39,10 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 //            int temp1 = spacing - (column + 1) * spacing / spanCount;
 //            int temp2 = (column + 1) * spacing / spanCount;
 //            System.out.println("参数信息 temp1=" + temp1 + ",temp2=" + temp2);
+//            temp1=14,temp2=4
+//            temp1=9,temp2=9
+//            temp1=5,temp2=13
+//            temp1=0,temp2=18
 
             outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
 

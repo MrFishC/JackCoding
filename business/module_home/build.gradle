@@ -1,5 +1,4 @@
 apply from: "../../gradle/module_kt.build.gradle"
-apply plugin: 'org.jetbrains.kotlin.android'
 
 dependencies {
     //底部导航栏

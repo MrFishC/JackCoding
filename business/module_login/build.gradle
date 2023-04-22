@@ -1,5 +1,4 @@
 apply from: "../../gradle/module_kt.build.gradle"
-apply plugin: 'org.jetbrains.kotlin.android'
 
 dependencies {
     //按需依赖业务模块使用的第三方组件

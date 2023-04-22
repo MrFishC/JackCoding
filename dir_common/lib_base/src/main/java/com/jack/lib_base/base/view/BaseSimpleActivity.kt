@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.jack.lib_base.ext.closeDialog
 import com.jack.lib_base.ext.loadDialog
 import com.alibaba.android.arouter.launcher.ARouter
@@ -15,12 +16,12 @@ import com.jack.lib_base.ext.setStatusBarTranslucent
 import com.jack.lib_base.interfac.IHandler
 import com.jack.lib_base.interfac.IStatusSwitchLisenter
 import com.jack.lib_wrapper_mvvm.mvvm.view.BaseWrapperActivity
-
 /**
  * @创建者 Jack
  * @创建时间 2022/8/29 0029 20:58
  * @描述
  */
+//@Route(path = RouterPathActivity.SimpleRv.PAGER_SIMPLE_RV)
 abstract class BaseSimpleActivity<VB : ViewDataBinding>(override var block: (LayoutInflater) -> VB) :
     BaseWrapperActivity<VB>(block), IStatusSwitchLisenter,
     IHandler {

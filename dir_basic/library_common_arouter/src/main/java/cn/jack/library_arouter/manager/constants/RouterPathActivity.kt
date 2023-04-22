@@ -35,4 +35,9 @@ class RouterPathActivity {
         private const val RESULT = "/result"
         const val PAGER_RESULT = "$RESULT/Result"
     }
+
+    object SimpleRv {
+        private const val SIMPLE_RV = "/simple_rv"
+        const val PAGER_SIMPLE_RV = "$SIMPLE_RV/SimpleRv"
+    }
 }

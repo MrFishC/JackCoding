@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
 import cn.jack.library_util.DensityU
 import cn.jack.library_util.JsonU
@@ -13,10 +14,12 @@ import cn.jack.module_fragment_04.R
 import cn.jack.module_fragment_04.adapter.AllFuncationRvAdapter
 import cn.jack.module_fragment_04.databinding.ModuleFragment04FragmentHome04Binding
 import cn.jack.module_fragment_04.entity.AllFunctionInfoRes
+import cn.jack.module_fragment_04.entity.AllFunctionInfoRes.ChildrenBean.AttributesBean
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
 import com.jack.lib_base.base.view.BaseSimpleFragment
 import kotlinx.coroutines.flow.*
+
 
 /**
  * 功能列表
@@ -69,6 +72,23 @@ class ModuleFragment04 :
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
+
+        mAllFuncationRvAdapter!!.setOpenFunctionActivityInterface(object :
+            AllFuncationRvAdapter.OpenFunctionActivityInterface{
+            override fun openFunctionActivity(childrenBean: AllFunctionInfoRes.ChildrenBean) {
+                openActivityByFunction(childrenBean)
+            }
+        })
+    }
+
+    private fun openActivityByFunction(childrenBean: AllFunctionInfoRes.ChildrenBean) {
+        val attributesBean: AttributesBean? = childrenBean.attributes
+
+        if(attributesBean != null){
+            if(attributesBean.appFunctionName == "CardLayout"){
+                openActivityByARouter(RouterPathActivity.SimpleRv.PAGER_SIMPLE_RV);
+            }
+        }
     }
 
     private fun initAdapter() {

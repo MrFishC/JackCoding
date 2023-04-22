@@ -27,9 +27,13 @@ buildscript {
     apply from: "/gradle/config.gradle"
 
     repositories {
-        google()
-        mavenCentral()
-        jcenter()
+//        google()
+//        mavenCentral()
+//        jcenter()
+
+        maven{ url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+//        maven{ url 'https://maven.aliyun.com/repository/gradle-plugin'}
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$build_gradle_version"

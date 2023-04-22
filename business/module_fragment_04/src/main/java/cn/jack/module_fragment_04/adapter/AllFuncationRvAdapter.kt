@@ -9,8 +9,11 @@ import cn.jack.library_util.ContextU
 import cn.jack.library_util.helper.GridSpacingItemDecoration
 import cn.jack.module_fragment_04.R
 import cn.jack.module_fragment_04.entity.AllFunctionInfoRes
+import cn.jack.module_fragment_04.entity.AllFunctionInfoRes.ChildrenBean
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+
 
 /**
  * @创建者 Jack
@@ -68,6 +71,13 @@ class AllFuncationRvAdapter(
                 ItemRecyclerViewAdapter(R.layout.item_recycle_inner_content)
             recyclerView.adapter = itemRecyclerViewAdapter
             itemRecyclerViewAdapter.setNewInstance(item.children)
+
+            itemRecyclerViewAdapter.setOnItemClickListener { adapter, _, position ->
+                val childrenBean = adapter.getItem(position) as ChildrenBean
+                if (mOpenFunctionActivityInterface != null) {
+                    mOpenFunctionActivityInterface!!.openFunctionActivity(childrenBean)
+                }
+            }
         }
     }
 
@@ -128,4 +138,15 @@ class AllFuncationRvAdapter(
     }
 
     internal inner class ItemViewHolder(itemView: View) : BaseViewHolder(itemView)
+
+    //使用接口回调
+    private var mOpenFunctionActivityInterface: OpenFunctionActivityInterface? = null
+
+    interface OpenFunctionActivityInterface {
+        fun openFunctionActivity(childrenBean: ChildrenBean)
+    }
+
+    fun setOpenFunctionActivityInterface(openFunctionActivityInterface: OpenFunctionActivityInterface) {
+        mOpenFunctionActivityInterface = openFunctionActivityInterface
+    }
 }

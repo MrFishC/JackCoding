@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CommonListOutterLayout">
+
+        <!-- 背景色 -->
+        <attr name="bg" format="reference|color"/>
+
+    </declare-styleable>
+</resources>

@@ -1,0 +1,5 @@
+apply from: "../../gradle/module_kt.build.gradle"
+
+dependencies {
+    implementation 'com.github.MrFishC:YcrCardLayoutHepler:v1.1'
+}
