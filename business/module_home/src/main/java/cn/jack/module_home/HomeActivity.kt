@@ -27,9 +27,7 @@ class HomeActivity : BaseSimpleActivity<ModuleHomeActivityHomeBinding>(ModuleHom
 
     private val mFragments: MutableList<Fragment> = ArrayList()
 
-    override fun injectARouter(): Boolean {
-        return true
-    }
+    override fun injectARouter(): Boolean = true
 
     override fun prepareData() {
         super.prepareData()

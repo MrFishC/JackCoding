@@ -174,8 +174,8 @@ ext {
             "activity-ktx"                      : "androidx.activity:activity-ktx:${version["activity_version"]}",// Kotlin
             "fragment-ktx"                      : "androidx.fragment:fragment-ktx:${version["fragment_version"]}",
 
-            "kotlinx-coroutines-core"           : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${version["kotlinx_coroutines_core_version"]}",
-            "kotlinx-coroutines-android"        : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${version["kotlinx_coroutines_android_version"]}",
+            "kotlinx-coroutines-core"           : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${version["kotlinx_coroutines_core_version"]}",            //协程    核心库
+            "kotlinx-coroutines-android"        : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${version["kotlinx_coroutines_android_version"]}",      //协程    Android 支持库
 
             "hilt-android"                      : "com.google.dagger:hilt-android:${version["hilt_version"]}",
             "hilt-compiler"                     : "com.google.dagger:hilt-android-compiler:${version["hilt_version"]}",
