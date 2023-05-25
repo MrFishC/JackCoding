@@ -6,21 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import cn.jack.library_arouter.manager.constants.RouterPathActivity
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.jack.lib_base.base.view.BaseSimpleActivity
 import com.jack.simple_recycleview.databinding.ActivitySimpleRecycleviewBinding
 import com.jack.ycr_rv_cardlayout.ConfigManager
 import com.jack.ycr_rv_cardlayout.CustomItemTouchHelperCallBackImp
 import com.jack.ycr_rv_cardlayout.CustomLayoutManager
 import com.jack.ycr_rv_cardlayout.OnItemSwipeListener
-import java.util.Objects
-import cn.jack.library_arouter.manager.constants.RouterPathActivity
-import com.alibaba.android.arouter.facade.annotation.Route
+import java.util.*
 
 @Route(path = RouterPathActivity.SimpleRv.PAGER_SIMPLE_RV)
 class SimpleRecycleViewActivity :
     BaseSimpleActivity<ActivitySimpleRecycleviewBinding>(ActivitySimpleRecycleviewBinding::inflate) {
-
-    override fun injectARouter(): Boolean = true
 
     override fun prepareData() {
         super.prepareData()
@@ -88,6 +86,7 @@ class SimpleRecycleViewActivity :
         val cardLayoutManager = CustomLayoutManager(mBinding.recyclerView, touchHelper, manager)
         mBinding.recyclerView.layoutManager = cardLayoutManager
         touchHelper.attachToRecyclerView(mBinding.recyclerView)
+        initData()
     }
 
     private fun initData() {
