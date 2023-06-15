@@ -20,7 +20,6 @@ import com.google.android.material.tabs.TabLayout
 import com.jack.lib_base.base.view.BaseSimpleFragment
 import kotlinx.coroutines.flow.*
 
-
 /**
  * 功能列表
  *
@@ -66,11 +65,16 @@ class ModuleFragment04 :
         mBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 //点击tab的时候，RecyclerView自动滑到该tab对应的item位置
+                //当tab是选中状态，再次点击是不会回调该方法，将下方代码在onTabReselected回调中添加即可解决问题
                 mManager!!.scrollToPositionWithOffset(tab.position, 0)
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
-            override fun onTabReselected(tab: TabLayout.Tab) {}
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+
+            }
+            override fun onTabReselected(tab: TabLayout.Tab) {
+                mManager!!.scrollToPositionWithOffset(tab.position, 0)
+            }
         })
 
         mAllFuncationRvAdapter!!.setOpenFunctionActivityInterface(object :

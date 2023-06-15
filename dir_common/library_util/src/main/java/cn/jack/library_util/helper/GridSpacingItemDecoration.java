@@ -32,7 +32,6 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
         int column = position % spanCount; // view 所在的列
 
         if (includeEdge) {
-            //某列的left = 列间距 - 某列的left = 列间距 - 所在的列数 * （列间距 * (1 / 列数)）
             outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
             //outRect.right = 后列的left           //这里的推理为什么不是    某列的right = 列间距 - 后列的left   ？        一时没思考出来 改日再来
             //            打印一下数值 对比一下
