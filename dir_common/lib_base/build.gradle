@@ -77,4 +77,6 @@ dependencies {
     api rootProject.ext.dependencies["immersionbar-ktx"]
 
     api rootProject.ext.dependencies["XPopup"]
+
+
 }

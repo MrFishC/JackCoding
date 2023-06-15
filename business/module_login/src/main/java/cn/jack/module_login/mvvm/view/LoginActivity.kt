@@ -2,10 +2,8 @@ package cn.jack.module_login.mvvm.view
 
 import android.annotation.SuppressLint
 import androidx.activity.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import cn.jack.lib_common.ext.showToast
+import cn.jack.lib_common.ext.parseResponseWithCallback
+import cn.jack.lib_common.inter.ResponseCallback
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_common_business.constant.C
@@ -16,13 +14,11 @@ import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.vm.LoginViewModel
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.jack.lib_base.base.view.BaseActivity
-import com.jack.lib_wrapper_net.model.EventResult
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDispose
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
-import kotlinx.coroutines.launch
 
 /**
  * @创建者 Jack
@@ -39,36 +35,9 @@ class LoginActivity :
 
     override fun observeViewModel() {
         super.observeViewModel()
-
-        //可重启生命周期感知型协程 https://developer.android.com/topic/libraries/architecture/coroutines#restart
-        // Create a new coroutine in the lifecycleScope
-        lifecycleScope.launch {
-            //StateFlow和SharedFlow是热流，热流不会随着生命周期自动取消，也就是说页面消失后还会继续监听数据，或者下次进入时候会重复绑定，这样就会导致很多无法预料的错误。
-            //观察StateFlow需要在协程中，一般我们会使用下面几种
-            //1、lifecycleScope.launch: 立即启动协程，并且在本 Activity或Fragment 销毁时结束协程。
-            //2、LaunchWhenStarted 和 LaunchWhenResumed:它会在lifecycleOwner进入X状态之前一直等待，又在离开X状态时挂起协程
-            //StateFlow 或任意其他数据流收集数据的操作并不会停止，所以官方推荐repeatOnLifecycle来构建协程。
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mViewModel.userInfo.collect {
-                    when (it) {
-                        is EventResult.OnStart -> visibleDialog()
-                        is EventResult.OnNext -> openHome(it.data)
-                        is EventResult.OnFail -> {
-                            hideDialog()
-                            mBinding.btnLoginCommit.reset()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnError -> {
-                            hideDialog()
-                            mBinding.btnLoginCommit.reset()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnComplete -> {
-                            mBinding.btnLoginCommit.reset()
-                            hideDialog()
-                        }
-                    }
-                }
+        parseResponseWithCallback(mViewModel.userInfo) {
+            onSuccess = {
+                openHome(it)
             }
         }
     }
