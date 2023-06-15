@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import cn.jack.lib_common.inter.ResponseCallback
+import cn.jack.lib_common.callback.ResponseCallback
 import com.jack.lib_base.ext.closeDialog
 import com.jack.lib_base.ext.loadDialog
 import com.jack.lib_wrapper_net.model.EventResult
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 /**
  * 使用 携程作用域 + 拓展函数 + flow + 函数类型 进一步封装，简化View层代码
  */
-fun <T> AppCompatActivity.parseResponseWithCallback(
+fun <T> AppCompatActivity.requestHttp(
     sharedFlow: SharedFlow<EventResult<T>>,
     listenerResponse: ResponseCallback<T>.() -> Unit
 ) {

@@ -1,4 +1,4 @@
-package cn.jack.lib_common.inter
+package cn.jack.lib_common.callback
 
 class ResponseCallback<T> {
     var onSuccess: (data: T?) -> Unit = {}

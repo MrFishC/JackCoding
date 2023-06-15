@@ -70,12 +70,15 @@ abstract class CustomApplication : BaseApplication() {
     }
 
     private fun initNetwork() {
-        val logging = HttpLoggingInterceptor()
-        logging.level =
+        val loggerInterceptor = HttpLoggingInterceptor { message ->
+            LogU.d(message)
+        }
+        loggerInterceptor.level =
             if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+
         val builder: OkHttpClient.Builder = OkHttpClient.Builder()
+            .addInterceptor(loggerInterceptor)
             .addInterceptor(TokenInterceptor())
-            .addInterceptor(logging)
             .cookieJar(PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(this)))
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)

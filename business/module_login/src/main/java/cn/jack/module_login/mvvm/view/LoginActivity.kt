@@ -2,8 +2,7 @@ package cn.jack.module_login.mvvm.view
 
 import android.annotation.SuppressLint
 import androidx.activity.viewModels
-import cn.jack.lib_common.ext.parseResponseWithCallback
-import cn.jack.lib_common.inter.ResponseCallback
+import cn.jack.lib_common.ext.requestHttp
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_common_business.constant.C
@@ -35,7 +34,7 @@ class LoginActivity :
 
     override fun observeViewModel() {
         super.observeViewModel()
-        parseResponseWithCallback(mViewModel.userInfo) {
+        requestHttp(mViewModel.userInfo) {
             onSuccess = {
                 openHome(it)
             }
