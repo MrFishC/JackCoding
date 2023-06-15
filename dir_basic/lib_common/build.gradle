@@ -62,4 +62,15 @@ dependencies {
     kapt rootProject.ext.dependencies["arouter-compiler"]
 
     debugApi 'com.squareup.leakcanary:leakcanary-android:2.6'
+
+    //测试一下依赖
+    //https://github.com/LuckSiege/PictureSelector/blob/version_component/README_CN.md
+    // PictureSelector 基础 (必须)
+//    api 'io.github.lucksiege:pictureselector:v3.11.1'
+//    // 图片压缩 (按需引入)
+//    api 'io.github.lucksiege:compress:v3.11.1'
+//    // 图片裁剪 (按需引入)
+//    api 'io.github.lucksiege:ucrop:v3.11.1'
+//    // 自定义相机 (按需引入)
+//    api 'io.github.lucksiege:camerax:v3.11.1'
 }

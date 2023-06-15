@@ -18,7 +18,19 @@ import cn.jack.module_fragment_04.entity.AllFunctionInfoRes.ChildrenBean.Attribu
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
 import com.jack.lib_base.base.view.BaseSimpleFragment
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlin.coroutines.Continuation
+import kotlin.coroutines.ContinuationInterceptor
+import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.coroutines.createCoroutine
 
 /**
  * 功能列表
@@ -78,7 +90,7 @@ class ModuleFragment04 :
         })
 
         mAllFuncationRvAdapter!!.setOpenFunctionActivityInterface(object :
-            AllFuncationRvAdapter.OpenFunctionActivityInterface{
+            AllFuncationRvAdapter.OpenFunctionActivityInterface {
             override fun openFunctionActivity(childrenBean: AllFunctionInfoRes.ChildrenBean) {
                 openActivityByFunction(childrenBean)
             }
@@ -88,8 +100,8 @@ class ModuleFragment04 :
     private fun openActivityByFunction(childrenBean: AllFunctionInfoRes.ChildrenBean) {
         val attributesBean: AttributesBean? = childrenBean.attributes
 
-        if(attributesBean != null){
-            if(attributesBean.appFunctionName == "CardLayout"){
+        if (attributesBean != null) {
+            if (attributesBean.appFunctionName == "CardLayout") {
                 openActivityByARouter(RouterPathActivity.SimpleRv.PAGER_SIMPLE_RV);
             }
         }
@@ -134,6 +146,95 @@ class ModuleFragment04 :
         super.prepareData()
         initAdapter()
         setAllFuncationData()
+
+//        testKoltin()
+        testKoltin1()
+    }
+
+    private fun testKoltin1() {
+        //创建协程
+        val continuation = suspend {
+            println("In Coroutine.")
+            5
+        }.createCoroutine(object : Continuation<Int> {
+            override fun resumeWith(result: Result<Int>) {
+                println("Coroutine End: $result")
+            }
+            override val context = EmptyCoroutineContext
+        })
+    }
+    private fun testKoltin() {
+//        runBlocking {
+//            println("0: " + Thread.currentThread().name)
+//            //协程上下文 CoroutineStart.UNDISPATCHED ：立即在当前线程执行协程体，直到第一个 suspend 调用
+//            //挂起之后的执行线程取决于上下文当中的调度器了
+//            launch(context = Dispatchers.Default, start = CoroutineStart.UNDISPATCHED) {
+//                println("1: " + Thread.currentThread().name)
+//                delay(1000)
+//                println("2: " + Thread.currentThread().name)
+//            }
+//            delay(2000)
+//        }
+//
+//        GlobalScope.launch(Dispatchers.Default) {
+//            println("4: " + Thread.currentThread().name)
+//            launch(Dispatchers.Default) {
+//                delay(1000)
+//                println("5: " + Thread.currentThread().name)
+//            }
+//            //DefaultDispatcher-worker-2
+//            println("6: " + Thread.currentThread().name)
+//        }
+
+        GlobalScope.launch(MyContinuationInterceptor() + MyContinuationInterceptor1()) {
+            println("7: " + Thread.currentThread().name)
+            launch(Dispatchers.Main, start = CoroutineStart.UNDISPATCHED) {
+                println("8: " + Thread.currentThread().name)
+                delay(1000)
+                println("9: " + Thread.currentThread().name)
+            }
+
+            val job = async {
+                println("11: " + Thread.currentThread().name)
+                delay(1000)
+                println("12: " + Thread.currentThread().name)
+                "Hello"
+
+            }
+            val result = job.await()
+            println("13: $result")
+
+            //DefaultDispatcher-worker-2
+            println("10: " + Thread.currentThread().name)
+        }
+    }
+
+    class MyContinuation<T>(val continuation: Continuation<T>) : Continuation<T> {
+        override val context = continuation.context
+        override fun resumeWith(result: Result<T>) {
+            println("<MyContinuation> $result")
+            continuation.resumeWith(result)
+        }
+    }
+
+    class MyContinuationInterceptor : ContinuationInterceptor {
+        override val key = ContinuationInterceptor
+        override fun <T> interceptContinuation(continuation: Continuation<T>) =
+            MyContinuation(continuation)
+    }
+
+    class MyContinuation1<T>(val continuation: Continuation<T>) : Continuation<T> {
+        override val context = continuation.context
+        override fun resumeWith(result: Result<T>) {
+            println("<MyContinuation1> $result")
+            continuation.resumeWith(result)
+        }
+    }
+
+    class MyContinuationInterceptor1 : ContinuationInterceptor {
+        override val key = ContinuationInterceptor
+        override fun <T> interceptContinuation(continuation: Continuation<T>) =
+            MyContinuation1(continuation)
     }
 
     private fun initTablayout() {

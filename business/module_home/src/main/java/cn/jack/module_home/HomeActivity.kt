@@ -14,7 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 @Route(path = RouterPathActivity.Home.PAGER_HOME)
-class HomeActivity : BaseSimpleActivity<ModuleHomeActivityHomeBinding>(ModuleHomeActivityHomeBinding::inflate) {
+class HomeActivity :
+    BaseSimpleActivity<ModuleHomeActivityHomeBinding>(ModuleHomeActivityHomeBinding::inflate) {
     private val tabText = arrayOf("首页", "项目", "体系", "更多")
 
     //未选中icon
@@ -26,6 +27,8 @@ class HomeActivity : BaseSimpleActivity<ModuleHomeActivityHomeBinding>(ModuleHom
         intArrayOf(R.mipmap.index1, R.mipmap.find1, R.mipmap.message1, R.mipmap.me1)
 
     private val mFragments: MutableList<Fragment> = ArrayList()
+
+    override fun injectARouter(): Boolean = true
 
     override fun prepareData() {
         super.prepareData()

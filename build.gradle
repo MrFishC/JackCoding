@@ -21,33 +21,19 @@
 
 //====================按照以上的方式进行依赖，会出现不能使用viewModels，理论上推测感觉没有错误，实践试出来还是存在问题             gradle知识掌握的还不够,待安排
 
-apply from: "/gradle/config.gradle"
-
-buildscript {
-    apply from: "/gradle/config.gradle"
-
-    repositories {
-//        google()
-//        mavenCentral()
-//        jcenter()
-
-        maven{ url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
-//        maven{ url 'https://maven.aliyun.com/repository/gradle-plugin'}
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:$build_gradle_version"
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0'
-
-        //https://github.com/google/protobuf-gradle-plugin
-        //protobuf配置1
-        classpath "com.google.protobuf:protobuf-gradle-plugin:$protobuf_version"
-        //https://developer.android.google.cn/training/dependency-injection/hilt-android#groovy
-        //hilt配置1   version["hilt_version"]
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_plugin_version"
-    }
+plugins {
+    id 'com.android.application' version '7.3.0' apply false
+    id 'com.android.library' version '7.3.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.7.0' apply false
+    //hilt ---> https://developer.android.google.cn/training/dependency-injection/hilt-android?hl=zh-cn#setup
+    id 'com.google.dagger.hilt.android' version '2.44' apply false
+    //https://github.com/google/protobuf-gradle-plugin
+    //protobuf配置1 需要用到protobuf时，再按照上一行地址的文档进行配置
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+apply from: "/gradle/config.gradle"
