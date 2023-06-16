@@ -24,8 +24,8 @@ class HomePageOneViewModle @Inject constructor(private val mRepository: HomePage
     private val mBinnerInfos = MutableStateFlow<EventResult<List<BanInfos>>>(EventResult.OnComplete)
     val binnerInfos_ = mBinnerInfos.shareIn(viewModelScope, SharingStarted.WhileSubscribed(5000))
 
-//    private val mHomeInfos = MutableStateFlow<EventResult<HomeInfos>>(EventResult.OnComplete)
-    private val mHomeInfos = MutableStateFlow<EventResult<List<ArticleInfo>>>(EventResult.OnComplete)
+    private val mHomeInfos =
+        MutableStateFlow<EventResult<List<ArticleInfo>>>(EventResult.OnComplete)
 
     val homeInfos_ = mHomeInfos.shareIn(viewModelScope, SharingStarted.WhileSubscribed(5000))
 
@@ -41,7 +41,7 @@ class HomePageOneViewModle @Inject constructor(private val mRepository: HomePage
     val uncollectArticle_ =
         uncollectArticle.shareIn(viewModelScope, SharingStarted.WhileSubscribed(5000))
 
-    fun loadBinnerInfo(){
+    fun loadBinnerInfo() {
         mRepository.binnerInfo().onEach {
             mBinnerInfos.value = it
         }.launchIn(viewModelScope)

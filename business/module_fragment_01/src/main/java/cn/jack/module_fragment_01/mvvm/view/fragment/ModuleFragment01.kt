@@ -7,12 +7,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.lib_common.ext.observeInResult
 import cn.jack.lib_common.ext.showToast
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
 import cn.jack.library_arouter.manager.params.BundleParams
 import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_common_business.entiy.ArticleInfo
+import cn.jack.library_util.LogU
 import cn.jack.module_fragment_01.R
 import cn.jack.module_fragment_01.databinding.ModuleFragment01HomeBinding
 import cn.jack.module_fragment_01.mvvm.model.entity.BanInfos
@@ -37,8 +39,7 @@ import kotlin.properties.Delegates
 /**
  * 1.列表
  * 2.轮播图()
- * 3.搜索   参考 ===> https://github.com/Carson-Ho/Search_Layout
- *
+ * 3.搜索
  */
 
 @AndroidEntryPoint
@@ -60,137 +61,61 @@ class ModuleFragment01 :
     override fun observeViewModel() {
         super.observeViewModel()
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mViewModel.binnerInfos_.collect {
-                    when (it) {
-                        is EventResult.OnStart -> visibleDialog()
-                        is EventResult.OnNext -> {
-                            showBannerInfos(it.data!!)
-                        }
-                        is EventResult.OnFail -> {
-
-                        }
-                        is EventResult.OnError -> {
-
-
-                        }
-                        is EventResult.OnComplete -> {
-
-                        }
-                    }
-                }
+        observeInResult(mViewModel.binnerInfos_) {
+            onSuccess = {
+                showBannerInfos(it!!)
             }
         }
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mViewModel.homeInfos_.collect {
-                    when (it) {
-                        is EventResult.OnStart -> {
-                            if (mIsRefresh) {
-                                setLayoutState(LayoutState.OnLoading)
-                            }
-                        }
-                        is EventResult.OnNext -> {
-                            if (it.data == null) {
-//                                showToast("数据为空")
-                                mBinding.refreshLayout.finishRefresh()
-                                mBinding.refreshLayout.finishLoadMore()
-                                setLayoutState(LayoutState.OnEmpty)
-                                return@collect
-                            }
+        observeInResult(mViewModel.homeInfos_, false) {
+            onStart = {
+                if (mIsRefresh) {
+                    setLayoutState(LayoutState.OnLoading)
+                }
+            }
 
-//                            val articleList = it.data!!.projectInfoList!!.datas
-//                            if (mIsRefresh) {
-//                                mHomeArticleInfoAdapter.setList(articleList)
-//                                showBannerInfos(it.data!!.bannerInfo!!)
-//                                setLayoutState(LayoutState.OnSuccess)
-//                            } else {
-//                                mHomeArticleInfoAdapter.addData(articleList)
-//                                showBannerInfos(it.data!!.bannerInfo!!)
-//                            }
-
-                            val articleList = it.data
-                            if (mIsRefresh) {
-                                mHomeArticleInfoAdapter.setList(articleList)
-//                                showBannerInfos(it.data!!.bannerInfo!!)
-                                setLayoutState(LayoutState.OnSuccess)
-                            } else {
-                                mHomeArticleInfoAdapter.addData(articleList!!)
-//                                showBannerInfos(it.data!!.bannerInfo!!)
-                            }
-
-                            mIsRefresh = false
-                        }
-                        is EventResult.OnFail -> {
-//                            hideDialog()
-//                            showToast(it.throwable.message)
-                            setLayoutState(LayoutState.OnFailed)
-                        }
-                        is EventResult.OnError -> {
-//                            hideDialog()
-//                            showToast(it.throwable.message)
-                            setLayoutState(LayoutState.OnNetError)
-                        }
-                        is EventResult.OnComplete -> {
-//                            hideDialog()
-                        }
-                    }
-
+            onSuccess = {
+                if (it == null) {
                     mBinding.refreshLayout.finishRefresh()
                     mBinding.refreshLayout.finishLoadMore()
+                    setLayoutState(LayoutState.OnEmpty)
+                } else {
+                    if (mIsRefresh) {
+                        mHomeArticleInfoAdapter.setList(it)
+                        setLayoutState(LayoutState.OnSuccess)
+                    } else {
+                        mHomeArticleInfoAdapter.addData(it)
+                    }
                 }
+
+                mIsRefresh = false
+            }
+
+            onFail = {
+                setLayoutState(LayoutState.OnFailed)
+            }
+
+            onError = {
+                setLayoutState(LayoutState.OnNetError)
+            }
+
+            onComplete = {
+                mBinding.refreshLayout.finishRefresh()
+                mBinding.refreshLayout.finishLoadMore()
             }
         }
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mViewModel.collectAtrticle_.collect {
-                    when (it) {
-                        is EventResult.OnStart -> visibleDialog()
-                        is EventResult.OnNext -> {
-                            articleInfo.collect = !articleInfo.collect
-                            mHomeArticleInfoAdapter.notifyItemChanged(position)
-                        }
-                        is EventResult.OnFail -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnError -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnComplete -> {
-                            hideDialog()
-                        }
-                    }
-                }
+        observeInResult(mViewModel.collectAtrticle_) {
+            onSuccess = {
+                articleInfo.collect = !articleInfo.collect
+                mHomeArticleInfoAdapter.notifyItemChanged(position)
             }
         }
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mViewModel.uncollectArticle_.collect {
-                    when (it) {
-                        is EventResult.OnStart -> visibleDialog()
-                        is EventResult.OnNext -> {
-                            articleInfo.collect = !articleInfo.collect
-                            mHomeArticleInfoAdapter.notifyItemChanged(position)
-                        }
-                        is EventResult.OnFail -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnError -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnComplete -> {
-                            hideDialog()
-                        }
-                    }
-                }
+        observeInResult(mViewModel.uncollectArticle_) {
+            onSuccess = {
+                articleInfo.collect = !articleInfo.collect
+                mHomeArticleInfoAdapter.notifyItemChanged(position)
             }
         }
     }

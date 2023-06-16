@@ -6,6 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.lib_common.ext.observeInResult
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.params.BundleParams
 import cn.jack.library_arouter.manager.router.ArouterU
@@ -32,7 +33,9 @@ import kotlin.properties.Delegates
 @AndroidEntryPoint
 @Route(path = RouterPathActivity.Subject.PAGER_SUBJECT)
 class SubjectActivity() :
-    BaseActivity<ModuleFragment02ActivityCollectionBinding, SubjectViewModel>(ModuleFragment02ActivityCollectionBinding::inflate),
+    BaseActivity<ModuleFragment02ActivityCollectionBinding, SubjectViewModel>(
+        ModuleFragment02ActivityCollectionBinding::inflate
+    ),
     OnRefreshLoadMoreListener {
     override val mViewModel: SubjectViewModel by viewModels()
 
@@ -49,58 +52,51 @@ class SubjectActivity() :
 
     override fun observeViewModel() {
         super.observeViewModel()
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mViewModel.projectInfoList_.collect {
-                    when (it) {
-                        is EventResult.OnStart -> {
-                            if (mIsRefresh) {
-                                setLayoutState(LayoutState.OnLoading)
-                            }
-                        }
-                        is EventResult.OnNext -> {
-                            if (it.data == null) {
-                                mBinding.subjectSmartRefreshLayout.finishRefresh()
-                                mBinding.subjectSmartRefreshLayout.finishLoadMore()
-                                setLayoutState(LayoutState.OnEmpty)
-                                return@collect
-                            }
-                            val datas: List<ArticleInfo> = it.data!!.datas
-                            for (articleBean in datas) {
-                                articleBean.collect = true
-                            }
-                            if (mIsRefresh) {
-                                mArticleInfoAdapter.setList(datas)
-                                setLayoutState(LayoutState.OnSuccess)
-                            } else {
-                                mArticleInfoAdapter.addData(datas)
-                            }
-
-                            mIsRefresh = false
-                        }
-                        is EventResult.OnFail -> {
-//                            hideDialog()
-//                            showToast(it.throwable.message)
-                            mBinding.subjectSmartRefreshLayout.finishRefresh()
-                            mBinding.subjectSmartRefreshLayout.finishLoadMore()
-                            setLayoutState(LayoutState.OnFailed)
-                        }
-                        is EventResult.OnError -> {
-//                            hideDialog()
-//                            showToast(it.throwable.message)
-                            setLayoutState(LayoutState.OnNetError)
-                            mBinding.subjectSmartRefreshLayout.finishRefresh()
-                            mBinding.subjectSmartRefreshLayout.finishLoadMore()
-                        }
-                        is EventResult.OnComplete -> {
-//                            hideDialog()
-                            mBinding.subjectSmartRefreshLayout.finishRefresh()
-                            mBinding.subjectSmartRefreshLayout.finishLoadMore()
-                        }
-                    }
+        observeInResult(mViewModel.projectInfoList_, false) {
+            onStart = {
+                if (mIsRefresh) {
+                    setLayoutState(LayoutState.OnLoading)
                 }
             }
+            onSuccess = {
+                if (it == null) {
+                    mBinding.subjectSmartRefreshLayout.finishRefresh()
+                    mBinding.subjectSmartRefreshLayout.finishLoadMore()
+                    setLayoutState(LayoutState.OnEmpty)
+                } else {
+                    val dInfo: List<ArticleInfo> = it.datas
+                    for (articleBean in dInfo) {
+                        articleBean.collect = true
+                    }
+                    if (mIsRefresh) {
+                        mArticleInfoAdapter.setList(dInfo)
+                        setLayoutState(LayoutState.OnSuccess)
+                    } else {
+                        mArticleInfoAdapter.addData(dInfo)
+                    }
+                }
+
+                mIsRefresh = false
+            }
+
+            onFail = {
+                mBinding.subjectSmartRefreshLayout.finishRefresh()
+                mBinding.subjectSmartRefreshLayout.finishLoadMore()
+                setLayoutState(LayoutState.OnFailed)
+            }
+
+            onError = {
+                setLayoutState(LayoutState.OnNetError)
+                mBinding.subjectSmartRefreshLayout.finishRefresh()
+                mBinding.subjectSmartRefreshLayout.finishLoadMore()
+            }
+
+            onComplete = {
+                mBinding.subjectSmartRefreshLayout.finishRefresh()
+                mBinding.subjectSmartRefreshLayout.finishLoadMore()
+            }
         }
+
     }
 
     private fun initAdapter() {

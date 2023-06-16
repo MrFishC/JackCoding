@@ -4,10 +4,8 @@ import android.annotation.SuppressLint
 import android.text.TextUtils
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import cn.jack.lib_common.ext.showToast
+import cn.jack.lib_common.ext.observeInResult
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
 import cn.jack.library_arouter.manager.params.BundleParams
@@ -37,7 +35,6 @@ import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet.BottomListSheetBuilder
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
 /**
@@ -45,7 +42,8 @@ import kotlin.properties.Delegates
  * 2.项目分类（条件筛选）
  */
 @Route(path = RouterPathFragment.HomeSecond.PAGER_HOME_SECOND)
-class ModuleFragment02 : BaseSimpleFragment<ModuleFragment02FragmentHome02Binding>(ModuleFragment02FragmentHome02Binding::inflate),
+class ModuleFragment02 :
+    BaseSimpleFragment<ModuleFragment02FragmentHome02Binding>(ModuleFragment02FragmentHome02Binding::inflate),
     OnRefreshLoadMoreListener,
     OnItemChildClickListener {
 
@@ -56,7 +54,6 @@ class ModuleFragment02 : BaseSimpleFragment<ModuleFragment02FragmentHome02Bindin
 
     private val uncollectArticle_ =
         uncollectArticle.shareIn(lifecycleScope, SharingStarted.WhileSubscribed(5000))
-
 
     private val collectAtrticle =
         MutableStateFlow<EventResult<String>>(EventResult.OnComplete)
@@ -86,139 +83,67 @@ class ModuleFragment02 : BaseSimpleFragment<ModuleFragment02FragmentHome02Bindin
         super.prepareData()
         initAdapter()
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                uncollectArticle_.collect {
-                    when (it) {
-                        is EventResult.OnStart -> visibleDialog()
-                        is EventResult.OnNext -> {
-//                            if (it.data == null) {
-//                                return@collect
-//                            }
-                            articleInfo.collect = !articleInfo.collect
-//                            mArticleInfoAdapter.notifyItemChanged(position)
-                            mArticleInfoAdapter.notifyDataSetChanged()
-                        }
-                        is EventResult.OnFail -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnError -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnComplete -> {
-                            hideDialog()
-                        }
-                    }
-                }
+        observeInResult(uncollectArticle_) {
+            onSuccess = {
+                articleInfo.collect = !articleInfo.collect
+                mArticleInfoAdapter.notifyDataSetChanged()
             }
         }
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                collectAtrticle_.collect {
-                    when (it) {
-                        is EventResult.OnStart -> visibleDialog()
-                        is EventResult.OnNext -> {
-//                            if (it.data == null) {
-//                                return@collect
-//                            }
-                            articleInfo.collect = !articleInfo.collect
-//                            mArticleInfoAdapter.notifyItemChanged(position)
-                            mArticleInfoAdapter.notifyDataSetChanged()
-                        }
-                        is EventResult.OnFail -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnError -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnComplete -> {
-                            hideDialog()
-                        }
-                    }
-                }
+        observeInResult(collectAtrticle_) {
+            onSuccess = {
+                articleInfo.collect = !articleInfo.collect
+                mArticleInfoAdapter.notifyDataSetChanged()
             }
         }
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                projectInfoList_.collect {
-                    when (it) {
-                        is EventResult.OnStart -> {
-                            if (mIsRefresh) {
-                                setLayoutState(LayoutState.OnLoading)
-                            }
-                        }
-                        is EventResult.OnNext -> {
-                            if (it.data == null) {
-                                setLayoutState(LayoutState.OnEmpty)
-                                return@collect
-                            }
-                            if (it.data!!.curPage == 0) {
-                                mArticleInfoAdapter.setList(it.data!!.datas)
-                                setLayoutState(LayoutState.OnSuccess)
-                            } else {
-                                mArticleInfoAdapter.addData(it.data!!.datas)
-                            }
-                            mIsRefresh = false
-                        }
-                        is EventResult.OnFail -> {
-//                            hideDialog()
-//                            showToast(it.throwable.message)
-                            setLayoutState(LayoutState.OnFailed)
-                        }
-                        is EventResult.OnError -> {
-                            setLayoutState(LayoutState.OnNetError)
-//                            hideDialog()
-//                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnComplete -> {
-//                            hideDialog()
-
-                        }
-                    }
-                    mBinding.findSmartRefreshLayout.finishRefresh()
-                    mBinding.findSmartRefreshLayout.finishLoadMore()
+        observeInResult(projectInfoList_, false) {
+            onStart = {
+                if (mIsRefresh) {
+                    setLayoutState(LayoutState.OnLoading)
                 }
+            }
+
+            onSuccess = {
+                if (it == null) {
+                    setLayoutState(LayoutState.OnEmpty)
+                } else {
+                    if (it.curPage == 0) {
+                        mArticleInfoAdapter.setList(it.datas)
+                        setLayoutState(LayoutState.OnSuccess)
+                    } else {
+                        mArticleInfoAdapter.addData(it.datas)
+                    }
+                }
+
+                mIsRefresh = false
+            }
+
+            onFail = {
+                setLayoutState(LayoutState.OnFailed)
+            }
+
+            onError = {
+                setLayoutState(LayoutState.OnNetError)
+            }
+
+            onComplete = {
+                mBinding.findSmartRefreshLayout.finishRefresh()
+                mBinding.findSmartRefreshLayout.finishLoadMore()
             }
         }
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                projectSortInfo_.collect {
-                    when (it) {
-                        is EventResult.OnStart -> visibleDialog()
-                        is EventResult.OnNext -> {
-                            if (it.data == null) {
-                                return@collect
-                            }
-
-                            showSortDialog(
-                                it.data!!, true, true, true,
-                                "项目分类", true, false
-                            )
-                            //将数据存储在本地
-                            keepSortInfosInLocal(it.data!!)
-                        }
-                        is EventResult.OnFail -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnError -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnComplete -> {
-                            hideDialog()
-                        }
-                    }
-                }
+        observeInResult(projectSortInfo_) {
+            onSuccess = {
+                showSortDialog(
+                    it!!, true, true, true,
+                    "项目分类", true, false
+                )
+                //将数据存储在本地
+                keepSortInfosInLocal(it)
             }
         }
+
     }
 
     override fun loadData() {
@@ -247,7 +172,7 @@ class ModuleFragment02 : BaseSimpleFragment<ModuleFragment02FragmentHome02Bindin
     }
 
     private fun openSearchDialogFragment() {
-        SearchFragment().show(requireActivity().supportFragmentManager,"")
+        SearchFragment().show(requireActivity().supportFragmentManager, "")
     }
 
     private fun showSortDailog() {

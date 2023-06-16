@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.lib_common.ext.observeInResult
 import cn.jack.lib_common.ext.showToast
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
@@ -48,35 +49,51 @@ open class SystemFragment :
 
     override fun prepareData() {
         super.prepareData()
-
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                systemAndSquareInfo_.collect {
-                    when (it) {
-                        is EventResult.OnStart -> {
-                            setLayoutState(LayoutState.OnLoading)
-                        }
-                        is EventResult.OnNext -> {
-                            if (it.data == null) {
-                                setLayoutState(LayoutState.OnEmpty)
-                                return@collect
-                            }
-                            setData(it.data!!)
-                            setLayoutState(LayoutState.OnSuccess)
-                        }
-                        is EventResult.OnFail -> setLayoutState(LayoutState.OnFailed)
-                        is EventResult.OnError -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                            setLayoutState(LayoutState.OnNetError)
-                        }
-                        is EventResult.OnComplete -> {
-//                            hideDialog()
-                        }
-                    }
+        observeInResult(systemAndSquareInfo_, false) {
+            onStart = {
+                setLayoutState(LayoutState.OnLoading)
+            }
+            onSuccess = {
+                if (it == null) {
+                    setLayoutState(LayoutState.OnEmpty)
+                } else {
+                    setData(it)
+                    setLayoutState(LayoutState.OnSuccess)
                 }
             }
+            onError = {
+                setLayoutState(LayoutState.OnNetError)
+            }
         }
+
+//        lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                systemAndSquareInfo_.collect {
+//                    when (it) {
+//                        is EventResult.OnStart -> {
+//                            setLayoutState(LayoutState.OnLoading)
+//                        }
+//                        is EventResult.OnNext -> {
+//                            if (it.data == null) {
+//                                setLayoutState(LayoutState.OnEmpty)
+//                                return@collect
+//                            }
+//                            setData(it.data!!)
+//                            setLayoutState(LayoutState.OnSuccess)
+//                        }
+//                        is EventResult.OnFail -> setLayoutState(LayoutState.OnFailed)
+//                        is EventResult.OnError -> {
+//                            hideDialog()
+//                            showToast(it.throwable.message)
+//                            setLayoutState(LayoutState.OnNetError)
+//                        }
+//                        is EventResult.OnComplete -> {
+////                            hideDialog()
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
     override fun onResume() {
@@ -109,7 +126,11 @@ open class SystemFragment :
 
     @SuppressLint("InflateParams")
     private fun findItem(): View {
-        return layoutInflater.inflate(R.layout.module_fragment_03_layout_square_item, null, false) as View
+        return layoutInflater.inflate(
+            R.layout.module_fragment_03_layout_square_item,
+            null,
+            false
+        ) as View
     }
 
     private fun findLabel(flexboxLayout: FlexboxLayout): AppCompatTextView {

@@ -2,7 +2,7 @@ package cn.jack.module_login.mvvm.view
 
 import android.annotation.SuppressLint
 import androidx.activity.viewModels
-import cn.jack.lib_common.ext.requestHttp
+import cn.jack.lib_common.ext.observeInResult
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_common_business.constant.C
@@ -22,9 +22,7 @@ import io.reactivex.Observable
 /**
  * @创建者 Jack
  * @创建时间 2021/3/16 22:38
- * @描述
- *
- *  表单验证，使用Rxjava的combineLatest操作符
+ * @描述 Rxjava表单验证（使用combineLatest操作符）可以抽离出来作为Rxjava框架的常用点
  */
 @AndroidEntryPoint
 @Route(path = RouterPathActivity.Login.PAGER_LOGIN)
@@ -34,7 +32,7 @@ class LoginActivity :
 
     override fun observeViewModel() {
         super.observeViewModel()
-        requestHttp(mViewModel.userInfo) {
+        observeInResult(mViewModel.userInfo) {
             onSuccess = {
                 openHome(it)
             }
@@ -44,7 +42,6 @@ class LoginActivity :
     private fun openHome(data: UserInfo?) {
         KvStoreUtil.getInstance().save(C.Login.user_name, data?.email)
         mBinding.btnLoginCommit.reset()
-//        ArouterManager.getInstance().navigation2Home()
         ArouterU.getInstance().navigationTo(
             RouterPathActivity.Home.PAGER_HOME
         )
@@ -98,7 +95,6 @@ class LoginActivity :
         }
 
         mBinding.registerText.setOnClickListener {
-//            ArouterManager.getInstance().navigation2Register()
             ArouterU.getInstance().navigationTo(
                 RouterPathActivity.Register.PAGER_REGISTER
             )

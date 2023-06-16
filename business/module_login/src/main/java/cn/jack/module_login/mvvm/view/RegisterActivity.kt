@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.lib_common.ext.observeInResult
 import cn.jack.lib_common.ext.showToast
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.router.ArouterU
@@ -37,22 +38,27 @@ class RegisterActivity :
 
     override fun observeViewModel() {
         super.observeViewModel()
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mViewModel.registerUserInfo.collect {
-                    when (it) {
-                        is EventResult.OnStart -> visibleDialog()
-                        is EventResult.OnNext -> registerSuccess(it.data)
-                        is EventResult.OnError -> {
-                            hideDialog()
-                            showToast(it.throwable.message)
-                        }
-                        is EventResult.OnComplete -> hideDialog()
-                        is EventResult.OnFail -> showToast(it.throwable.message)
-                    }
-                }
+        observeInResult(mViewModel.registerUserInfo) {
+            onSuccess = {
+                registerSuccess(it)
             }
         }
+//        lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                mViewModel.registerUserInfo.collect {
+//                    when (it) {
+//                        is EventResult.OnStart -> visibleDialog()
+//                        is EventResult.OnNext -> registerSuccess(it.data)
+//                        is EventResult.OnError -> {
+//                            hideDialog()
+//                            showToast(it.throwable.message)
+//                        }
+//                        is EventResult.OnComplete -> hideDialog()
+//                        is EventResult.OnFail -> showToast(it.throwable.message)
+//                    }
+//                }
+//            }
+//        }
     }
 
     private fun registerSuccess(data: UserInfo?) {

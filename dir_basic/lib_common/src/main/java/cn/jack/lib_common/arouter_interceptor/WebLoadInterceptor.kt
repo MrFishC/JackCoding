@@ -1,13 +1,12 @@
 package cn.jack.lib_common.arouter_interceptor
 
 import android.content.Context
-import android.util.Log
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Interceptor
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback
 import com.alibaba.android.arouter.facade.template.IInterceptor
-import com.jack.library_webview.util.LogW.Companion.d
+import com.jack.library_webview.util.LogW
 
 /**
  * @创建者 Jack
@@ -18,10 +17,10 @@ import com.jack.library_webview.util.LogW.Companion.d
 @Interceptor(priority = 7)
 class WebLoadInterceptor : IInterceptor {
     override fun process(postcard: Postcard, callback: InterceptorCallback) {
-        Log.i("拦截 === ", "拦截操作开始了啊")
+        logInfo("拦截 === 拦截操作开始了啊")
         if (RouterPathActivity.Web.PAGER_WEB == postcard.path) {
             //加载H5页面之前，判断token是否失效，若失效则跳转到登录页面先登录
-            Log.i("拦截 === ", "啊进来了")
+            logInfo("拦截 === 啊进来了")
 
             //可以在这里请求接口 token失效的情况下，重新登录 再跳转H5页面
 
@@ -64,6 +63,10 @@ class WebLoadInterceptor : IInterceptor {
     }
 
     override fun init(context: Context) {
-        d(WebLoadInterceptor::class.java.name + "初始化成功")
+        logInfo(WebLoadInterceptor::class.java.name + "初始化成功")
+    }
+
+    private fun logInfo(msg: String) {
+        LogW.Companion.d(msg)
     }
 }

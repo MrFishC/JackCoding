@@ -8,10 +8,12 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.lib_common.ext.observeInResult
 import cn.jack.library_arouter.manager.params.BundleParams
 import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
+import cn.jack.library_common_business.entiy.ArticleInfo
 import cn.jack.module_fragment_03.R
 import cn.jack.module_fragment_03.databinding.ModuleFragment03FragmentSquareBinding
 import cn.jack.module_fragment_03.entity.SystemInfo
@@ -50,40 +52,65 @@ open class SquareFragment :
     override fun prepareData() {
         super.prepareData()
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                systemAndSquareInfo_.collect {
-                    when (it) {
-                        is EventResult.OnStart -> {
-                            println("OnStart12")
-                            setLayoutState(LayoutState.OnLoading)
-                        }
-                        is EventResult.OnNext -> {
-                            if (it.data == null) {
-                                setLayoutState(LayoutState.OnEmpty)
-                                return@collect
-                            }
-                            setData(it.data!!)
-                            println("OnNext12")
-                            setLayoutState(LayoutState.OnSuccess)
-                        }
-                        is EventResult.OnFail -> {
-//                            hideDialog()
-//                            showToast(it.throwable.message)
-                            setLayoutState(LayoutState.OnFailed)
-                        }
-                        is EventResult.OnError -> {
-//                            hideDialog()
-//                            showToast(it.throwable.message)
-                            setLayoutState(LayoutState.OnNetError)
-                        }
-                        is EventResult.OnComplete -> {
-//                            hideDialog()
-                        }
-                    }
+        observeInResult(systemAndSquareInfo_, false) {
+            onStart = {
+                setLayoutState(LayoutState.OnLoading)
+            }
+            onSuccess = {
+                if (it == null) {
+                    setLayoutState(LayoutState.OnEmpty)
+                } else {
+                    setData(it)
+                    setLayoutState(LayoutState.OnSuccess)
                 }
             }
+
+            onFail = {
+                setLayoutState(LayoutState.OnFailed)
+            }
+
+            onError = {
+                setLayoutState(LayoutState.OnNetError)
+            }
         }
+
+//        lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                systemAndSquareInfo_.collect {
+//                    when (it) {
+//                        is EventResult.OnStart -> {
+//                            println("OnStart12")
+//                            setLayoutState(LayoutState.OnLoading)
+//                        }
+//
+//                        is EventResult.OnNext -> {
+//                            if (it.data == null) {
+//                                setLayoutState(LayoutState.OnEmpty)
+//                                return@collect
+//                            }
+//                            setData(it.data!!)
+//                            setLayoutState(LayoutState.OnSuccess)
+//                        }
+//
+//                        is EventResult.OnFail -> {
+////                            hideDialog()
+////                            showToast(it.throwable.message)
+//                            setLayoutState(LayoutState.OnFailed)
+//                        }
+//
+//                        is EventResult.OnError -> {
+////                            hideDialog()
+////                            showToast(it.throwable.message)
+//                            setLayoutState(LayoutState.OnNetError)
+//                        }
+//
+//                        is EventResult.OnComplete -> {
+////                            hideDialog()
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
     private var isInitialLoaded = false
@@ -117,7 +144,11 @@ open class SquareFragment :
     }
 
     private fun findItem(): View {
-        return layoutInflater.inflate(R.layout.module_fragment_03_layout_square_item, null, false) as View
+        return layoutInflater.inflate(
+            R.layout.module_fragment_03_layout_square_item,
+            null,
+            false
+        ) as View
     }
 
     private fun findLabel(flexboxLayout: FlexboxLayout): AppCompatTextView {
