@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import cn.jack.lib_common.callback.ResponseCallback
 import cn.jack.lib_common.ext.observeInResult
 import cn.jack.lib_common.ext.showToast
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
@@ -25,6 +26,8 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.jack.lib_base.base.view.BaseFragment
+import com.jack.lib_base.ext.closeDialog
+import com.jack.lib_base.ext.loadDialog
 import com.jack.lib_base.uistate.LayoutState
 import com.jack.lib_wrapper_net.model.EventResult
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -63,12 +66,14 @@ class ModuleFragment01 :
 
         observeInResult(mViewModel.binnerInfos_) {
             onSuccess = {
+                println("参数内容信息 xxx onSuccess")
                 showBannerInfos(it!!)
             }
         }
 
         observeInResult(mViewModel.homeInfos_, false) {
             onStart = {
+                println("参数内容信息  onStart")
                 if (mIsRefresh) {
                     setLayoutState(LayoutState.OnLoading)
                 }
@@ -89,6 +94,8 @@ class ModuleFragment01 :
                 }
 
                 mIsRefresh = false
+
+                println("参数内容信息  onSuccess")
             }
 
             onFail = {
@@ -100,6 +107,7 @@ class ModuleFragment01 :
             }
 
             onComplete = {
+                println("参数内容信息  onComplete")
                 mBinding.refreshLayout.finishRefresh()
                 mBinding.refreshLayout.finishLoadMore()
             }

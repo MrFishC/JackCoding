@@ -26,11 +26,14 @@ object FlowManager {
                 }
             }
      */
-    fun <T> httpRequest(requestBlock: () -> Flow<EventResult<T>>) =
+  inline fun <T> httpRequest(requestBlock: () -> Flow<EventResult<T>>) =
         requestBlock()
+            //flowOn:仅限于其上游,与其位置强相关
             .flowOn(Dispatchers.IO)
+            //catch的作用域仅限于上游      对发生在上游，中间操作符异常的处理,未捕获的异常在消费时抛出
+            //总结flow异常的处理方案，注意catch的作用域  下游使用try catch
             .catch { e ->
-                emit(EventResult.OnError(e))
+                emit(EventResult.OnError(e))        //emit：挂起函数，往下游发送数据         上游创建数据，同时也要将数据发送出去
             }
             .onStart {
                 emit(EventResult.OnStart)

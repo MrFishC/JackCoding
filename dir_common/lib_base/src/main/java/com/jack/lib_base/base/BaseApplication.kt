@@ -17,7 +17,6 @@ import com.kingja.loadsir.core.LoadSir
  * @描述
  */
 abstract class BaseApplication : Application() {
-
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         MultiDex.install(this)

@@ -42,7 +42,7 @@ class HomePageOneRepository @Inject constructor() : BaseWrapperModel() {
                 topArticFlow.data?.let {
                     articleFlow.data?.datas?.addAll(0, it)
                 }
-                EventResult.OnNext(articleFlow.data?.datas)
+                EventResult.OnNext(articleFlow.data?.datas)     //zip内部最终会将结果发送到下游（查看map操作符更容易分析）
             } else {
                 if (articleFlow.errorCode != 0) {
                     EventResult.OnFail(Throwable(articleFlow.errorMsg))
