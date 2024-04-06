@@ -57,7 +57,7 @@ public class WebViewSettingManager {
 
         settings.setTextZoom(100);
         settings.setDatabaseEnabled(true);
-        settings.setAppCacheEnabled(true);
+//        settings.setAppCacheEnabled(true);
         settings.setLoadsImagesAutomatically(true);
         settings.setSupportMultipleWindows(false);
         //是否阻塞加载网络图片  协议http or https

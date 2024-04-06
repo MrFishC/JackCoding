@@ -93,5 +93,6 @@ dependencies {
 
     //https://developer.android.google.cn/jetpack/androidx/releases/room#kts
     implementation rootProject.ext.dependencies["roomRuntime"]
+
     kapt rootProject.ext.dependencies["roomCompiler"]
 }

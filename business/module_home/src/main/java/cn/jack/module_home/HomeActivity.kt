@@ -1,5 +1,7 @@
 package cn.jack.module_home
 
+import android.view.KeyEvent
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
@@ -55,5 +57,21 @@ class HomeActivity :
             .fragmentManager(supportFragmentManager)
             .canScroll(true)
             .build()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
+            //音量下键点击事件
+            if (BuildConfig.DEBUG) {
+                try {
+                    val aClass = Class.forName("com.jack.debugtoolu.DebugToolDialogFragment")
+                    val target = aClass.getConstructor().newInstance() as DialogFragment
+                    target.show(supportFragmentManager, "debug_tool")
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }

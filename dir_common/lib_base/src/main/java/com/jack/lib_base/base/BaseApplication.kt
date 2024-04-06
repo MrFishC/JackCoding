@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Process
 import android.webkit.WebView
 import androidx.multidex.MultiDex
+import com.jack.debugtoolu.DebugManager
 import com.jack.lib_base.uistate.loadsir.callback.*
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadSir
@@ -66,10 +67,15 @@ abstract class BaseApplication : Application() {
     @Synchronized
     fun setApplication(application: Application) {
         initArouter()
+        initDebugTool()
         initLoadSir()
 //        initBus()
         initOthers()
         /*注册监听每个activity的生命周期,便于堆栈式管理*/
+    }
+
+    private fun initDebugTool() {
+        DebugManager.init(this)
     }
 
     private fun initLoadSir() {

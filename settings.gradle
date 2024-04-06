@@ -62,3 +62,4 @@ project(':commonRes').projectDir = file('dir_common/library_common_res')
 /*5.simple模块*/
 include ':simpleRecycleview'
 project(':simpleRecycleview').projectDir = file('dir_simple/simple_recycleview')
+include ':debug_tool_u'

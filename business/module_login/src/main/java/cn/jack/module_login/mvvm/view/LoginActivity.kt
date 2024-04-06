@@ -2,6 +2,7 @@ package cn.jack.module_login.mvvm.view
 
 import android.annotation.SuppressLint
 import androidx.activity.viewModels
+import androidx.fragment.app.DialogFragment
 import cn.jack.lib_common.ext.observeInResult
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.router.ArouterU
@@ -12,6 +13,7 @@ import cn.jack.module_login.mvvm.modle.entity.InfoVerification
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.vm.LoginViewModel
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.jack.debugtoolu.BuildConfig
 import com.jack.lib_base.base.view.BaseActivity
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider

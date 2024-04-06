@@ -57,6 +57,8 @@ dependencies {
     api project(':basicArouter')
     api project(':basicCBusiness')
 
+    api project(':debug_tool_u')
+
     //依赖第三方库========================================================
     implementation rootProject.ext.dependencies["arouter-api"]
     kapt rootProject.ext.dependencies["arouter-compiler"]

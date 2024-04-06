@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
-        >
+        android:networkSecurityConfig="@xml/network_sercurity_config">
 
         <!--状态栏库-->
         <!--适配华为（huawei）刘海屏-->
@@ -23,6 +23,19 @@
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths">
+
+            </meta-data>
+        </provider>
 
     </application>
 
