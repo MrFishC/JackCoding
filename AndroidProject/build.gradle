@@ -1,0 +1,76 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+//buildscript {
+//    dependencies {
+//        //protobuf配置1
+//        //https://github.com/google/protobuf-gradle-plugin   0.8.15 要求 Gradle >= 5.6 and Java 8.
+//        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.15'
+//    }
+//}
+//
+//plugins {
+//    id 'com.android.application' version '7.2.1' apply false
+//    id 'com.android.library' version '7.2.1' apply false
+//    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
+//}
+//
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}
+//apply from: "config.gradle"
+
+//====================按照以上的方式进行依赖，会出现不能使用viewModels，理论上推测感觉没有错误，实践试出来还是存在问题             gradle知识掌握的还不够,待安排
+
+//plugins {
+//    id 'com.android.application' version '7.3.0' apply false
+//    id 'com.android.library' version '7.3.0' apply false
+//    id 'org.jetbrains.kotlin.android' version '1.7.0' apply false
+//    //hilt ---> https://developer.android.google.cn/training/dependency-injection/hilt-android?hl=zh-cn#setup
+//    id 'com.google.dagger.hilt.android' version '2.44' apply false
+//    id 'com.alibaba.arouter.register' version "1.0.2" apply false
+//    //https://github.com/google/protobuf-gradle-plugin
+//    //protobuf配置1 需要用到protobuf时，再按照上一行地址的文档进行配置
+//}
+
+//===============================================
+buildscript {
+    ext.kotlin_version = '1.7.0'
+    repositories {
+//        google()
+//        jcenter()
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.alibaba:arouter-register:1.0.2"
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.44'
+    }
+}
+
+allprojects {
+    repositories {
+//        google()
+//        jcenter()
+        //rn
+//        maven {
+//            // All of React Native (JS, Android binaries) is installed from npm
+//            url "$rootDir/../rn_module/node_modules/react-native/android"
+//        }
+//        maven {
+//            // Android JSC is installed from npm
+//            url("$rootDir/../rn_module/node_modules/jsc-android/dist")
+//        }
+        //rn end
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'https://jitpack.io' }
+    }
+}
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+apply from: "/gradle/config.gradle"

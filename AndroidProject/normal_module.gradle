@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+
+//protobuf配置2
+apply plugin: 'com.google.protobuf'
+
+android {
+
+    //指定项目的编译版本
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
+    //指定项目构建工具的版本   略
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]          //最低兼容的Android系统版本
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]    //在该目标版本上已经做过了充分的测试，系统将会为你的应用程序启用一些最新的功能和特性
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {    //用于指定生成安装文件的相关配置
+        release {
+            //minifyEnabled用于指定是否对项目的代码进行混淆
+            //proguardFiles用于指定混淆时使用的规则文件
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+
+            //protobuf配置3.1
+            proto {
+                //// In addition to the default 'src/main/proto'
+                //自定义路径
+                srcDir 'src/main/java'
+            }
+
+            //protobuf配置3.2
+            java {
+                //自定义路径
+                srcDir 'src/main/proto'
+            }
+        }
+    }
+
+}
+
+//protobuf配置4
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.8.0'
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option "lite"
+                }
+            }
+        }
+    }
+}
+
+dependencies {  //指定当前项目所有的依赖关系
+
+    //protobuf配置5
+    implementation 'com.google.protobuf:protobuf-javalite:3.8.0'
+
+    //Gradle在构建项目时会首先检查一下本地是否已经有这个库的缓存，如果没有的话则会自动联网下载，然后再添加到项目的构建路径中
+
+    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["material"]
+    implementation rootProject.ext.dependencies["constraint"]
+    testImplementation  rootProject.ext.dependencies["junit"]
+    androidTestImplementation  rootProject.ext.dependencies["test_junit"]
+    androidTestImplementation  rootProject.ext.dependencies["test_espresso_core"]
+}

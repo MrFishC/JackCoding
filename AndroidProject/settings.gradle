@@ -1,0 +1,90 @@
+//原来在工程build.gradle的buildscript和allprojects移动至setting.gradle并改名为pluginManagement 和dependencyResolutionManagement。
+//pluginManagement {
+//    repositories {
+////        gradlePluginPortal()
+////        google()
+////        mavenCentral()
+////        jcenter()
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+//        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+//    }
+//
+//    resolutionStrategy {
+//        eachPlugin {
+//            if (requested.id.id == 'com.alibaba.arouter.register') {
+//                useModule('com.alibaba:arouter-register:1.0.2')
+//            }
+//        }
+//    }
+//}
+//dependencyResolutionManagement {
+////    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+//    //sync项目报错:Caused by: org.gradle.api.InvalidUserCodeException: Build was configured to prefer settings repositories over project repositories but repository 'maven' was added by plugin class 'FlutterPlugin'
+//    //使用：repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)，原：repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+//    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)//在原生Android项目依赖了Flutter模块，该位置的配置需要更改
+//    repositories {
+////        google()
+////        mavenCentral()
+////        jcenter()
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+//        maven { url 'https://jitpack.io' }
+//    }
+//}
+//将以上的进行注释，配置改迁到build.gradle中进行
+
+rootProject.name = "JackCoding"
+
+/*1.宿主层*/
+include ':app'
+
+/*2.业务组件层模块*/
+include ':businessLogin', ':businessHome', ':businessFragment1', ':businessFragment2', ':businessFragment3', ':businessFragment4', ':businessFragment5', ':businessHybird'
+
+project(':businessLogin').projectDir = file('business/module_login')
+project(':businessHome').projectDir = file('business/module_home')
+project(':businessFragment1').projectDir = file('business/module_fragment_01')
+project(':businessFragment2').projectDir = file('business/module_fragment_02')
+project(':businessFragment3').projectDir = file('business/module_fragment_03')
+project(':businessFragment4').projectDir = file('business/module_fragment_04')
+project(':businessFragment5').projectDir = file('business/module_fragment_05')
+//混合架构模块需要用到的业务层，可以加在业务组件层模块和业务基础层中间
+project(':businessHybird').projectDir = file('business/module_hybird')
+
+/*3.业务基础层-服务于业务层模块*/
+include ':basicCommon', ':basicArouter', ':basicCBusiness'
+
+//业务层只需要依赖basicCommon即可
+project(':basicCommon').projectDir = file('dir_basic/lib_common')
+//basicCommon依赖了basicArouter和basicCBusiness
+project(':basicArouter').projectDir = file('dir_basic/library_common_arouter')
+project(':basicCBusiness').projectDir = file('dir_basic/library_common_business')
+
+/*4.基础组件层模块*/
+include ':commonWrapper', ':commonBase', ':commonHttp', ':commonImage',
+        ':commonWebview', ':commonTool', ':commonWeight', ':commonRes', ':commonDebug'
+
+project(':commonWrapper').projectDir = file('dir_common/lib_wrapper_mvvm')
+project(':commonBase').projectDir = file('dir_common/lib_base')
+project(':commonHttp').projectDir = file('dir_common/lib_wrapper_net')
+project(':commonImage').projectDir = file('dir_common/library_image')
+project(':commonWebview').projectDir = file('dir_common/library_webview')
+project(':commonTool').projectDir = file('dir_common/library_util')
+project(':commonWeight').projectDir = file('dir_common/library_weight')
+project(':commonRes').projectDir = file('dir_common/library_common_res')
+project(':commonDebug').projectDir = file('dir_common/debug_tool_u')
+
+/*5.simple模块*/
+include ':simpleRecycleview'
+project(':simpleRecycleview').projectDir = file('dir_simple/simple_recycleview')
+
+/*配置依赖flutter_module的脚本*/
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir.parentFile,
+        'flutter_module/.android/include_flutter.groovy'
+))
+//可选，作用：可以在当前AS的项目下显示flutter_module以方便查看和编写Dart代码
+include ':flutter_module'
+project(':flutter_module').projectDir = new File('../flutter_module')

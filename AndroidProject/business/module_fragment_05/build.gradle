@@ -1,0 +1,2 @@
+apply from: "../../gradle/module_home_fragment_kt.build.gradle"
+apply plugin: 'org.jetbrains.kotlin.android'
