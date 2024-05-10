@@ -4,11 +4,12 @@ plugins {
 }
 
 android {
-    namespace 'com.jack.debugtoolu'
+//    namespace 'com.jack.debugtoolu'
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {
         minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -18,6 +19,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "boolean", "DEBUG","false"
+            buildConfigField "String", "BUILD_APK_TIME", "\"" + buildApkTime() + "\""
+            buildConfigField "String", "VERSION_CODE", "\"" + appVersionCode() + "\""
+            buildConfigField "String", "VERSION_NAME", "\"" + appVersionName() + "\""
         }
         debug {
             buildConfigField "String", "BUILD_APK_TIME", "\"" + buildApkTime() + "\""
@@ -48,11 +52,18 @@ def appVersionName() {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.10.1'
-    implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+//    implementation 'androidx.core:core-ktx:1.10.1'
+//    implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
+//    implementation 'androidx.appcompat:appcompat:1.6.1'
+//    implementation 'com.google.android.material:material:1.9.0'
+//    testImplementation 'junit:junit:4.13.2'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation rootProject.ext.dependencies["core-ktx"]
+    implementation rootProject.ext.dependencies["material"]
+    implementation rootProject.ext.dependencies["appcompat"]
+//    testImplementation  rootProject.ext.dependencies["junit"]
+//    androidTestImplementation  rootProject.ext.dependencies["test_junit"]
+//    androidTestImplementation  rootProject.ext.dependencies["test_espresso_core"]
 }

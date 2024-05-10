@@ -17,7 +17,7 @@ import dagger.hilt.android.HiltAndroidApp
 class AppApplication : CustomApplication() {
 
     override fun initArouter() {
-        if (BuildConfig.DEBUG) {
+        if (isDebugMode()) {
             ARouter.openLog()
             ARouter.openDebug()
         }

@@ -79,7 +79,7 @@ dependencies {  //指定当前项目所有的依赖关系
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["material"]
     implementation rootProject.ext.dependencies["constraint"]
-    testImplementation  rootProject.ext.dependencies["junit"]
-    androidTestImplementation  rootProject.ext.dependencies["test_junit"]
-    androidTestImplementation  rootProject.ext.dependencies["test_espresso_core"]
+//    testImplementation  rootProject.ext.dependencies["junit"]
+//    androidTestImplementation  rootProject.ext.dependencies["test_junit"]
+//    androidTestImplementation  rootProject.ext.dependencies["test_espresso_core"]
 }

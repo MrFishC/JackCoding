@@ -78,5 +78,6 @@ dependencies {
 
     api rootProject.ext.dependencies["XPopup"]
 
-    debugApi project(":commonDebug")
+//    debugApi project(":commonDebug")
+    api project(":commonDebug")
 }

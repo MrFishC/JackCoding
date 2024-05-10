@@ -46,6 +46,11 @@ class RouterPathActivity {
         const val PAGER_SIMPLE_RV = "$SIMPLE_RV/SimpleRv"
     }
 
+    object SimpleCustom {
+        private const val SIMPLE_CUSTOM = "/simple_custom"
+        const val PAGER_SIMPLE_CUSTOM = "$SIMPLE_CUSTOM/SimpleCustom"
+    }
+
     object MallActivity {
         private const val MALL_ACTIVITY = "/mall_activity"
         const val PAGER_MALL_ACTIVITY = "$MALL_ACTIVITY/MallActivity"

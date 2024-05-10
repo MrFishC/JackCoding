@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="cn.jack.simple02_custom_view">
+    <application>
+        <activity
+            android:name=".SimpleCustomViewActivity"
+            android:exported="true">
+
+        </activity>
+    </application>
+
+</manifest>

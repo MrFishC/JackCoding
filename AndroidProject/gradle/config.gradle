@@ -3,7 +3,7 @@ ext {
     android = [
             compileSdkVersion   : 33,
             minSdkVersion       : 24,
-            targetSdkVersion    : 33,
+            targetSdkVersion    : 34,
             versionCode         : 1,
             versionName         : "1.0.1",
             applicationId       : 'jack.mvvm',
@@ -18,12 +18,16 @@ ext {
     version = [
 
             constraintVersion                         : "2.0.1",
-            junit                                     : "4.+",
-            test_junit                                : "1.1.1",
-            test_espresso_core                        : "3.2.0",
+//            junit                                     : "4.+",
+//            test_junit                                : "1.1.1",
+//            test_espresso_core                        : "3.2.0",
+
+            junit                                     : "4.13.2",
+            test_junit                                : "1.1.5",
+            test_espresso_core                        : "3.5.1",
 
             timber                                    : "5.0.1",
-            appcompatVersion                          : "1.0.0",
+            appcompatVersion                          : "1.0.2",
             aacVersion                                : "2.0.0",
             materialVersion                           : "1.1.0",
 

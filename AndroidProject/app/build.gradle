@@ -27,10 +27,21 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    signingConfigs {
+        release {
+            storeFile file(KEY_PATH)
+            storePassword KEY_PASS
+            keyAlias ALIAS_NAME
+            keyPassword ALIAS_PASS
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // 包签名
+            signingConfig signingConfigs.release
         }
     }
 
@@ -42,6 +53,7 @@ android {
     dataBinding {
         enabled true
     }
+
 }
 
 dependencies {
@@ -57,8 +69,13 @@ dependencies {
         implementation project(path: ':businessLogin')   //登录注册模块
         implementation project(path: ':businessHome')    //主页模块
         implementation project(path: ':simpleRecycleview')
+        implementation project(path: ':simpleCustomView')
     } else {
 //        implementation project(':basicCommon')
         implementation project(':businessHybird')//businessHybird依赖于basicCommon
     }
+
+    testImplementation  rootProject.ext.dependencies["junit"]
+    androidTestImplementation  rootProject.ext.dependencies["test_junit"]
+    androidTestImplementation  rootProject.ext.dependencies["test_espresso_core"]
 }

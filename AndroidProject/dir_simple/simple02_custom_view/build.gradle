@@ -1,0 +1,7 @@
+apply from: "../../gradle/module_kt.build.gradle"
+
+dependencies {
+//    testImplementation  rootProject.ext.dependencies["junit"]
+//    androidTestImplementation  rootProject.ext.dependencies["test_junit"]
+//    androidTestImplementation  rootProject.ext.dependencies["test_espresso_core"]
+}

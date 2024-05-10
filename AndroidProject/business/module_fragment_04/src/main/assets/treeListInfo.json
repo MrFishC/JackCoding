@@ -83,6 +83,13 @@
             "appFunctionName": "属性动画",
             "invokingWay": 1
           }
+        },
+        {
+          "attributes": {
+            "appFunctionIcon": "icon_function_headmaster_box",
+            "appFunctionName": "自定义控件",
+            "invokingWay": 1
+          }
         }
       ],
       "name": "Android基础"

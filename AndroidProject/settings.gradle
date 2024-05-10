@@ -76,8 +76,9 @@ project(':commonRes').projectDir = file('dir_common/library_common_res')
 project(':commonDebug').projectDir = file('dir_common/debug_tool_u')
 
 /*5.simple模块*/
-include ':simpleRecycleview'
+include ':simpleRecycleview',":simpleCustomView"
 project(':simpleRecycleview').projectDir = file('dir_simple/simple_recycleview')
+project(':simpleCustomView').projectDir = file('dir_simple/simple02_custom_view')
 
 /*配置依赖flutter_module的脚本*/
 setBinding(new Binding([gradle: this]))

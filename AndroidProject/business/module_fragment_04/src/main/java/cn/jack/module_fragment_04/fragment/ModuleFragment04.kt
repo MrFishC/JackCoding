@@ -94,6 +94,8 @@ class ModuleFragment04 :
                 openActivityByARouter(RouterPathActivity.SimpleRv.PAGER_SIMPLE_RV)
             }else if (attributesBean.appFunctionName == "Flutter") {
                 openActivityByARouter(RouterPathActivity.MallActivity.PAGER_MALL_ACTIVITY)
+            }else if (attributesBean.appFunctionName == "自定义控件") {
+                openActivityByARouter(RouterPathActivity.SimpleCustom.PAGER_SIMPLE_CUSTOM)
             }
         }
     }
@@ -148,5 +150,4 @@ class ModuleFragment04 :
             )
         }
     }
-
 }

@@ -54,7 +54,7 @@ abstract class CustomApplication : BaseApplication() {
     }
 
     private fun initLogger() {
-        LogU.init(BuildConfig.DEBUG, "HiLog")
+        LogU.init(isDebugMode(), "HiLog")
     }
 
     private fun initMMKV() {
@@ -74,7 +74,7 @@ abstract class CustomApplication : BaseApplication() {
             LogU.d(message)
         }
         loggerInterceptor.level =
-            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+            if (isDebugMode()) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
 
         val builder: OkHttpClient.Builder = OkHttpClient.Builder()
             .addInterceptor(loggerInterceptor)
@@ -85,4 +85,6 @@ abstract class CustomApplication : BaseApplication() {
             .writeTimeout(30, TimeUnit.SECONDS)
         OkHttpManager.instance.initClient(builder.build())
     }
+
+    protected fun isDebugMode() = BuildConfig.DEBUG
 }
