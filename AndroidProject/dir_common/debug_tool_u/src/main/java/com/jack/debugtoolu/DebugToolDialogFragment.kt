@@ -24,7 +24,7 @@ internal class DebugToolDialogFragment : AppCompatDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val parent = dialog?.window?.findViewById<ViewGroup>(android.R.id.content) ?: container
-        val view = inflater.inflate(R.layout.hi_debug_tool, parent, false)
+        val view = inflater.inflate(R.layout.layout_debug_tool, parent, false)
 
         dialog?.window?.setLayout(
             (ScreenUtils.getScreenWidth(view.context) * 0.7f).toInt(),
@@ -83,7 +83,7 @@ internal class DebugToolDialogFragment : AppCompatDialogFragment() {
     inner class DebugToolAdapter(val list: List<DebugFunction>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            val itemView = layoutInflater.inflate(R.layout.hi_debug_tool_item, parent, false)
+            val itemView = layoutInflater.inflate(R.layout.layout_debug_tool_item, parent, false)
             return object : RecyclerView.ViewHolder(itemView) {}
         }
 

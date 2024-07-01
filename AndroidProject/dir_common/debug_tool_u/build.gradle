@@ -63,6 +63,9 @@ dependencies {
     implementation rootProject.ext.dependencies["core-ktx"]
     implementation rootProject.ext.dependencies["material"]
     implementation rootProject.ext.dependencies["appcompat"]
+
+    //注意重复依赖的问题
+    implementation project(':commonTool')
 //    testImplementation  rootProject.ext.dependencies["junit"]
 //    androidTestImplementation  rootProject.ext.dependencies["test_junit"]
 //    androidTestImplementation  rootProject.ext.dependencies["test_espresso_core"]

@@ -3,6 +3,7 @@ package com.jack.debugtoolu
 import android.content.Context
 import android.os.Build
 import android.os.Process
+import com.jack.debugtoolu.fps.FpsMonitor
 
 /**
  * @创建者 Jack
@@ -37,5 +38,10 @@ class DebugTool {
         context.startActivity(intent)
         //杀掉当前进程,并主动启动新的 启动页，以完成重启的动作
         Process.killProcess(Process.myPid())
+    }
+
+    @HiDebug(name = "打开/关闭Fps", desc = "打开后可以查看页面实时的FPS")
+    fun toggleFps(context: Context) {
+        FpsMonitor.toggle()
     }
 }
