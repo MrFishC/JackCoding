@@ -8,6 +8,7 @@ import cn.jack.library_arouter.manager.router.ArouterU
 import cn.jack.library_common_business.constant.C
 import cn.jack.library_util.KvStoreUtil
 import cn.jack.module_login.databinding.ModuleLoginActivityLoginBinding
+import cn.jack.module_login.mvvm.TaskStartUp
 import cn.jack.module_login.mvvm.modle.entity.InfoVerification
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.vm.LoginViewModel
@@ -32,6 +33,9 @@ class LoginActivity :
 
     override fun observeViewModel() {
         super.observeViewModel()
+
+        TaskStartUp.start()
+
         observeInResult(mViewModel.userInfo) {
             onSuccess = {
                 openHome(it)

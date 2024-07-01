@@ -4,18 +4,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import cn.jack.lib_common.callback.ResponseCallback
 import cn.jack.lib_common.ext.observeInResult
-import cn.jack.lib_common.ext.showToast
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
 import cn.jack.library_arouter.manager.params.BundleParams
 import cn.jack.library_arouter.manager.router.ArouterU
+import cn.jack.library_arouter.manager.service.LoginServiceProvider
 import cn.jack.library_common_business.entiy.ArticleInfo
-import cn.jack.library_util.LogU
 import cn.jack.module_fragment_01.R
 import cn.jack.module_fragment_01.databinding.ModuleFragment01HomeBinding
 import cn.jack.module_fragment_01.mvvm.model.entity.BanInfos
@@ -26,17 +21,13 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.jack.lib_base.base.view.BaseFragment
-import com.jack.lib_base.ext.closeDialog
-import com.jack.lib_base.ext.loadDialog
 import com.jack.lib_base.uistate.LayoutState
-import com.jack.lib_wrapper_net.model.EventResult
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.youth.banner.Banner
 import com.youth.banner.config.IndicatorConfig
 import com.youth.banner.indicator.CircleIndicator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
 /**
@@ -59,6 +50,61 @@ class ModuleFragment01 :
         initAdapter()
         mViewModel.loadBinnerInfo()
         mViewModel.loadHomeInfos(mIsRefresh)
+
+        //test
+//        runBlocking {
+//            val deferred = async {
+//                println("In async:${Thread.currentThread().name}")
+//                delay(1000L)//模拟耗时操作
+//                println("In async after delay")
+//                return@async "Task completed!"
+//            }
+//
+//            //await只是等待执行完，并不是触发执行
+//            delay(2000L)
+//        }
+
+//        runBlocking {
+//            val job = launch {
+//                println("First continue start!")
+//                delay(1000L)
+//                println("First continue end!")
+//            }
+//            println("First continue 1 ---> ${job.isActive}")
+//            println("First continue 2 ---> ${job.isCompleted}")
+//            job.join()
+//            println("First continue 3 ---> ${job.isActive}")
+//            println("First continue 4 ---> ${job.isCompleted}")
+//            val job2 = launch(job) {
+//                println("Second continue start!")
+//                delay(1000L)
+//                println("Second continue end!")
+//            }
+//            println("First continue 5 ---> ${job.isActive}")
+//            println("First continue 6 ---> ${job.isCompleted}")
+//            println("First continue 7 ---> ${job2.isActive}")
+//            println("First continue 8 ---> ${job2.isCompleted}")
+//            job2.join()
+//            println("First continue 9 ---> ${job.isActive}")
+//            println("First continue 10 ---> ${job.isCompleted}")
+//            println("First continue 11 ---> ${job2.isActive}")
+//            println("First continue 12 ---> ${job2.isCompleted}")
+//            println("Process end!")
+//        }
+
+//        runBlocking {
+//            flow {
+//                emit(1)
+//            //SafeFlow
+//            }.collect {
+//
+//            }
+//        }
+
+        //test 模块间的通信
+//        if(!LoginServiceProvider.isLogin()){
+//            LoginServiceProvider.login(context)
+//        }
     }
 
     override fun observeViewModel() {

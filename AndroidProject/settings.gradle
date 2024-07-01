@@ -40,7 +40,8 @@ rootProject.name = "JackCoding"
 include ':app'
 
 /*2.业务组件层模块*/
-include ':businessLogin', ':businessHome', ':businessFragment1', ':businessFragment2', ':businessFragment3', ':businessFragment4', ':businessFragment5', ':businessHybird'
+include ':businessLogin', ':businessHome', ':businessFragment1', ':businessFragment2', ':businessFragment3',
+        ':businessFragment4', ':businessFragment5', ':businessHybird', ':businessService'
 
 project(':businessLogin').projectDir = file('business/module_login')
 project(':businessHome').projectDir = file('business/module_home')
@@ -51,6 +52,8 @@ project(':businessFragment4').projectDir = file('business/module_fragment_04')
 project(':businessFragment5').projectDir = file('business/module_fragment_05')
 //混合架构模块需要用到的业务层，可以加在业务组件层模块和业务基础层中间
 project(':businessHybird').projectDir = file('business/module_hybird')
+//不同模块之间通信的模块
+project(':businessService').projectDir = file('business/module_service')
 
 /*3.业务基础层-服务于业务层模块*/
 include ':basicCommon', ':basicArouter', ':basicCBusiness'
@@ -63,7 +66,8 @@ project(':basicCBusiness').projectDir = file('dir_basic/library_common_business'
 
 /*4.基础组件层模块*/
 include ':commonWrapper', ':commonBase', ':commonHttp', ':commonImage',
-        ':commonWebview', ':commonTool', ':commonWeight', ':commonRes', ':commonDebug'
+        ':commonWebview', ':commonTool', ':commonWeight', ':commonRes',
+        ':commonDebug', ':commonTaskTool'
 
 project(':commonWrapper').projectDir = file('dir_common/lib_wrapper_mvvm')
 project(':commonBase').projectDir = file('dir_common/lib_base')
@@ -74,6 +78,7 @@ project(':commonTool').projectDir = file('dir_common/library_util')
 project(':commonWeight').projectDir = file('dir_common/library_weight')
 project(':commonRes').projectDir = file('dir_common/library_common_res')
 project(':commonDebug').projectDir = file('dir_common/debug_tool_u')
+project(':commonTaskTool').projectDir = file('dir_common/task_tool_u')
 
 /*5.simple模块*/
 include ':simpleRecycleview',":simpleCustomView"

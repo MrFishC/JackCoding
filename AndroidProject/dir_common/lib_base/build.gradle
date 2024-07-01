@@ -80,4 +80,5 @@ dependencies {
 
 //    debugApi project(":commonDebug")
     api project(":commonDebug")
+    api project(":commonTaskTool")
 }
