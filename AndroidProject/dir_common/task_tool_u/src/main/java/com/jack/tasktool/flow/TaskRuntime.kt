@@ -3,7 +3,7 @@ package com.jack.tasktool.flow
 import android.text.TextUtils
 import android.util.Log
 import com.jack.tasktool.BuildConfig
-import com.jack.tasktool.executor.HiExecutor
+import com.jack.tasktool.executor.ExecutorManager
 import com.jack.tasktool.util.MainHandler
 import com.jack.tasktool.util.Utils
 import java.lang.StringBuilder
@@ -87,7 +87,7 @@ internal object TaskRuntime {
     @JvmStatic
     fun executeTask(task: Task) {
         if (task.isAsyncTask) {
-            HiExecutor.execute(runnable = task)
+            ExecutorManager.execute(runnable = task)
         } else {
             //else 里面的 都是在主线程 执行的
             //延迟任务 ，但是如果这个延迟任务 它存在着后置任务  A(延迟任务)-->B--->C（Block task）

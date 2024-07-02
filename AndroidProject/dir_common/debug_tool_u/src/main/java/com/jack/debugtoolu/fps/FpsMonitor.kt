@@ -11,6 +11,9 @@ import android.provider.Settings
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.View.OnTouchListener
 import android.view.WindowManager
 import android.widget.TextView
 import cn.jack.library_util.ActivityManager
@@ -18,6 +21,11 @@ import cn.jack.library_util.ContextU
 import com.jack.debugtoolu.R
 import java.text.DecimalFormat
 
+/**
+ * 优化一下，实现可拖拽的悬浮窗
+ *
+ * 出现的问题，没有在AndroidManifest中添加 android.permission.SYSTEM_ALERT_WINDOW 权限，跳转到其他应用上层 按钮是不能操作的
+ */
 object FpsMonitor {
     @SuppressLint("StaticFieldLeak")
     private val fpsViewer = FpsViewer()
@@ -25,20 +33,18 @@ object FpsMonitor {
         fpsViewer.toggle()
     }
 
-//    fun listener(callback: FpsCallback) {
-//        fpsViewer.addListener(callback)
-//    }
-
     interface FpsCallback {
         fun onFrame(fps: Double)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private class FpsViewer {
         private var params = WindowManager.LayoutParams()
         private var isPlaying = false
         private val application: Application = ContextU.application()
         private var fpsView =
-            LayoutInflater.from(application).inflate(R.layout.layout_fps_view, null, false) as TextView
+            LayoutInflater.from(application)
+                .inflate(R.layout.layout_fps_view, null, false) as TextView
 
         private val decimal = DecimalFormat("#.0 fps")
         private var windowManager: WindowManager? = null
@@ -92,7 +98,7 @@ object FpsMonitor {
         private fun play() {
             if (!hasOverlayPermission()) {
                 startOverlaySettingActivity()
-                Log.e("fps ---> ","app has no overlay permission")
+                Log.e("fps ---> ", "app has no overlay permission")
                 return
             }
 
@@ -100,6 +106,36 @@ object FpsMonitor {
             if (!isPlaying) {
                 isPlaying = true
                 windowManager!!.addView(fpsView, params)
+
+                //没有效果
+//                var x = 0
+//                var y = 0
+//                fpsView.setOnTouchListener { view, event ->
+//                    Log.e("setOnTouchListener ", " : : : ")
+//
+//                    when (event.action) {
+//                        MotionEvent.ACTION_DOWN -> {
+//                            x = event.rawX.toInt()
+//                            y = event.rawY.toInt()
+//                        }
+//
+//                        MotionEvent.ACTION_MOVE -> {
+//                            val nowX = event.rawX.toInt()
+//                            val nowY = event.rawY.toInt()
+//                            val movedX = nowX - x
+//                            val movedY = nowY - y
+//                            x = nowX
+//                            y = nowY
+//                            params.x += movedX
+//                            params.y += movedY
+//                            // 更新悬浮窗控件布局
+//                            windowManager!!.updateViewLayout(view, params)
+//                        }
+//
+//                        else -> {}
+//                    }
+//                    false
+//                }
             }
         }
 
@@ -115,7 +151,7 @@ object FpsMonitor {
         }
 
         private fun hasOverlayPermission(): Boolean {
-            return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(
+            return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(
                 application
             )
         }
@@ -128,8 +164,5 @@ object FpsMonitor {
             }
         }
 
-//        fun addListener(callback: FpsCallback) {
-//            frameMonitor.addListener(callback)
-//        }
     }
 }

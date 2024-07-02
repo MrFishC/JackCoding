@@ -14,10 +14,9 @@ import java.util.concurrent.locks.ReentrantLock
  * 支持线程池暂停.恢复(批量文件下载，上传) ，
  * 异步结果主动回调主线程
  *
- * copy from other
  * todo 线程池能力监控,耗时任务检测,定时,延迟,
  */
-object HiExecutor {
+object ExecutorManager {
     private const val TAG: String = "HiExecutor"
     private var isPaused: Boolean = false
     private var hiExecutor: ThreadPoolExecutor
