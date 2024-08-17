@@ -36,8 +36,8 @@
 buildscript {
     ext.kotlin_version = '1.7.10'
     repositories {
-//        google()
-//        jcenter()
+        google()
+        jcenter()
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
@@ -52,8 +52,8 @@ buildscript {
 
 allprojects {
     repositories {
-//        google()
-//        jcenter()
+        google()
+        jcenter()
         //rn
 //        maven {
 //            // All of React Native (JS, Android binaries) is installed from npm

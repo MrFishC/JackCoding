@@ -15,6 +15,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
 import android.view.WindowManager
+import android.widget.Switch
 import android.widget.TextView
 import cn.jack.library_util.ActivityManager
 import cn.jack.library_util.ContextU
@@ -58,7 +59,9 @@ object FpsMonitor {
             params.height = WindowManager.LayoutParams.WRAP_CONTENT
 
             params.flags =
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+//                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+            //FLAG_NOT_TOUCH_MODAL:不阻塞事件传递到后面的窗口
 
             params.format = PixelFormat.TRANSLUCENT
             params.gravity = Gravity.RIGHT or Gravity.TOP
@@ -67,6 +70,62 @@ object FpsMonitor {
                 params.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             } else {
                 params.type = WindowManager.LayoutParams.TYPE_TOAST
+            }
+
+            Log.e("setOnTouchListener x1 = ", "${params.x}")
+            Log.e("setOnTouchListener y2 = ", "${params.y}")
+
+            //增加View的拖拽效果
+            //出现的问题 params.x 和 params.y的值 持续性 无限增大, 改如何控制呢？
+            fpsView.setOnTouchListener { view, event ->
+
+                var ret: Boolean = false
+                var lastX: Float = 0F
+                var lastY: Float = 0F
+                var nowX: Float = 0F
+                var nowY: Float = 0F
+                var tranX: Float = 0F
+                var tranY: Float = 0F
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        //获取按下时x、y的坐标
+                        lastX = event.rawX
+                        lastY = event.rawY
+                        ret = true
+                    }
+
+                    MotionEvent.ACTION_MOVE -> {
+
+                        //获取移动时x、y的坐标
+                        nowX = event.rawX
+                        nowY = event.rawY
+
+                        Log.e("setOnTouchListener lastX = ", "$lastX")
+                        Log.e("setOnTouchListener lastY = ", "$lastY")
+
+                        //计算x、y坐标的偏移量
+                        tranX = nowX - lastX
+                        tranY = nowY - lastY
+
+                        Log.e("setOnTouchListener tranX = ", "$tranX")
+                        Log.e("setOnTouchListener tranY = ", "$tranY")
+
+                        params.x += tranX.toInt()
+                        params.y += tranY.toInt()
+
+                        Log.e("setOnTouchListener nowX = ", "$nowX")
+                        Log.e("setOnTouchListener nowY = ", "$nowY")
+
+                        Log.e("setOnTouchListener x = ", "${params.x}")
+                        Log.e("setOnTouchListener y = ", "${params.y}")
+
+                        lastX = nowX
+                        lastY = nowY
+
+                        windowManager!!.updateViewLayout(view, params)
+                    }
+                }
+                ret
             }
 
             frameMonitor.addListener(object : FpsCallback {
@@ -106,36 +165,6 @@ object FpsMonitor {
             if (!isPlaying) {
                 isPlaying = true
                 windowManager!!.addView(fpsView, params)
-
-                //没有效果
-//                var x = 0
-//                var y = 0
-//                fpsView.setOnTouchListener { view, event ->
-//                    Log.e("setOnTouchListener ", " : : : ")
-//
-//                    when (event.action) {
-//                        MotionEvent.ACTION_DOWN -> {
-//                            x = event.rawX.toInt()
-//                            y = event.rawY.toInt()
-//                        }
-//
-//                        MotionEvent.ACTION_MOVE -> {
-//                            val nowX = event.rawX.toInt()
-//                            val nowY = event.rawY.toInt()
-//                            val movedX = nowX - x
-//                            val movedY = nowY - y
-//                            x = nowX
-//                            y = nowY
-//                            params.x += movedX
-//                            params.y += movedY
-//                            // 更新悬浮窗控件布局
-//                            windowManager!!.updateViewLayout(view, params)
-//                        }
-//
-//                        else -> {}
-//                    }
-//                    false
-//                }
             }
         }
 
@@ -163,6 +192,5 @@ object FpsMonitor {
                 play()
             }
         }
-
     }
 }

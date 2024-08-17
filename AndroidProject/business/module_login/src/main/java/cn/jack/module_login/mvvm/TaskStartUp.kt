@@ -30,7 +30,7 @@ object TaskStartUp {
          * javapoet ---生成 TaskStartUp类
          */
 
-
+        //存在重复启动会报错的问题，待优化
         Log.e("TaskStartUp", "start")
         val project = Project.Builder("TaskStartUp", createTaskCreator())
             .add(TASK_BLOCK_1)
