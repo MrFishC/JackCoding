@@ -51,6 +51,10 @@ class FlutterBridge : MethodChannel.MethodCallHandler,
             "goToNative" -> goToNative(call.arguments)
             else -> result.notImplemented()
         }
+        //具体的参数解析
+//     var name =   call.argument<String>("name")
+        //回传给dart端
+//        result.success()
     }
 
     override fun onBack(p: Any?) {

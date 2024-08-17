@@ -7,6 +7,7 @@ import cn.jack.lib_common.databinding.FlutterFragmentBinding
 import cn.jack.lib_common.flutter.cache.FlutterCacheManager
 import cn.jack.library_util.ContextU
 import com.jack.lib_base.base.view.BaseSimpleFragment
+import io.flutter.embedding.android.FlutterFragment
 import io.flutter.embedding.android.FlutterTextureView
 import io.flutter.embedding.android.FlutterView
 import io.flutter.embedding.engine.FlutterEngine
@@ -16,6 +17,8 @@ import io.flutter.embedding.engine.dart.DartExecutor
  * @创建者 Jack
  * @创建时间 2024-04-24 23:39
  * @描述
+ * 除了自定义Fragment之外，还可以用下方的代码来实现
+ * FlutterFragment.withNewEngine().initialRoute("main/home").build<FlutterFragment>();
  */
 abstract class BaseFlutterFragment(moduleName: String) :
     BaseSimpleFragment<FlutterFragmentBinding>(FlutterFragmentBinding::inflate) {
