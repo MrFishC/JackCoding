@@ -11,14 +11,14 @@ import cn.jack.library_arouter.manager.constants.RouterPathFragment
 import cn.jack.library_util.DensityU
 import cn.jack.library_util.JsonU
 import cn.jack.library_util.helper.RecycleViewU
-import cn.jack.module_fragment_04.R
 import cn.jack.module_fragment_04.adapter.AllFuncationRvAdapter
 import cn.jack.module_fragment_04.databinding.ModuleFragment04FragmentHome04Binding
 import cn.jack.module_fragment_04.entity.AllFunctionInfoRes
 import cn.jack.module_fragment_04.entity.AllFunctionInfoRes.ChildrenBean.AttributesBean
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
-import com.jack.lib_base.base.view.BaseSimpleFragment
+import cn.jack.lib_base.base.view.BaseSimpleFragment
+import cn.jack.module_fragment_04.R
 import kotlinx.coroutines.flow.*
 
 /**

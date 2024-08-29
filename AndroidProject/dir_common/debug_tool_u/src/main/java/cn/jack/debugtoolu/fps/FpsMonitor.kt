@@ -19,7 +19,7 @@ import android.widget.Switch
 import android.widget.TextView
 import cn.jack.library_util.ActivityManager
 import cn.jack.library_util.ContextU
-import com.jack.debugtoolu.R
+import cn.jack.debugtoolu.R
 import java.text.DecimalFormat
 
 /**

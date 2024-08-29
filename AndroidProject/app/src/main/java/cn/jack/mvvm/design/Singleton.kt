@@ -1,4 +1,4 @@
-package cn.jackmvvm.design
+package cn.jack.mvvm.design
 
 /**
  * @创建者 Jack

@@ -6,9 +6,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import cn.jack.lib_common.callback.ResponseCallback
-import com.jack.lib_base.ext.closeDialog
-import com.jack.lib_base.ext.loadDialog
-import com.jack.lib_wrapper_net.model.EventResult
+import cn.jack.lib_base.ext.closeDialog
+import cn.jack.lib_base.ext.loadDialog
+import cn.jack.lib_wrapper_net.model.EventResult
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 

@@ -1,9 +1,9 @@
-//package com.jack.module_fragment_05
+//package cn.jack.module_fragment_05
 //
 //import android.os.Bundle
 //import android.view.View
 //import cn.jack.lib_common.flutter.base.BaseFlutterFragment
-//import com.jack.module_hybird.MultipleModulesNameProvider
+//import cn.jack.module_hybird.MultipleModulesNameProvider
 //import cn.jack.lib_common.flutter.bridge.FlutterBridge
 //import cn.jack.library_arouter.manager.constants.RouterPathFragment
 //import cn.jack.library_util.ToastU

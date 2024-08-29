@@ -17,10 +17,10 @@ package cn.jack.module_fragment_04.fragment//package cn.jack.module_fragment_04
 //import cn.jack.library_common_business.service.ApiArticleService
 //import cn.jack.module_fragment_04.databinding.ModuleFragment04FragmentHome04Binding
 //import com.alibaba.android.arouter.facade.annotation.Route
-//import com.jack.lib_base.base.view.BaseSimpleFragment
-//import com.jack.lib_wrapper_net.flow.FlowManager
-//import com.jack.lib_wrapper_net.manager.HttpManager
-//import com.jack.lib_wrapper_net.model.EventResult
+//import cn.jack.lib_base.base.view.BaseSimpleFragment
+//import cn.jack.lib_wrapper_net.flow.FlowManager
+//import cn.jack.lib_wrapper_net.manager.HttpManager
+//import cn.jack.lib_wrapper_net.model.EventResult
 //import com.scwang.smart.refresh.layout.api.RefreshLayout
 //import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 //import kotlinx.coroutines.flow.*

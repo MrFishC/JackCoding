@@ -1,4 +1,4 @@
-package cn.jackmvvm;
+package cn.jack.mvvm;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;

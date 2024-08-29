@@ -5,16 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import com.jack.lib_base.ext.closeDialog
-import com.jack.lib_base.ext.loadDialog
+import cn.jack.lib_base.R
+import cn.jack.lib_base.ext.closeDialog
+import cn.jack.lib_base.ext.loadDialog
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gyf.immersionbar.ktx.immersionBar
-import com.jack.lib_base.R
-import com.jack.lib_base.ext.finisActivity
-import com.jack.lib_base.ext.setStatusBarTranslucent
-import com.jack.lib_base.interfac.IHandler
-import com.jack.lib_base.interfac.IStatusSwitchLisenter
+import cn.jack.lib_base.ext.finisActivity
+import cn.jack.lib_base.ext.setStatusBarTranslucent
+import cn.jack.lib_base.interfac.IHandler
+import cn.jack.lib_base.interfac.IStatusSwitchLisenter
 import com.jack.lib_wrapper_mvvm.mvvm.view.BaseWrapperActivity
+
 /**
  * @创建者 Jack
  * @创建时间 2022/8/29 0029 20:58

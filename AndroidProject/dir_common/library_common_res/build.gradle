@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
+    namespace 'cn.jack.library_common_res'
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {

@@ -1,7 +1,7 @@
 package cn.jack.simple_recycleview.debug
 
+import cn.jack.debugtoolu.BuildConfig
 import cn.jack.lib_common.CustomApplication
-import cn.jack.simple_recycleview.BuildConfig
 import com.alibaba.android.arouter.launcher.ARouter
 
 /**
@@ -12,7 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 //@HiltAndroidApp
 class DebugApplication : CustomApplication() {
     override fun initArouter() {
-        if (cn.jack.simple_recycleview.BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             ARouter.openLog()
             ARouter.openDebug()
         }

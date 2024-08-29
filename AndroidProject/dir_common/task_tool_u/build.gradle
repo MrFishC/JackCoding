@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace 'cn.jack.tasktool'
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {
@@ -16,11 +17,13 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
+            buildConfigField "boolean", "DEBUG","true"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         release {
             minifyEnabled false
+            buildConfigField "boolean", "DEBUG","false"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -32,6 +35,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        buildConfig true
     }
 }
 

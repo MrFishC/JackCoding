@@ -4,7 +4,9 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'kotlin-kapt'
 
 android {
+    namespace 'cn.jack.mvvm'
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
     defaultConfig {
         applicationId rootProject.ext.android["applicationId"]
         minSdkVersion rootProject.ext.android["minSdkVersion"]

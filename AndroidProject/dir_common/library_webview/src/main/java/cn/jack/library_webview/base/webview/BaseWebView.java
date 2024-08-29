@@ -13,7 +13,7 @@ import cn.jack.library_webview.base.callback.WebViewCallBack;
 import cn.jack.library_webview.base.set.WebViewSettingManager;
 import cn.jack.library_webview.command.CommandConstants;
 import cn.jack.library_webview.request.ExecuteLisenter;
-import com.jack.library_webview.util.LogW;
+import cn.jack.library_webview.util.LogW;
 
 import cn.jack.library_webview.base.callback.WebViewCallBack;
 import cn.jack.library_webview.base.h5callnative.WebCallNativeLisenter;

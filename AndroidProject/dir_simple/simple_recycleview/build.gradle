@@ -1,5 +1,9 @@
 apply from: "../../gradle/module_kt.build.gradle"
 
+android{
+    namespace 'cn.jack.simple_recycleview'
+}
+
 dependencies {
     implementation 'com.github.MrFishC:YcrCardLayoutHepler:v1.1'
 }

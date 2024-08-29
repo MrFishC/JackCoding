@@ -3,9 +3,9 @@ package cn.jack.module_fragment_02.mvvm
 import cn.jack.library_common_business.entiy.ProjectInfoList
 import cn.jack.library_common_business.service.ApiArticleService
 import com.jack.lib_wrapper_mvvm.mvvm.model.BaseWrapperModel
-import com.jack.lib_wrapper_net.flow.FlowManager
-import com.jack.lib_wrapper_net.manager.HttpManager
-import com.jack.lib_wrapper_net.model.EventResult
+import cn.jack.lib_wrapper_net.flow.FlowManager
+import cn.jack.lib_wrapper_net.manager.HttpManager
+import cn.jack.lib_wrapper_net.model.EventResult
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 

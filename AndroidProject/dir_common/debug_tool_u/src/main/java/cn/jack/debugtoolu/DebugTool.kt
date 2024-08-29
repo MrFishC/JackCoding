@@ -3,7 +3,7 @@ package cn.jack.debugtoolu
 import android.content.Context
 import android.os.Build
 import android.os.Process
-import com.jack.debugtoolu.fps.FpsMonitor
+import cn.jack.debugtoolu.fps.FpsMonitor
 
 /**
  * @创建者 Jack
@@ -28,7 +28,7 @@ class DebugTool {
 
     fun buildDevice(): String {
         // 构建版本 ： 品牌-sdk-abi
-        return "设备信息:" + Build.BRAND + "-" + Build.VERSION.SDK_INT + "-" + Build.CPU_ABI
+        return "设备信息:" + Build.BRAND + "-" + Build.VERSION.SDK_INT + "-" + Build.SUPPORTED_ABIS
     }
 
     @HiDebug(name = "一键更换网络请求地址", desc = "开发环境和线上环境地址一键切换")

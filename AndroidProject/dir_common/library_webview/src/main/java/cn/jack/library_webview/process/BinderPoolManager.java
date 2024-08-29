@@ -8,7 +8,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import cn.jack.library_webview.IBinderPool;
 import cn.jack.library_webview.process.service.MainProcessService;
-import com.jack.library_webview.util.LogW;
+import cn.jack.library_webview.util.LogW;
 
 import java.util.concurrent.CountDownLatch;
 

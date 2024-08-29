@@ -6,7 +6,7 @@ import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Interceptor
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback
 import com.alibaba.android.arouter.facade.template.IInterceptor
-import com.jack.library_webview.util.LogW
+import cn.jack.library_webview.util.LogW
 
 /**
  * @创建者 Jack

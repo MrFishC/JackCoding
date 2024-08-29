@@ -1,7 +1,7 @@
 package cn.jack.lib_wrapper_net.flow
 
-import com.jack.lib_wrapper_net.model.ApiResponse
-import com.jack.lib_wrapper_net.model.EventResult
+import cn.jack.lib_wrapper_net.model.ApiResponse
+import cn.jack.lib_wrapper_net.model.EventResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

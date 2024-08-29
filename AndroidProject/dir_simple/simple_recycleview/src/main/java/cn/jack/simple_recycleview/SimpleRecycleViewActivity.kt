@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.jack.lib_base.base.view.BaseSimpleActivity
-import com.jack.simple_recycleview.databinding.ActivitySimpleRecycleviewBinding
+import cn.jack.lib_base.base.view.BaseSimpleActivity
+import cn.jack.simple_recycleview.databinding.ActivitySimpleRecycleviewBinding
 import com.jack.ycr_rv_cardlayout.ConfigManager
 import com.jack.ycr_rv_cardlayout.CustomItemTouchHelperCallBackImp
 import com.jack.ycr_rv_cardlayout.CustomLayoutManager

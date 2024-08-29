@@ -25,11 +25,11 @@ import com.alibaba.fastjson.JSON
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.hjq.bar.OnTitleBarListener
-import com.jack.lib_base.base.view.BaseSimpleFragment
-import com.jack.lib_base.uistate.LayoutState
-import com.jack.lib_wrapper_net.flow.FlowManager
-import com.jack.lib_wrapper_net.manager.HttpManager
-import com.jack.lib_wrapper_net.model.EventResult
+import cn.jack.lib_base.base.view.BaseSimpleFragment
+import cn.jack.lib_base.uistate.LayoutState
+import cn.jack.lib_wrapper_net.flow.FlowManager
+import cn.jack.lib_wrapper_net.manager.HttpManager
+import cn.jack.lib_wrapper_net.model.EventResult
 import com.qmuiteam.qmui.skin.QMUISkinManager
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet.BottomListSheetBuilder
 import com.scwang.smart.refresh.layout.api.RefreshLayout

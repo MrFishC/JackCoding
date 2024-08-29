@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.jack.lib_wrapper_mvvm.interfa.IBaseView
+import cn.jack.lib_wrapper_mvvm.interfa.IBaseView
 
 /**
  * @创建者 Jack

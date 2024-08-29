@@ -3,7 +3,7 @@ package cn.jack.module_hybird.activity
 import cn.jack.lib_common.flutter.base.FlutterBaseActivity
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.jack.module_hybird.MultipleModulesNameProvider
+import cn.jack.module_hybird.MultipleModulesNameProvider
 
 /**
  * @创建者 Jack

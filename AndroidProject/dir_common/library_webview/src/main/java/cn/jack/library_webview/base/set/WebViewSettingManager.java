@@ -5,8 +5,8 @@ import android.os.Build;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-import com.jack.library_webview.util.LogW;
-import com.jack.library_webview.util.SystemInfoUtil;
+import cn.jack.library_webview.util.LogW;
+import cn.jack.library_webview.util.SystemInfoUtil;
 
 /**
  * @创建者 Jack

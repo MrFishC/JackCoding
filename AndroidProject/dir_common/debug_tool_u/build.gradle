@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-//    namespace 'com.jack.debugtoolu'
+    namespace 'cn.jack.debugtoolu'
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {
@@ -36,6 +36,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    //AGP8+默认不生成模块的BuildConfig.java，导致之前使用该类的功能失效。开启方案是：在模块的build.gradle中增加配置。
+    buildFeatures {
+        buildConfig true
     }
 }
 

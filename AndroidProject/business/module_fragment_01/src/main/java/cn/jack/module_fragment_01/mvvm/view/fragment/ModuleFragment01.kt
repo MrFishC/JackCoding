@@ -20,8 +20,8 @@ import cn.jack.module_fragment_01.mvvm.vm.HomePageOneViewModle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
-import com.jack.lib_base.base.view.BaseFragment
-import com.jack.lib_base.uistate.LayoutState
+import cn.jack.lib_base.base.view.BaseFragment
+import cn.jack.lib_base.uistate.LayoutState
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.youth.banner.Banner

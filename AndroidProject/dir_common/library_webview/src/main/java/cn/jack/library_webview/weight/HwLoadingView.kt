@@ -9,7 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.annotation.ColorInt
-import com.jack.library_webview.R
+import cn.jack.library_webview.R
 
 /**
  * @创建者 Jack

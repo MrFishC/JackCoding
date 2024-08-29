@@ -4,8 +4,8 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.viewModelScope
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.modle.repository.LoginHttpRepository
-import com.jack.lib_base.base.vm.BaseViewModle
-import com.jack.lib_wrapper_net.model.EventResult
+import cn.jack.lib_base.base.vm.BaseViewModle
+import cn.jack.lib_wrapper_net.model.EventResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject

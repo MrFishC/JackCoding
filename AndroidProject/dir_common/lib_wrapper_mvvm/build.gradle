@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace 'cn.jack.lib_wrapper_mvvm'
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {

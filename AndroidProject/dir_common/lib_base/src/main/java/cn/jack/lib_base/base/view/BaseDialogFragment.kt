@@ -34,9 +34,9 @@ abstract class BaseDialogFragment<VB : ViewDataBinding>(var block: (LayoutInflat
     private fun initImmersionBar() {
         immersionBar {
             //通用设置
-            statusBarColor(com.jack.lib_base.R.color.transparent)
+            statusBarColor(cn.jack.lib_base.R.color.transparent)
             statusBarDarkFont(true)
-            navigationBarColor(com.jack.lib_base.R.color.white)
+            navigationBarColor(cn.jack.lib_base.R.color.white)
             autoDarkModeEnable(true, 0.2f)
         }
     }

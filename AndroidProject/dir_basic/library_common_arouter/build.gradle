@@ -3,6 +3,10 @@ apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
 
 android {
+//    print("project.name ${project.name}")
+//    print("project.name ${rootProject.ext.android["namespace"]}")
+    namespace 'cn.jack.library_arouter'
+
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {

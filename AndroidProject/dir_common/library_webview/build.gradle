@@ -2,6 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
+    print("路径信息查看一下 ${project.getName()}")
+    namespace 'cn.jack.library_webview'
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {
@@ -32,8 +34,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    //gradle升级了 之前写的AIDL文件出现报错，需要在buildFeatures中添加配置aidl
     buildFeatures {
         dataBinding true
+        aidl true
     }
 
     kotlinOptions {

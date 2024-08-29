@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.jack.simple_recycleview.customView.CustomLayoutLeft xmlns:android="http://schemas.android.com/apk/res/android"
+<cn.jack.simple_recycleview.customView.CustomLayoutLeft xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
     android:layout_width="@dimen/dp_0"
@@ -15,4 +15,4 @@
         android:layout_height="@dimen/dp_40"
         android:layout_marginBottom="@dimen/dp_120" />
 
-</com.jack.simple_recycleview.customView.CustomLayoutLeft>
+</cn.jack.simple_recycleview.customView.CustomLayoutLeft>

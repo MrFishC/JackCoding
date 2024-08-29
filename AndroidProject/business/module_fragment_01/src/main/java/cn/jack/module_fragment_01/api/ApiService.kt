@@ -3,7 +3,7 @@ package cn.jack.module_fragment_01.api
 import cn.jack.library_common_business.entiy.ArticleInfo
 import cn.jack.library_common_business.entiy.ProjectInfoList
 import cn.jack.module_fragment_01.mvvm.model.entity.BanInfos
-import com.jack.lib_wrapper_net.model.ApiResponse
+import cn.jack.lib_wrapper_net.model.ApiResponse
 import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Path

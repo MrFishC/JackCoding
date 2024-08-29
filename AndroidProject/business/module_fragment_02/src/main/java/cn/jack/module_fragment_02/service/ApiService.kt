@@ -2,7 +2,7 @@ package cn.jack.module_fragment_02.service
 
 import cn.jack.library_common_business.entiy.ProjectInfoList
 import cn.jack.module_fragment_02.entiy.SortInfo
-import com.jack.lib_wrapper_net.model.ApiResponse
+import cn.jack.lib_wrapper_net.model.ApiResponse
 import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Path

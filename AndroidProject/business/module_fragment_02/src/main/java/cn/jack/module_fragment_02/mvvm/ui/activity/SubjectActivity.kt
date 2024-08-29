@@ -16,9 +16,9 @@ import cn.jack.module_fragment_02.databinding.ModuleFragment02ActivityCollection
 import cn.jack.module_fragment_02.mvvm.SubjectViewModel
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hjq.bar.OnTitleBarListener
-import com.jack.lib_base.base.view.BaseActivity
-import com.jack.lib_base.uistate.LayoutState
-import com.jack.lib_wrapper_net.model.EventResult
+import cn.jack.lib_base.base.view.BaseActivity
+import cn.jack.lib_base.uistate.LayoutState
+import cn.jack.lib_wrapper_net.model.EventResult
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import dagger.hilt.android.AndroidEntryPoint

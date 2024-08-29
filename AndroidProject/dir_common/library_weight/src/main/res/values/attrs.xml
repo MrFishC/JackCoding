@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr format="color" name="colorAccent"/>
 
     <!-- 正则表达式编辑框 -->
     <declare-styleable name="RegexEditText">

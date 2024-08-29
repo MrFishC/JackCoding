@@ -20,11 +20,11 @@ import cn.jack.module_fragment_03.entity.SystemInfo
 import cn.jack.module_fragment_03.service.ApiService
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.flexbox.FlexboxLayout
-import com.jack.lib_base.base.view.BaseSimpleFragment
-import com.jack.lib_base.uistate.LayoutState
-import com.jack.lib_wrapper_net.flow.FlowManager
-import com.jack.lib_wrapper_net.manager.HttpManager
-import com.jack.lib_wrapper_net.model.EventResult
+import cn.jack.lib_base.base.view.BaseSimpleFragment
+import cn.jack.lib_base.uistate.LayoutState
+import cn.jack.lib_wrapper_net.flow.FlowManager
+import cn.jack.lib_wrapper_net.manager.HttpManager
+import cn.jack.lib_wrapper_net.model.EventResult
 import com.skydoves.indicatorscrollview.IndicatorAnimation
 import com.skydoves.indicatorscrollview.IndicatorItem.Builder
 import kotlinx.coroutines.flow.*

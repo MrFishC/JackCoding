@@ -1,7 +1,7 @@
 package cn.jack.module_login.api
 
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
-import com.jack.lib_wrapper_net.model.ApiResponse
+import cn.jack.lib_wrapper_net.model.ApiResponse
 import kotlinx.coroutines.flow.Flow
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

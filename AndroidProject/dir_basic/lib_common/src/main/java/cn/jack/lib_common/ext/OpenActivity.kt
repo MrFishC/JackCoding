@@ -2,7 +2,7 @@ package cn.jack.lib_common.ext
 
 import androidx.fragment.app.Fragment
 import cn.jack.library_arouter.manager.router.ArouterU
-import com.jack.lib_base.util.DoubleCU
+import cn.jack.lib_base.util.DoubleCU
 
 /**
  * @创建者 Jack

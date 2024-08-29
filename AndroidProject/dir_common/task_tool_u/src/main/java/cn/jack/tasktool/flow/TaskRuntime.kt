@@ -3,9 +3,9 @@ package cn.jack.tasktool.flow
 import android.text.TextUtils
 import android.util.Log
 import cn.jack.tasktool.BuildConfig
-import com.jack.tasktool.executor.ExecutorManager
-import com.jack.tasktool.util.MainHandler
-import com.jack.tasktool.util.Utils
+import cn.jack.tasktool.executor.ExecutorManager
+import cn.jack.tasktool.util.MainHandler
+import cn.jack.tasktool.util.Utils
 import java.lang.StringBuilder
 import java.util.Collections
 import java.util.LinkedHashSet
@@ -208,7 +208,7 @@ internal object TaskRuntime {
             }
 
 
-            if (cn.jack.tasktool.BuildConfig.DEBUG && behindTask.behindTasks.isEmpty()) {
+            if (BuildConfig.DEBUG && behindTask.behindTasks.isEmpty()) {
                 //behindTask =end
                 val iterator = traversalVisitor.iterator()
                 val builder: StringBuilder = StringBuilder()

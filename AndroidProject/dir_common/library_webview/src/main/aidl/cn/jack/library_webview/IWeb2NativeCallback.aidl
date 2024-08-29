@@ -1,5 +1,5 @@
 // IWeb2NativeCallback.aidl
-package com.jack.library_webview;
+package cn.jack.library_webview;
 
 //主进程将结果回调给H5进程 所使用
 interface IWeb2NativeCallback {

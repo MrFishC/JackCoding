@@ -12,9 +12,9 @@ apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
 
 android {
+//    namespace rootProject.ext.android["namespace"]
 
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-
     defaultConfig {
 
         minSdkVersion rootProject.ext.android["minSdkVersion"]

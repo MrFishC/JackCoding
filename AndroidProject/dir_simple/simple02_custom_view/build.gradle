@@ -1,5 +1,9 @@
 apply from: "../../gradle/module_kt.build.gradle"
 
+android{
+    namespace 'cn.jack.simple02_custom_view'
+}
+
 dependencies {
 //    testImplementation  rootProject.ext.dependencies["junit"]
 //    androidTestImplementation  rootProject.ext.dependencies["test_junit"]

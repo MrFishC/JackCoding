@@ -5,7 +5,7 @@ import cn.jack.lib_common.R
 import cn.jack.lib_common.databinding.ActivityFlutterBinding
 import cn.jack.lib_common.flutter.cache.FlutterCacheManager
 import cn.jack.library_util.LogU
-import com.jack.lib_base.base.view.BaseSimpleActivity
+import cn.jack.lib_base.base.view.BaseSimpleActivity
 
 /**
  * @创建者 Jack

@@ -1,7 +1,7 @@
 package cn.jack.module_home.debug
 
+import cn.jack.debugtoolu.BuildConfig
 import cn.jack.lib_common.CustomApplication
-import cn.jack.module_home.BuildConfig
 import com.alibaba.android.arouter.launcher.ARouter
 
 /**

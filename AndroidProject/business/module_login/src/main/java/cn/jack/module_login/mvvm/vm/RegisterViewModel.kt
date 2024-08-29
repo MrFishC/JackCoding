@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import cn.jack.module_login.mvvm.modle.repository.RegisterHttpRepository
+import cn.jack.lib_wrapper_net.model.EventResult
 import com.jack.lib_wrapper_mvvm.mvvm.viewmodel.BaseWrapperViewModel
-import com.jack.lib_wrapper_net.model.EventResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject

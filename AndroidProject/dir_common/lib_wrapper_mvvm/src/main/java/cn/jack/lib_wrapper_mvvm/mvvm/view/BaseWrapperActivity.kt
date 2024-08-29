@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import com.jack.lib_wrapper_mvvm.interfa.IBaseView
+import cn.jack.lib_wrapper_mvvm.interfa.IBaseView
 
 /**
  * @创建者 Jack

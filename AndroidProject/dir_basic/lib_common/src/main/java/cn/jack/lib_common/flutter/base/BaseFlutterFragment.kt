@@ -6,7 +6,7 @@ import android.view.View
 import cn.jack.lib_common.databinding.FlutterFragmentBinding
 import cn.jack.lib_common.flutter.cache.FlutterCacheManager
 import cn.jack.library_util.ContextU
-import com.jack.lib_base.base.view.BaseSimpleFragment
+import cn.jack.lib_base.base.view.BaseSimpleFragment
 import io.flutter.embedding.android.FlutterFragment
 import io.flutter.embedding.android.FlutterTextureView
 import io.flutter.embedding.android.FlutterView

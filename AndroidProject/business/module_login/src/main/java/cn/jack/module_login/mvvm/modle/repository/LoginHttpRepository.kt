@@ -5,9 +5,9 @@ import cn.jack.library_util.KvStoreUtil
 import cn.jack.module_login.api.ApiService
 import cn.jack.module_login.mvvm.modle.entity.UserInfo
 import com.jack.lib_wrapper_mvvm.mvvm.model.BaseWrapperModel
-import com.jack.lib_wrapper_net.model.EventResult
-import com.jack.lib_wrapper_net.flow.FlowManager
-import com.jack.lib_wrapper_net.manager.HttpManager
+import cn.jack.lib_wrapper_net.model.EventResult
+import cn.jack.lib_wrapper_net.flow.FlowManager
+import cn.jack.lib_wrapper_net.manager.HttpManager
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 

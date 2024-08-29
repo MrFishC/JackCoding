@@ -1,6 +1,6 @@
 package cn.jack.tasktool.util
 
-import com.jack.tasktool.flow.Task
+import cn.jack.tasktool.flow.Task
 
 object Utils {
     //比较两个任务的先后执行顺序

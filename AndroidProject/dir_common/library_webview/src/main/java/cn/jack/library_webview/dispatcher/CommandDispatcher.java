@@ -12,9 +12,9 @@ import cn.jack.library_webview.command.callback.CommandCallBack;
 import cn.jack.library_webview.command.manager.CommandsManager;
 import cn.jack.library_webview.process.BinderConstants;
 import cn.jack.library_webview.process.BinderPoolManager;
-import com.jack.library_webview.util.LogW;
+import cn.jack.library_webview.util.LogW;
 import cn.jack.library_webview.util.MainLooper;
-import com.jack.library_webview.util.SystemInfoUtil;
+import cn.jack.library_webview.util.SystemInfoUtil;
 
 /**
  * @创建者 Jack

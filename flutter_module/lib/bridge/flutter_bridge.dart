@@ -1,10 +1,10 @@
 import 'package:flutter/services.dart';
 
 class FlutterBridge {
-  static FlutterBridge _instance = FlutterBridge._();
-  MethodChannel _bridge =
+  static final FlutterBridge _instance = FlutterBridge._();
+  final MethodChannel _bridge =
       const MethodChannel("FlutterBridge"); //该名称要和native端定义的名字要对应
-  var _listeners = {};
+  final _listeners = {};
 
   //私有的命名构造函数
   FlutterBridge._() {

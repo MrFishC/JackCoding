@@ -1,5 +1,5 @@
 // IBinderPool.aidl
-package com.jack.library_webview;
+package cn.jack.library_webview;
 
 // Declare any non-default types here with import statements
 

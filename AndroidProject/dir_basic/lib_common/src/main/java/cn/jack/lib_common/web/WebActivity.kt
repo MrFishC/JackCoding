@@ -7,7 +7,7 @@ import cn.jack.lib_common.R
 import cn.jack.library_arouter.manager.constants.RouterPathActivity
 import cn.jack.library_arouter.manager.params.BundleParams
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.jack.library_webview.fragment.BaseH5Fragment
+import cn.jack.library_webview.fragment.BaseH5Fragment
 
 /**
  * @创建者 Jack
@@ -22,7 +22,7 @@ class WebActivity : AppCompatActivity() {
 //    var webUrl: String? = null
 // 不使用Bundle传递参数的话，需要用Autowired接收数据，同时要添加ARouter.getInstance().inject(this)，并且跨进程时还有新的问题，故推荐使用bundle的方式传值
 
-    var mBaseH5Fragment: BaseH5Fragment? = null
+    var mBaseH5Fragment: cn.jack.library_webview.fragment.BaseH5Fragment? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,7 +30,7 @@ class WebActivity : AppCompatActivity() {
 
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(
-            R.id.web_view_fragment, BaseH5Fragment.newInstance(
+            R.id.web_view_fragment, cn.jack.library_webview.fragment.BaseH5Fragment.newInstance(
                 intent.extras!!.getString(BundleParams.WEB_URL)
             )
         ).commit()

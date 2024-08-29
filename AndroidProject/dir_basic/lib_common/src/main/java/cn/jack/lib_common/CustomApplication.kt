@@ -1,15 +1,15 @@
 package cn.jack.lib_common
 
+import cn.jack.debugtoolu.BuildConfig
 import cn.jack.lib_common.interceptor.TokenInterceptor
 import cn.jack.library_image.util.ImageU
 import cn.jack.library_util.*
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
-import com.jack.lib_base.BuildConfig
-import com.jack.lib_base.base.BaseApplication
-import com.jack.lib_wrapper_net.manager.OkHttpManager
-import com.jack.library_webview.cache.WebViewCacheU
+import cn.jack.lib_base.base.BaseApplication
+import cn.jack.lib_wrapper_net.manager.OkHttpManager
+import cn.jack.library_webview.cache.WebViewCacheU
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit

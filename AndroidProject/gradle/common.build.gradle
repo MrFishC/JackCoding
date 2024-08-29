@@ -3,6 +3,9 @@ apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
 
 android {
+//    print("project.namexxx ${project.name}")
+//    print("project.namexxx ${rootProject.ext.android["namespace"]}")
+//    namespace rootProject.ext.android["namespace"]
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {

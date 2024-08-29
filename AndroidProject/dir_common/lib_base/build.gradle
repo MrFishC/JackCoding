@@ -5,6 +5,8 @@ plugins {
 }
 
 android {
+//    namespace rootProject.ext.android["namespace"]
+    namespace 'cn.jack.lib_base'
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {
@@ -31,6 +33,7 @@ android {
 
     buildFeatures {
         dataBinding true
+        buildConfig true
     }
 }
 

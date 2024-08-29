@@ -11,7 +11,7 @@
     <!--        android:layout_width="wrap_content"-->
     <!--        android:layout_height="wrap_content"/>-->
 
-    <com.jack.lib_base.uistate.loadsir.weight.HwLoadingView
+    <cn.jack.lib_base.uistate.loadsir.weight.HwLoadingView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:hlv_color="#999999"

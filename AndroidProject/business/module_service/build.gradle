@@ -3,6 +3,8 @@ apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
 
 android {
+    namespace 'cn.jack.module_service'
+
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {

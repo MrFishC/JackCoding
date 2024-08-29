@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import androidx.annotation.Nullable;
 import cn.jack.library_webview.process.BinderPoolImpl;
-import com.jack.library_webview.util.LogW;
+import cn.jack.library_webview.util.LogW;
 
 /**
  * @创建者 Jack

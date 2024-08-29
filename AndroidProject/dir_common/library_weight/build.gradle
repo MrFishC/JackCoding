@@ -4,6 +4,8 @@ plugins {
 }
 
 android {
+//    namespace rootProject.ext.android["namespace"]
+    namespace 'cn.jack.library_weight'
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {

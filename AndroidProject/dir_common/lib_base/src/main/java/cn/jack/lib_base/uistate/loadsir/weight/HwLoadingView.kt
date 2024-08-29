@@ -9,7 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.annotation.ColorInt
-import com.jack.lib_base.R
+import cn.jack.lib_base.R
 
 /**
  * @创建者 Jack

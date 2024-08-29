@@ -24,10 +24,10 @@ import cn.jack.library_util.CommonUtil
 import cn.jack.library_util.DisplayManager
 import cn.jack.library_weight.flow.FlowAdapter
 import com.gyf.immersionbar.ktx.immersionBar
-import com.jack.lib_base.base.view.BaseDialogFragment
-import com.jack.lib_wrapper_net.flow.FlowManager
-import com.jack.lib_wrapper_net.manager.HttpManager
-import com.jack.lib_wrapper_net.model.EventResult
+import cn.jack.lib_base.base.view.BaseDialogFragment
+import cn.jack.lib_wrapper_net.flow.FlowManager
+import cn.jack.lib_wrapper_net.manager.HttpManager
+import cn.jack.lib_wrapper_net.model.EventResult
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

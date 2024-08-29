@@ -15,15 +15,15 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.jack.library_webview.R;
+import cn.jack.library_webview.R;
 import cn.jack.library_webview.base.callback.WebViewCallBack;
 import cn.jack.library_webview.base.set.WebViewSettingManager;
 import cn.jack.library_webview.base.webview.BaseWebView;
-import com.jack.library_webview.cache.WebViewCacheU;
-import com.jack.library_webview.databinding.LayoutWebviewContainerBinding;
+import cn.jack.library_webview.cache.WebViewCacheU;
+import cn.jack.library_webview.databinding.LayoutWebviewContainerBinding;
 import cn.jack.library_webview.dispatcher.CommandDispatcher;
 import cn.jack.library_webview.request.ExecuteLisenter;
-import com.jack.library_webview.util.LogW;
+import cn.jack.library_webview.util.LogW;
 import cn.jack.library_webview.util.WebConstants;
 
 import java.util.Objects;

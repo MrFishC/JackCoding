@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
-import com.jack.simple_recycleview.R;
+import cn.jack.simple_recycleview.R;
 
 /**
  * @author Jack

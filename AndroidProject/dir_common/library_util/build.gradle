@@ -1,6 +1,10 @@
 apply from: "../../gradle/common.build.gradle"
 apply plugin: 'org.jetbrains.kotlin.android'
 
+android{
+    namespace 'cn.jack.library_util'
+}
+
 dependencies {
     //通用标题栏
     api rootProject.ext.dependencies["titlebar"]

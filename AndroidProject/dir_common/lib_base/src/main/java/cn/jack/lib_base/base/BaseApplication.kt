@@ -7,8 +7,8 @@ import android.os.Build
 import android.os.Process
 import android.webkit.WebView
 import androidx.multidex.MultiDex
-import com.jack.debugtoolu.DebugManager
-import com.jack.lib_base.uistate.loadsir.callback.*
+import cn.jack.debugtoolu.DebugManager
+import cn.jack.lib_base.uistate.loadsir.callback.*
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadSir
 

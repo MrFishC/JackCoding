@@ -1,7 +1,7 @@
-package cn.jackmvvm
+package cn.jack.mvvm
 
 import cn.jack.lib_common.CustomApplication
-import com.jack.module_hybird.MultipleModulesNameProvider
+import cn.jack.module_hybird.MultipleModulesNameProvider
 import cn.jack.lib_common.flutter.cache.FlutterCacheManager
 import cn.jack.library_util.ActivityManager
 import cn.jack.library_util.ToastU

@@ -1,10 +1,10 @@
 package cn.jack.module_login.mvvm
 
 import android.util.Log
-import com.jack.tasktool.flow.ITaskCreator
-import com.jack.tasktool.flow.Project
-import com.jack.tasktool.flow.Task
-import com.jack.tasktool.flow.TaskFlowManager
+import cn.jack.tasktool.flow.ITaskCreator
+import cn.jack.tasktool.flow.Project
+import cn.jack.tasktool.flow.Task
+import cn.jack.tasktool.flow.TaskFlowManager
 
 object TaskStartUp {
     const val TASK_BLOCK_1 = "block_task_1"

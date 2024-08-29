@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.jack.simple_recycleview", appContext.packageName)
+        assertEquals("cn.jack.simple_recycleview", appContext.packageName)
     }
 }

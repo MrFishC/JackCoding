@@ -1,6 +1,10 @@
 apply from: "../../gradle/module_home_fragment_kt.build.gradle"
 apply plugin: 'org.jetbrains.kotlin.android'
 
+android {
+    namespace 'cn.jack.module_fragment_04'
+}
+
 dependencies {
     //每个业务模块都按照implementation的方式依赖
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jack.lib_wrapper_mvvm.mvvm.model.BaseWrapperModel
-import com.jack.lib_wrapper_mvvm.uistate.DialogState
+import cn.jack.lib_wrapper_mvvm.uistate.DialogState
 
 /**
  * @创建者 Jack
