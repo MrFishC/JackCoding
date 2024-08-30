@@ -18,3 +18,10 @@
 + [【Flutter 问题系列第 68 篇】为什么提示 The plugins “xxx_plugin“ use a deprecated version of the Android embedding](https://blog.csdn.net/qq_42351033/article/details/125340617)
 
 ## 4.同样的代码，换一台设备重新拉取，build都没有通过，尤其是flutter模块，会提示一些报错信息；
++ 跟下载的依赖包环境有很大关系，拆解进行处理啊
++ 4.1.Android依赖了flutter模块，先将flutter模块有关的配置注释掉，单独让Android项目依赖成功下载。
++ 4.2.Android项目依赖成功之后在取消4.1中的注释，继续同步。此时，可能会报错，提示flutter模块下Android模块缺少local.properties（因为在忽略文件中做了配置）；
++ 4.3.进入flutter模块，点击pub get
++ 总结：经过以上几步，问题得到解决。
++ 开始没有按照上方的步骤来进行，出现了多种报错，尝试过很多中方式，都不管用，于是采取分解的方式逐一的缩小范围；
++ 依赖包的下载环境还是比较作用，由于网络的不稳定性，z；

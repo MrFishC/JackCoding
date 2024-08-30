@@ -89,7 +89,7 @@ project(':simpleCustomView').projectDir = file('dir_simple/simple02_custom_view'
 setBinding(new Binding([gradle: this]))
 evaluate(new File(
         settingsDir.parentFile,
-        'flutter_module/.android/include_flutter.groovy'
+       'flutter_module/.android/include_flutter.groovy'
 ))
 //可选，作用：可以在当前AS的项目下显示flutter_module以方便查看和编写Dart代码
 include ':flutter_module'
