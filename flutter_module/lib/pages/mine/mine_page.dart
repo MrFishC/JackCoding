@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_module/base/model/constants.dart';
+import 'package:flutter_module/base/model/events.dart';
 import 'package:flutter_module/base/util/sp_util.dart';
 import 'package:flutter_module/bridge/flutter_bridge.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,34 +13,45 @@ class MinePage extends StatefulWidget {
 }
 
 class _MinePageState extends State<MinePage> {
-
   @override
   void initState() {
     super.initState();
+
+    // print("initState 1");//登录之后，该方法就被触发了，优化处理，进行懒加载
+
     ///1.获取 native 端的登录信息
     ///2.进行网络请求
     ///3.下拉刷新
     ///4.骨架屏效果
     ///
     ///
+    ///
+
     SharedPreferencesU.preInit();
-    FlutterBridge.getInstance().register("postToken", (MethodCall call) {
-      print('------flutter端收到来自native层的消息------token=${call.arguments}');
-      var token = call.arguments;
-      if(token){
+    FlutterBridge.getInstance().register(Events.postCookie, (MethodCall call) {
+      print('------flutter端收到来自native层的消息------cookie=${call.arguments}');
+      print('------flutter端收到来自native层的消息------call=${call}');
+      var cookie = call.arguments;
+      // if (cookie) {//这里的if判断出现了问题，报错信息为类型转换错误。触发了MethodChannel.Result中的回调，并将报错信息传递了过去。
+      if (cookie is String && cookie.isNotEmpty) {
         //保存token，执行网络请求
-        SharedPreferencesU.getInstance().setData(Constants.token, token);
-      }else{
+        SharedPreferencesU.getInstance().setData(Constants.cookie, cookie);
+        return Future.value('onSuccess'); //参数信息的字符串，可以根据需求进行自定义
+      } else {
         return Future.value('onFailed');
       }
-      // return Future.value('Flutter收到了，返回'); //flutter回信给native层
     });
+
+    // print("initState 2");
+    //
+    // var cookieInfo = SharedPreferencesU.getInstance().get(Constants.cookie);
+    // print("initState 3 cookieInfo = $cookieInfo");
   }
 
   @override
   void dispose() {
     super.dispose();
-    FlutterBridge.getInstance().unRegister("postToken");
+    // FlutterBridge.getInstance().unRegister(Events.postCookie);
   }
 
   @override

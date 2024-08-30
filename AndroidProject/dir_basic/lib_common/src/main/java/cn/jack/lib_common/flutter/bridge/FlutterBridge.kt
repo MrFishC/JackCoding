@@ -94,7 +94,10 @@ class FlutterBridge : MethodChannel.MethodCallHandler,
 
     fun native2Flutter(method: String, arguments: Any? = null, callback: MethodChannel.Result?) {
         mMethodChannels.forEach {
-            //native向flutter传递数据，flutter端可以向native回复本次数据的
+            //native向flutter传递数据后，flutter端可以向native回复本次数据的
+            LogU.d("native2Flutter method $method")
+            LogU.d("native2Flutter arguments $arguments")
+            LogU.d("native2Flutter callback $callback")
             it.invokeMethod(method, arguments, callback)
         }
     }

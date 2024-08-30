@@ -25,4 +25,5 @@ object HttpManager {
     fun <T> obtainRetrofitService(service: Class<T>): T {
         return retrofitClient.create(service)
     }
+
 }

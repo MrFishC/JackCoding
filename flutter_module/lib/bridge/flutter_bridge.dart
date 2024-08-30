@@ -10,10 +10,13 @@ class FlutterBridge {
   FlutterBridge._() {
     _bridge.setMethodCallHandler((MethodCall call) {
       String method = call.method;
+      print("FlutterBridge 执行 1 $method");//
       if (_listeners[method] != null) {
+        print("FlutterBridge 执行 2 $call");
         return _listeners[method](call);
       }
-      return Future.value("FlutterBridge返回");
+      print("FlutterBridge 执行 3");
+      return Future.value("onCompleted");
     });
   }
 
@@ -33,7 +36,7 @@ class FlutterBridge {
     return _bridge;
   }
 
-  goToNative(Map params){
-    _bridge.invokeMethod("goToNative",params);
+  goToNative(Map params) {
+    _bridge.invokeMethod("goToNative", params);
   }
 }

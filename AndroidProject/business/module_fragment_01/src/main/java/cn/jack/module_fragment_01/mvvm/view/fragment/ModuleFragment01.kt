@@ -112,14 +112,14 @@ class ModuleFragment01 :
 
         observeInResult(mViewModel.binnerInfos_) {
             onSuccess = {
-                println("参数内容信息 xxx onSuccess")
+//                println("参数内容信息 xxx onSuccess")
                 showBannerInfos(it!!)
             }
         }
 
         observeInResult(mViewModel.homeInfos_, false) {
             onStart = {
-                println("参数内容信息  onStart")
+//                println("参数内容信息  onStart")
                 if (mIsRefresh) {
                     setLayoutState(LayoutState.OnLoading)
                 }
@@ -140,8 +140,7 @@ class ModuleFragment01 :
                 }
 
                 mIsRefresh = false
-
-                println("参数内容信息  onSuccess")
+//                println("参数内容信息  onSuccess")
             }
 
             onFail = {
@@ -153,7 +152,7 @@ class ModuleFragment01 :
             }
 
             onComplete = {
-                println("参数内容信息  onComplete")
+//                println("参数内容信息  onComplete")
                 mBinding.refreshLayout.finishRefresh()
                 mBinding.refreshLayout.finishLoadMore()
             }

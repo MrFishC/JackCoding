@@ -18,5 +18,9 @@ class MultipleModulesNameProvider : ModuleNameProvider {
         const val MODULE_NAME_COLLECTION: String = "collection"
         const val MODULE_NAME_MALL: String = "mall"
         const val MODULE_NAME_MINE: String = "mine"
+
+
+        //约定好的事件
+        const val POST_COOKIE: String = "postCookie"
     }
 }

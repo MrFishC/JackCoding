@@ -16,3 +16,5 @@
 
 ## 3.【Flutter 问题系列第 68 篇】为什么提示 The plugins “xxx_plugin“ use a deprecated version of the Android embedding
 + [【Flutter 问题系列第 68 篇】为什么提示 The plugins “xxx_plugin“ use a deprecated version of the Android embedding](https://blog.csdn.net/qq_42351033/article/details/125340617)
+
+## 4.同样的代码，换一台设备重新拉取，build都没有通过，尤其是flutter模块，会提示一些报错信息；

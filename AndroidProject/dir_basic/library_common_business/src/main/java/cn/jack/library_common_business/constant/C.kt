@@ -10,6 +10,7 @@ object C {
     var C_USER_TOKEN = "c_user_token"
 
     object Login{
+       const val cookie = "cookie"
        const val user_name = "user_name"
        const val user_passwd = "user_passwd"
        const val user_token = "user_token"

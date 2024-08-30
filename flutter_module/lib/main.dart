@@ -9,6 +9,9 @@ void main() =>
       title: "flutter混合开发",
     )));
 
+@pragma('vm:entry-point')
+void mine() => runApp(MyApp(MinePage()));
+
 //必须加注解,注册成入口，collection同FlutterCacheManager中定义的一致
 @pragma('vm:entry-point')
 void collection() =>
@@ -21,9 +24,6 @@ void mall() {
   ///https://github.com/OpenFlutter/flutter_screenutil/blob/master/README_CN.md
   runApp(const MyApp2());
 }
-
-@pragma('vm:entry-point')
-void mine() => runApp(MyApp(MinePage()));
 
 class MyApp extends StatelessWidget {
   final Widget page;

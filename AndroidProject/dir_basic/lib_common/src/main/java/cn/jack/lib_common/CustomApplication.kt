@@ -75,7 +75,7 @@ abstract class CustomApplication : BaseApplication() {
         }
         loggerInterceptor.level =
             if (isDebugMode()) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-
+        
         val builder: OkHttpClient.Builder = OkHttpClient.Builder()
             .addInterceptor(loggerInterceptor)
             .addInterceptor(TokenInterceptor())
