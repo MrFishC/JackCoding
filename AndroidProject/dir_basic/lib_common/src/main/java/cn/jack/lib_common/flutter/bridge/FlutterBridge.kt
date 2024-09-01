@@ -85,12 +85,12 @@ class FlutterBridge : MethodChannel.MethodCallHandler,
 
     //native发送给flutter端
     //method:在flutter页面注册
-//    fun native2Flutter(method: String, arguments: Any? = null) {
-//        mMethodChannels.forEach {
-//            //通过invokeMethod将数据传递给flutter端
-//            it.invokeMethod(method, arguments)
-//        }
-//    }
+    fun native2Flutter(method: String, arguments: Any? = null) {
+        mMethodChannels.forEach {
+            //通过invokeMethod将数据传递给flutter端
+            it.invokeMethod(method, arguments)
+        }
+    }
 
     fun native2Flutter(method: String, arguments: Any? = null, callback: MethodChannel.Result?) {
         mMethodChannels.forEach {

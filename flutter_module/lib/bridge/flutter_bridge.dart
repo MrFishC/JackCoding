@@ -10,12 +10,12 @@ class FlutterBridge {
   FlutterBridge._() {
     _bridge.setMethodCallHandler((MethodCall call) {
       String method = call.method;
-      print("FlutterBridge 执行 1 $method");//
+      // print("FlutterBridge 执行 1 $method");//
       if (_listeners[method] != null) {
-        print("FlutterBridge 执行 2 $call");
+        // print("FlutterBridge 执行 2 $call");
         return _listeners[method](call);
       }
-      print("FlutterBridge 执行 3");
+      // print("FlutterBridge 执行 3");
       return Future.value("onCompleted");
     });
   }

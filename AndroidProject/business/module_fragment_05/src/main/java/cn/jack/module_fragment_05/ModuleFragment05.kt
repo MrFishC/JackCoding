@@ -45,6 +45,7 @@ class ModuleFragment05 : BaseFlutterFragment(MultipleModulesNameProvider.MODULE_
                         when (status) {
                             "onSuccess" -> {
                                 println("onSuccess 业务逻辑")
+                                FlutterBridge.instance?.native2Flutter(MultipleModulesNameProvider.REFRESH)
                             }
 
                             "onFailed" -> {

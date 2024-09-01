@@ -22,5 +22,6 @@ class MultipleModulesNameProvider : ModuleNameProvider {
 
         //约定好的事件
         const val POST_COOKIE: String = "postCookie"
+        const val REFRESH: String = "refresh"
     }
 }

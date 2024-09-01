@@ -30,7 +30,6 @@ class _MinePageState extends State<MinePage> {
     SharedPreferencesU.preInit();
     FlutterBridge.getInstance().register(Events.postCookie, (MethodCall call) {
       print('------flutter端收到来自native层的消息------cookie=${call.arguments}');
-      print('------flutter端收到来自native层的消息------call=${call}');
       var cookie = call.arguments;
       // if (cookie) {//这里的if判断出现了问题，报错信息为类型转换错误。触发了MethodChannel.Result中的回调，并将报错信息传递了过去。
       if (cookie is String && cookie.isNotEmpty) {
@@ -42,16 +41,22 @@ class _MinePageState extends State<MinePage> {
       }
     });
 
-    // print("initState 2");
+    FlutterBridge.getInstance().register(Events.refresh, (MethodCall call) {
+      var cookieInfo = SharedPreferencesU.getInstance().get(Constants.cookie);
+      print("刷新列表数据 cookieInfo = $cookieInfo");
+    });
+
+    // print("initState 2")
     //
-    // var cookieInfo = SharedPreferencesU.getInstance().get(Constants.cookie);
-    // print("initState 3 cookieInfo = $cookieInfo");
+    // var cookieInfo = SharedPreferencesU.getInstance().get(Constants.cookie)
+    // print("initState 3 cookieInfo = $cookieInfo")
   }
 
   @override
   void dispose() {
     super.dispose();
-    // FlutterBridge.getInstance().unRegister(Events.postCookie);
+    FlutterBridge.getInstance().unRegister(Events.postCookie);
+    FlutterBridge.getInstance().unRegister(Events.refresh);
   }
 
   @override

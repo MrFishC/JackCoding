@@ -3,6 +3,7 @@ package cn.jack.module_fragment_03.simple.fragment
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import cn.jack.lib_base.base.view.BaseSimpleFragment
 import cn.jack.library_arouter.manager.constants.RouterPathFragment
 import cn.jack.module_fragment_03.R
 import cn.jack.module_fragment_03.databinding.ModuleFragment03FragmentHome03Binding
@@ -10,7 +11,6 @@ import cn.jack.module_fragment_03.simple.adapter.TabNavigatorAdapter
 import cn.jack.module_fragment_03.simple.adapter.ViewPagerFragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import cn.jack.lib_base.base.view.BaseSimpleFragment
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
 
 /**
@@ -25,7 +25,8 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigat
  * 存在的问题，在两个子fragment，使用对指定的View设置状态布局 没有效果。 目前按照对整个页面设置状态布局的方式。
  */
 @Route(path = RouterPathFragment.HomeThird.PAGER_HOME_THIRD)
-class ModuleFragment03 : BaseSimpleFragment<ModuleFragment03FragmentHome03Binding>(ModuleFragment03FragmentHome03Binding::inflate) {
+class ModuleFragment03 :
+    BaseSimpleFragment<ModuleFragment03FragmentHome03Binding>(ModuleFragment03FragmentHome03Binding::inflate) {
 
     override fun staBarView(view: View): View = mBinding.defaultIncludeStaBar.statusBar
 

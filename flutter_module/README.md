@@ -4,9 +4,12 @@
 + 痛点问题
 + 使用FlutterJsonBeanFactory插件没有生成对应的文件，[参考资料-无效](https://blog.csdn.net/weixin_45677723/article/details/134005991)
   + 由于是在Android项目中混合了flutter，开始并未生成代码，后面是把flutter模块单独当成一个项目打开，代码就可以自动生成了。
-+ 暂时不适用该插件，采用[json_serializable 解析](https://blog.csdn.net/jdsjlzx/article/details/126145817)
++ 暂时不使用该插件，采用[json_serializable 解析](https://blog.csdn.net/jdsjlzx/article/details/126145817)
   + [辅助-为了便利使用 json_serializable库](https://caijinglong.github.io/json2dart/index_ch.html)
-  + 出现生成的数据格式不理想的情况（可能是缓存原因，猜测原因有可能同上）
+-------------
++ 以json_serializable的方式创建model类
++ json_serializable 支持泛型（需要添加注解），借助辅助工具[为了便利使用 json_serializable库](https://caijinglong.github.io/json2dart/index_ch.html)
++ 在Android嵌套flutter模块的方式下，生成的g.dart文件比较理想。
 
 ## 1.stderr: fatal: unable to connect to github.com:
 + 更改pubspec.yaml中git中url的地址，如将git:开头的改成https:开头的,同时注意是否有使用翻墙工具；
@@ -22,6 +25,11 @@
 + 4.1.Android依赖了flutter模块，先将flutter模块有关的配置注释掉，单独让Android项目依赖成功下载。
 + 4.2.Android项目依赖成功之后在取消4.1中的注释，继续同步。此时，可能会报错，提示flutter模块下Android模块缺少local.properties（因为在忽略文件中做了配置）；
 + 4.3.进入flutter模块，点击pub get
-+ 总结：经过以上几步，问题得到解决。
++ 总结1：经过以上几步，问题得到解决。
 + 开始没有按照上方的步骤来进行，出现了多种报错，尝试过很多中方式，都不管用，于是采取分解的方式逐一的缩小范围；
-+ 依赖包的下载环境还是比较作用，由于网络的不稳定性，z；
++ 依赖包的下载环境还是比较重要，由于网络的不稳定性，需要检查辅助工具是否稳定；
++ 提示：同样的方式，在笔记本上操作可以处理好。换了一个环境和电脑进行操作，Android部分依赖下载正常，但是Android模块依赖flutter模块后重新同步出现了失败，flutter引擎相关的依赖没有下载下来；
++ 换一种思路，检查flutter模块，执行flutter clean、flutter pub，再来同步Android项目，问题仍存在；
+  + 存在的区别：笔记本打开Android项目时，project下包含两个项目的目录，但是，这里仅存在Android的项目目录；
+  + 猜测：未成功的原因，应该是4.2中再次同步时flutter引擎依赖没有下载成功导致的，可能还是下载依赖所在的环境导致（应该是local.properties中flutter.sdk未配置正确）。
++ 总结2：提示缺少xxx等或者xxx失败等，猜测更多是因为配置或下载依赖的原因导致的； 
