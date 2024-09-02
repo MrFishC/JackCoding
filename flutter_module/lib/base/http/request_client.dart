@@ -21,12 +21,13 @@ class RequestClient {
         requestHeader: true, requestBody: true, responseHeader: true));
   }
 
-  Future<T?> request<T>(
-    String url, {
+  Future<T?> request<T>(String url, {
     String method = "Get",
     Map<String, dynamic>? queryParameters,
     data,
-    required T Function(dynamic json) fromJsonT,///增加多层泛型嵌套时的解析
+    required T Function(dynamic json) fromJsonT,
+
+    ///增加多层泛型嵌套时的解析
     Map<String, dynamic>? headers,
     Function(ApiResponse<T>)? onResponse,
     bool Function(ApiException)? onError,
@@ -36,11 +37,14 @@ class RequestClient {
         ..method = method
         ..headers = headers;
 
+      print("【请求data】1");
       data = _convertRequestData(data);
+      print("【请求data】5");
 
       Response response = await _dio.request(url,
           queryParameters: queryParameters, data: data, options: options);
 
+      print("【请求data】6");
       return _handleResponse<T>(response, onResponse, fromJsonT);
     } catch (e) {
       var exception = ApiException.from(e);
@@ -53,15 +57,17 @@ class RequestClient {
   }
 
   _convertRequestData(data) {
+    print("【请求data】2");
     if (data != null) {
       ///将请求 data 数据先使用 jsonEncode 转换为字符串，再使用 jsonDecode 方法将字符串转换为 Map。
+      print("【请求data】3");
       data = jsonDecode(jsonEncode(data));
     }
+    print("【请求data】4");
     return data;
   }
 
-  Future<T?> get<T>(
-    String url, {
+  Future<T?> get<T>(String url, {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
     required T Function(dynamic json) fromJsonT,
@@ -77,8 +83,7 @@ class RequestClient {
         onError: onError);
   }
 
-  Future<T?> post<T>(
-    String url, {
+  Future<T?> post<T>(String url, {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
@@ -97,8 +102,7 @@ class RequestClient {
         onError: onError);
   }
 
-  Future<T?> delete<T>(
-    String url, {
+  Future<T?> delete<T>(String url, {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
@@ -117,8 +121,7 @@ class RequestClient {
         onError: onError);
   }
 
-  Future<T?> put<T>(
-    String url, {
+  Future<T?> put<T>(String url, {
     Map<String, dynamic>? queryParameters,
     data,
     Map<String, dynamic>? headers,
@@ -138,32 +141,37 @@ class RequestClient {
   }
 
   ///请求响应内容处理
-  T? _handleResponse<T>(
-    Response response,
-    Function(ApiResponse<T>)? onResponse,
-    T Function(dynamic json) fromJsonT,
-  ) {
+  T? _handleResponse<T>(Response response,
+      Function(ApiResponse<T>)? onResponse,
+      T Function(dynamic json) fromJsonT,) {
+    print("【请求data】7");
     if (response.statusCode == 200) {
       if (T.toString() == (RawData).toString()) {
         RawData raw = RawData();
         raw.value = response.data;
         return raw as T;
       } else {
-        ApiResponse<T> apiResponse = ApiResponse<T>.fromJson(response.data, fromJsonT);
+        print("【请求data】8 ${response.data}");
+        ApiResponse<T> apiResponse = ApiResponse<T>.fromJson(
+            response.data, fromJsonT);
+        print("【请求data】9");
         // ApiResponse<T> apiResponse = ApiResponse.fromJson(response.data, (json) => _fromJson<T>(json));
         onResponse?.call(apiResponse);
+        print("【请求data】10");
         return _handleBusinessResponse<T>(apiResponse);
       }
     } else {
       var exception =
-          ApiException(response.statusCode, ApiException.unknownException);
+      ApiException(response.statusCode, ApiException.unknownException);
       throw exception;
     }
   }
 
   ///业务内容处理
   T? _handleBusinessResponse<T>(ApiResponse<T> response) {
+    print("【请求data】 _handleBusinessResponse $response");
     if (response.errorCode == RequestConfig.successCode) {
+      print("【请求data】 response.data ${response.data}");
       return response.data;
     } else {
       var exception = ApiException(response.errorCode, response.errorMsg);

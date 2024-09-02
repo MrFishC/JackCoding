@@ -29,6 +29,9 @@ class ApiException implements Exception {
           // if(apiResponse.errorCode != null){///这里应该可以省略,在下方default中包含即可
           //   return ApiException(apiResponse.errorCode, apiResponse.errorMsg);
           // }
+          print("【请求data】 1 ApiException ${error.response}");
+          print("【请求data】 2 ApiException ${error.response?.statusCode}");
+          print("【请求data】 3 ApiException ${error.response?.data}");
 
           int? errCode = error.response?.statusCode;
           switch (errCode) {

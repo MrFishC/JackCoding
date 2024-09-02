@@ -9,15 +9,15 @@ class TokenInterceptor extends Interceptor{
     ///根据业务需求进行添加
     var cookieInfo = SharedPreferencesU.getInstance().get(Constants.cookie);
     options.headers["set-cookie"] = cookieInfo;
+    print("【请求data】");
     super.onRequest(options, handler);
   }
 
-  // @override
-  // void onResponse(Response response, ResponseInterceptorHandler handler) {
-  //   print("【返回data】${response.data.toString()}");
-  //   // super.onResponse(response, handler);
-  //   super.onResponse(response.data, handler);//数据剥壳
-  // }
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    print("【返回data】${response.data.toString()}");
+    super.onResponse(response, handler);
+  }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {

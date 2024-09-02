@@ -13,10 +13,10 @@ class ArticleTags {
 
   ArticleTags(this.name,this.url,);
 
-  factory ArticleTags.fromJson(Map<String, dynamic> srcJson) => _$TagsFromJson(srcJson);
+  factory ArticleTags.fromJson(Map<String, dynamic> srcJson) => _$ArticleTagsFromJson(srcJson);
 
   Map<String, dynamic> toJson() =>
-      _$TagsToJson(this);
+      _$ArticleTagsToJson(this);
 }
 
 

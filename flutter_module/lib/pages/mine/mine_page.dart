@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_module/base/http/request_client.dart';
 import 'package:flutter_module/base/model/constants.dart';
 import 'package:flutter_module/base/model/events.dart';
 import 'package:flutter_module/base/util/sp_util.dart';
 import 'package:flutter_module/bridge/flutter_bridge.dart';
+import 'package:flutter_module/model/article.dart';
+import 'package:flutter_module/model/article_tags.dart';
+import 'package:flutter_module/model/page_data.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -41,9 +45,16 @@ class _MinePageState extends State<MinePage> {
       }
     });
 
-    FlutterBridge.getInstance().register(Events.refresh, (MethodCall call) {
+    FlutterBridge.getInstance().register(Events.refresh, (MethodCall call) async {
       var cookieInfo = SharedPreferencesU.getInstance().get(Constants.cookie);
       print("刷新列表数据 cookieInfo = $cookieInfo");
+
+      PageData<Article<ArticleTags>>? result = await requestClient.get<PageData<Article<ArticleTags>>>("/article/list/1/json",
+          fromJsonT: (json) =>  PageData.fromJson(json, (json) => Article.fromJson(json, (json) => ArticleTags.fromJson(json))));
+      print("【请求data】 解析数据 ${result?.pageCount}");
+      print("【请求data】 解析数据 ${result?.datas.length}");
+      print("【请求data】 解析数据 ${result?.curPage}");
+      print("【请求data】 解析数据 $result");///Instance of 'PageData<Article<ArticleTags>>'
     });
 
     // print("initState 2")
