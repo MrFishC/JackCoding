@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_module/base/http/exception.dart';
 import 'package:flutter_module/base/http/http_config.dart';
@@ -11,11 +10,18 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 ///全局变量
 RequestClient requestClient = RequestClient();
 
+///参考资料：[Flutter 网络请求封装之Dio](https://download.csdn.net/blog/column/9600549/90234708#Dio_3)
+///
 class RequestClient {
   late Dio _dio;
 
   RequestClient() {
-    _dio = Dio(BaseOptions(baseUrl: RequestConfig.baseUrl));
+    _dio = Dio(BaseOptions(baseUrl: RequestConfig.baseUrl,
+      // //请求的Content-Type，默认值是"application/json; charset=utf-8",Headers.formUrlEncodedContentType会自动编码请求体.
+      // contentType: Headers.formUrlEncodedContentType,
+      // //表示期望以那种格式(方式)接受响应数据。接受4种类型 `json`, `stream`, `plain`, `bytes`. 默认值是 `json`,
+      // responseType: ResponseType.json,
+    ));
     _dio.interceptors.add(TokenInterceptor());
     _dio.interceptors.add(PrettyDioLogger(
         requestHeader: true, requestBody: true, responseHeader: true));
@@ -26,7 +32,6 @@ class RequestClient {
     Map<String, dynamic>? queryParameters,
     data,
     required T Function(dynamic json) fromJsonT,
-
     ///增加多层泛型嵌套时的解析
     Map<String, dynamic>? headers,
     Function(ApiResponse<T>)? onResponse,
