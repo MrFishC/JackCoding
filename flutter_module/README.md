@@ -33,3 +33,46 @@
   + 存在的区别：笔记本打开Android项目时，project下包含两个项目的目录，但是，这里仅存在Android的项目目录；
   + 猜测：未成功的原因，应该是4.2中再次同步时flutter引擎依赖没有下载成功导致的，可能还是下载依赖所在的环境导致（应该是local.properties中flutter.sdk未配置正确）。
 + 总结2：提示缺少xxx等或者xxx失败等，猜测更多是因为配置或下载依赖的原因导致的； 
+
+## 5.运行开源flutter项目出现的报错
++ 处理方案：将compileSdkVersion提升，目前是由 28 ---> 31
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:checkDebugAarMetadata'.
+> Multiple task action failures occurred:
+   > A failure occurred while executing com.android.build.gradle.internal.tasks.CheckAarMetadataWorkAction
+      > The minCompileSdk (31) specified in a
+        dependency's AAR metadata (META-INF/com/android/build/gradle/aar-metadata.properties)
+        is greater than this module's compileSdkVersion (android-28).
+        Dependency: androidx.window:window-java:1.0.0-beta04.
+        AAR metadata file: D:\xxx\Cache\AndroidStudio\.gradle\caches\transforms-2\files-2.1\b2d779a3a6f49cacbe1c4a638e946840\jetified-window-java-1.0.0-beta04\META-INF\com\android\build\gradle\aar-metadata.properties.
+   > A failure occurred while executing com.android.build.gradle.internal.tasks.CheckAarMetadataWorkAction
+      > The minCompileSdk (31) specified in a
+        dependency's AAR metadata (META-INF/com/android/build/gradle/aar-metadata.properties)
+        is greater than this module's compileSdkVersion (android-28).
+        Dependency: androidx.window:window:1.0.0-beta04.
+        AAR metadata file: D:\xxx\Cache\AndroidStudio\.gradle\caches\transforms-2\files-2.1\9c5fcee88564c7e411a0fe1eb9c506c8\jetified-window-1.0.0-beta04\META-INF\com\android\build\gradle\aar-metadata.properties.
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 3s
+
+┌─ Flutter Fix ───────────────────────────────────────────────────────┐
+│ [!] Your project requires a higher compileSdkVersion.               │
+│ Fix this issue by bumping the compileSdkVersion in                  │
+│ G:\develop\code\wanandroid_flutter-master\android\app\build.gradle: │
+│ android {                                                           │
+│   compileSdkVersion 31                                              │
+│ }                                                                   │
+└─────────────────────────────────────────────────────────────────────┘
+Exception: Gradle task assembleDebug failed with exit code 1
+
+```
+
+# 参考资料
++ https://github.com/yechaoa/wanandroid_flutter

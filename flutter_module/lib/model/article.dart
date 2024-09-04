@@ -38,7 +38,7 @@ class Article<T> {
   String descMd;
 
   // @JsonKey(name: 'envelopePic')
-  String envelopePic;
+  String envelopePic;//根据该字段是否为空来判断使用哪一种类型的条目
 
   // @JsonKey(name: 'fresh')
   bool fresh;
