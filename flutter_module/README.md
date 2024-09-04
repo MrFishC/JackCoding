@@ -33,3 +33,7 @@
   + 存在的区别：笔记本打开Android项目时，project下包含两个项目的目录，但是，这里仅存在Android的项目目录；
   + 猜测：未成功的原因，应该是4.2中再次同步时flutter引擎依赖没有下载成功导致的，可能还是下载依赖所在的环境导致（应该是local.properties中flutter.sdk未配置正确）。
 + 总结2：提示缺少xxx等或者xxx失败等，猜测更多是因为配置或下载依赖的原因导致的； 
++ 补充1：时不时报错“this and base files have different roots xxx”，处理方式：指定Flutter的pub缓存目录，通知环境变量--->***用户变量***设置。key为：PUB_CACHE，value：指定一个目录；
+第4点的问题，大概率跟PUB_CACHE有关系，[参考资料-this and base files have different roots](https://blog.csdn.net/LuoHuaX/article/details/132304886)中提到：pub get下载的缓存位置和项目位置不在同一个磁盘，就会报这个错。
+估计是这个原因；
++ 补充2：x:\xxx\flutter\packages\flutter_tools\gradle\src\main\groovy中的flutter.groovy可以设置依赖的镜像地址；
