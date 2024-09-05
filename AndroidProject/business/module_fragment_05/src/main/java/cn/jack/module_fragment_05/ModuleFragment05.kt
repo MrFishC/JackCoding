@@ -52,7 +52,7 @@ class ModuleFragment05 : BaseFlutterFragment(MultipleModulesNameProvider.MODULE_
                                 println("onFailed 业务逻辑")
                             }
                         }
-                        ToastU.normal(result)
+//                        ToastU.normal(result)
                     }
                 }
 

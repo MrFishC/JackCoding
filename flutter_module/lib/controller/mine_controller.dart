@@ -16,12 +16,9 @@ class MineController extends GetxController {
 
   void onRefresh() async {
     page = 0;
-    showLoading();
-    update();
     await Future.delayed(const Duration(seconds: 2));
     PageData<Article<ArticleTags>>? result = await apiService.getArticleList(page);
     articleListInfo = result!.datas;
-    dismissLoading();
     update();
   }
 

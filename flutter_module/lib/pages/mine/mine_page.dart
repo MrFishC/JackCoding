@@ -41,7 +41,7 @@ class _MinePageState extends State<MinePage> {
       // if (cookie) {//这里的if判断出现了问题，报错信息为类型转换错误。触发了MethodChannel.Result中的回调，并将报错信息传递了过去。
       if (cookie is String && cookie.isNotEmpty) {
         //保存token，执行网络请求
-        SharedPreferencesU.getInstance().setData(Constants.cookie, cookie);
+        // SharedPreferencesU.getInstance().setData(Constants.cookie, cookie);
         return Future.value('onSuccess'); //参数信息的字符串，可以根据需求进行自定义
       } else {
         return Future.value('onFailed');

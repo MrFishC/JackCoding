@@ -1,6 +1,10 @@
 package cn.jack.lib_common.flutter.bridge
 
+import cn.jack.library_arouter.manager.constants.RouterPathActivity
+import cn.jack.library_util.KvStoreUtil
 import cn.jack.library_util.LogU
+import cn.jack.library_util.ToastU
+import com.alibaba.android.arouter.launcher.ARouter
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -73,7 +77,10 @@ class FlutterBridge : MethodChannel.MethodCallHandler,
 //                    goodsId as String?
 //                ).navigation()
             } else if (action == "goToLogin") {
-//                ARouter.getInstance().build("/account/login").navigation()
+                LogU.e("token失效了啊 清除token，重新登录！")
+                KvStoreUtil.getInstance().clearAll()
+                ToastU.normal("token失效，请重新登录")
+                ARouter.getInstance().build(RouterPathActivity.Login.PAGER_LOGIN).navigation()
             }
         }
     }

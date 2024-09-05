@@ -22,7 +22,9 @@ class TokenInterceptor : Interceptor {
             //判断是否是登录接口，若是则将cookie信息获取并保存起来，后续要提供给flutter端使用
             val response = chain.proceed(request)
             val cookie = response.headers["set-cookie"]
+            val session = response.headers["cookie"]
             println("获取 cookie $cookie")
+            println("获取 session $session")
             if (cookie?.isNotEmpty() == true) {
                 KvStoreUtil.getInstance().save(C.Login.cookie, cookie)
             }

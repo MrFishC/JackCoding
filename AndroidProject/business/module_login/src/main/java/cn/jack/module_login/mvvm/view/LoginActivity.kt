@@ -34,7 +34,7 @@ class LoginActivity :
     override fun observeViewModel() {
         super.observeViewModel()
 
-        TaskStartUp.start()
+//        TaskStartUp.start()       //TaskStartUp需要重新好好梳理一下
 
         observeInResult(mViewModel.userInfo) {
             onSuccess = {
