@@ -40,6 +40,8 @@ build/
 .flutter-plugins
 .flutter-plugins-dependencies
 
+.android/plugins_build_output
+
 # Symbolication related
 app.*.symbols
 
