@@ -1,8 +1,7 @@
-import 'package:flutter_module/pages/mall/mine_binding.dart';
+import 'package:flutter_module/pages/mine/mine_binding.dart';
 import 'package:flutter_module/pages/mine/mine_page.dart';
 import 'package:get/get.dart';
 
-///参考
 class RouteGet {
   ///root page
   static const String main = "/";

@@ -7,6 +7,8 @@ import 'package:flutter_module/routers/routers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'pages/mine/mine_binding.dart';
+
 void main() => runApp(const MyApp(CollectionPage(
       title: "flutter混合开发",
     )));
@@ -37,9 +39,10 @@ class MyApp extends StatelessWidget {
     ///初始化getx
     /// GetX改造步骤：1、修改MaterialApp成GetMaterialApp
     return GetMaterialApp(
-      initialRoute: RouteGet.main,
-      getPages: RouteGet.getPages,
-      // home: page,
+      // initialRoute: RouteGet.main,
+      // getPages: RouteGet.getPages,
+      initialBinding: MineBinding(),
+      home: page,
       builder: EasyLoading.init(),
     );
   }

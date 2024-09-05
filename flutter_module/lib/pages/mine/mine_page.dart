@@ -17,14 +17,13 @@ class MinePage extends StatefulWidget {
 }
 
 class _MinePageState extends State<MinePage> {
-  // late MineController mineController;
-  final _controller = Get.find<MineController>();
+  // final _controller = Get.put(MineController());
+  final _controller = Get.find<MineController>();///在MineBinding中进行了延迟初始化，这里直接获取即可
 
   @override
   void initState() {
     super.initState();
 
-    // mineController = MineController();
     // print("initState 1");//登录之后，该方法就被触发了，优化处理，进行懒加载
 
     ///1.获取 native 端的登录信息
@@ -51,27 +50,8 @@ class _MinePageState extends State<MinePage> {
 
     FlutterBridge.getInstance().register(Events.refresh,
         (MethodCall call) async {
-      // var cookieInfo = SharedPreferencesU.getInstance().get(Constants.cookie);
-      // print("刷新列表数据 cookieInfo = $cookieInfo");
-      //
-      // PageData<Article<ArticleTags>>? result = await requestClient
-      //     .get<PageData<Article<ArticleTags>>>("/article/list/1/json",
-      //         fromJsonT: (json) => PageData.fromJson(
-      //             json,
-      //             (json) => Article.fromJson(
-      //                 json, (json) => ArticleTags.fromJson(json))));
-      // print("【请求data】 解析数据 ${result?.pageCount}");
-      // print("【请求data】 解析数据 ${result?.datas.length}");
-      // print("【请求data】 解析数据 ${result?.curPage}");
-      // print("【请求data】 解析数据 $result");
-      ///Instance of 'PageData<Article<ArticleTags>>'
       _controller.onRefresh();
     });
-
-    // print("initState 2")
-    //
-    // var cookieInfo = SharedPreferencesU.getInstance().get(Constants.cookie)
-    // print("initState 3 cookieInfo = $cookieInfo")
   }
 
   @override
@@ -81,30 +61,13 @@ class _MinePageState extends State<MinePage> {
     FlutterBridge.getInstance().unRegister(Events.refresh);
   }
 
-  // void _onRefresh() {
-  //   controller.page = 0;
-  //   controller.loadData.then((result) {
-  //     setState(() {
-  //       controller.articleListInfo = result!.datas;
-  //     });
-  //   });
-  // }
-
-  // void _loadMore() {
-  //   controller.page++;
-  //   controller.loadData.then((result) {
-  //     setState(() {
-  //       controller.articleListInfo.addAll(result!.datas);
-  //     });
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     ///这种方式只需在使用 flutter_screenutil 前进行初始化即可，一般放在根路由即第一个页面加载的时候进行初始化
     ///https://juejin.cn/post/7041021257562718239
     ///GetX需要先初始化
-    ScreenUtil.init(Get.context!, designSize: const Size(360, 690));
+    // ScreenUtil.init(Get.context!, designSize: const Size(360, 690));
+    // ScreenUtil.init(context, designSize: const Size(360, 690));//使用ScreenUtil库后，若再使用getx，则页面显示存在异常；
 
     return Scaffold(
       appBar: AppBar(
@@ -112,31 +75,31 @@ class _MinePageState extends State<MinePage> {
         title: const Text("收藏列表"),
       ),
 
-      ///GetX 还提供了使用 Controller 来管理状态，实现一个自定义 Controller 类继承自 GetxController ，
-      ///Controller 中进行业务逻辑的处理，当需要改变状态数据时调用 update() 来通知数据改变。
-      // GetX改造步骤3：使用GetBuilder进行包裹
+      /// GetX改造步骤3：使用GetBuilder进行包裹
+      ///参考  https://juejin.cn/post/7064483004038512648
+      ///GetBuilder  是一个 Widget 组件， 在 GetX 的状态管理中，GetBuilder  的主要作用是结合 GetxController  实现界面数据的更新。当调用 GetxController 的 update 方法时，GetBuilder  包裹的 Widget 就会刷新从而实现界面数据的更新。
       body: GetBuilder<MineController>(
 
           ///第一次使用某个 Controller 时需要进行初始化，后续再使用同一个 Controller 就不需要再进行初始化，即不需要配置 init。
           ///初始化完成后，可以使用 Get.find() 找到对应的 Controller ：
-          // init: MineController(), //Controller 首次初始化     在binding中进行延迟初始化
+          // init: _controller,
           builder: (controller) {
-            return EasyRefresh(
-              header: const PhoenixHeader(),
-              footer: const PhoenixFooter(),
-              onRefresh: () async {
-                await Future.delayed(const Duration(seconds: 1), () {
-                  controller.onRefresh();
-                });
-              },
-              onLoad: () async {
-                await Future.delayed(const Duration(seconds: 1), () async {
-                  controller.loadMore();
-                });
-              },
-              child: buildCustomScrollView(),
-            );
-          }),
+        return EasyRefresh(
+          header: const PhoenixHeader(),
+          footer: const PhoenixFooter(),
+          onRefresh: () async {
+            await Future.delayed(const Duration(seconds: 1), () {
+              controller.onRefresh();
+            });
+          },
+          onLoad: () async {
+            await Future.delayed(const Duration(seconds: 1), () async {
+              controller.loadMore();
+            });
+          },
+          child: buildCustomScrollView(),
+        );
+      }),
     );
   }
 
@@ -163,19 +126,21 @@ class _MinePageState extends State<MinePage> {
     );
   }
 
-  Widget buildItem(index) {
+  Widget buildItem(int index) {
     var article = _controller.articleListInfo[index];
+
+    print("article ------> $article");
+
     if (article.envelopePic.isEmpty) {
-      //样式1
       return Container(
-        margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
-        padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         decoration: BoxDecoration(boxShadow: [
           //卡片阴影
           BoxShadow(
             color: Colors.white,
             // offset: Offset(0, 0),
-            blurRadius: 5.sp,
+            blurRadius: 5,
           )
         ]),
         child: Column(
@@ -186,17 +151,17 @@ class _MinePageState extends State<MinePage> {
               children: [
                 Text("新",
                     style: TextStyle(
-                        fontSize: 14.sp, color: AppColors.color_6c1bc)),
+                        fontSize: 14, color: AppColors.color_6c1bc)),
                 Expanded(
                     flex: 1,
                     child: Text(article.chapterName,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            fontSize: 14.sp, color: AppColors.color_7c7b7b))),
+                            fontSize: 14, color: AppColors.color_7c7b7b))),
                 Text(article.niceDate,
                     style: TextStyle(
-                        fontSize: 12.sp, color: AppColors.color_999999))
+                        fontSize: 12, color: AppColors.color_999999))
               ],
             ),
             Text(article.title,
@@ -204,7 +169,7 @@ class _MinePageState extends State<MinePage> {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style:
-                    TextStyle(fontSize: 14.sp, color: AppColors.color_000000)),
+                TextStyle(fontSize: 14, color: AppColors.color_000000)),
             Flex(
               direction: Axis.horizontal,
               children: [
@@ -214,7 +179,7 @@ class _MinePageState extends State<MinePage> {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            fontSize: 12.sp, color: AppColors.color_999999))),
+                            fontSize: 12, color: AppColors.color_999999))),
                 Image.asset(
                   "assets/images/icon_collected.png",
                   width: 16,
@@ -224,17 +189,74 @@ class _MinePageState extends State<MinePage> {
           ],
         ),
       );
+      //样式1
+      // return Container(
+      //   margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+      //   padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+      //   decoration: BoxDecoration(boxShadow: [
+      //     //卡片阴影
+      //     BoxShadow(
+      //       color: Colors.white,
+      //       // offset: Offset(0, 0),
+      //       blurRadius: 5.sp,
+      //     )
+      //   ]),
+      //   child: Column(
+      //     crossAxisAlignment: CrossAxisAlignment.start,
+      //     children: [
+      //       Flex(
+      //         direction: Axis.horizontal,
+      //         children: [
+      //           Text("新",
+      //               style: TextStyle(
+      //                   fontSize: 14.sp, color: AppColors.color_6c1bc)),
+      //           Expanded(
+      //               flex: 1,
+      //               child: Text(article.chapterName,
+      //                   maxLines: 1,
+      //                   overflow: TextOverflow.ellipsis,
+      //                   style: TextStyle(
+      //                       fontSize: 14.sp, color: AppColors.color_7c7b7b))),
+      //           Text(article.niceDate,
+      //               style: TextStyle(
+      //                   fontSize: 12.sp, color: AppColors.color_999999))
+      //         ],
+      //       ),
+      //       Text(article.title,
+      //           textAlign: TextAlign.left,
+      //           maxLines: 2,
+      //           overflow: TextOverflow.ellipsis,
+      //           style:
+      //               TextStyle(fontSize: 14.sp, color: AppColors.color_000000)),
+      //       Flex(
+      //         direction: Axis.horizontal,
+      //         children: [
+      //           Expanded(
+      //               flex: 1,
+      //               child: Text(article.author,
+      //                   maxLines: 1,
+      //                   overflow: TextOverflow.ellipsis,
+      //                   style: TextStyle(
+      //                       fontSize: 12.sp, color: AppColors.color_999999))),
+      //           Image.asset(
+      //             "assets/images/icon_collected.png",
+      //             width: 16,
+      //           )
+      //         ],
+      //       )
+      //     ],
+      //   ),
+      // );
     } else {
-      //样式2
       return Container(
-        margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
-        padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         decoration: BoxDecoration(boxShadow: [
           //卡片阴影
           BoxShadow(
             color: Colors.white,
             // offset: Offset(0, 0),
-            blurRadius: 5.sp,
+            blurRadius: 5,
           )
         ]),
         child: Flex(
@@ -253,18 +275,18 @@ class _MinePageState extends State<MinePage> {
                       children: [
                         Text("新",
                             style: TextStyle(
-                                fontSize: 14.sp, color: AppColors.color_6c1bc)),
+                                fontSize: 14, color: AppColors.color_6c1bc)),
                         Expanded(
                             flex: 1,
                             child: Text(article.chapterName,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     color: AppColors.color_7c7b7b))),
                         Text(article.niceDate,
                             style: TextStyle(
-                                fontSize: 12.sp, color: AppColors.color_999999))
+                                fontSize: 12, color: AppColors.color_999999))
                       ],
                     ),
                     Text(article.title,
@@ -272,7 +294,7 @@ class _MinePageState extends State<MinePage> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            fontSize: 14.sp, color: AppColors.color_000000)),
+                            fontSize: 14, color: AppColors.color_000000)),
                     Flex(
                       direction: Axis.horizontal,
                       children: [
@@ -282,11 +304,11 @@ class _MinePageState extends State<MinePage> {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                    fontSize: 12.sp,
+                                    fontSize: 12,
                                     color: AppColors.color_999999))),
                         Image.asset(
                           "assets/images/icon_collected.png",
-                          width: 16.w,
+                          width: 16,
                         )
                       ],
                     )
@@ -295,6 +317,76 @@ class _MinePageState extends State<MinePage> {
           ],
         ),
       );
+      //样式2
+      // return Container(
+      //   margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+      //   padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+      //   decoration: BoxDecoration(boxShadow: [
+      //     //卡片阴影
+      //     BoxShadow(
+      //       color: Colors.white,
+      //       // offset: Offset(0, 0),
+      //       blurRadius: 5.sp,
+      //     )
+      //   ]),
+      //   child: Flex(
+      //     direction: Axis.horizontal,
+      //     children: [
+      //       // _buildImageWidget(article.envelopePic),
+      //       _buildImageWidget(
+      //           "https://wbedu.sanyaedu.org/res/20240904/png/1ddad595-9094-4c74-9a20-e37ccfbb691d.png"),
+      //       Expanded(
+      //           flex: 1,
+      //           child: Column(
+      //             crossAxisAlignment: CrossAxisAlignment.start,
+      //             children: [
+      //               Flex(
+      //                 direction: Axis.horizontal,
+      //                 children: [
+      //                   Text("新",
+      //                       style: TextStyle(
+      //                           fontSize: 14.sp, color: AppColors.color_6c1bc)),
+      //                   Expanded(
+      //                       flex: 1,
+      //                       child: Text(article.chapterName,
+      //                           maxLines: 1,
+      //                           overflow: TextOverflow.ellipsis,
+      //                           style: TextStyle(
+      //                               fontSize: 14.sp,
+      //                               color: AppColors.color_7c7b7b))),
+      //                   Text(article.niceDate,
+      //                       style: TextStyle(
+      //                           fontSize: 12.sp, color: AppColors.color_999999))
+      //                 ],
+      //               ),
+      //               Text(article.title,
+      //                   textAlign: TextAlign.left,
+      //                   maxLines: 2,
+      //                   overflow: TextOverflow.ellipsis,
+      //                   style: TextStyle(
+      //                       fontSize: 14.sp, color: AppColors.color_000000)),
+      //               Flex(
+      //                 direction: Axis.horizontal,
+      //                 children: [
+      //                   Expanded(
+      //                       flex: 1,
+      //                       child: Text(article.author,
+      //                           maxLines: 1,
+      //                           overflow: TextOverflow.ellipsis,
+      //                           style: TextStyle(
+      //                               fontSize: 12.sp,
+      //                               color: AppColors.color_999999))),
+      //                   Image.asset(
+      //                     "assets/images/icon_collected.png",
+      //                     width: 16.w,
+      //                   )
+      //                 ],
+      //               )
+      //             ],
+      //           ))
+      //     ],
+      //   ),
+      // );
     }
   }
 

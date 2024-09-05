@@ -11,6 +11,7 @@
 + json_serializable 支持泛型（需要添加注解），借助辅助工具[为了便利使用 json_serializable库](https://caijinglong.github.io/json2dart/index_ch.html)
 + 在Android嵌套flutter模块的方式下，生成的g.dart文件比较理想。
 
+# 二、踩坑
 ## 1.stderr: fatal: unable to connect to github.com:
 + 更改pubspec.yaml中git中url的地址，如将git:开头的改成https:开头的,同时注意是否有使用翻墙工具；
 + 我们在当前项目的目录下运行flutter packages pub run build_runner build
@@ -78,6 +79,8 @@ BUILD FAILED in 3s
 Exception: Gradle task assembleDebug failed with exit code 1
 
 ```
+## 6.使用屏幕适配和getx出现冲突
++ 使用getx的状态管理，同时使用ScreenUtil库进行适配，列表的item无法正常渲染出来，原因不明；
 
 # 参考资料
 + https://github.com/yechaoa/wanandroid_flutter
