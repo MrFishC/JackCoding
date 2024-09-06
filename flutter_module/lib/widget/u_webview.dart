@@ -25,7 +25,16 @@ class _UWebViewState extends State<UWebView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+              child: WebViewWidget(
+                controller: controller,
+              ))
+        ],
+      ),
+    );
   }
 
   void _initWebViewController() {
@@ -41,8 +50,8 @@ class _UWebViewState extends State<UWebView> {
           },
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
-            // return NavigationDecision.prevent;
-            return NavigationDecision.navigate;
+            // return NavigationDecision.prevent;//阻止路由替换
+            return NavigationDecision.navigate;//允许进行路由替换
           }))
       ..loadRequest(Uri.parse(url!));
   }
