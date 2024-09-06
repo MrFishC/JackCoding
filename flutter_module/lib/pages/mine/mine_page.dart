@@ -6,6 +6,7 @@ import 'package:flutter_module/base/model/events.dart';
 import 'package:flutter_module/base/util/sp_util.dart';
 import 'package:flutter_module/bridge/flutter_bridge.dart';
 import 'package:flutter_module/controller/mine_controller.dart';
+import 'package:flutter_module/router/routers.dart';
 import 'package:flutter_module/util/AppColors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,9 @@ class MinePage extends StatefulWidget {
 
 class _MinePageState extends State<MinePage> {
   // final _controller = Get.put(MineController());
-  final _controller = Get.find<MineController>();///在MineBinding中进行了延迟初始化，这里直接获取即可
+  final _controller = Get.find<MineController>();
+
+  ///在MineBinding中进行了延迟初始化，这里直接获取即可
 
   @override
   void initState() {
@@ -97,6 +100,7 @@ class _MinePageState extends State<MinePage> {
               controller.loadMore();
             });
           },
+          // child: buildCustomScrollView(),
           child: buildCustomScrollView(),
         );
       }),
@@ -119,11 +123,21 @@ class _MinePageState extends State<MinePage> {
       slivers: [
         SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
-            return buildItem(index);
+            return GestureDetector(
+              onTap: () => openH5Detail(index),
+              // onTap: openH5Detail(index),//错误写法，会导致openH5Detail方法没有被点击就执行了
+              child: buildItem(index),
+            );
           }, childCount: _controller.articleListInfo.length),
         ),
       ],
     );
+  }
+
+  //没有被点击，但是自动触发了，具体原因不明
+  openH5Detail(int index) {
+    var article = _controller.articleListInfo[index];
+    Get.toNamed(RouteGet.web, arguments: {Constants.url: article.link});
   }
 
   Widget buildItem(int index) {
@@ -150,8 +164,8 @@ class _MinePageState extends State<MinePage> {
               direction: Axis.horizontal,
               children: [
                 Text("新",
-                    style: TextStyle(
-                        fontSize: 14, color: AppColors.color_6c1bc)),
+                    style:
+                        TextStyle(fontSize: 14, color: AppColors.color_6c1bc)),
                 Expanded(
                     flex: 1,
                     child: Text(article.chapterName,
@@ -160,16 +174,15 @@ class _MinePageState extends State<MinePage> {
                         style: TextStyle(
                             fontSize: 14, color: AppColors.color_7c7b7b))),
                 Text(article.niceDate,
-                    style: TextStyle(
-                        fontSize: 12, color: AppColors.color_999999))
+                    style:
+                        TextStyle(fontSize: 12, color: AppColors.color_999999))
               ],
             ),
             Text(article.title,
                 textAlign: TextAlign.left,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style:
-                TextStyle(fontSize: 14, color: AppColors.color_000000)),
+                style: TextStyle(fontSize: 14, color: AppColors.color_000000)),
             Flex(
               direction: Axis.horizontal,
               children: [
@@ -183,7 +196,7 @@ class _MinePageState extends State<MinePage> {
                 Image.asset(
                   "assets/images/icon_collected.png",
                   width: 16,
-                )
+                ),
               ],
             )
           ],
