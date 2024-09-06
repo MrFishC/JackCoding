@@ -56,6 +56,9 @@ dependencies:
   #https://pub.dev/packages/cookie_jar
   cookie_jar: ^4.0.8
 
+  #https://pub-web.flutter-io.cn/packages/webview_flutter
+  webview_flutter: ^4.9.0
+
 dev_dependencies:
   json_serializable: ^6.8.0
   build_runner: ^2.4.11

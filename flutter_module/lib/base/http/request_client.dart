@@ -40,6 +40,7 @@ class RequestClient {
       Map<String, dynamic>? queryParameters,
       data,
       required T Function(dynamic json) fromJsonT,
+
       ///增加多层泛型嵌套时的解析
       Map<String, dynamic>? headers,
       Function(ApiResponse<T>)? onResponse,
@@ -54,19 +55,19 @@ class RequestClient {
       data = _convertRequestData(data);
       print("【请求data】5");
 
-      if(sLoading == true){
+      if (sLoading == true) {
         showLoading();
       }
       Response response = await _dio.request(url,
           queryParameters: queryParameters, data: data, options: options);
 
       print("【请求data】6");
-      if(sLoading == true){
+      if (sLoading == true) {
         dismissLoading();
       }
       return _handleResponse<T>(response, onResponse, fromJsonT);
     } catch (e) {
-      if(sLoading == true){
+      if (sLoading == true) {
         dismissLoading();
       }
       var exception = ApiException.from(e);
@@ -104,7 +105,7 @@ class RequestClient {
         headers: headers,
         onResponse: onResponse,
         onError: onError,
-        sLoading:showLoading);
+        sLoading: showLoading);
   }
 
   Future<T?> post<T>(
@@ -116,7 +117,6 @@ class RequestClient {
     bool showLoading = true,
     Function(ApiResponse<T>)? onResponse,
     bool Function(ApiException)? onError,
-
   }) {
     return request(url,
         method: "POST",
@@ -126,7 +126,7 @@ class RequestClient {
         headers: headers,
         onResponse: onResponse,
         onError: onError,
-        sLoading:showLoading);
+        sLoading: showLoading);
   }
 
   Future<T?> delete<T>(
@@ -147,7 +147,7 @@ class RequestClient {
         headers: headers,
         onResponse: onResponse,
         onError: onError,
-        sLoading:showLoading);
+        sLoading: showLoading);
   }
 
   Future<T?> put<T>(
@@ -168,7 +168,7 @@ class RequestClient {
         headers: headers,
         onResponse: onResponse,
         onError: onError,
-        sLoading:showLoading);
+        sLoading: showLoading);
   }
 
   ///请求响应内容处理

@@ -7,9 +7,9 @@ class TokenInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     ///根据业务需求进行添加
-    var cookieInfo = SharedPreferencesU.getInstance().get(Constants.cookie);
-      print("【请求data】 cookieInfo $cookieInfo");
-    options.headers["set-cookie"] = cookieInfo;
+    // var cookieInfo = SharedPreferencesU.getInstance().get(Constants.cookie);
+    //   print("【请求data】 cookieInfo $cookieInfo");
+    // options.headers["set-cookie"] = cookieInfo;///使用了CookieManager，这里就注释
     if (kDebugMode) {
       print("【请求data】 onRequest ${options.headers["set-cookie"]}");
       print("【请求data】 onRequest ${options.headers["cookie"]}");
@@ -19,7 +19,7 @@ class TokenInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    SharedPreferencesU.getInstance().setData(Constants.cookie, response.headers["set-cookie"]);
+    // SharedPreferencesU.getInstance().setData(Constants.cookie, response.headers["set-cookie"]);
     if (kDebugMode) {
       print("【返回data】onResponse ${response.headers}");
       print("【返回data】${response.data.toString()}");

@@ -3,7 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_module/pages/collection/collection_page.dart';
 import 'package:flutter_module/pages/mine/mine_page.dart';
 import 'package:flutter_module/router/u_router.dart';
-import 'package:flutter_module/routers/routers.dart';
+import 'package:flutter_module/router/routers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
