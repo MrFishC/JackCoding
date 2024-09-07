@@ -1,32 +1,22 @@
-import 'package:flutter_module/base/util/loading.dart';
-import 'package:flutter_module/model/article.dart';
-import 'package:flutter_module/model/article_tags.dart';
-import 'package:flutter_module/model/page_data.dart';
-import 'package:flutter_module/service/api_service.dart';
+import 'package:flutter_module/base/model/constants.dart';
 import 'package:get/get.dart';
 
-/// GetX改造步骤2：创建controller，继承自GetxController
-class MineController extends GetxController {
-  ///getX改造
-  // final ApiService apiService = Get.put(ApiService());
-  final ApiService apiService = Get.find<ApiService>();
+class WebController extends GetxController {
+  String? url;
 
-  List<Article<ArticleTags>> articleListInfo = [];
-  int page = 0;
+  @override
+  void onInit() {
+    super.onInit();
+    url = Get.arguments[Constants.url];
 
-  void onRefresh() async {
-    page = 0;
-    await Future.delayed(const Duration(seconds: 2));
-    PageData<Article<ArticleTags>>? result = await apiService.getArticleList(page);
-    articleListInfo = result!.datas;
-    update();
-  }
+    //  E  [ERROR:flutter/runtime/dart_vm_initializer.cc(41)] Unhandled Exception: MissingPluginException(No implementation found for method create on channel flutter/platform_views)
+    // #0      MethodChannel._invokeMethod (package:flutter/src/services/platform_channel.dart:332:7)
+    // <asynchronous suspension>
+    // #1      SurfaceAndroidViewController._sendCreateMessage (package:flutter/src/services/platform_views.dart:1040:30)
+    // <asynchronous suspension>
+    // #2      AndroidViewController.create (package:flutter/src/services/platform_views.dart:827:5)
+    // <asynchronous suspension>
 
-  void loadMore() {
-    page++;
-    apiService.getArticleList(page).then((result) {
-      articleListInfo.addAll(result!.datas);
-      update();
-    });
+    // update();
   }
 }

@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_module/pages/collection/collection_page.dart';
-import 'package:flutter_module/pages/mine/mine_page.dart';
-import 'package:flutter_module/router/u_router.dart';
 import 'package:flutter_module/router/routers.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_module/router/u_router.dart';
 import 'package:get/get.dart';
 
-import 'pages/mine/mine_binding.dart';
+import 'pages/mall/mall_home_page.dart';
 
-void main() => runApp(const MyApp(CollectionPage(
-      title: "flutter混合开发",
-    )));
+void main() => runApp(const MyApp());
 
 @pragma('vm:entry-point')
-void mine() => runApp(MyApp(MinePage()));
+void mine() => runApp(const MyApp());
 
 //必须加注解,注册成入口，collection同FlutterCacheManager中定义的一致
-@pragma('vm:entry-point')
-void collection() => runApp(const MyApp(CollectionPage(
-      title: "收藏",
-    )));
+// @pragma('vm:entry-point')
+// void collection() => runApp(const MyApp(CollectionPage(
+//       title: "收藏",
+//     )));
 
 @pragma('vm:entry-point')
 void mall() {
@@ -29,9 +24,7 @@ void mall() {
 }
 
 class MyApp extends StatelessWidget {
-  final Widget page;
-
-  const MyApp(this.page, {super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +32,11 @@ class MyApp extends StatelessWidget {
     ///初始化getx
     /// GetX改造步骤：1、修改MaterialApp成GetMaterialApp
     return GetMaterialApp(
-      // initialRoute: RouteGet.main,
-      // getPages: RouteGet.getPages,
-      initialBinding: MineBinding(),
-      home: page,
+      initialRoute: RouteGet.mine,//初始页面
+      // initialRoute: RouteGet.main,//初始页面
+      getPages: RouteGet.getPages,//路由映射集合
+      // initialBinding: MineBinding(),//注释，改用getx的别名路由实现
+      // home: MinePage(),//注释，改用getx的别名路由实现
       builder: EasyLoading.init(),
     );
   }
@@ -60,12 +54,13 @@ class MyApp2 extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Router(
-        routerDelegate: router,
-        //所有的路由都有这个代理来完成   首页是按照router中的_pages来决定的，排在集合第一个的为首页。因此_pages中需要有数据
-        backButtonDispatcher:
-            RootBackButtonDispatcher(), //返回的时候进行处理，暂时不需要过多的去了解
-      ),
+      // home: Router(
+      //   routerDelegate: router,
+      //   //所有的路由都有这个代理来完成   首页是按照router中的_pages来决定的，排在集合第一个的为首页。因此_pages中需要有数据
+      //   backButtonDispatcher:
+      //       RootBackButtonDispatcher(), //返回的时候进行处理，暂时不需要过多的去了解
+      // ),
+      home: MallHomePage(),
     );
   }
 }
