@@ -70,7 +70,7 @@ dependencies {
     implementation rootProject.ext.dependencies["arouter-api"]
     kapt rootProject.ext.dependencies["arouter-compiler"]
 
-    debugApi 'com.squareup.leakcanary:leakcanary-android:2.6'
+//    debugApi 'com.squareup.leakcanary:leakcanary-android:2.6'
 
     //测试一下依赖
     //https://github.com/LuckSiege/PictureSelector/blob/version_component/README_CN.md
