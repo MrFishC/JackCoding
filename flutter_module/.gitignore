@@ -7,7 +7,13 @@
 .vagrant/
 .sconsign.dblite
 .svn/
-
+.ios/
+test/
+.android/.gradle
+.android/.idea
+.android/plugins_build_output
+.metadata
+.flutter-plugins
 migrate_working_dir/
 
 *.swp

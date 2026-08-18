@@ -50,7 +50,7 @@ class _UWebViewState extends State<UWebView> {
   void _initWebViewController() {
     //参考：webview_flutter使用详解
     ///https://blog.csdn.net/the_shy_faker/article/details/138174982
-    controller = WebViewController()
+    _controller = WebViewController()
       //是否启用JavaScript执行，默认不启用
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       //设置webview的背景色
